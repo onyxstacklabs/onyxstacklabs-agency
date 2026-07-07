@@ -350,7 +350,7 @@ export default function App() {
 
           {/* WhatsApp Constant Emerald Identity Node */}
           <a 
-            href="https://wa.me/923005555555" 
+            href="https://wa.me/923445800630" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors group"
