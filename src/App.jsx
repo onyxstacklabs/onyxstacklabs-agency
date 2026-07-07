@@ -448,7 +448,7 @@ export default function App() {
                   type="text" 
                   id="companyName"
                   disabled={submissionState === 'SUBMITTING'}
-                  placeholder="e.g., Global Enterprise Corp" 
+                  placeholder="OnyxStack Labs" 
                   value={formData.companyName}
                   onChange={(e) => setFormData({...formData, companyName: e.target.value})}
                   className={`w-full bg-black border ${errors.companyName ? 'border-red-500' : 'border-neutral-800'} focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 rounded-xl py-3.5 px-4 text-sm text-white placeholder-neutral-700 outline-none transition-all disabled:opacity-50`}
@@ -463,7 +463,7 @@ export default function App() {
                     type="email" 
                     id="email"
                     disabled={submissionState === 'SUBMITTING'}
-                    placeholder="you@company.com" 
+                    placeholder="onyxstacklabs@gmail.com" 
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className={`w-full bg-black border ${errors.email ? 'border-red-500' : 'border-neutral-800'} focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 rounded-xl py-3.5 px-4 text-sm text-white placeholder-neutral-700 outline-none transition-all disabled:opacity-50`}
@@ -477,7 +477,7 @@ export default function App() {
                     type="tel" 
                     id="phone"
                     disabled={submissionState === 'SUBMITTING'}
-                    placeholder="+92 300 1234567" 
+                    placeholder="+92 344 5800630" 
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     className={`w-full bg-black border ${errors.phone ? 'border-red-500' : 'border-neutral-800'} focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 rounded-xl py-3.5 px-4 text-sm text-white placeholder-neutral-700 outline-none transition-all disabled:opacity-50`}
@@ -575,7 +575,7 @@ export default function App() {
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-400 font-bold">Communication Nodes</h4>
             <ul className="space-y-2 text-xs text-neutral-500 font-normal">
-              <li><span className="text-neutral-400">Inquiries:</span> touqeer@onyxstack.com</li>
+              <li><span className="text-neutral-400">Inquiries:</span> onyxstacklabs@gmail.com</li>
               <li><span className="text-neutral-400">Hotline:</span> +92 344 5800630</li>
               <li><span className="text-neutral-400">Headquarters:</span> Pakistan</li>
             </ul>
@@ -621,7 +621,7 @@ export default function App() {
             {/* TikTok Link */}
             <a href="https://tiktok.com/@onyxstacklabs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-cyan-400 transition-colors group">
               <svg className="w-3.5 h-3.5 fill-current text-neutral-500 group-hover:text-cyan-400 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.94 1.15 2.25 1.95 3.67 2.31v3.7c-1.35-.14-2.68-.67-3.79-1.48-.69-.51-1.28-1.15-1.74-1.89-.04 1.96-.02 3.91-.03 5.87 0 2.05-.44 4.15-1.57 5.87-1.32 2.04-3.61 3.44-6.04 3.53-2.61.16-5.27-.85-6.83-2.95-1.69-2.22-1.92-5.46-.6-7.89 1.13-2.11 3.42-3.53 5.81-3.65.01 1.28-.01 2.56-.01 3.84-1.27.05-2.54.73-3.16 1.84-.74 1.26-.54 3 .47 4.05.99 1.05 2.65 1.16 3.77.24.87-.69 1.28-1.83 1.26-2.94-.01-4.13-.01-8.26-.01-12.39z"/>
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.94 1.15 2.25 1.95 3.67 2.31v3.7c-1.35-.14-2.68-.67-3.79-1.48-.69-.51-1.28-1.15-1.74-1.89-.04 1.96-.02 3.91-.03 5.87 0 2.05-.44 4.15-1.57 5.87-1.32 2.04-3.61 3.44-6.04 3.53-2.61.16-5.27-.85-6.83-2.95-1.69-2.22-1.92-5.46-.6-7.89 1.13-2.11 3.42-3.53 5.81-3.65.01 1.28-.01 2.56-.01 3.84-1.27.05-2.54.73-3.16 1.84-.74 1.26-.54 3 .47 4.05.99 1.05 2.65 1.16 3.77.24.87-.69 1.28-1.83 1.26-2.94-.01 4.13-.01-8.26-.01-12.39z"/>
               </svg>
               <span>TikTok</span>
             </a>
