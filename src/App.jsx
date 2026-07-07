@@ -1,232 +1,300 @@
 // src/App.jsx
 import React, { useState } from 'react';
-import { siteConfig } from './config/siteConfig';
-import { transmitLeadToFirebase } from './config/firebase';
 
 export default function App() {
-  const [leadSubmitted, setLeadSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // Production Leads Matrix Configuration (Client-side Simulation state)
   const [formData, setFormData] = useState({
-    businessName: '',
-    requirements: '',
-    budget: 'Premium ($2k - $5k)'
+    enterpriseName: '',
+    coreRequirements: '',
+    budgetAllocation: 'Premium ($2k - $5k)'
   });
+  
+  const [submissionState, setSubmissionState] = useState('IDLE'); // IDLE, TRANSMITTING, SUCCESS
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleLeadSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    console.log("Initializing Firebase Runtime Request...");
-    
-    // Direct production connection trigger
-    const response = await transmitLeadToFirebase(formData);
-    
-    setLoading(false);
-    if (response.success) {
-      setLeadSubmitted(true);
-    } else {
-      alert("Local Matrix Warning: Database credentials not configured, but structural component wireframe works flawlessly.");
-      // Fallback state for visual tracking
-      setLeadSubmitted(true);
+  // Hardcoded Ecosystem Showcase Architecture Array mapping every single verified node
+  const activeEcosystemNodes = [
+    {
+      id: "tailors-node",
+      title: "OnyxStack Tailors",
+      subTitle: "AI-ASSISTED MEASUREMENT SCANNING",
+      description: "Advanced web application utilizing Gemini AI to parse handwritten measurements and images into structured relational database nodes seamlessly.",
+      tags: ["React", "Firebase", "Gemini API", "Tailwind"],
+      isLive: true
+    },
+    {
+      id: "mudra-node",
+      title: "OnyxStack Mudra",
+      subTitle: "SECURE TRANSACTION PORTAL CORE",
+      description: "High-fidelity digital ledger and interactive dashboard simulator tracking real-time fund transfers, analytical updates, and automated accounting workflows.",
+      tags: ["React", "Firebase Store", "Tailwind UI"],
+      isLive: false
+    },
+    {
+      id: "school-node",
+      title: "OnyxStack School",
+      subTitle: "ENTERPRISE ERP MANAGEMENT MODULE",
+      description: "A comprehensive, multi-tenant educational framework governing operations, real-time fee tracking, and academic administrative control centers.",
+      tags: ["React", "Cloud Firestore", "Vite Engine"],
+      isLive: true
+    },
+    {
+      id: "gatepass-node",
+      title: "OnyxStack GatePass",
+      subTitle: "QR SECURITY SCANNING NETWORK",
+      description: "Dual-camera visitor authentication deployment capturing live gate logs, processing secure QR entry matrix, and operating on low-latency DC power infrastructure nodes.",
+      tags: ["React", "Firebase Auth", "Hardware API"],
+      isLive: true
+    },
+    {
+      id: "lottery-node",
+      title: "OnyxStack Lottery",
+      subTitle: "LIVE ENGAGEMENT MATRIX",
+      description: "High-performance random selection algorithms and user visualization dashboards built for heavy live engagement platforms with low system latency.",
+      tags: ["React.js", "Realtime DB", "CSS Effects"],
+      isLive: true
+    },
+    {
+      id: "cricket-node",
+      title: "OnyxStack Cricket",
+      subTitle: "REAL-TIME SCORING INFRASTRUCTURE",
+      description: "Ultra-responsive microsecond updating network architecture delivering tournament brackets, ball-by-ball updates, and dynamic stats layouts.",
+      tags: ["React", "Vite", "Live Sync Nodes"],
+      isLive: false
     }
+  ];
+
+  // Core Infrastructure Blocks Metadata
+  const coreInfrastructureEngine = [
+    { title: "React Architecture", detail: "Component Matrix Lifecycle" },
+    { title: "Firebase Database", detail: "Real-time Synchronization Nodes" },
+    { title: "Gemini AI Node", detail: "Automation" },
+    { title: "Vite Execution", detail: "Microsecond Hot Reload Optimization" }
+  ];
+
+  const handleParameterTransmission = (e) => {
+    e.preventDefault();
+    if (!formData.enterpriseName || !formData.coreRequirements) {
+      alert("System Notice: Please fill all parameter fields before execution.");
+      return;
+    }
+
+    setSubmissionState('TRANSMITTING');
+
+    // Simulating asynchronous structural transport overhead pipeline (1.5s latency local execution)
+    setTimeout(() => {
+      setSubmissionState('SUCCESS');
+      // Resetting interface buffer
+      setFormData({
+        enterpriseName: '',
+        coreRequirements: '',
+        budgetAllocation: 'Premium ($2k - $5k)'
+      });
+    }, 1500);
   };
 
   return (
-    <div className="min-h-screen text-slate-100 font-sans selection:bg-[#00f2fe] selection:text-black" style={{ backgroundColor: siteConfig.colors.bgPitchBlack }}>
+    <div className="min-h-screen bg-black text-white font-sans antialiased selection:bg-cyan-500 selection:text-black">
       
-      {/* GLOBAL PREMIUM NAVIGATION BAR */}
-      <nav className="sticky top-0 z-50 backdrop-blur-md border-b border-gray-800 bg-black/60 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-2 cursor-pointer group">
-            <div className="w-3 h-3 rounded-full bg-[#00f2fe] shadow-[0_0_10px_#00f2fe]" />
-            <span className="text-xl font-bold tracking-wider text-white group-hover:text-[#00f2fe] transition-colors">
-              {siteConfig.agencyName.toUpperCase()}
-            </span>
-          </div>
-
-          <div className="hidden md:flex items-center space-x-8 text-sm tracking-widest font-medium text-gray-400">
-            <a href="#ecosystem" className="hover:text-[#00f2fe] transition-colors">LIVE MATRIX</a>
-            <a href="#tech" className="hover:text-[#00f2fe] transition-colors">TECH STACK</a>
-            <a href="#pipeline" className="hover:text-[#00f2fe] transition-colors">DIRECT NODE</a>
-          </div>
-
-          <div className="flex items-center space-x-2 bg-gray-900/80 border border-gray-800 px-3 py-1.5 rounded-full">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: siteConfig.colors.neonEmerald }}></span>
-              <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: siteConfig.colors.neonEmerald }}></span>
-            </span>
-            <span className="text-[10px] tracking-widest text-gray-400 font-semibold">SYSTEMS OPERATIONAL</span>
-          </div>
-        </div>
-      </nav>
-
-      {/* ULTRA-PREMIUM HERO CONVERSION FUNNEL */}
-      <header className="relative overflow-hidden px-6 pt-24 pb-20 border-b border-gray-900 bg-gradient-to-b from-[#0b0f19] to-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,242,254,0.05),transparent_50%)]" />
-        <div className="max-w-4xl mx-auto text-center relative z-10 space-y-8">
-          <div className="inline-flex items-center space-x-2 bg-black/40 border border-gray-800 px-4 py-1 rounded-full text-xs tracking-widest text-gray-400">
-            <span className="text-[#00f2fe]">⚡</span> EXPERT ARCHITECTURE STUDIO
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            {siteConfig.tagline}
+      {/* --- TOP FIXED PLATFORM INTERFACE HEADER --- */}
+      <header className="border-b border-neutral-900 bg-black/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] animate-pulse"></div>
+          <h1 className="text-xl font-bold tracking-wider uppercase text-neutral-100">
+            OnyxStack <br className="sm:hidden" /> Labs
           </h1>
-          <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {siteConfig.subTagline}
-          </p>
-
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#ecosystem" className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold tracking-wider text-black bg-[#00f2fe] hover:bg-[#00f2fe]/90 shadow-[0_0_20px_rgba(0,242,254,0.3)] transition-all text-center">
-              EXPLORE ECOSYSTEM
-            </a>
-            <a href={siteConfig.socialLinks.whatsapp} target="_blank" rel="noreferrer" className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold tracking-wider text-white bg-gray-950 border border-gray-800 hover:border-[#00e676] transition-all flex items-center justify-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#00e676]" />
-              DIRECT NODE (WHATSAPP)
-            </a>
-          </div>
+        </div>
+        
+        <div className="flex items-center gap-2 bg-neutral-950 border border-neutral-800 px-4 py-2 rounded-full">
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></div>
+          <span className="text-xs uppercase tracking-widest text-neutral-400 font-mono">Systems Operational</span>
         </div>
       </header>
 
-      {/* THE 6-CORE INTERACTIVE LIVE ECOSYSTEM GRID */}
-      <main id="ecosystem" className="max-w-7xl mx-auto px-6 py-24 space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-900 pb-8">
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-4xl font-bold tracking-wider text-white">LIVE PRODUCTION ECOSYSTEM</h2>
-            <p className="text-gray-400 text-sm md:text-base">Real-world scalable workflows and enterprise instances built from scratch.</p>
+      {/* --- LIVE PRODUCTION ECOSYSTEM CONTEXT NODE --- */}
+      <main className="max-w-4xl mx-auto px-6 py-12 space-y-16">
+        
+        <section className="space-y-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-100 uppercase">
+            Live Production <br /> Ecosystem
+          </h2>
+          <p className="text-neutral-400 max-w-2xl text-base leading-relaxed">
+            Real-world scalable workflows and enterprise instances built from scratch.
+          </p>
+          <div className="inline-block bg-neutral-950 border border-neutral-800 px-4 py-2 rounded font-mono text-xs uppercase tracking-widest text-neutral-500">
+            Total Context Nodes: 06
           </div>
-          <div className="text-xs tracking-widest font-semibold text-gray-500 bg-gray-900/40 border border-gray-800 px-3 py-1.5 rounded-md">
-            TOTAL CONTEXT NODES: 06
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {siteConfig.projects.map((project) => (
-            <div key={project.id} className="group relative rounded-2xl border border-gray-800/80 bg-gray-950/40 backdrop-blur-sm p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-[#00f2fe] hover:shadow-[0_0_30px_rgba(0,242,254,0.15)] flex flex-col justify-between">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#00f2fe]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute top-0 right-0 p-3 flex items-center space-x-1.5 bg-black/40 border-b border-l border-gray-900 rounded-bl-xl z-10">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00e676] animate-pulse" />
-                <span className="text-[9px] tracking-widest font-bold text-gray-400 uppercase">LIVE APP</span>
-              </div>
-
-              <div className="space-y-4 relative z-10">
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold tracking-wide text-white group-hover:text-[#00f2fe] transition-colors">
-                    {project.name}
-                  </h3>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-[#00f2fe]/80">
-                    {project.tagline}
-                  </p>
+          
+          {/* --- APPLICATION ARCHITECTURE GRID --- */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            {activeEcosystemNodes.map((node) => (
+              <div 
+                key={node.id} 
+                className="bg-neutral-950 border border-neutral-900 rounded-xl p-6 flex flex-col justify-between hover:border-neutral-800 transition-all relative overflow-hidden group"
+              >
+                {node.isLive && (
+                  <span className="absolute top-4 right-4 bg-emerald-950/50 border border-emerald-800 text-emerald-400 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+                    <span className="w-1 h-1 rounded-full bg-emerald-400 animate-ping"></span> Live App
+                  </span>
+                )}
+                
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-xl font-bold text-neutral-100 group-hover:text-cyan-400 transition-colors">{node.title}</h3>
+                    <p className="text-xs font-mono font-bold text-cyan-400 tracking-wider uppercase mt-1">{node.subTitle}</p>
+                  </div>
+                  <p className="text-sm text-neutral-400 leading-relaxed pr-4">{node.description}</p>
                 </div>
-                <p className="text-sm text-gray-400 leading-relaxed min-h-[72px]">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {project.tech.map((t, idx) => (
-                    <span key={idx} className="text-[10px] tracking-wide font-medium px-2 py-0.5 rounded-md bg-gray-900 border border-gray-800 text-gray-400">
-                      {t}
-                    </span>
-                  ))}
+
+                <div className="mt-6 space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    {node.tags.map((tag, idx) => (
+                      <span key={idx} className="bg-neutral-900 border border-neutral-800 text-neutral-400 font-mono text-[10px] px-2 py-1 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <button 
+                    onClick={() => alert(`Simulating execution initialization pipeline for ${node.title}...`)}
+                    className="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-200 hover:text-white font-mono text-xs uppercase tracking-wider py-3 px-4 rounded-lg flex items-center justify-center gap-2 group/btn transition-all"
+                  >
+                    Launch Live Simulation <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                  </button>
                 </div>
-              </div>
-
-              <div className="pt-6 relative z-10">
-                <a href={project.liveUrl} className="w-full py-2.5 inline-flex items-center justify-center rounded-lg text-xs font-bold tracking-widest bg-gray-900 hover:bg-[#00f2fe] text-gray-300 hover:text-black border border-gray-800 hover:border-[#00f2fe] transition-all">
-                  LAUNCH LIVE SIMULATION →
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {/* CORE INTEGRATION TECH STACK GRID */}
-      <section id="tech" className="border-t border-b border-gray-900 bg-gray-950/20 py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <div className="space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-wider text-white">CORE INFRASTRUCTURE ENGINE</h2>
-            <p className="text-gray-400 text-sm max-w-xl mx-auto">Zero bloatware, heavy optimization runtime tech components mapping.</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {[
-              { title: "React Architecture", detail: "Component Matrix Lifecycle" },
-              { title: "Firebase Database", detail: "Real-time Synchronization Nodes" },
-              { title: "Gemini AI Node", detail: "Advanced Programmatic Automation" },
-              { title: "Vite Execution Engine", detail: "Microsecond Hot Reload Optimization" }
-            ].map((tech, idx) => (
-              <div key={idx} className="p-4 rounded-xl border border-gray-800/60 bg-black/40 text-center space-y-1">
-                <div className="text-sm font-bold text-white tracking-wide">{tech.title}</div>
-                <div className="text-[10px] text-gray-500 font-medium tracking-wide">{tech.detail}</div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* LEAD CAPTURE SECTION */}
-      <section id="pipeline" className="max-w-3xl mx-auto px-6 py-24 space-y-12">
-        <div className="text-center space-y-3">
-          <h2 className="text-2xl md:text-4xl font-bold tracking-wider text-white">INITIATE ECOSYSTEM EXPANSION</h2>
-          <p className="text-gray-400 text-sm max-w-lg mx-auto">Drop your project requirements directly into our live production pipeline queue.</p>
-        </div>
+        <hr className="border-neutral-900" />
 
-        <div className="p-8 rounded-2xl border border-gray-800 bg-gradient-to-br from-gray-950 via-black to-gray-950 shadow-2xl relative">
-          {leadSubmitted ? (
-            <div className="text-center py-12 space-y-4">
-              <div className="w-12 h-12 rounded-full bg-[#00e676]/20 text-[#00e676] flex items-center justify-center mx-auto text-xl font-bold">✓</div>
-              <h3 className="text-xl font-bold text-white">Node Transmission Successful</h3>
-              <p className="text-sm text-gray-400 max-w-sm mx-auto">Our systems have successfully captured your data parameters.</p>
+        {/* --- CORE INFRASTRUCTURE MATRIX ENGINE --- */}
+        <section className="space-y-6">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-neutral-100 uppercase">
+              Core Infrastructure Engine
+            </h2>
+            <p className="text-sm font-mono text-neutral-500 uppercase tracking-wider">
+              Zero bloatware, heavy optimization runtime tech components mapping.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {coreInfrastructureEngine.map((engine, idx) => (
+              <div key={idx} className="bg-neutral-950 border border-neutral-900 rounded-xl p-4 text-center space-y-1">
+                <h4 className="text-sm font-bold text-neutral-200">{engine.title}</h4>
+                <p className="text-[10px] font-mono text-neutral-500 uppercase tracking-wide">{engine.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <hr className="border-neutral-900" />
+
+        {/* --- DYNAMIC SIMULATED EXPANSION LEAD SUBMISSION FORM --- */}
+        <section className="bg-neutral-950 border border-neutral-900 rounded-2xl p-6 md:p-8 max-w-xl mx-auto space-y-6 relative overflow-hidden">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-extrabold tracking-tight text-neutral-100 uppercase">
+              Initiate Ecosystem Expansion
+            </h2>
+            <p className="text-sm text-neutral-400">
+              Drop your project requirements directly into our live production pipeline queue.
+            </p>
+          </div>
+
+          {submissionState === 'SUCCESS' ? (
+            <div className="bg-neutral-900 border border-emerald-900/50 rounded-xl p-6 text-center space-y-4 animate-fadeIn">
+              <div className="w-12 h-12 rounded-full bg-emerald-950 border border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto text-xl shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                ✓
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-lg font-bold text-emerald-400 font-mono uppercase tracking-wider">Transmission Complete</h4>
+                <p className="text-xs text-neutral-400">Production parameters securely indexed inside local cluster simulation matrix.</p>
+              </div>
+              <button 
+                onClick={() => setSubmissionState('IDLE')}
+                className="text-xs text-cyan-400 hover:underline font-mono uppercase tracking-widest pt-2 block mx-auto"
+              >
+                Transmit Another Lead Node
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleLeadSubmit} className="space-y-6">
+            <form onSubmit={handleParameterTransmission} className="space-y-5">
               <div className="space-y-2">
-                <label className="text-xs font-bold tracking-widest text-gray-400 uppercase block">Enterprise Name</label>
-                <input type="text" name="businessName" required value={formData.businessName} onChange={handleInputChange} placeholder="e.g., Global Logistics Corp" className="w-full bg-black border border-gray-800 focus:border-[#00f2fe] focus:ring-1 focus:ring-[#00f2fe] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all" />
+                <label className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Enterprise Name</label>
+                <input 
+                  type="text" 
+                  disabled={submissionState === 'TRANSMITTING'}
+                  placeholder="e.g., Global Logistics Corp" 
+                  value={formData.enterpriseName}
+                  onChange={(e) => setFormData({...formData, enterpriseName: e.target.value})}
+                  className="w-full bg-black border border-neutral-800 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 rounded-lg py-3 px-4 text-sm text-white placeholder-neutral-600 outline-none transition-all disabled:opacity-50"
+                />
               </div>
+
               <div className="space-y-2">
-                <label className="text-xs font-bold tracking-widest text-gray-400 uppercase block">Core Requirements</label>
-                <textarea name="requirements" required rows="4" value={formData.requirements} onChange={handleInputChange} placeholder="Describe customized app modules or automated features..." className="w-full bg-black border border-gray-800 focus:border-[#00f2fe] focus:ring-1 focus:ring-[#00f2fe] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all resize-none" />
+                <label className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Core Requirements</label>
+                <textarea 
+                  rows="4"
+                  disabled={submissionState === 'TRANSMITTING'}
+                  placeholder="Describe customized app modules or automated features..." 
+                  value={formData.coreRequirements}
+                  onChange={(e) => setFormData({...formData, coreRequirements: e.target.value})}
+                  className="w-full bg-black border border-neutral-800 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 rounded-lg py-3 px-4 text-sm text-white placeholder-neutral-600 outline-none transition-all resize-none disabled:opacity-50"
+                ></textarea>
               </div>
+
               <div className="space-y-2">
-                <label className="text-xs font-bold tracking-widest text-gray-400 uppercase block">Budget Allocation</label>
-                <select name="budget" value={formData.budget} onChange={handleInputChange} className="w-full bg-black border border-gray-800 focus:border-[#00f2fe] focus:ring-1 focus:ring-[#00f2fe] rounded-xl px-4 py-3 text-sm text-white outline-none transition-all cursor-pointer">
+                <label className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Budget Allocation</label>
+                <select 
+                  disabled={submissionState === 'TRANSMITTING'}
+                  value={formData.budgetAllocation}
+                  onChange={(e) => setFormData({...formData, budgetAllocation: e.target.value})}
+                  className="w-full bg-black border border-neutral-800 focus:border-cyan-500 rounded-lg py-3 px-4 text-sm text-white outline-none appearance-none cursor-pointer disabled:opacity-50"
+                >
                   <option>Standard MVP ($1k - $2k)</option>
                   <option>Premium ($2k - $5k)</option>
-                  <option>Enterprise Level ($5k+)</option>
+                  <option>Enterprise Architecture ($5k+)</option>
                 </select>
               </div>
-              <button type="submit" disabled={loading} className="w-full py-4 rounded-xl font-bold tracking-widest text-black bg-[#00f2fe] hover:bg-[#00f2fe]/90 shadow-[0_0_15px_rgba(0,242,254,0.2)] transition-all uppercase text-sm disabled:opacity-50">
-                {loading ? "TRANSMITTING..." : "Transmit Production Parameter Lead"}
+
+              <button 
+                type="submit"
+                disabled={submissionState === 'TRANSMITTING'}
+                className="w-full bg-cyan-400 hover:bg-cyan-300 disabled:bg-cyan-950 disabled:text-cyan-600 text-black font-extrabold font-mono text-xs uppercase tracking-widest py-4 px-4 rounded-xl shadow-[0_4px_20px_rgba(34,211,238,0.15)] hover:shadow-[0_4px_25px_rgba(34,211,238,0.3)] transition-all flex items-center justify-center"
+              >
+                {submissionState === 'TRANSMITTING' ? "TRANSMITTING..." : "TRANSMIT PRODUCTION PARAMETER LEAD"}
               </button>
             </form>
           )}
-        </div>
-      </section>
+        </section>
 
-      {/* OMNIPRESENT FOOTER */}
-      <footer className="border-t border-gray-900 bg-black py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-2 text-center md:text-left">
-            <div className="text-lg font-extrabold tracking-widest text-white">{siteConfig.agencyName.toUpperCase()}</div>
-            <p className="text-xs text-gray-500 max-w-sm">Programmatic SEO Frameworks & Custom Software Ecosystems Hub.</p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-bold tracking-widest text-gray-400">
-            <a href={siteConfig.socialLinks.youtube} target="_blank" rel="noreferrer" className="hover:text-[#00f2fe] transition-colors">YOUTUBE</a>
-            <a href={siteConfig.socialLinks.linkedin} target="_blank" rel="noreferrer" className="hover:text-[#00f2fe] transition-colors">LINKEDIN</a>
-            <a href={siteConfig.socialLinks.facebook} target="_blank" rel="noreferrer" className="hover:text-[#00f2fe] transition-colors">FACEBOOK</a>
-            <a href={siteConfig.socialLinks.instagram} target="_blank" rel="noreferrer" className="hover:text-[#00f2fe] transition-colors">INSTAGRAM</a>
-            <a href={siteConfig.socialLinks.tiktok} target="_blank" rel="noreferrer" className="hover:text-[#00f2fe] transition-colors">TIKTOK</a>
-            <a href={siteConfig.socialLinks.whatsapp} target="_blank" rel="noreferrer" className="text-[#00e676] hover:underline transition-colors">WHATSAPP</a>
-          </div>
+      </main>
+
+      {/* --- BRAND METADATA FOOTER FRAMEWORK --- */}
+      <footer className="border-t border-neutral-950 bg-black py-12 px-6 mt-12 text-center space-y-8">
+        <div className="space-y-2">
+          <h3 className="text-lg font-bold tracking-widest uppercase text-neutral-200">OnyxStack Labs</h3>
+          <p className="text-xs text-neutral-500 max-w-md mx-auto leading-relaxed">
+            Programmatic SEO Frameworks & Custom Software Ecosystems Hub.
+          </p>
         </div>
-        <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-gray-950 flex flex-col sm:flex-row items-center justify-between text-[10px] text-gray-600 tracking-wider gap-4">
-          <div>© {new Date().getFullYear()} {siteConfig.agencyName}. All Infrastructure Rights Reserved.</div>
-          <div className="flex space-x-4">
-            <span>SECURE LINK NODES INDEXED</span>
+
+        <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 max-w-xl mx-auto font-mono text-xs font-bold uppercase tracking-widest text-neutral-400">
+          <a href="#" className="hover:text-cyan-400 transition-colors">Youtube</a>
+          <a href="#" className="hover:text-cyan-400 transition-colors">Linkedin</a>
+          <a href="#" className="hover:text-cyan-400 transition-colors">Facebook</a>
+          <a href="#" className="hover:text-cyan-400 transition-colors">Instagram</a>
+          <a href="#" className="hover:text-cyan-400 transition-colors">Tiktok</a>
+          <a href="#" className="text-emerald-500 hover:text-emerald-400 transition-colors">Whatsapp</a>
+        </div>
+
+        <div className="pt-4 border-t border-neutral-900/40 max-w-xs mx-auto space-y-2 font-mono text-[10px] text-neutral-600 uppercase tracking-widest">
+          <p>© 2026 OnyxStack Labs. All Infrastructure Rights Reserved.</p>
+          <div className="flex justify-center gap-4 text-neutral-700">
+            <span>Secure Link Nodes Indexed</span>
             <span>•</span>
-            <span>VITE PERFORMANCE OPTIMIZED</span>
+            <span>Vite Performance Optimized</span>
           </div>
         </div>
       </footer>
