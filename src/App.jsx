@@ -6,12 +6,12 @@ export default function App() {
   const [formData, setFormData] = useState({
     enterpriseName: '',
     coreRequirements: '',
-    budgetAllocation: 'Premium ($2k - $5k)'
+    budgetAllocation: 'Standard MVP ($1k - $2k)' // Set default to matching production minimum range entry
   });
   
   const [submissionState, setSubmissionState] = useState('IDLE'); // IDLE, TRANSMITTING, SUCCESS
 
-  // Hardcoded Ecosystem Showcase Architecture Array mapping every single verified node
+  // Hardcoded Ecosystem Showcase Architecture Array mapping every single verified node with production dynamic routing links
   const activeEcosystemNodes = [
     {
       id: "tailors-node",
@@ -19,7 +19,8 @@ export default function App() {
       subTitle: "AI-ASSISTED MEASUREMENT SCANNING",
       description: "Advanced web application utilizing Gemini AI to parse handwritten measurements and images into structured relational database nodes seamlessly.",
       tags: ["React", "Firebase", "Gemini API", "Tailwind"],
-      isLive: true
+      isLive: true,
+      appUrl: "https://onyxstack-tailors.vercel.app"
     },
     {
       id: "mudra-node",
@@ -27,7 +28,8 @@ export default function App() {
       subTitle: "SECURE TRANSACTION PORTAL CORE",
       description: "High-fidelity digital ledger and interactive dashboard simulator tracking real-time fund transfers, analytical updates, and automated accounting workflows.",
       tags: ["React", "Firebase Store", "Tailwind UI"],
-      isLive: false
+      isLive: false,
+      appUrl: "https://onyxstack-mudra.vercel.app"
     },
     {
       id: "school-node",
@@ -35,7 +37,8 @@ export default function App() {
       subTitle: "ENTERPRISE ERP MANAGEMENT MODULE",
       description: "A comprehensive, multi-tenant educational framework governing operations, real-time fee tracking, and academic administrative control centers.",
       tags: ["React", "Cloud Firestore", "Vite Engine"],
-      isLive: true
+      isLive: true,
+      appUrl: "https://onyxstack-school.vercel.app"
     },
     {
       id: "gatepass-node",
@@ -43,7 +46,8 @@ export default function App() {
       subTitle: "QR SECURITY SCANNING NETWORK",
       description: "Dual-camera visitor authentication deployment capturing live gate logs, processing secure QR entry matrix, and operating on low-latency DC power infrastructure nodes.",
       tags: ["React", "Firebase Auth", "Hardware API"],
-      isLive: true
+      isLive: true,
+      appUrl: "https://onyxstack-gatepass.vercel.app"
     },
     {
       id: "lottery-node",
@@ -51,7 +55,8 @@ export default function App() {
       subTitle: "LIVE ENGAGEMENT MATRIX",
       description: "High-performance random selection algorithms and user visualization dashboards built for heavy live engagement platforms with low system latency.",
       tags: ["React.js", "Realtime DB", "CSS Effects"],
-      isLive: true
+      isLive: true,
+      appUrl: "https://onyxstack-lottery.vercel.app"
     },
     {
       id: "cricket-node",
@@ -59,7 +64,8 @@ export default function App() {
       subTitle: "REAL-TIME SCORING INFRASTRUCTURE",
       description: "Ultra-responsive microsecond updating network architecture delivering tournament brackets, ball-by-ball updates, and dynamic stats layouts.",
       tags: ["React", "Vite", "Live Sync Nodes"],
-      isLive: false
+      isLive: false,
+      appUrl: "https://onyxstack-cricket.vercel.app"
     }
   ];
 
@@ -87,7 +93,7 @@ export default function App() {
       setFormData({
         enterpriseName: '',
         coreRequirements: '',
-        budgetAllocation: 'Premium ($2k - $5k)'
+        budgetAllocation: 'Standard MVP ($1k - $2k)'
       });
     }, 1500);
   };
@@ -154,12 +160,15 @@ export default function App() {
                     ))}
                   </div>
                   
-                  <button 
-                    onClick={() => alert(`Simulating execution initialization pipeline for ${node.title}...`)}
-                    className="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-200 hover:text-white font-mono text-xs uppercase tracking-wider py-3 px-4 rounded-lg flex items-center justify-center gap-2 group/btn transition-all"
+                  {/* Absolute Target Blank Layout Anchor Interface */}
+                  <a 
+                    href={node.appUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-200 hover:text-white font-mono text-xs uppercase tracking-wider py-3 px-4 rounded-lg flex items-center justify-center gap-2 group/btn transition-all text-center block"
                   >
                     Launch Live Simulation <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}
