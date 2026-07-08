@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+// IMPORT CRITICAL CORE NODES: Database configuration mapping
+import { db } from './firebase'; 
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function App() {
   // Lead Generation State Architecture
@@ -148,7 +151,8 @@ export default function App() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleLeadFormTransmission = (e) => {
+  // LOGICAL FIX: Converted to async execution block to interface with live database stream
+  const handleLeadFormTransmission = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
       alert("Validation Failed. Check required input nodes.");
@@ -158,26 +162,33 @@ export default function App() {
     setSubmissionState('SUBMITTING');
 
     try {
-      // Diagnostic Telemetry Simulation log to trace direct values in runtime
-      console.log("Transmitting payload package details:", formData);
+      console.log("Transmitting payload package details to Firestore...", formData);
       
-      // Asynchronous network overhead simulation mimicking true cloud transport processing (1.5 seconds)
-      setTimeout(() => {
-        // Mobile runtime trigger alert to explicitly prove compilation cycle passed
-        alert(`Verification Success!\nCompany: ${formData.companyName}\nStatus: Transport Layer Safe.`);
-        
-        setSubmissionState('SUCCESS');
-        setFormData({
-          companyName: '',
-          email: '',
-          phone: '',
-          details: '',
-          budget: 'Standard MVP ($1,000 - $2,000)'
-        });
-        setErrors({});
-      }, 1500);
+      // REAL FIREBASE PIPELINE INTEGRATION (Replaced the simulation timeout)
+      await addDoc(collection(db, "leads"), {
+        companyName: formData.companyName,
+        email: formData.email,
+        phone: formData.phone,
+        details: formData.details,
+        budget: formData.budget,
+        timestamp: serverTimestamp() // Generates global server tracking node
+      });
+
+      // Verification notification only acts once the remote database sends a success verification stream
+      alert(`Verification Success!\nCompany: ${formData.companyName}\nStatus: Transport Layer Safe.`);
+      
+      setSubmissionState('SUCCESS');
+      setFormData({
+        companyName: '',
+        email: '',
+        phone: '',
+        details: '',
+        budget: 'Standard MVP ($1,000 - $2,000)'
+      });
+      setErrors({});
 
     } catch (runtimeException) {
+      console.error("Transmission Interrupted at Network Core:", runtimeException);
       alert("Fatal Transmission Interrupt: " + runtimeException.message);
       setSubmissionState('IDLE');
     }
