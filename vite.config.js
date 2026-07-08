@@ -5,12 +5,6 @@ import react from '@vitejs/plugin-react';
 // Production Build Matrix Optimization Engine
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      // Direct root relative fallback targeting the root project directories without platform specific hacks
-      '@firebase': '/firebase',
-    },
-  },
   build: {
     outDir: 'dist',
     minify: 'terser', // Premium minification logic for low latency
