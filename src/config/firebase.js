@@ -4,12 +4,12 @@ import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/fire
 
 // OnyxStack Labs Web Production Environment Matrix
 const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY", // Replace with your production credentials when ready
-  authDomain: "onyxstacklabs-agency.firebaseapp.com",
-  projectId: "onyxstacklabs-agency",
-  storageBucket: "onyxstacklabs-agency.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDwpE_nXBS-ptEvf9CsV3Bze5xr-W-oHmI",
+  authDomain: "onyxstack-labs.firebaseapp.com",
+  projectId: "onyxstack-labs",
+  storageBucket: "onyxstack-labs.firebasestorage.app",
+  messagingSenderId: "825221965531",
+  appId: "1:825221965531:web:ae6684052f998f8c9d8efe"
 };
 
 // Initialize Cloud Core Instance
