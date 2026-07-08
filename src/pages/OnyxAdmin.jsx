@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase/config'; // Adjust this path to match your Firebase config file location
+import { db } from '../../firebase/config'; // Fixed path: Moving up two levels to reach root-level firebase folder
 import { collection, query, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 
 export default function OnyxAdmin() {
@@ -11,7 +11,7 @@ export default function OnyxAdmin() {
   // Simple Secure Entry Gate for OnyxStack Labs Admin Control
   const handleAdminAuth = (e) => {
     e.preventDefault();
-    // Replace 'OnyxAdmin2026!' with your preferred local management key
+    // Your system passkey is: OnyxAdmin2026!
     if (passkey === 'OnyxAdmin2026!') {
       setIsAuthenticated(true);
     } else {
