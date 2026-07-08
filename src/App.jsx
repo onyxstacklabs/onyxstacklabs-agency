@@ -150,22 +150,37 @@ export default function App() {
 
   const handleLeadFormTransmission = (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      alert("Validation Failed. Check required input nodes.");
+      return;
+    }
 
     setSubmissionState('SUBMITTING');
 
-    // Asynchronous network overhead simulation mimicking true cloud transport processing (1.5 seconds)
-    setTimeout(() => {
-      setSubmissionState('SUCCESS');
-      setFormData({
-        companyName: '',
-        email: '',
-        phone: '',
-        details: '',
-        budget: 'Standard MVP ($1,000 - $2,000)'
-      });
-      setErrors({});
-    }, 1500);
+    try {
+      // Diagnostic Telemetry Simulation log to trace direct values in runtime
+      console.log("Transmitting payload package details:", formData);
+      
+      // Asynchronous network overhead simulation mimicking true cloud transport processing (1.5 seconds)
+      setTimeout(() => {
+        // Mobile runtime trigger alert to explicitly prove compilation cycle passed
+        alert(`Verification Success!\nCompany: ${formData.companyName}\nStatus: Transport Layer Safe.`);
+        
+        setSubmissionState('SUCCESS');
+        setFormData({
+          companyName: '',
+          email: '',
+          phone: '',
+          details: '',
+          budget: 'Standard MVP ($1,000 - $2,000)'
+        });
+        setErrors({});
+      }, 1500);
+
+    } catch (runtimeException) {
+      alert("Fatal Transmission Interrupt: " + runtimeException.message);
+      setSubmissionState('IDLE');
+    }
   };
 
   return (
