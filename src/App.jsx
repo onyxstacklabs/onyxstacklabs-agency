@@ -1,7 +1,21 @@
 import React, { useState } from 'react';
-// IMPORT CRITICAL CORE NODES: Database configuration mapping
-import { db } from './firebase'; 
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+// FIREBASE CORE ARCHITECTURE INITIALIZATION
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
+// 1. Verified Firebase Configuration Stream
+const firebaseConfig = {
+  apiKey: "AIzaSyDwpE_nXBS-ptEvf9CsV3Bze5xr-W-oHmI",
+  authDomain: "onyxstack-labs.firebaseapp.com",
+  projectId: "onyxstack-labs",
+  storageBucket: "onyxstack-labs.firebasestorage.app",
+  messagingSenderId: "825221965531",
+  appId: "1:825221965531:web:ae6684052f998f8c9d8efe"
+};
+
+// Initialize Firebase Core Instances
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export default function App() {
   // Lead Generation State Architecture
@@ -164,7 +178,7 @@ export default function App() {
     try {
       console.log("Transmitting payload package details to Firestore...", formData);
       
-      // REAL FIREBASE PIPELINE INTEGRATION (Replaced the simulation timeout)
+      // REAL FIREBASE PIPELINE INTEGRATION
       await addDoc(collection(db, "leads"), {
         companyName: formData.companyName,
         email: formData.email,
