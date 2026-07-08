@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// Using an absolute module breakdown to guarantee resolution regardless of nesting level
-import { db } from '/firebase/config'; 
+// Locked absolute configuration alias targeting the root firebase module matrix
+import { db } from '@firebase/config'; 
 import { collection, query, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 
 export default function OnyxAdmin() {
