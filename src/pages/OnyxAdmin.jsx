@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// Locked relative layer fallback pointing strictly to the matching project source root folder mapping
-import { db } from '@firebase/config'; 
+// Exact relative trajectory mapping targeting the real firebase module location
+import { db } from '../config/firebase'; 
 import { collection, query, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 
 export default function OnyxAdmin() {
