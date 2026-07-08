@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// Locked absolute configuration alias targeting the root firebase module matrix
+// Locked relative layer fallback pointing strictly to the matching project source root folder mapping
 import { db } from '@firebase/config'; 
 import { collection, query, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 
