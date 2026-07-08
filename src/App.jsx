@@ -1,9 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // IMPORTING LIVE DATA ENTITIES FROM MODULAR MATRIX CONFIGURATIONS
 import { transmitLeadToFirebase } from './config/firebase';
 import { siteConfig } from './config/siteConfig';
+// IMPORTING THE ADMIN CONTROL LAYER FROM PAGES HOUSING
+import OnyxAdmin from './pages/OnyxAdmin';
 
 export default function App() {
+  // Reactive routing node tracker
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  // Monitor browser history state changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  // Structural Navigation Helper
+  const navigateToNode = (path) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+  };
+
   // Lead Generation State Architecture
   const [formData, setFormData] = useState({
     companyName: '',
@@ -122,6 +143,11 @@ export default function App() {
       setSubmissionState('IDLE');
     }
   };
+
+  // Routing Condition Gate: Route to Admin Panel if path matches our private routing node
+  if (currentPath === '/onyx-control-tower') {
+    return <OnyxAdmin navigateToNode={navigateToNode} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#000000] text-neutral-100 font-sans antialiased selection:bg-cyan-500 selection:text-black scroll-smooth">
