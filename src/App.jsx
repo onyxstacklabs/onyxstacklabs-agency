@@ -1,21 +1,6 @@
 import React, { useState } from 'react';
-// FIREBASE CORE ARCHITECTURE INITIALIZATION
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
-
-// 1. Verified Firebase Configuration Stream
-const firebaseConfig = {
-  apiKey: "AIzaSyDwpE_nXBS-ptEvf9CsV3Bze5xr-W-oHmI",
-  authDomain: "onyxstack-labs.firebaseapp.com",
-  projectId: "onyxstack-labs",
-  storageBucket: "onyxstack-labs.firebasestorage.app",
-  messagingSenderId: "825221965531",
-  appId: "1:825221965531:web:ae6684052f998f8c9d8efe"
-};
-
-// Initialize Firebase Core Instances
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// IMPORTING LIVE PIPELINE LAYER FROM DECOUPLED ARCHITECTURE
+import { transmitLeadToFirebase } from './config/firebase';
 
 export default function App() {
   // Lead Generation State Architecture
@@ -165,7 +150,7 @@ export default function App() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  // LOGICAL FIX: Converted to async execution block to interface with live database stream
+  // UPDATED WORKFLOW: Executing decoupled universal lead transmission block safely
   const handleLeadFormTransmission = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
@@ -175,22 +160,11 @@ export default function App() {
 
     setSubmissionState('SUBMITTING');
 
-    try {
-      console.log("Transmitting payload package details to Firestore...", formData);
-      
-      // REAL FIREBASE PIPELINE INTEGRATION
-      await addDoc(collection(db, "leads"), {
-        companyName: formData.companyName,
-        email: formData.email,
-        phone: formData.phone,
-        details: formData.details,
-        budget: formData.budget,
-        timestamp: serverTimestamp() // Generates global server tracking node
-      });
+    // Passing local component state payload into externalized firebase pipeline engine
+    const response = await transmitLeadToFirebase(formData);
 
-      // Verification notification only acts once the remote database sends a success verification stream
-      alert(`Verification Success!\nCompany: ${formData.companyName}\nStatus: Transport Layer Safe.`);
-      
+    if (response.success) {
+      alert(`Verification Success!\nCompany: ${formData.companyName}\nSync Node Token: ${response.nodeRef}`);
       setSubmissionState('SUCCESS');
       setFormData({
         companyName: '',
@@ -200,10 +174,8 @@ export default function App() {
         budget: 'Standard MVP ($1,000 - $2,000)'
       });
       setErrors({});
-
-    } catch (runtimeException) {
-      console.error("Transmission Interrupted at Network Core:", runtimeException);
-      alert("Fatal Transmission Interrupt: " + runtimeException.message);
+    } else {
+      alert(`Fatal Transmission Interrupt: ${response.error}`);
       setSubmissionState('IDLE');
     }
   };
@@ -250,7 +222,7 @@ export default function App() {
 
       {/* --- BRAND AGENCY HERO SECTION WITH BUSINESS ENGAGEMENT FOCUS --- */}
       <header className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-20 text-center md:pt-36 md:pb-32 space-y-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-500/20 rounded-full text-xs text-cyan-400 bg-cyan-950/20 backdrop-blur-md mx-auto animate-fadeIn">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-500/20 rounded-full text-xs text-cyan-400 bg-cyan-950/20 backdrop-blur-md mx-auto">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
           Building Smarter Solutions for Global Brands
         </div>
@@ -463,7 +435,7 @@ export default function App() {
           </div>
 
           {submissionState === 'SUCCESS' ? (
-            <div className="bg-neutral-900/60 border border-emerald-500/30 rounded-2xl p-8 text-center space-y-5 animate-fadeIn">
+            <div className="bg-neutral-900/60 border border-emerald-500/30 rounded-2xl p-8 text-center space-y-5">
               <div className="w-14 h-14 rounded-full bg-emerald-950 border border-emerald-400 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_rgba(16,185,129,0.3)]">
                 ✓
               </div>
@@ -669,7 +641,7 @@ export default function App() {
             {/* Emerald WhatsApp Communication Anchor Node */}
             <a href="https://wa.me/923445800630" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors group">
               <svg className="w-3.5 h-3.5 fill-current text-emerald-500 group-hover:text-emerald-400 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.966 0c3.178.001 6.169 1.24 8.419 3.496 2.25 2.255 3.488 5.248 3.487 8.425-.004 6.616-5.34 11.965-11.912 11.965-1.996-.001-3.963-.502-5.716-1.458L0 24zm6.588-3.418l.366.218c1.5.892 3.314 1.363 5.166 1.364h.006c5.52 0 10.011-4.505 10.014-10.04a9.92 9.92 0 0 0-2.914-7.094A9.855 9.855 0 0 0 11.966 1.96c-5.522 0-10.015 4.508-10.018 10.043-.001 1.865.485 3.689 1.409 5.3l.239.417-1.002 3.662 3.753-.989zM18.06 14.85c-.333-.167-1.97-.974-2.278-1.087-.308-.113-.532-.167-.756.167-.224.334-.868 1.087-1.064 1.313-.196.226-.392.254-.725.087-1.361-.682-2.333-1.181-3.238-2.73-.241-.413.241-.383.69-.1.403.253.392.424.588.756.196.334.098.623-.05.924-.147.302-.756 1.821-.924 2.226-.164.394-.329.34-.45.34h-.382c-.132 0-.346-.049-.527-.247-.182-.198-.693-.677-.693-1.652 0-.975.709-1.916.821-2.066.112-.15 1.396-2.132 3.382-2.99.473-.204.843-.326 1.131-.418.475-.152.907-.13 1.25-.181.382-.057 1.173-.48 1.338-.943.165-.463.165-.86.116-.943-.049-.084-.182-.132-.515-.299z"/>
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.966 0c3.178.001 6.169 1.24 8.419 3.496 2.25 2.255 3.488 5.248 3.487 8.425-.004 6.616-5.34 11.965-11.912 11.965-1.996-.001-3.963-.502-5.716-1.458L0 24zm6.588-3.418l.366.218c1.5.892 3.314 1.363 5.166 1.364h.006c5.52 0 10.011-4.505 10.014-10.04a9.92 9.92 0 0 0-2.914-7.094A9.855 9.855 0 0 0 11.966 1.96c-5.522 0-10.015 4.508-10.018 10.043-.001 1.865.485 3.689 1.409 5.3 l.239.417-1.002 3.662 3.753-.989zM18.06 14.85c-.333-.167-1.97-.974-2.278-1.087-.308-.113-.532-.167-.756.167-.224.334-.868 1.087-1.064 1.313-.196.226-.392.254-.725.087-1.361-.682-2.333-1.181-3.238-2.73-.241-.413.241-.383.69-.1.403.253.392.424.588.756.196.334.098.623-.05.924-.147.302-.756 1.821-.924 2.226-.164.394-.329.34-.45.34h-.382c-.132 0-.346-.049-.527-.247-.182-.198-.693-.677-.693-1.652 0-.975.709-1.916.821-2.066.112-.15 1.396-2.132 3.382-2.99.473-.204.843-.326 1.131-.418.475-.152.907-.13 1.25-.181.382-.057 1.173-.48 1.338-.943.165-.463.165-.86.116-.943-.049-.084-.182-.132-.515-.299z"/>
               </svg>
               <span>WhatsApp</span>
             </a>
