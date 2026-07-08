@@ -114,6 +114,41 @@ export default function App() {
     return Object.keys(tempErrors).length === 0;
   };
 
+  // Asynchronous Webhook Notification Interface
+  const triggerDiscordNotification = async (payload) => {
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1524387978846142494/O6FRnbl8XQmgBuMlB4P3HubPI9oUJ-Thcv4SoAEiQ9lCiDBCAeB9MxdVybF1QHkNEWqa";
+    
+    const discordPayload = {
+      username: "OnyxStack Control Tower",
+      avatar_url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150",
+      embeds: [
+        {
+          title: "🛑 NEW TRANSMISSION DETECTED: INCOMING LEAD",
+          color: 62206, // Cyber Cyan hexadecimal representation
+          fields: [
+            { name: "🏢 Company Name", value: `**${payload.companyName}**`, inline: true },
+            { name: "📧 Client Email", value: payload.email, inline: true },
+            { name: "📱 Contact Number", value: payload.phone, inline: true },
+            { name: "💰 Allocation Target", value: `\`${payload.budget}\``, inline: true },
+            { name: "🔬 Scope Anchor Details", value: payload.details }
+          ],
+          footer: { text: "OnyxStack Labs • Infrastructure Automation Engine" },
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+
+    try {
+      await fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(discordPayload)
+      });
+    } catch (error) {
+      console.error("Discord transmission dropped:", error);
+    }
+  };
+
   // Executing decoupled universal lead transmission block safely
   const handleLeadFormTransmission = async (e) => {
     e.preventDefault();
@@ -128,6 +163,9 @@ export default function App() {
     const response = await transmitLeadToFirebase(formData);
 
     if (response.success) {
+      // Trigger Instant Mobile Notification via Discord Webhook Pipeline
+      await triggerDiscordNotification(formData);
+
       alert(`Verification Success!\nCompany: ${formData.companyName}\nSync Node Token: ${response.nodeRef}`);
       setSubmissionState('SUCCESS');
       setFormData({
@@ -223,7 +261,7 @@ export default function App() {
           </a>
         </div>
 
-        <div className="pt-16 md:pt-24 border-t border-neutral-900/60 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
+        <div className="flex pt-16 md:pt-24 border-t border-neutral-900/60 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
           {[
             { metric: "20+", label: "Successful Deployments" },
             { metric: "100%", label: "Custom Product Engineering" },
