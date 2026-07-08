@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../../firebase/config'; // Fixed path: Moving up two levels to reach root-level firebase folder
+// Using an absolute module breakdown to guarantee resolution regardless of nesting level
+import { db } from '/firebase/config'; 
 import { collection, query, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 
 export default function OnyxAdmin() {
@@ -11,7 +12,6 @@ export default function OnyxAdmin() {
   // Simple Secure Entry Gate for OnyxStack Labs Admin Control
   const handleAdminAuth = (e) => {
     e.preventDefault();
-    // Your system passkey is: OnyxAdmin2026!
     if (passkey === 'OnyxAdmin2026!') {
       setIsAuthenticated(true);
     } else {
@@ -57,7 +57,7 @@ export default function OnyxAdmin() {
 
   // Helper to safely open communication channel with dynamic templates
   const triggerWhatsAppCommunication = (phone, companyName) => {
-    const cleanPhone = phone.replace(/[^\d+]/g, ''); // Sanitize phone format
+    const cleanPhone = phone.replace(/[^\d+]/g, ''); 
     const message = `Hello ${companyName},\n\nThis is OnyxStack Labs. We have successfully verified your project parameters and initiated your active engineering funnel.\n\nLet us schedule a quick technical discovery call. Please let us know your availability.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${cleanPhone}?text=${encodedMessage}`, '_blank');
@@ -96,7 +96,6 @@ export default function OnyxAdmin() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-slate-100 font-sans p-4 sm:p-8">
-      {/* Header Block */}
       <header className="max-w-7xl mx-auto mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-900 pb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
@@ -110,7 +109,6 @@ export default function OnyxAdmin() {
         </div>
       </header>
 
-      {/* Main Grid View */}
       <main className="max-w-7xl mx-auto">
         {loading ? (
           <div className="text-center py-20 text-slate-500 font-mono text-sm animate-pulse">Syncing streaming channels...</div>
@@ -129,7 +127,6 @@ export default function OnyxAdmin() {
                   lead.status === 'rejected' ? 'border-red-900/40 opacity-40 hover:opacity-60' : 'border-slate-800'
                 }`}
               >
-                {/* Meta Top Section */}
                 <div>
                   <div className="flex justify-between items-start gap-4 mb-4">
                     <div>
@@ -145,7 +142,6 @@ export default function OnyxAdmin() {
                     </span>
                   </div>
 
-                  {/* Data Grid Parameters */}
                   <div className="grid grid-cols-2 gap-4 bg-[#181818] border border-slate-900 rounded-lg p-4 mb-6 text-xs font-mono">
                     <div>
                       <span className="block text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">Allocation Target</span>
@@ -164,9 +160,7 @@ export default function OnyxAdmin() {
                   </div>
                 </div>
 
-                {/* Tactical Actions Toolbar */}
                 <div className="border-t border-slate-900 pt-4 mt-2 flex flex-wrap gap-2 justify-between items-center">
-                  {/* Pipeline Lifecycle Changers */}
                   <div className="flex gap-1">
                     <button
                       onClick={() => updateLeadStatus(lead.id, 'approved')}
@@ -191,7 +185,6 @@ export default function OnyxAdmin() {
                     </button>
                   </div>
 
-                  {/* Immediate Response Protocol */}
                   {lead.phone && (
                     <button
                       onClick={() => triggerWhatsAppCommunication(lead.phone, lead.companyName)}
