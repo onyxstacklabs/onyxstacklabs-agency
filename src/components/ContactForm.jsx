@@ -45,7 +45,7 @@ export default function ContactForm({
                 type="text" 
                 id="companyName"
                 disabled={submissionState === 'SUBMITTING'}
-                placeholder={siteConfig.agencyName} 
+                placeholder={siteConfig?.agencyName || "OnyxStack Labs"} 
                 value={formData.companyName}
                 onChange={(e) => setFormData({...formData, companyName: e.target.value})}
                 className={`w-full bg-[#050505] border ${errors.companyName ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
@@ -93,7 +93,7 @@ export default function ContactForm({
                 value={formData.details}
                 onChange={(e) => setFormData({...formData, details: e.target.value})}
                 className={`w-full bg-[#050505] border ${errors.details ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all resize-none disabled:opacity-50`}
-              ></textarea>
+              />
               {errors.details && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.details}</p>}
             </div>
 
