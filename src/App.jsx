@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // LIVE DATA CORE IMPORTS
 import { transmitLeadToFirebase } from './config/firebase';
@@ -21,6 +20,11 @@ export default function App() {
   // Reactive routing node tracker
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [activeSection, setActiveSection] = useState('');
+
+  // Fallback SEO title sync natively without external dependencies
+  useEffect(() => {
+    document.title = "OnyxStack Labs | Enterprise Software & AI Automation Agency";
+  }, []);
 
   // Monitor browser history state changes & handle scroll spies safely
   useEffect(() => {
@@ -68,7 +72,7 @@ export default function App() {
     budget: 'Standard MVP ($1,000 - $2,000)'
   });
   
-  const [submissionState, setSubmissionState] = useState('IDLE'); // IDLE, SUBMITTING, SUCCESS
+  const [submissionState, setSubmissionState] = useState('IDLE'); 
   const [errors, setErrors] = useState({});
 
   // Core Services Array derived from site parameters
@@ -111,7 +115,6 @@ export default function App() {
     }
   ];
 
-  // Value Proposition Strategic Grid Array
   const valueProps = [
     { title: "Fast Delivery", desc: "No bloated timelines. We deploy hyper-optimized MVP configurations and custom software quickly without taking shortcut measures on code health." },
     { title: "Modern UI", desc: "Interfaces polished for premium engagement. Your applications will naturally match the world-class design languages of Vercel, Stripe, and Linear." },
@@ -121,7 +124,6 @@ export default function App() {
     { title: "Enterprise Security", desc: "Defensive code-structuring strategies keeping access tokens, pipeline sync logs, and dynamic web payloads tightly contained." }
   ];
 
-  // Delivery Framework Roadmap Pipeline
   const deliveryProcess = [
     { step: "01", label: "Discovery", desc: "Deep diving into your commercial business workflow parameters, identifying major operational friction points." },
     { step: "02", label: "Planning", desc: "Mapping explicit technical blueprints, chosen tech stack components, and predictable deployment milestones." },
@@ -131,12 +133,10 @@ export default function App() {
     { step: "06", label: "Deployment", desc: "Launching your custom system safely to live cloud infrastructures like Vercel with absolute domain mapping." }
   ];
 
-  // Technology Blueprint Badges Array
   const techStackBadges = [
     "React", "Vite", "Firebase", "Tailwind CSS", "Gemini AI", "JavaScript (ES6+)", "HTML5 / CSS3", "Responsive Strategy", "API Architecture", "Cloud Firestore", "Git Versioning", "Vercel Cloud"
   ];
 
-  // Client Validation Form Transmission Pipeline
   const validateForm = () => {
     let tempErrors = {};
     if (!formData.companyName.trim()) tempErrors.companyName = "Company name is required to initialize.";
@@ -151,7 +151,6 @@ export default function App() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  // Asynchronous Webhook Notification Interface
   const triggerDiscordNotification = async (payload) => {
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1524387978846142494/O6FRnbl8XQmgBuMlB4P3HubPI9oUJ-Thcv4SoAEiQ9lCiDBCAeB9MxdVybF1QHkNEWqa";
     
@@ -186,7 +185,6 @@ export default function App() {
     }
   };
 
-  // Executing decoupled universal lead transmission block safely
   const handleLeadFormTransmission = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
@@ -195,13 +193,10 @@ export default function App() {
     }
 
     setSubmissionState('SUBMITTING');
-
-    // Passing local component state payload into externalized firebase pipeline engine
     const response = await transmitLeadToFirebase(formData);
 
     if (response.success) {
       await triggerDiscordNotification(formData);
-
       alert(`Verification Success!\nCompany: ${formData.companyName}\nSync Node Token: ${response.nodeRef}`);
       setSubmissionState('SUCCESS');
       setFormData({
@@ -218,95 +213,50 @@ export default function App() {
     }
   };
 
-  // Structured Data Configuration Blocks
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://onyxstacklabs-agency.vercel.app/#organization",
-        "name": "OnyxStack Labs",
-        "url": "https://onyxstacklabs-agency.vercel.app/",
-        "logo": "https://onyxstacklabs-agency.vercel.app/favicon.png",
-        "description": "Modern software agency building websites, AI-powered software, automation and scalable digital solutions.",
-        "sameAs": [
-          siteConfig.socialLinks.youtube,
-          siteConfig.socialLinks.linkedin,
-          siteConfig.socialLinks.facebook,
-          siteConfig.socialLinks.instagram,
-          siteConfig.socialLinks.tiktok,
-          siteConfig.socialLinks.whatsapp
-        ].filter(Boolean)
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://onyxstacklabs-agency.vercel.app/#website",
-        "url": "https://onyxstacklabs-agency.vercel.app/",
-        "name": "OnyxStack Labs",
-        "description": "Modern software agency building websites, AI-powered software, automation and scalable digital solutions.",
-        "publisher": {
-          "@id": "https://onyxstacklabs-agency.vercel.app/#organization"
-        }
-      }
-    ]
-  };
-
-  // Routing Condition Gate
   if (currentPath === '/onyx-control-tower') {
     return <OnyxAdmin navigateToNode={navigateToNode} />;
   }
 
   return (
-    <HelmetProvider>
-      <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth">
-        
-        <Helmet>
-          <title>OnyxStack Labs | Enterprise Software &amp; AI Automation Agency</title>
-          <meta name="description" content="OnyxStack Labs designs premium web platforms, AI-powered automation and custom business software engineered for performance, security and long-term scalability." />
-          <link rel="canonical" href="https://onyxstacklabs-agency.vercel.app/" />
-          <script type="application/ld+json">
-            {JSON.stringify(structuredData)}
-          </script>
-        </Helmet>
+    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth">
+      
+      {/* Backdrop Ambient Effects */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_60%)] pointer-events-none z-0" />
+      <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
 
-        {/* Backdrop Ambient Effects */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_60%)] pointer-events-none z-0" />
-        <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
-        <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
+      {/* MODULAR REFACTORED SECTIONS */}
+      <Navbar 
+        currentPath={currentPath} 
+        activeSection={activeSection} 
+        navigateToNode={navigateToNode} 
+        siteConfig={siteConfig} 
+      />
+      
+      <Hero />
+      
+      <Services coreServices={coreServices} />
+      
+      <Portfolio projects={siteConfig.projects} />
+      
+      <WhyChooseUs valueProps={valueProps} />
+      
+      <Process deliveryProcess={deliveryProcess} />
+      
+      <TechStack techStackBadges={techStackBadges} />
+      
+      <ContactForm 
+        formData={formData}
+        setFormData={setFormData}
+        submissionState={submissionState}
+        setSubmissionState={setSubmissionState}
+        errors={errors}
+        handleLeadFormTransmission={handleLeadFormTransmission}
+        siteConfig={siteConfig}
+      />
+      
+      <Footer siteConfig={siteConfig} />
 
-        {/* MODULAR REFACTORED SECTIONS */}
-        <Navbar 
-          currentPath={currentPath} 
-          activeSection={activeSection} 
-          navigateToNode={navigateToNode} 
-          siteConfig={siteConfig} 
-        />
-        
-        <Hero />
-        
-        <Services coreServices={coreServices} />
-        
-        <Portfolio projects={siteConfig.projects} />
-        
-        <WhyChooseUs valueProps={valueProps} />
-        
-        <Process deliveryProcess={deliveryProcess} />
-        
-        <TechStack techStackBadges={techStackBadges} />
-        
-        <ContactForm 
-          formData={formData}
-          setFormData={setFormData}
-          submissionState={submissionState}
-          setSubmissionState={setSubmissionState}
-          errors={errors}
-          handleLeadFormTransmission={handleLeadFormTransmission}
-          siteConfig={siteConfig}
-        />
-        
-        <Footer siteConfig={siteConfig} />
-
-      </div>
-    </HelmetProvider>
+    </div>
   );
 }
