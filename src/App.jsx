@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 // IMPORTING LIVE DATA ENTITIES FROM MODULAR MATRIX CONFIGURATIONS
 import { transmitLeadToFirebase } from './config/firebase';
 import { siteConfig } from './config/siteConfig';
@@ -207,486 +208,530 @@ export default function App() {
     }
   };
 
+  // Structured Data Configuration Blocks
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://onyxstacklabs-agency.vercel.app/#organization",
+        "name": "OnyxStack Labs",
+        "url": "https://onyxstacklabs-agency.vercel.app/",
+        "logo": "https://onyxstacklabs-agency.vercel.app/favicon.png",
+        "description": "Modern software agency building websites, AI-powered software, automation and scalable digital solutions.",
+        "sameAs": [
+          siteConfig.socialLinks.youtube,
+          siteConfig.socialLinks.linkedin,
+          siteConfig.socialLinks.facebook,
+          siteConfig.socialLinks.instagram,
+          siteConfig.socialLinks.tiktok,
+          siteConfig.socialLinks.whatsapp
+        ].filter(Boolean)
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://onyxstacklabs-agency.vercel.app/#website",
+        "url": "https://onyxstacklabs-agency.vercel.app/",
+        "name": "OnyxStack Labs",
+        "description": "Modern software agency building websites, AI-powered software, automation and scalable digital solutions.",
+        "publisher": {
+          "@id": "https://onyxstacklabs-agency.vercel.app/#organization"
+        }
+      }
+    ]
+  };
+
   // Routing Condition Gate: Route to Admin Panel if path matches our private routing node
   if (currentPath === '/onyx-control-tower') {
     return <OnyxAdmin navigateToNode={navigateToNode} />;
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth">
-      
-      {/* Premium Backdrop Aesthetic Glow Nodes using Refined Design Tokens */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_60%)] pointer-events-none z-0" />
-      <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
-
-      {/* --- ELITE FIXED STICKY NAVIGATION BAR --- */}
-      <nav className="sticky top-0 z-50 border-b border-neutral-900/80 bg-[#050505]/70 backdrop-blur-md px-6 md:px-12 py-4 transition-all duration-300" aria-label="Main Navigation">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#06B6D4] rounded-md p-1" aria-label={`${siteConfig.agencyName} Homepage`}>
-            <div className="w-2.5 h-2.5 rounded-full bg-[#06B6D4] shadow-[0_0_12px_#06B6D4] group-hover:scale-110 transition-transform duration-300"></div>
-            <span className="text-base font-bold tracking-wider uppercase font-mono text-white">
-              OnyxStack<span className="text-[#06B6D4] font-sans tracking-normal lowercase font-semibold">Labs</span>
-            </span>
-          </a>
-          
-          <div className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-neutral-400">
-            <a href="#services" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'services' ? 'text-[#06B6D4] font-bold' : ''}`}>Services</a>
-            <a href="#portfolio" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'portfolio' ? 'text-[#06B6D4] font-bold' : ''}`}>Portfolio</a>
-            <a href="#why-choose-us" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'why-choose-us' ? 'text-[#06B6D4] font-bold' : ''}`}>Philosophy</a>
-            <a href="#process" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'process' ? 'text-[#06B6D4] font-bold' : ''}`}>Our Process</a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2 bg-neutral-900/40 border border-neutral-800/80 px-3 py-1 rounded-full" aria-label="System status node indicator">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#00e676] shadow-[0_0_8px_#00e676] animate-pulse"></div>
-              <span className="text-[9px] uppercase tracking-widest text-neutral-400 font-mono">Ready For Partnerships</span>
-            </div>
-            <a 
-              href="#contact" 
-              className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-4.5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
-            >
-              Start Project
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* --- ENTERPRISE HERO SECTION --- */}
-      <header className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-24 text-center md:pt-40 md:pb-36 space-y-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#06B6D4]/20 rounded-full text-[11px] font-mono tracking-wider uppercase text-[#06B6D4] bg-[#06B6D4]/5 backdrop-blur-sm mx-auto animate-fade-in">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4]"></span>
-          Building Smarter Software for Global Businesses
-        </div>
+    <HelmetProvider>
+      <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth">
         
-        <div className="space-y-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.05]">
-            Enterprise Software.<br />
-            AI Automation.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 via-neutral-400 to-[#06B6D4]">
-              Scalable Digital Products.
-            </span>
-          </h1>
-          <p className="text-sm sm:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed font-normal tracking-wide">
-            OnyxStack Labs designs premium web platforms, AI-powered automation and custom business software engineered for performance, security and long-term scalability.
-          </p>
-        </div>
+        <Helmet>
+          <title>OnyxStack Labs | Enterprise Software &amp; AI Automation Agency</title>
+          <meta name="description" content="OnyxStack Labs designs premium web platforms, AI-powered automation and custom business software engineered for performance, security and long-term scalability." />
+          <link rel="canonical" href="https://onyxstacklabs-agency.vercel.app/" />
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData)}
+          </script>
+        </Helmet>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-          <a 
-            href="#contact" 
-            className="w-full sm:w-auto bg-[#06B6D4] hover:bg-cyan-400 text-black px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] text-center"
-          >
-            Start Your Project
-          </a>
-          <a 
-            href="#portfolio" 
-            className="w-full sm:w-auto bg-neutral-900/50 hover:bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-neutral-700 text-center"
-          >
-            View Portfolio
-          </a>
-        </div>
+        {/* Premium Backdrop Aesthetic Glow Nodes using Refined Design Tokens */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_60%)] pointer-events-none z-0" />
+        <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
+        <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
 
-        {/* Floating Scroll Indicator */}
-        <div className="pt-10 animate-bounce hidden md:block">
-          <a href="#services" aria-label="Scroll Down" className="text-neutral-600 hover:text-[#06B6D4] transition-colors">
-            <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-          </a>
-        </div>
-
-        <div className="flex pt-20 md:pt-28 border-t border-neutral-900/60 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6">
-          {[
-            { metric: "Verified", label: "Production Deployments" },
-            { metric: "100%", label: "Custom Product Engineering" },
-            { metric: "AI-Powered", label: "Workflow Automation Models" },
-            { metric: "Premium", label: "UI/UX Aesthetic Standard" }
-          ].map((stat, idx) => (
-            <div key={idx} className="space-y-1 group border-r border-neutral-900 last:border-none last:pr-0">
-              <div className="text-xl md:text-2xl font-black text-white group-hover:text-[#06B6D4] transition-colors duration-300 font-mono">{stat.metric}</div>
-              <div className="text-[10px] text-neutral-500 uppercase tracking-widest font-mono font-medium max-w-[140px] mx-auto">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </header>
-
-      {/* --- CORE PREMIUM SERVICES SECTION --- */}
-      <section id="services" className="relative z-10 border-t border-neutral-900 bg-[#050505]/20 py-28 px-6" aria-labelledby="services-title">
-        <div className="max-w-7xl mx-auto space-y-20">
-          <div className="text-center space-y-3">
-            <h2 id="services-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Capabilities Matrix</h2>
-            <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">Engineered Solutions for Complex Problems</p>
-            <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed font-normal">High-performance production apps built cleanly with zero bloatware runtime execution templates.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {coreServices.map((service, idx) => (
-              <div 
-                key={idx} 
-                className="bg-[#090909]/60 backdrop-blur-sm border border-neutral-900 rounded-2xl p-6 space-y-4 hover:border-[#06B6D4]/30 transition-all duration-300 group hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-              >
-                <div className="w-10 h-10 rounded-xl bg-neutral-900 flex items-center justify-center border border-neutral-800 group-hover:bg-cyan-950/20 group-hover:border-[#06B6D4]/20 transition-all duration-300">
-                  {service.icon}
-                </div>
-                <h3 className="text-base font-bold text-neutral-100 group-hover:text-[#06B6D4] transition-colors duration-300">{service.title}</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed font-normal">{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- PRODUCTION ECOSYSTEM ROW COMPLETELY GENERATED FROM SITECONFIG DATA --- */}
-      <section id="portfolio" className="relative z-10 py-28 px-6 max-w-7xl mx-auto space-y-20" aria-labelledby="portfolio-title">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-900 pb-8">
-          <div className="space-y-3">
-            <h2 id="portfolio-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Selected Product Deployments</h2>
-            <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">Live Production Ecosystem</p>
-          </div>
-          <div className="inline-block bg-neutral-900/30 backdrop-blur-sm border border-neutral-800 px-4 py-2 rounded-xl font-mono text-[11px] uppercase tracking-widest text-neutral-400">
-            Active Verified Instances
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {siteConfig.projects.map((project) => (
-            <article 
-              key={project.id} 
-              className="bg-[#090909]/40 backdrop-blur-sm border border-neutral-900 rounded-2xl p-6 flex flex-col justify-between hover:border-[#06B6D4]/20 transition-all duration-300 relative overflow-hidden group hover:shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
-            >
-              {project.liveUrl !== "#" && (
-                <span className="absolute top-4 right-4 bg-emerald-950/40 border border-emerald-500/20 text-[#00e676] text-[9px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1.5">
-                  <span className="w-1 h-1 rounded-full bg-[#00e676] animate-pulse"></span> Live Setup
-                </span>
-              )}
-              
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-[#06B6D4] transition-colors duration-300">{project.name}</h3>
-                  <p className="text-[9px] font-mono font-bold text-[#06B6D4] tracking-widest uppercase mt-1">{project.tagline}</p>
-                </div>
-                <p className="text-xs text-neutral-400 leading-relaxed font-normal min-h-[64px]">{project.description}</p>
-              </div>
-
-              <div className="mt-6 space-y-4 pt-4 border-t border-neutral-900/60">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((tag, idx) => (
-                    <span key={idx} className="bg-neutral-900/60 text-neutral-400 border border-neutral-800/40 font-mono text-[9px] px-2 py-0.5 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <a 
-                  href={project.liveUrl}
-                  target={project.liveUrl !== "#" ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                  className="w-full bg-neutral-900/80 hover:bg-[#06B6D4] border border-neutral-800/80 text-neutral-300 hover:text-black font-bold text-[11px] uppercase tracking-widest py-3 px-4 rounded-xl flex items-center justify-center gap-2 group/btn transition-all duration-300 text-center focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
-                  aria-label={`Launch deployment instance demo for ${project.name}`}
-                >
-                  Launch Client Instance <span className="group-hover/btn:translate-x-0.5 transition-transform duration-300">→</span>
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* --- STRATEGIC FEATURE GRID SECTION --- */}
-      <section id="why-choose-us" className="relative z-10 border-t border-neutral-900 bg-[#050505]/20 py-28 px-6" aria-labelledby="why-us-title">
-        <div className="max-w-7xl mx-auto space-y-20">
-          <div className="text-center space-y-3">
-            <h2 id="why-us-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Our Strategic Advantage</h2>
-            <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">Built For Real Commercial Impact</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {valueProps.map((prop, idx) => (
-              <div key={idx} className="bg-[#090909]/60 backdrop-blur-sm border border-neutral-900 p-6 rounded-2xl flex gap-4 items-start hover:border-neutral-800 transition-all duration-300 group">
-                <div className="mt-0.5 w-5 h-5 rounded-full bg-cyan-950/40 border border-cyan-400/20 flex items-center justify-center shrink-0 group-hover:border-[#06B6D4]/50 transition-colors duration-300">
-                  <svg className="w-2.5 h-2.5 text-[#06B6D4]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-neutral-100 font-mono uppercase tracking-wider">{prop.title}</h3>
-                  <p className="text-xs text-neutral-400 leading-relaxed font-normal">{prop.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- PIPELINE DELIVERY TIMELINE PROCESS SECTION --- */}
-      <section id="process" className="relative z-10 border-t border-neutral-900 py-28 px-6 max-w-7xl mx-auto space-y-20" aria-labelledby="process-title">
-        <div className="text-center space-y-3">
-          <h2 id="process-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Execution Timeline</h2>
-          <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">From Blueprint to Deployment Loop</p>
-        </div>
-
-        <div className="relative max-w-4xl mx-auto before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[1px] before:bg-neutral-900 before:pointer-events-none">
-          {deliveryProcess.map((proc, idx) => (
-            <div key={idx} className={`relative flex flex-col md:flex-row items-start mb-10 last:mb-0 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-              <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-black border border-neutral-800 flex items-center justify-center z-10 shadow-[0_0_10px_rgba(0,0,0,0.9)]">
-                <span className="text-[9px] font-mono text-[#06B6D4] font-bold">{proc.step}</span>
-              </div>
-              
-              <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:pr-12 text-left md:text-right' : 'md:pl-12 text-left'}`}>
-                <div className="bg-[#090909]/40 backdrop-blur-sm border border-neutral-900 p-5 rounded-2xl hover:border-neutral-800 transition-colors duration-300 inline-block w-full">
-                  <h3 className="text-sm font-bold text-white mb-1 font-mono uppercase tracking-wider">{proc.label}</h3>
-                  <p className="text-xs text-neutral-400 leading-relaxed font-normal">{proc.desc}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* --- CORE TECH STACK COMPONENT GRID --- */}
-      <section className="relative z-10 border-t border-neutral-900 bg-[#090909]/20 py-20 px-6" aria-labelledby="tech-title">
-        <div className="max-w-5xl mx-auto space-y-10">
-          <div className="text-center space-y-2">
-            <h2 id="tech-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">The Technology Architecture Blueprint</h2>
-            <p className="text-xs text-neutral-500 font-mono uppercase tracking-widest">High-performance tech stacks configured for microsecond hot reload optimization.</p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mx-auto">
-            {techStackBadges.map((tech, idx) => (
-              <span 
-                key={idx} 
-                className="bg-neutral-950 border border-neutral-900/80 text-neutral-400 font-mono text-[11px] px-3.5 py-1.5 rounded-xl hover:border-[#06B6D4]/30 hover:text-white transition-all duration-200 cursor-default"
-              >
-                {tech}
+        {/* --- ELITE FIXED STICKY NAVIGATION BAR --- */}
+        <nav className="sticky top-0 z-50 border-b border-neutral-900/80 bg-[#050505]/70 backdrop-blur-md px-6 md:px-12 py-4 transition-all duration-300" aria-label="Main Navigation">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#06B6D4] rounded-md p-1" aria-label={`${siteConfig.agencyName} Homepage`}>
+              <div className="w-2.5 h-2.5 rounded-full bg-[#06B6D4] shadow-[0_0_12px_#06B6D4] group-hover:scale-110 transition-transform duration-300"></div>
+              <span className="text-base font-bold tracking-wider uppercase font-mono text-white">
+                OnyxStack<span className="text-[#06B6D4] font-sans tracking-normal lowercase font-semibold">Labs</span>
               </span>
-            ))}
-          </div>
-        </div>
-      </section>
+            </a>
+            
+            <div className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-neutral-400">
+              <a href="#services" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'services' ? 'text-[#06B6D4] font-bold' : ''}`}>Services</a>
+              <a href="#portfolio" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'portfolio' ? 'text-[#06B6D4] font-bold' : ''}`}>Portfolio</a>
+              <a href="#why-choose-us" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'why-choose-us' ? 'text-[#06B6D4] font-bold' : ''}`}>Philosophy</a>
+              <a href="#process" className={`transition-all duration-200 hover:text-white focus:outline-none ${activeSection === 'process' ? 'text-[#06B6D4] font-bold' : ''}`}>Our Process</a>
+            </div>
 
-      {/* --- REDESIGNED HIGH-CONVERSION PARTNERSHIP CONTACT SECTION --- */}
-      <section id="contact" className="relative z-10 border-t border-neutral-900 py-28 px-6" aria-labelledby="contact-title">
-        <div className="max-w-2xl mx-auto bg-[#090909]/80 border border-neutral-900 rounded-3xl p-6 md:p-10 space-y-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-md">
-          <div className="text-center space-y-2">
-            <h2 id="contact-title" className="text-xl md:text-2xl font-black uppercase tracking-tight text-white">Let's Build Your Next Project</h2>
-            <p className="text-xs text-neutral-400 font-normal max-w-md mx-auto leading-relaxed tracking-wide">
-              Drop your custom application parameters directly into our active design consultation funnel pipeline.
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex items-center gap-2 bg-neutral-900/40 border border-neutral-800/80 px-3 py-1 rounded-full" aria-label="System status node indicator">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#00e676] shadow-[0_0_8px_#00e676] animate-pulse"></div>
+                <span className="text-[9px] uppercase tracking-widest text-neutral-400 font-mono">Ready For Partnerships</span>
+              </div>
+              <a 
+                href="#contact" 
+                className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-4.5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+              >
+                Start Project
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        {/* --- ENTERPRISE HERO SECTION --- */}
+        <header className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-24 text-center md:pt-40 md:pb-36 space-y-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#06B6D4]/20 rounded-full text-[11px] font-mono tracking-wider uppercase text-[#06B6D4] bg-[#06B6D4]/5 backdrop-blur-sm mx-auto animate-fade-in">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4]"></span>
+            Building Smarter Software for Global Businesses
+          </div>
+          
+          <div className="space-y-6 max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.05]">
+              Enterprise Software.<br />
+              AI Automation.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 via-neutral-400 to-[#06B6D4]">
+                Scalable Digital Products.
+              </span>
+            </h1>
+            <p className="text-sm sm:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed font-normal tracking-wide">
+              OnyxStack Labs designs premium web platforms, AI-powered automation and custom business software engineered for performance, security and long-term scalability.
             </p>
           </div>
 
-          {submissionState === 'SUCCESS' ? (
-            <div className="bg-neutral-900/40 border border-emerald-500/20 rounded-2xl p-8 text-center space-y-5 animate-fade-in">
-              <div className="w-12 h-12 rounded-full bg-emerald-950/50 border border-emerald-500 text-[#00e676] flex items-center justify-center mx-auto text-xl shadow-[0_0_15px_rgba(0,230,118,0.2)]">
-                ✓
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+            <a 
+              href="#contact" 
+              className="w-full sm:w-auto bg-[#06B6D4] hover:bg-cyan-400 text-black px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] text-center"
+            >
+              Start Your Project
+            </a>
+            <a 
+              href="#portfolio" 
+              className="w-full sm:w-auto bg-neutral-900/50 hover:bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-neutral-700 text-center"
+            >
+              View Portfolio
+            </a>
+          </div>
+
+          {/* Floating Scroll Indicator */}
+          <div className="pt-10 animate-bounce hidden md:block">
+            <a href="#services" aria-label="Scroll Down" className="text-neutral-600 hover:text-[#06B6D4] transition-colors">
+              <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </a>
+          </div>
+
+          <div className="flex pt-20 md:pt-28 border-t border-neutral-900/60 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6">
+            {[
+              { metric: "Verified", label: "Production Deployments" },
+              { metric: "100%", label: "Custom Product Engineering" },
+              { metric: "AI-Powered", label: "Workflow Automation Models" },
+              { metric: "Premium", label: "UI/UX Aesthetic Standard" }
+            ].map((stat, idx) => (
+              <div key={idx} className="space-y-1 group border-r border-neutral-900 last:border-none last:pr-0">
+                <div className="text-xl md:text-2xl font-black text-white group-hover:text-[#06B6D4] transition-colors duration-300 font-mono">{stat.metric}</div>
+                <div className="text-[10px] text-neutral-500 uppercase tracking-widest font-mono font-medium max-w-[140px] mx-auto">{stat.label}</div>
               </div>
-              <div className="space-y-1.5">
-                <h3 className="text-base font-bold text-[#00e676] font-mono uppercase tracking-widest">Project Request Cached</h3>
-                <p className="text-xs text-neutral-400 max-w-sm mx-auto leading-relaxed">
-                  Your project specifications have been successfully transmitted. Our engineering partners will reach out within 24 hours.
-                </p>
-              </div>
-              <button 
-                onClick={() => setSubmissionState('IDLE')}
-                className="text-[10px] text-[#06B6D4] hover:text-cyan-300 font-mono uppercase tracking-widest pt-2 font-bold focus:outline-none focus:underline"
-              >
-                Submit An Additional System Node
-              </button>
+            ))}
+          </div>
+        </header>
+
+        {/* --- CORE PREMIUM SERVICES SECTION --- */}
+        <section id="services" className="relative z-10 border-t border-neutral-900 bg-[#050505]/20 py-28 px-6" aria-labelledby="services-title">
+          <div className="max-w-7xl mx-auto space-y-20">
+            <div className="text-center space-y-3">
+              <h2 id="services-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Capabilities Matrix</h2>
+              <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">Engineered Solutions for Complex Problems</p>
+              <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed font-normal">High-performance production apps built cleanly with zero bloatware runtime execution templates.</p>
             </div>
-          ) : (
-            <form onSubmit={handleLeadFormTransmission} className="space-y-5">
-              <div className="space-y-1.5">
-                <label htmlFor="companyName" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Company Name</label>
-                <input 
-                  type="text" 
-                  id="companyName"
-                  disabled={submissionState === 'SUBMITTING'}
-                  placeholder={siteConfig.agencyName} 
-                  value={formData.companyName}
-                  onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                  className={`w-full bg-[#050505] border ${errors.companyName ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
-                />
-                {errors.companyName && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.companyName}</p>}
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label htmlFor="email" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email"
-                    disabled={submissionState === 'SUBMITTING'}
-                    placeholder="onyxstacklabs@gmail.com" 
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className={`w-full bg-[#050505] border ${errors.email ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
-                  />
-                  {errors.email && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.email}</p>}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {coreServices.map((service, idx) => (
+                <div 
+                  key={idx} 
+                  className="bg-[#090909]/60 backdrop-blur-sm border border-neutral-900 rounded-2xl p-6 space-y-4 hover:border-[#06B6D4]/30 transition-all duration-300 group hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-neutral-900 flex items-center justify-center border border-neutral-800 group-hover:bg-cyan-950/20 group-hover:border-[#06B6D4]/20 transition-all duration-300">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-base font-bold text-neutral-100 group-hover:text-[#06B6D4] transition-colors duration-300">{service.title}</h3>
+                  <p className="text-xs text-neutral-400 leading-relaxed font-normal">{service.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* --- PRODUCTION ECOSYSTEM ROW COMPLETELY GENERATED FROM SITECONFIG DATA --- */}
+        <section id="portfolio" className="relative z-10 py-28 px-6 max-w-7xl mx-auto space-y-20" aria-labelledby="portfolio-title">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-900 pb-8">
+            <div className="space-y-3">
+              <h2 id="portfolio-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Selected Product Deployments</h2>
+              <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">Live Production Ecosystem</p>
+            </div>
+            <div className="inline-block bg-neutral-900/30 backdrop-blur-sm border border-neutral-800 px-4 py-2 rounded-xl font-mono text-[11px] uppercase tracking-widest text-neutral-400">
+              Active Verified Instances
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {siteConfig.projects.map((project) => (
+              <article 
+                key={project.id} 
+                className="bg-[#090909]/40 backdrop-blur-sm border border-neutral-900 rounded-2xl p-6 flex flex-col justify-between hover:border-[#06B6D4]/20 transition-all duration-300 relative overflow-hidden group hover:shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
+              >
+                {project.liveUrl !== "#" && (
+                  <span className="absolute top-4 right-4 bg-emerald-950/40 border border-emerald-500/20 text-[#00e676] text-[9px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1.5">
+                    <span className="w-1 h-1 rounded-full bg-[#00e676] animate-pulse"></span> Live Setup
+                  </span>
+                )}
+                
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-white group-hover:text-[#06B6D4] transition-colors duration-300">{project.name}</h3>
+                    <p className="text-[9px] font-mono font-bold text-[#06B6D4] tracking-widest uppercase mt-1">{project.tagline}</p>
+                  </div>
+                  <p className="text-xs text-neutral-400 leading-relaxed font-normal min-h-[64px]">{project.description}</p>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label htmlFor="phone" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Phone Number</label>
-                  <input 
-                    type="tel" 
-                    id="phone"
-                    disabled={submissionState === 'SUBMITTING'}
-                    placeholder="+92 344 5800630" 
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className={`w-full bg-[#050505] border ${errors.phone ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
-                  />
-                  {errors.phone && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.phone}</p>}
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label htmlFor="details" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Project Scope & Details</label>
-                <textarea 
-                  id="details"
-                  rows="4"
-                  disabled={submissionState === 'SUBMITTING'}
-                  placeholder="Describe your customized system goals, required AI features, or workflow challenges..." 
-                  value={formData.details}
-                  onChange={(e) => setFormData({...formData, details: e.target.value})}
-                  className={`w-full bg-[#050505] border ${errors.details ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all resize-none disabled:opacity-50`}
-                ></textarea>
-                {errors.details && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.details}</p>}
-              </div>
-
-              <div className="space-y-1.5">
-                <label htmlFor="budget" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Estimated Budget Allocation</label>
-                <div className="relative">
-                  <select 
-                    id="budget"
-                    disabled={submissionState === 'SUBMITTING'}
-                    value={formData.budget}
-                    onChange={(e) => setFormData({...formData, budget: e.target.value})}
-                    className="w-full bg-[#050505] border border-neutral-800 focus:border-[#06B6D4] rounded-xl py-3 px-4 text-xs text-white outline-none cursor-pointer appearance-none disabled:opacity-50"
+                <div className="mt-6 space-y-4 pt-4 border-t border-neutral-900/60">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tech.map((tag, idx) => (
+                      <span key={idx} className="bg-neutral-900/60 text-neutral-400 border border-neutral-800/40 font-mono text-[9px] px-2 py-0.5 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <a 
+                    href={project.liveUrl}
+                    target={project.liveUrl !== "#" ? "_blank" : "_self"}
+                    rel="noopener noreferrer"
+                    className="w-full bg-neutral-900/80 hover:bg-[#06B6D4] border border-neutral-800/80 text-neutral-300 hover:text-black font-bold text-[11px] uppercase tracking-widest py-3 px-4 rounded-xl flex items-center justify-center gap-2 group/btn transition-all duration-300 text-center focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+                    aria-label={`Launch deployment instance demo for ${project.name}`}
                   >
-                    <option>Standard MVP ($1,000 - $2,000)</option>
-                    <option>Premium Business Tier ($2,000 - $5,000)</option>
-                    <option>Enterprise Custom Architecture ($5,000+)</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                    Launch Client Instance <span className="group-hover/btn:translate-x-0.5 transition-transform duration-300">→</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* --- STRATEGIC FEATURE GRID SECTION --- */}
+        <section id="why-choose-us" className="relative z-10 border-t border-neutral-900 bg-[#050505]/20 py-28 px-6" aria-labelledby="why-us-title">
+          <div className="max-w-7xl mx-auto space-y-20">
+            <div className="text-center space-y-3">
+              <h2 id="why-us-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Our Strategic Advantage</h2>
+              <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">Built For Real Commercial Impact</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {valueProps.map((prop, idx) => (
+                <div key={idx} className="bg-[#090909]/60 backdrop-blur-sm border border-neutral-900 p-6 rounded-2xl flex gap-4 items-start hover:border-neutral-800 transition-all duration-300 group">
+                  <div className="mt-0.5 w-5 h-5 rounded-full bg-cyan-950/40 border border-cyan-400/20 flex items-center justify-center shrink-0 group-hover:border-[#06B6D4]/50 transition-colors duration-300">
+                    <svg className="w-2.5 h-2.5 text-[#06B6D4]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-bold text-neutral-100 font-mono uppercase tracking-wider">{prop.title}</h3>
+                    <p className="text-xs text-neutral-400 leading-relaxed font-normal">{prop.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* --- PIPELINE DELIVERY TIMELINE PROCESS SECTION --- */}
+        <section id="process" className="relative z-10 border-t border-neutral-900 py-28 px-6 max-w-7xl mx-auto space-y-20" aria-labelledby="process-title">
+          <div className="text-center space-y-3">
+            <h2 id="process-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">Execution Timeline</h2>
+            <p className="text-2xl md:text-3xl font-black tracking-tight uppercase text-white">From Blueprint to Deployment Loop</p>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[1px] before:bg-neutral-900 before:pointer-events-none">
+            {deliveryProcess.map((proc, idx) => (
+              <div key={idx} className={`relative flex flex-col md:flex-row items-start mb-10 last:mb-0 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-black border border-neutral-800 flex items-center justify-center z-10 shadow-[0_0_10px_rgba(0,0,0,0.9)]">
+                  <span className="text-[9px] font-mono text-[#06B6D4] font-bold">{proc.step}</span>
+                </div>
+                
+                <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:pr-12 text-left md:text-right' : 'md:pl-12 text-left'}`}>
+                  <div className="bg-[#090909]/40 backdrop-blur-sm border border-neutral-900 p-5 rounded-2xl hover:border-neutral-800 transition-colors duration-300 inline-block w-full">
+                    <h3 className="text-sm font-bold text-white mb-1 font-mono uppercase tracking-wider">{proc.label}</h3>
+                    <p className="text-xs text-neutral-400 leading-relaxed font-normal">{proc.desc}</p>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <button 
-                type="submit"
-                disabled={submissionState === 'SUBMITTING'}
-                className="w-full bg-[#06B6D4] hover:bg-cyan-400 disabled:bg-cyan-950 disabled:text-cyan-700 text-black font-black text-xs uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-[0_4px_20px_rgba(6,182,212,0.1)] transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
-              >
-                {submissionState === 'SUBMITTING' ? (
-                  <>
-                    <svg className="animate-spin h-3.5 w-3.5 text-black" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    <span className="font-mono tracking-wider">Verifying Transmission...</span>
-                  </>
-                ) : (
-                  "Start Project"
-                )}
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
-
-      {/* --- UNIFIED HIGH-END FOOTER FRAMEWORK --- */}
-      <footer className="border-t border-neutral-900 bg-[#050505] py-16 px-6 relative z-10" aria-label="Agency Directory Info">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12">
-          
-          {/* Brand Identity Segment */}
-          <div className="space-y-4 md:col-span-2">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]"></div>
-              <h3 className="text-sm font-bold tracking-widest uppercase text-white font-mono">{siteConfig.agencyName}</h3>
+        {/* --- CORE TECH STACK COMPONENT GRID --- */}
+        <section className="relative z-10 border-t border-neutral-900 bg-[#090909]/20 py-20 px-6" aria-labelledby="tech-title">
+          <div className="max-w-5xl mx-auto space-y-10">
+            <div className="text-center space-y-2">
+              <h2 id="tech-title" className="text-xs font-mono font-bold uppercase tracking-widest text-[#06B6D4]">The Technology Architecture Blueprint</h2>
+              <p className="text-xs text-neutral-500 font-mono uppercase tracking-widest">High-performance tech stacks configured for microsecond hot reload optimization.</p>
             </div>
-            <p className="text-xs text-neutral-500 max-w-sm leading-relaxed font-normal">
-              High-performance premium custom software engineering agency. We turn enterprise business specifications into optimized software environments.
-            </p>
-            <div className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-widest">
-              Building Smarter Solutions
+
+            <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mx-auto">
+              {techStackBadges.map((tech, idx) => (
+                <span 
+                  key={idx} 
+                  className="bg-neutral-950 border border-neutral-900/80 text-neutral-400 font-mono text-[11px] px-3.5 py-1.5 rounded-xl hover:border-[#06B6D4]/30 hover:text-white transition-all duration-200 cursor-default"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
+        </section>
 
-          {/* Quick Services Index */}
-          <div className="space-y-3">
-            <h4 className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Services Matrix</h4>
-            <ul className="space-y-2 text-xs text-neutral-500 font-normal">
-              <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">Custom Web Platforms</a></li>
-              <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">Android Mobile Apps</a></li>
-              <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">AI System Automation</a></li>
-              <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">Management ERP Core</a></li>
-            </ul>
+        {/* --- REDESIGNED HIGH-CONVERSION PARTNERSHIP CONTACT SECTION --- */}
+        <section id="contact" className="relative z-10 border-t border-neutral-900 py-28 px-6" aria-labelledby="contact-title">
+          <div className="max-w-2xl mx-auto bg-[#090909]/80 border border-neutral-900 rounded-3xl p-6 md:p-10 space-y-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-md">
+            <div className="text-center space-y-2">
+              <h2 id="contact-title" className="text-xl md:text-2xl font-black uppercase tracking-tight text-white">Let's Build Your Next Project</h2>
+              <p className="text-xs text-neutral-400 font-normal max-w-md mx-auto leading-relaxed tracking-wide">
+                Drop your custom application parameters directly into our active design consultation funnel pipeline.
+              </p>
+            </div>
+
+            {submissionState === 'SUCCESS' ? (
+              <div className="bg-neutral-900/40 border border-emerald-500/20 rounded-2xl p-8 text-center space-y-5 animate-fade-in">
+                <div className="w-12 h-12 rounded-full bg-emerald-950/50 border border-emerald-500 text-[#00e676] flex items-center justify-center mx-auto text-xl shadow-[0_0_15px_rgba(0,230,118,0.2)]">
+                  ✓
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-base font-bold text-[#00e676] font-mono uppercase tracking-widest">Project Request Cached</h3>
+                  <p className="text-xs text-neutral-400 max-w-sm mx-auto leading-relaxed">
+                    Your project specifications have been successfully transmitted. Our engineering partners will reach out within 24 hours.
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setSubmissionState('IDLE')}
+                  className="text-[10px] text-[#06B6D4] hover:text-cyan-300 font-mono uppercase tracking-widest pt-2 font-bold focus:outline-none focus:underline"
+                >
+                  Submit An Additional System Node
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleLeadFormTransmission} className="space-y-5">
+                <div className="space-y-1.5">
+                  <label htmlFor="companyName" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Company Name</label>
+                  <input 
+                    type="text" 
+                    id="companyName"
+                    disabled={submissionState === 'SUBMITTING'}
+                    placeholder={siteConfig.agencyName} 
+                    value={formData.companyName}
+                    onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+                    className={`w-full bg-[#050505] border ${errors.companyName ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
+                  />
+                  {errors.companyName && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.companyName}</p>}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="space-y-1.5">
+                    <label htmlFor="email" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Email Address</label>
+                    <input 
+                      type="email" 
+                      id="email"
+                      disabled={submissionState === 'SUBMITTING'}
+                      placeholder="onyxstacklabs@gmail.com" 
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className={`w-full bg-[#050505] border ${errors.email ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
+                    />
+                    {errors.email && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.email}</p>}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="phone" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone"
+                      disabled={submissionState === 'SUBMITTING'}
+                      placeholder="+92 344 5800630" 
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className={`w-full bg-[#050505] border ${errors.phone ? 'border-red-500/80 focus:ring-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all disabled:opacity-50`}
+                    />
+                    {errors.phone && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.phone}</p>}
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="details" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Project Scope & Details</label>
+                  <textarea 
+                    id="details"
+                    rows="4"
+                    disabled={submissionState === 'SUBMITTING'}
+                    placeholder="Describe your customized system goals, required AI features, or workflow challenges..." 
+                    value={formData.details}
+                    onChange={(e) => setFormData({...formData, details: e.target.value})}
+                    className={`w-full bg-[#050505] border ${errors.details ? 'border-red-500/80 focus:ring-red-500' : 'border-red-500' : 'border-neutral-800 focus:border-[#06B6D4] focus:ring-[#06B6D4]'} focus:ring-1 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-800 outline-none transition-all resize-none disabled:opacity-50`}
+                  ></textarea>
+                  {errors.details && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.details}</p>}
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="budget" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Estimated Budget Allocation</label>
+                  <div className="relative">
+                    <select 
+                      id="budget"
+                      disabled={submissionState === 'SUBMITTING'}
+                      value={formData.budget}
+                      onChange={(e) => setFormData({...formData, budget: e.target.value})}
+                      className="w-full bg-[#050505] border border-neutral-800 focus:border-[#06B6D4] rounded-xl py-3 px-4 text-xs text-white outline-none cursor-pointer appearance-none disabled:opacity-50"
+                    >
+                      <option>Standard MVP ($1,000 - $2,000)</option>
+                      <option>Premium Business Tier ($2,000 - $5,000)</option>
+                      <option>Enterprise Custom Architecture ($5,000+)</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  type="submit"
+                  disabled={submissionState === 'SUBMITTING'}
+                  className="w-full bg-[#06B6D4] hover:bg-cyan-400 disabled:bg-cyan-950 disabled:text-cyan-700 text-black font-black text-xs uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-[0_4px_20px_rgba(6,182,212,0.1)] transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+                >
+                  {submissionState === 'SUBMITTING' ? (
+                    <>
+                      <svg className="animate-spin h-3.5 w-3.5 text-black" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      <span className="font-mono tracking-wider">Verifying Transmission...</span>
+                    </>
+                  ) : (
+                    "Start Project"
+                  )}
+                </button>
+              </form>
+            )}
           </div>
+        </section>
 
-          {/* Core Contacts Segment */}
-          <div className="space-y-3">
-            <h4 className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Communication Nodes</h4>
-            <ul className="space-y-2 text-xs text-neutral-500 font-normal">
-              <li><span className="text-neutral-400 font-mono">Inquiries:</span> onyxstacklabs@gmail.com</li>
-              <li><span className="text-neutral-400 font-mono">Hotline:</span> +92 344 5800630</li>
-              <li><span className="text-neutral-400 font-mono">Headquarters:</span> Pakistan</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* PIXEL-PERFECT PIXEL ALIGNED SOCIAL GRID */}
-        <div className="border-t border-neutral-900/60 pt-8 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-6 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+        {/* --- UNIFIED HIGH-END FOOTER FRAMEWORK --- */}
+        <footer className="border-t border-neutral-900 bg-[#050505] py-16 px-6 relative z-10" aria-label="Agency Directory Info">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12">
             
-            {/* YouTube Link */}
-            <a href={siteConfig.socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs YouTube Channel">
-              <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 .502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            </a>
+            {/* Brand Identity Segment */}
+            <div className="space-y-4 md:col-span-2">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]"></div>
+                <h3 className="text-sm font-bold tracking-widest uppercase text-white font-mono">{siteConfig.agencyName}</h3>
+              </div>
+              <p className="text-xs text-neutral-500 max-w-sm leading-relaxed font-normal">
+                High-performance premium custom software engineering agency. We turn enterprise business specifications into optimized software environments.
+              </p>
+              <div className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-widest">
+                Building Smarter Solutions
+              </div>
+            </div>
 
-            {/* LinkedIn Link */}
-            <a href={siteConfig.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs LinkedIn Profile">
-              <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
+            {/* Quick Services Index */}
+            <div className="space-y-3">
+              <h4 className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Services Matrix</h4>
+              <ul className="space-y-2 text-xs text-neutral-500 font-normal">
+                <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">Custom Web Platforms</a></li>
+                <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">Android Mobile Apps</a></li>
+                <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">AI System Automation</a></li>
+                <li><a href="#services" className="hover:text-[#06B6D4] transition-colors">Management ERP Core</a></li>
+              </ul>
+            </div>
 
-            {/* Facebook Link */}
-            <a href={siteConfig.socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs Facebook Page">
-              <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-
-            {/* Instagram Link */}
-            <a href={siteConfig.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs Instagram Feed">
-              <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-              </svg>
-            </a>
-
-            {/* TikTok Link */}
-            <a href={siteConfig.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs TikTok Profile">
-              <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.94 1.15 2.25 1.95 3.67 2.31v3.7c-1.35-.14-2.68-.67-3.79-1.48-.69-.51-1.28-1.15-1.74-1.89-.04 1.96-.02 3.91-.03 5.87 0 2.05-.44 4.15-1.57 5.87-1.32 2.04-3.61 3.44-6.04 3.53-2.61.16-5.27-.85-6.83-2.95-1.69-2.22-1.92-5.46-.6-7.89 1.13-2.11 3.42-3.53 5.81-3.65.01 1.28-.01 2.56-.01 3.84-1.27.05-2.54.73-3.16 1.84-.74 1.26-.54 3 .47 4.05.99 1.05 2.65 1.16 3.77.24.87-.69 1.28-1.83 1.26-2.94-.01 4.13-.01-8.26-.01-12.39z"/>
-              </svg>
-            </a>
-
-            {/* WhatsApp Link */}
-            <a href={siteConfig.socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 text-[#00e676] hover:text-emerald-400 transition-colors group" aria-label="OnyxStack Labs WhatsApp Channel">
-              <svg className="w-full h-full fill-current text-[#00e676] group-hover:text-emerald-400 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.966 0c3.178.001 6.169 1.24 8.419 3.496 2.25 2.255 3.488 5.248 3.487 8.425-.004 6.616-5.34 11.965-11.912 11.965-1.996-.001-3.963-.502-5.716-1.458L0 24zm6.588-3.418l.366.218c1.5.892 3.314 1.363 5.166 1.364h.006c5.52 0 10.011-4.505 10.014-10.04a9.92 9.92 0 0 0-2.914-7.094A9.855 9.855 0 0 0 11.966 1.96c-5.522 0-10.015 4.508-10.018 10.043-.001 1.865.485 3.689 1.409 5.3 l.239.417-1.002 3.662 3.753-.989zM18.06 14.85c-.333-.167-1.97-.974-2.278-1.087-.308-.113-.532-.167-.756.167-.224.334-.868 1.087-1.064 1.313-.196.226-.392.254-.725.087-1.361-.682-2.333-1.181-3.238-2.73-.241-.413.241-.383.69-.1.403.253.392.424.588.756.196.334.098.623-.05.924-.147.302-.756 1.821-.924 2.226-.164.394-.329.34-.45.34h-.382c-.132 0-.346-.049-.527-.247-.182-.198-.693-.677-.693-1.652 0-.975.709-1.916.821-2.066.112-.15 1.396-2.132 3.382-2.99.473-.204.843-.326 1.131-.418.475-.152.907-.13 1.25-.181.382-.057 1.173-.48 1.338-.943.165-.463.165-.86.116-.943-.049-.084-.182-.132-.515-.299z"/>
-              </svg>
-            </a>
-
+            {/* Core Contacts Segment */}
+            <div className="space-y-3">
+              <h4 className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Communication Nodes</h4>
+              <ul className="space-y-2 text-xs text-neutral-500 font-normal">
+                <li><span className="text-neutral-400 font-mono">Inquiries:</span> onyxstacklabs@gmail.com</li>
+                <li><span className="text-neutral-400 font-mono">Hotline:</span> +92 344 5800630</li>
+                <li><span className="text-neutral-400 font-mono">Headquarters:</span> Pakistan</li>
+              </ul>
+            </div>
           </div>
 
-          <div className="font-mono text-[10px] text-neutral-600 uppercase tracking-widest text-center sm:text-right cursor-default select-none">
-            © 2026 OnyxStack Labs. All Rights Reserved.
-          </div>
-        </div>
-      </footer>
+          {/* PIXEL-PERFECT PIXEL ALIGNED SOCIAL GRID */}
+          <div className="border-t border-neutral-900/60 pt-8 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-6 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+              
+              {/* YouTube Link */}
+              <a href={siteConfig.socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs YouTube Channel">
+                <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 .502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
 
-    </div>
+              {/* LinkedIn Link */}
+              <a href={siteConfig.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs LinkedIn Profile">
+                <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+
+              {/* Facebook Link */}
+              <a href={siteConfig.socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs Facebook Page">
+                <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+
+              {/* Instagram Link */}
+              <a href={siteConfig.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs Instagram Feed">
+                <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                </svg>
+              </a>
+
+              {/* TikTok Link */}
+              <a href={siteConfig.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 hover:text-[#06B6D4] transition-colors group" aria-label="OnyxStack Labs TikTok Profile">
+                <svg className="w-full h-full fill-current text-neutral-600 group-hover:text-[#06B6D4] transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.94 1.15 2.25 1.95 3.67 2.31v3.7c-1.35-.14-2.68-.67-3.79-1.48-.69-.51-1.28-1.15-1.74-1.89-.04 1.96-.02 3.91-.03 5.87 0 2.05-.44 4.15-1.57 5.87-1.32 2.04-3.61 3.44-6.04 3.53-2.61.16-5.27-.85-6.83-2.95-1.69-2.22-1.92-5.46-.6-7.89 1.13-2.11 3.42-3.53 5.81-3.65.01 1.28-.01 2.56-.01 3.84-1.27.05-2.54.73-3.16 1.84-.74 1.26-.54 3 .47 4.05.99 1.05 2.65 1.16 3.77.24.87-.69 1.28-1.83 1.26-2.94-.01 4.13-.01-8.26-.01-12.39z"/>
+                </svg>
+              </a>
+
+              {/* WhatsApp Link */}
+              <a href={siteConfig.socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-4 h-4 text-[#00e676] hover:text-emerald-400 transition-colors group" aria-label="OnyxStack Labs WhatsApp Channel">
+                <svg className="w-full h-full fill-current text-[#00e676] group-hover:text-emerald-400 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.966 0c3.178.001 6.169 1.24 8.419 3.496 2.25 2.255 3.488 5.248 3.487 8.425-.004 6.616-5.34 11.965-11.912 11.965-1.996-.001-3.963-.502-5.716-1.458L0 24zm6.588-3.418l.366.218c1.5.892 3.314 1.363 5.166 1.364h.006c5.52 0 10.011-4.505 10.014-10.04a9.92 9.92 0 0 0-2.914-7.094A9.855 9.855 0 0 0 11.966 1.96c-5.522 0-10.015 4.508-10.018 10.043-.001 1.865.485 3.689 1.409 5.3 l.239.417-1.002 3.662 3.753-.989zM18.06 14.85c-.333-.167-1.97-.974-2.278-1.087-.308-.113-.532-.167-.756.167-.224.334-.868 1.087-1.064 1.313-.196.226-.392.254-.725.087-1.361-.682-2.333-1.181-3.238-2.73-.241-.413.241-.383.69-.1.403.253.392.424.588.756.196.334.098.623-.05.924-.147.302-.756 1.821-.924 2.226-.164.394-.329.34-.45.34h-.382c-.132 0-.346-.049-.527-.247-.182-.198-.693-.677-.693-1.652 0-.975.709-1.916.821-2.066.112-.15 1.396-2.132 3.382-2.99.473-.204.843-.326 1.131-.418.475-.152.907-.13 1.25-.181.382-.057 1.173-.48 1.338-.943.165-.463.165-.86.116-.943-.049-.084-.182-.132-.515-.299z"/>
+                </svg>
+              </a>
+
+            </div>
+
+            <div className="font-mono text-[10px] text-neutral-600 uppercase tracking-widest text-center sm:text-right cursor-default select-none">
+              © 2026 OnyxStack Labs. All Rights Reserved.
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </HelmetProvider>
   );
 }
