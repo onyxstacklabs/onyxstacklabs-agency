@@ -3,65 +3,100 @@ import heroDashboard from "../assets/hero-dashboard.svg";
 
 export default function Hero() {
   return (
-    <header className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-24 text-center md:pt-40 md:pb-36 space-y-10">
+    <header className="relative overflow-hidden z-10 max-w-7xl mx-auto px-6 pt-28 pb-24 md:pt-40 md:pb-36">
 
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#06B6D4]/20 rounded-full text-[11px] font-mono tracking-wider uppercase text-[#06B6D4] bg-[#06B6D4]/5 backdrop-blur-sm mx-auto">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4]"></span>
-        Building Smarter Software for Global Businesses
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute right-0 top-40 w-80 h-80 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
+
+      {/* Badge */}
+      <div className="flex justify-center">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-md text-[11px] uppercase tracking-[0.25em] font-semibold text-cyan-400">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          Building Smarter Software For Global Businesses
+        </div>
       </div>
 
-      <div className="space-y-6 max-w-4xl mx-auto">
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.05]">
-          Enterprise Software.
+      {/* Heading */}
+      <div className="max-w-5xl mx-auto text-center mt-10">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase leading-tight text-white">
+          Enterprise Software
           <br />
-          AI Automation.
+          AI Automation
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 via-neutral-400 to-[#06B6D4]">
-            Scalable Digital Products.
+          <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-500 bg-clip-text text-transparent">
+            Scalable Digital Products
           </span>
         </h1>
 
-        <p className="text-sm sm:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed font-normal tracking-wide">
-          OnyxStack Labs designs premium web platforms, AI-powered automation
-          and custom business software engineered for performance, security and
-          long-term scalability.
+        <p className="mt-8 max-w-3xl mx-auto text-neutral-400 text-lg leading-8">
+          OnyxStack Labs builds premium websites, AI solutions,
+          automation systems and enterprise software engineered for
+          speed, security and long-term scalability.
         </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-5 mt-10">
+          <a
+            href="#contact"
+            className="px-8 py-4 rounded-xl bg-cyan-500 text-black font-bold uppercase tracking-widest hover:bg-cyan-400 transition duration-300 shadow-[0_0_40px_rgba(6,182,212,.35)]"
+          >
+            Start Your Project
+          </a>
+
+          <a
+            href="#portfolio"
+            className="px-8 py-4 rounded-xl border border-neutral-700 bg-neutral-900/50 text-white uppercase tracking-widest hover:border-cyan-400 hover:text-cyan-300 transition duration-300"
+          >
+            View Portfolio
+          </a>
+        </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-        <a
-          href="#contact"
-          className="w-full sm:w-auto bg-[#06B6D4] hover:bg-cyan-400 text-black px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-300 hover:-translate-y-0.5"
-        >
-          Start Your Project
-        </a>
+      {/* Dashboard */}
+      <div className="relative mt-24 max-w-6xl mx-auto">
 
-        <a
-          href="#portfolio"
-          className="w-full sm:w-auto bg-neutral-900/50 hover:bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5"
-        >
-          View Portfolio
-        </a>
+        {/* Glow */}
+        <div className="absolute -inset-8 bg-cyan-500/20 blur-[100px] rounded-full opacity-60"></div>
+
+        {/* Left Floating Card */}
+        <div className="hidden lg:flex absolute -left-10 top-12 z-20 bg-[#0b1120]/90 backdrop-blur-xl border border-cyan-500/20 rounded-2xl px-5 py-4 shadow-2xl flex-col">
+          <span className="text-cyan-400 text-xs uppercase tracking-widest">
+            AI STATUS
+          </span>
+          <span className="text-2xl font-black text-white mt-2">
+            ONLINE
+          </span>
+        </div>
+
+        {/* Right Floating Card */}
+        <div className="hidden lg:flex absolute -right-10 bottom-12 z-20 bg-[#0b1120]/90 backdrop-blur-xl border border-cyan-500/20 rounded-2xl px-5 py-4 shadow-2xl flex-col">
+          <span className="text-cyan-400 text-xs uppercase tracking-widest">
+            DEPLOYMENTS
+          </span>
+          <span className="text-2xl font-black text-white mt-2">
+            24/7
+          </span>
+        </div>
+
+        {/* Dashboard Image */}
+        <div className="relative rounded-3xl overflow-hidden border border-cyan-500/20 shadow-[0_50px_120px_rgba(6,182,212,.25)] bg-[#090909] transition duration-500 hover:scale-[1.02]">
+          <img
+            src={heroDashboard}
+            alt="OnyxStack Dashboard"
+            className="w-full"
+          />
+        </div>
       </div>
 
-      {/* Dashboard Preview */}
-      <div className="max-w-5xl mx-auto pt-12">
-        <img
-          src={heroDashboard}
-          alt="OnyxStack Dashboard"
-          className="w-full rounded-2xl border border-cyan-500/10 shadow-[0_0_80px_rgba(6,182,212,0.20)]"
-        />
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="pt-6 animate-bounce hidden md:block">
+      {/* Scroll */}
+      <div className="mt-14 flex justify-center">
         <a
           href="#services"
-          aria-label="Scroll Down"
-          className="text-neutral-600 hover:text-[#06B6D4] transition-colors"
+          className="animate-bounce text-neutral-500 hover:text-cyan-400 transition"
         >
           <svg
-            className="w-5 h-5 mx-auto"
+            className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -70,28 +105,47 @@ export default function Hero() {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              d="M19.5 8.25L12 15.75 4.5 8.25"
             />
           </svg>
         </a>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-neutral-900/60 max-w-5xl mx-auto">
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-24 border-t border-neutral-800 pt-12">
+
         {[
-          { metric: "Verified", label: "Production Deployments" },
-          { metric: "100%", label: "Custom Product Engineering" },
-          { metric: "AI", label: "Automation Systems" },
-          { metric: "Premium", label: "UI/UX Experience" },
-        ].map((stat, idx) => (
-          <div key={idx} className="space-y-2">
-            <div className="text-2xl font-black text-white">
-              {stat.metric}
+          {
+            value: "100%",
+            title: "Custom Development",
+          },
+          {
+            value: "AI",
+            title: "Automation Ready",
+          },
+          {
+            value: "24/7",
+            title: "Engineering Support",
+          },
+          {
+            value: "Premium",
+            title: "Enterprise Quality",
+          },
+        ].map((item) => (
+          <div
+            key={item.title}
+            className="text-center"
+          >
+            <div className="text-3xl font-black text-white">
+              {item.value}
             </div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">
-              {stat.label}
+
+            <div className="mt-2 text-xs uppercase tracking-[0.25em] text-neutral-500">
+              {item.title}
             </div>
           </div>
         ))}
+
       </div>
 
     </header>
