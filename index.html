@@ -28,14 +28,14 @@
     <meta name="author" content="OnyxStack Labs" />
     <meta name="robots" content="index, follow" />
 
-    <!-- Canonical URL -->
+    <!-- Canonical -->
     <link
       rel="canonical"
       href="https://onyxstacklabs-agency.vercel.app/"
     />
 
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -52,6 +52,10 @@
       content="https://onyxstacklabs-agency.vercel.app/"
     />
     <meta property="og:site_name" content="OnyxStack Labs" />
+    <meta
+      property="og:image"
+      content="https://onyxstacklabs-agency.vercel.app/favicon.png"
+    />
 
     <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -63,15 +67,19 @@
       name="twitter:description"
       content="Modern software agency building websites, AI-powered software and scalable digital products."
     />
+    <meta
+      name="twitter:image"
+      content="https://onyxstacklabs-agency.vercel.app/favicon.png"
+    />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "OnyxStack Labs",
         "url": "https://onyxstacklabs-agency.vercel.app/",
-        "logo": "https://onyxstacklabs-agency.vercel.app/favicon.ico"
+        "logo": "https://onyxstacklabs-agency.vercel.app/favicon.png"
       }
     </script>
 
@@ -107,10 +115,8 @@
   </head>
 
   <body>
-    <!-- React Root -->
     <div id="root"></div>
 
-    <!-- Vite Entry -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
