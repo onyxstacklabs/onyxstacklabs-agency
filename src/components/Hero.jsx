@@ -1,97 +1,97 @@
 import React from "react";
-import heroIllustration from "../assets/hero-illustration.svg";
+import heroDashboard from "../assets/hero-dashboard.svg";
 
 export default function Hero() {
   return (
-    <header className="relative overflow-hidden max-w-7xl mx-auto px-6 pt-24 pb-24">
+    <header className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-24 text-center md:pt-40 md:pb-36 space-y-10">
 
-      {/* Background Glow */}
-      <div className="absolute inset-0 -z-10 opacity-80">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#06B6D4]/20 rounded-full text-[11px] font-mono tracking-wider uppercase text-[#06B6D4] bg-[#06B6D4]/5 backdrop-blur-sm mx-auto">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4]"></span>
+        Building Smarter Software for Global Businesses
+      </div>
+
+      <div className="space-y-6 max-w-4xl mx-auto">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.05]">
+          Enterprise Software.
+          <br />
+          AI Automation.
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 via-neutral-400 to-[#06B6D4]">
+            Scalable Digital Products.
+          </span>
+        </h1>
+
+        <p className="text-sm sm:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed font-normal tracking-wide">
+          OnyxStack Labs designs premium web platforms, AI-powered automation
+          and custom business software engineered for performance, security and
+          long-term scalability.
+        </p>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+        <a
+          href="#contact"
+          className="w-full sm:w-auto bg-[#06B6D4] hover:bg-cyan-400 text-black px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Start Your Project
+        </a>
+
+        <a
+          href="#portfolio"
+          className="w-full sm:w-auto bg-neutral-900/50 hover:bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5"
+        >
+          View Portfolio
+        </a>
+      </div>
+
+      {/* Dashboard Preview */}
+      <div className="max-w-5xl mx-auto pt-12">
         <img
-          src={heroIllustration}
-          alt=""
-          className="w-full h-full object-cover"
+          src={heroDashboard}
+          alt="OnyxStack Dashboard"
+          className="w-full rounded-2xl border border-cyan-500/10 shadow-[0_0_80px_rgba(6,182,212,0.20)]"
         />
-        <div className="absolute inset-0 bg-black/70"></div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-14 items-center">
-
-        {/* Left */}
-        <div>
-
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs uppercase tracking-[3px] font-mono">
-            <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-            Building Smarter Software
-          </div>
-
-          <h1 className="mt-8 text-5xl md:text-7xl font-black leading-tight text-white uppercase">
-            Enterprise Software
-            <br />
-            AI Automation
-            <br />
-            <span className="text-cyan-400">
-              Digital Products
-            </span>
-          </h1>
-
-          <p className="mt-6 text-neutral-400 text-lg max-w-xl">
-            We build premium websites, mobile apps, AI automation and business
-            software engineered for speed, security and scalability.
-          </p>
-
-          <div className="flex flex-wrap gap-4 mt-10">
-
-            <a
-              href="#contact"
-              className="bg-cyan-400 text-black px-8 py-4 rounded-xl font-bold"
-            >
-              Start Project
-            </a>
-
-            <a
-              href="#portfolio"
-              className="border border-neutral-700 px-8 py-4 rounded-xl text-white hover:bg-neutral-900"
-            >
-              Portfolio
-            </a>
-
-          </div>
-
-        </div>
-
-        {/* Right */}
-
-        <div className="flex justify-center">
-
-          <img
-            src={heroIllustration}
-            alt="OnyxStack Labs"
-            className="w-full max-w-2xl drop-shadow-[0_0_70px_rgba(6,182,212,.35)]"
-          />
-
-        </div>
-
+      {/* Scroll Indicator */}
+      <div className="pt-6 animate-bounce hidden md:block">
+        <a
+          href="#services"
+          aria-label="Scroll Down"
+          className="text-neutral-600 hover:text-[#06B6D4] transition-colors"
+        >
+          <svg
+            className="w-5 h-5 mx-auto"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </a>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 border-t border-neutral-800 pt-10">
-
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-neutral-900/60 max-w-5xl mx-auto">
         {[
-          ["Verified", "Production Deployments"],
-          ["100%", "Custom Engineering"],
-          ["AI", "Automation Systems"],
-          ["Premium", "UI/UX Experience"],
-        ].map(([title, text]) => (
-          <div key={title}>
+          { metric: "Verified", label: "Production Deployments" },
+          { metric: "100%", label: "Custom Product Engineering" },
+          { metric: "AI", label: "Automation Systems" },
+          { metric: "Premium", label: "UI/UX Experience" },
+        ].map((stat, idx) => (
+          <div key={idx} className="space-y-2">
             <div className="text-2xl font-black text-white">
-              {title}
+              {stat.metric}
             </div>
-            <div className="text-xs uppercase tracking-widest text-neutral-500 mt-2">
-              {text}
+            <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">
+              {stat.label}
             </div>
           </div>
         ))}
-
       </div>
 
     </header>
