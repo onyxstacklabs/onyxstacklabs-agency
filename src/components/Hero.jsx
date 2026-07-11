@@ -51,6 +51,9 @@ export default function Hero() {
 
       {/* CORE BRANDING COMPOSITION HEADER */}
       <header className="relative w-full max-w-5xl mx-auto text-center z-10 flex flex-col items-center">
+        {/* SEMANTIC CRITICAL H1 PRIMARY IDENTIFIER FOR SEO RECOVERY */}
+        <h1 className="sr-only">OnyxStack Labs - Premium Software Engineering & AI Automation Studio</h1>
+
         {/* ULTRA-PREMIUM CONTEXT BADGE */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-md shadow-[0_1px_2px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] text-[10px] sm:text-[11px] font-medium tracking-[0.2em] text-neutral-300 uppercase transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/[0.04]">
           <span className="relative flex h-2 w-2">
@@ -60,8 +63,8 @@ export default function Hero() {
           Next-Gen Engineering Frameworks
         </div>
 
-        {/* HIGH-HIERARCHY HERO HEADLINE */}
-        <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.08]">
+        {/* HIGH-HIERARCHY HERO HEADLINE DISPLAY ELEMENT */}
+        <p className="mt-6 sm:mt-8 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.08]">
           Enterprise Software.
           <br className="hidden sm:inline" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-cyan-200 to-blue-500 select-none will-change-auto">
@@ -69,7 +72,7 @@ export default function Hero() {
           </span>
           <br />
           Scalable Digital Products.
-        </h1>
+        </p>
 
         {/* HIGH-READABILITY INTRODUCTORY PARAGRAPH */}
         <p className="mt-6 sm:mt-8 max-w-3xl mx-auto text-neutral-400 text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-8 font-light tracking-wide px-2 sm:px-0">
