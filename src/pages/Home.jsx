@@ -5,15 +5,16 @@ import { transmitLeadToFirebase } from '../config/firebase';
 import { siteConfig } from '../config/siteConfig';
 
 // MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
-import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import Clients from '../components/Clients';
+import Stats from '../components/Stats';
 import Services from '../components/Services';
 import Portfolio from '../components/Portfolio';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Process from '../components/Process';
 import TechStack from '../components/TechStack';
+import CTA from '../components/CTA';
 import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
 
 export default function Home({ currentPath, navigateToNode }) {
   const [activeSection, setActiveSection] = useState('');
@@ -201,15 +202,12 @@ export default function Home({ currentPath, navigateToNode }) {
       <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
 
-      {/* MODULAR REFACTORED SECTIONS */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection={activeSection} 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
-      
+      {/* CORE FRAMEWORK ORDER MATRIX */}
       <Hero />
+      
+      <Clients />
+      
+      <Stats />
       
       <Services coreServices={coreServices} />
       
@@ -221,6 +219,8 @@ export default function Home({ currentPath, navigateToNode }) {
       
       <TechStack techStackBadges={techStackBadges} />
       
+      <CTA />
+      
       <ContactForm 
         formData={formData}
         setFormData={setFormData}
@@ -230,8 +230,6 @@ export default function Home({ currentPath, navigateToNode }) {
         handleLeadFormTransmission={handleLeadFormTransmission}
         siteConfig={siteConfig}
       />
-      
-      <Footer siteConfig={siteConfig} />
 
     </div>
   );
