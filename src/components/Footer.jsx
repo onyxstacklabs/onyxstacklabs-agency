@@ -29,6 +29,7 @@ export default function Footer({ siteConfig }) {
 
   const email = siteConfig?.contactEmail || 'onyxstacklabs@gmail.com';
   const website = siteConfig?.website || 'www.onyxstacklabs.com';
+  const phone = siteConfig?.contactPhone || '+92 344 5800630';
 
   return (
     <footer
@@ -116,11 +117,20 @@ export default function Footer({ siteConfig }) {
                 </a>
               </div>
               <div>
+                <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Phone / WhatsApp</span>
+                <a
+                  href={`tel:${phone.replace(/\s+/g, '')}`}
+                  className="text-sm text-[#D8D4C9] hover:text-[#C6A15B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] rounded transition-colors duration-200"
+                >
+                  {phone}
+                </a>
+              </div>
+              <div>
                 <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Website</span>
                 <span className="text-sm text-[#9BA1AF]">{website}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Location</span>
+                <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Headquarters</span>
                 <span className="text-sm text-[#9BA1AF]">Pakistan</span>
               </div>
             </div>
@@ -131,7 +141,7 @@ export default function Footer({ siteConfig }) {
         <div className="border-t border-[#1E2430] pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
 
           <nav
-            className="flex items-center gap-5"
+            className="flex flex-wrap items-center justify-center gap-5"
             aria-label="Social Media Links"
           >
             {/* GitHub */}
@@ -162,6 +172,36 @@ export default function Footer({ siteConfig }) {
               </a>
             )}
 
+            {/* Facebook */}
+            {siteConfig?.socialLinks?.facebook && (
+              <a
+                href={siteConfig.socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-8 h-8 rounded-lg border border-[#1E2430] bg-[#11151F]/50 text-[#6F7688] hover:text-[#C6A15B] hover:border-[#C6A15B]/40 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] transition-all duration-300"
+                aria-label="OnyxStack Labs on Facebook"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+              </a>
+            )}
+
+            {/* Instagram */}
+            {siteConfig?.socialLinks?.instagram && (
+              <a
+                href={siteConfig.socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-8 h-8 rounded-lg border border-[#1E2430] bg-[#11151F]/50 text-[#6F7688] hover:text-[#C6A15B] hover:border-[#C6A15B]/40 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] transition-all duration-300"
+                aria-label="OnyxStack Labs on Instagram"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                </svg>
+              </a>
+            )}
+
             {/* YouTube */}
             {siteConfig?.socialLinks?.youtube && (
               <a
@@ -177,17 +217,32 @@ export default function Footer({ siteConfig }) {
               </a>
             )}
 
-            {/* Facebook */}
-            {siteConfig?.socialLinks?.facebook && (
+            {/* TikTok */}
+            {siteConfig?.socialLinks?.tiktok && (
               <a
-                href={siteConfig.socialLinks.facebook}
+                href={siteConfig.socialLinks.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-8 h-8 rounded-lg border border-[#1E2430] bg-[#11151F]/50 text-[#6F7688] hover:text-[#C6A15B] hover:border-[#C6A15B]/40 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] transition-all duration-300"
-                aria-label="OnyxStack Labs on Facebook"
+                aria-label="OnyxStack Labs on TikTok"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.94 1.15 2.25 1.95 3.67 2.31v3.7c-1.35-.14-2.68-.67-3.79-1.48-.69-.51-1.28-1.15-1.74-1.89-.04 1.96-.02 3.91-.03 5.87 0 2.05-.44 4.15-1.57 5.87-1.32 2.04-3.61 3.44-6.04 3.53-2.61.16-5.27-.85-6.83-2.95-1.69-2.22-1.92-5.46-.6-7.89 1.13-2.11 3.42-3.53 5.81-3.65.01 1.28-.01 2.56-.01 3.84-1.27.05-2.54.73-3.16 1.84-.74 1.26-.54 3 .47 4.05.99 1.05 2.65 1.16 3.77.24.87-.69 1.28-1.83 1.26-2.94-.01 4.13-.01-8.26-.01-12.39z" />
+                </svg>
+              </a>
+            )}
+
+            {/* WhatsApp */}
+            {siteConfig?.socialLinks?.whatsapp && (
+              <a
+                href={siteConfig.socialLinks.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-8 h-8 rounded-lg border border-[#1E2430] bg-[#11151F]/50 text-[#7FB89A] hover:text-[#9FCBB2] hover:border-[#7FB89A]/40 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] transition-all duration-300"
+                aria-label="OnyxStack Labs on WhatsApp"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.966 0c3.178.001 6.169 1.24 8.419 3.496 2.25 2.255 3.488 5.248 3.487 8.425-.004 6.616-5.34 11.965-11.912 11.965-1.996-.001-3.963-.502-5.716-1.458L0 24zm6.588-3.418l.366.218c1.5.892 3.314 1.363 5.166 1.364h.006c5.52 0 10.011-4.505 10.014-10.04a9.92 9.92 0 0 0-2.914-7.094A9.855 9.855 0 0 0 11.966 1.96c-5.522 0-10.015 4.508-10.018 10.043-.001 1.865.485 3.689 1.409 5.3l.239.417-1.002 3.662 3.753-.989zM18.06 14.85c-.333-.167-1.97-.974-2.278-1.087-.308-.113-.532-.167-.756.167-.224.334-.868 1.087-1.064 1.313-.196.226-.392.254-.725.087-1.361-.682-2.333-1.181-3.238-2.73-.241-.413.241-.383.69-.1.403.253.392.424.588.756.196.334.098.623-.05.924-.147.302-.756 1.821-.924 2.226-.164.394-.329.34-.45.34h-.382c-.132 0-.346-.049-.527-.247-.182-.198-.693-.677-.693-1.652 0-.975.709-1.916.821-2.066.112-.15 1.396-2.132 3.382-2.99.473-.204.843-.326 1.131-.418.475-.152.907-.13 1.25-.181.382-.057 1.173-.48 1.338-.943.165-.463.165-.86.116-.943-.049-.084-.182-.132-.515-.299z" />
                 </svg>
               </a>
             )}
