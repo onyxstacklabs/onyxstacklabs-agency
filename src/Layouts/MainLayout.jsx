@@ -2,7 +2,9 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import siteConfig from '../config/siteConfig';
+
+// FIXED IMPORT: Transformed from default import to destructured named import to match siteConfig.js
+import { siteConfig } from '../config/siteConfig';
 
 /**
  * MainLayout
