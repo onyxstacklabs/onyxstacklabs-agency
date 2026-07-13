@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Navbar({ currentPath, activeSection, navigateToNode, siteConfig }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Close mobile drawer automatically on viewport changes
   useEffect(() => {
@@ -12,14 +13,28 @@ export default function Navbar({ currentPath, activeSection, navigateToNode, sit
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Subtle elevation once the page has scrolled, for a premium sticky feel
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 8);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Lock body scroll while the mobile drawer is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   // Handles dynamic state synchronization for in-page anchors vs absolute page jumps
   const handleNavClick = (e, target) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    
+
     if (target.startsWith('#')) {
       const elementId = target.substring(1);
-      
+
       if (currentPath === '/') {
         const element = document.getElementById(elementId);
         if (element) {
@@ -41,45 +56,62 @@ export default function Navbar({ currentPath, activeSection, navigateToNode, sit
   };
 
   const navLinks = [
+    { label: "Home", target: "/", type: "absolute", sectionKey: null },
     { label: "Services", target: "#services", type: "anchor", sectionKey: "services" },
     { label: "Portfolio", target: "#portfolio", type: "anchor", sectionKey: "portfolio" },
-    { label: "Philosophy", target: "#why-choose-us", type: "anchor", sectionKey: "why-choose-us" },
-    { label: "Our Process", target: "#process", type: "anchor", sectionKey: "process" },
-    { label: "About", target: "/about", type: "absolute", sectionKey: null }
+    { label: "About", target: "/about", type: "absolute", sectionKey: null },
+    { label: "Contact", target: "/contact", type: "absolute", sectionKey: null }
   ];
 
+  const isLinkActive = (link) =>
+    link.type === 'anchor'
+      ? activeSection === link.sectionKey && currentPath === '/'
+      : currentPath === link.target;
+
   return (
-    <nav className="sticky top-0 z-50 border-b border-neutral-900/80 bg-[#050505]/70 backdrop-blur-md px-6 md:px-12 py-4 transition-all duration-300" aria-label="Main Navigation">
+    <nav
+      className={`sticky top-0 z-50 px-6 md:px-12 transition-all duration-300 ${
+        scrolled
+          ? 'py-3 bg-[#0A0E17]/80 border-b border-[#1E2430] shadow-lg shadow-black/20 backdrop-blur-xl'
+          : 'py-5 bg-[#0A0E17]/40 border-b border-transparent backdrop-blur-md'
+      }`}
+      aria-label="Main Navigation"
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between relative">
-        
+
         {/* BRAND IDENTITY LINK NODE */}
-        <a 
-          href="/" 
+        <a
+          href="/"
           onClick={(e) => handleNavClick(e, '/')}
-          className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#06B6D4] rounded-md p-1 z-50" 
+          className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] rounded-md p-1 z-50"
           aria-label={`${siteConfig?.agencyName || 'OnyxStack Labs'} Homepage`}
         >
-          <div className="w-2.5 h-2.5 rounded-full bg-[#06B6D4] shadow-[0_0_12px_#06B6D4] group-hover:scale-110 transition-transform duration-300"></div>
-          <span className="text-base font-bold tracking-wider uppercase font-mono text-white">
-            OnyxStack<span className="text-[#06B6D4] font-sans tracking-normal lowercase font-semibold">Labs</span>
+          <div className="w-2.5 h-2.5 rounded-full bg-[#C6A15B] shadow-[0_0_12px_rgba(198,161,91,0.6)] group-hover:scale-110 transition-transform duration-300" />
+          <span className="text-base font-semibold tracking-wide text-white">
+            OnyxStack<span className="text-[#C6A15B] font-medium">Labs</span>
           </span>
         </a>
-        
-        {/* DESKTOP MATRIX LINK TRACKER GROUP */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-neutral-400">
+
+        {/* DESKTOP NAV LINKS */}
+        <div className="hidden md:flex items-center gap-9 text-[13px] font-medium text-[#9BA1AF]">
           {navLinks.map((link, idx) => {
-            const isActive = link.type === 'anchor' 
-              ? activeSection === link.sectionKey && currentPath === '/'
-              : currentPath === link.target;
-            
+            const isActive = isLinkActive(link);
             return (
-              <a 
+              <a
                 key={idx}
-                href={link.target} 
+                href={link.target}
                 onClick={(e) => handleNavClick(e, link.target)}
-                className={`transition-all duration-200 hover:text-white focus:outline-none focus:text-white ${isActive ? 'text-[#06B6D4] font-bold' : ''}`}
+                className={`relative py-1 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:text-white ${
+                  isActive ? 'text-white' : ''
+                }`}
               >
                 {link.label}
+                <span
+                  className={`absolute -bottom-0.5 left-0 h-px bg-[#C6A15B] transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0'
+                  }`}
+                  aria-hidden="true"
+                />
               </a>
             );
           })}
@@ -87,58 +119,96 @@ export default function Navbar({ currentPath, activeSection, navigateToNode, sit
 
         {/* ACTIONS AND INTERACTION INDICATORS */}
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 bg-neutral-900/40 border border-neutral-800/80 px-3 py-1 rounded-full" aria-label="System status node indicator">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#00e676] shadow-[0_0_8px_#00e676] animate-pulse"></div>
-            <span className="text-[9px] uppercase tracking-widest text-neutral-400 font-mono">Ready For Partnerships</span>
+          <div
+            className="hidden lg:flex items-center gap-2 bg-[#11151F]/60 border border-[#1E2430] px-3 py-1.5 rounded-full"
+            aria-label="Availability status"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7FB89A] opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#7FB89A]" />
+            </span>
+            <span className="text-[11px] tracking-wide text-[#9BA1AF]">Open for new partnerships</span>
           </div>
-          
-          <a 
-            href="/contact" 
+
+          <a
+            href="/contact"
             onClick={(e) => handleNavClick(e, '/contact')}
-            className={`bg-neutral-100 hover:bg-[#06B6D4] text-black px-4.5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] focus:outline-none focus:ring-2 focus:ring-[#06B6D4] ${currentPath === '/contact' ? 'bg-[#06B6D4] text-black shadow-[0_0_12px_rgba(6,182,212,0.3)]' : ''}`}
+            className={`hidden sm:inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0E17] ${
+              currentPath === '/contact'
+                ? 'bg-[#C6A15B] text-[#0A0E17] shadow-[0_0_16px_rgba(198,161,91,0.35)]'
+                : 'bg-[#ECE8DE] text-[#0A0E17] hover:bg-[#C6A15B] hover:shadow-[0_0_16px_rgba(198,161,91,0.3)]'
+            }`}
           >
             Start Project
           </a>
 
-          {/* RESPONSIVE MOBILE ACCESSIBILITY DISPATCHER */}
+          {/* MOBILE MENU TOGGLE */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex md:hidden flex-col justify-center items-center w-8 h-8 rounded-md border border-neutral-800 bg-neutral-900/50 text-white focus:outline-none focus:ring-2 focus:ring-[#06B6D4] z-50 p-1"
+            className="flex md:hidden flex-col justify-center items-center gap-1.5 w-9 h-9 rounded-lg border border-[#1E2430] bg-[#11151F]/60 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] z-50"
             aria-expanded={mobileMenuOpen}
-            aria-label="Toggle navigation structural drawer"
+            aria-controls="mobile-nav-panel"
+            aria-label="Toggle navigation menu"
           >
-            <span className={`block w-4 h-0.5 bg-current transition-all duration-300 ${mobileMenuOpen ? 'transform rotate-44 translate-y-1' : '-translate-y-0.5'}`} />
-            <span className={`block w-4 h-0.5 bg-current transition-all duration-200 my-0.5 ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
-            <span className={`block w-4 h-0.5 bg-current transition-all duration-300 ${mobileMenuOpen ? 'transform -rotate-44 -translate-y-1' : 'translate-y-0.5'}`} />
+            <span
+              className={`block w-4 h-0.5 bg-current rounded-full transition-transform duration-300 ${
+                mobileMenuOpen ? 'rotate-45 translate-y-[3px]' : ''
+              }`}
+            />
+            <span
+              className={`block w-4 h-0.5 bg-current rounded-full transition-all duration-200 ${
+                mobileMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <span
+              className={`block w-4 h-0.5 bg-current rounded-full transition-transform duration-300 ${
+                mobileMenuOpen ? '-rotate-45 -translate-y-[3px]' : ''
+              }`}
+            />
           </button>
         </div>
+      </div>
 
-        {/* SLIDE-OUT MOBILE NAVIGATION PANEL */}
-        {mobileMenuOpen && (
-          <div className="absolute top-14 left-0 w-full bg-[#050505] border-b border-neutral-900 p-6 flex flex-col gap-4 md:hidden shadow-2xl z-40 animate-fadeIn animate-duration-200">
-            {navLinks.map((link, idx) => {
-              const isActive = link.type === 'anchor' 
-                ? activeSection === link.sectionKey && currentPath === '/'
-                : currentPath === link.target;
-              
-              return (
-                <a
-                  key={idx}
-                  href={link.target}
-                  onClick={(e) => handleNavClick(e, link.target)}
-                  className={`text-xs font-mono uppercase tracking-widest py-2 border-b border-neutral-900/40 hover:text-white transition-colors ${isActive ? 'text-[#06B6D4] font-bold' : 'text-neutral-400'}`}
-                >
-                  {link.label}
-                </a>
-              );
-            })}
-            <div className="flex items-center gap-2 pt-2" aria-label="System status node indicator">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#00e676] shadow-[0_0_8px_#00e676] animate-pulse"></div>
-              <span className="text-[9px] uppercase tracking-widest text-neutral-500 font-mono">System Online Matrix</span>
-            </div>
+      {/* MOBILE SLIDE-DOWN NAVIGATION PANEL */}
+      <div
+        id="mobile-nav-panel"
+        className={`md:hidden absolute top-full left-0 w-full overflow-hidden transition-all duration-300 ease-out motion-reduce:transition-none ${
+          mobileMenuOpen ? 'max-h-[26rem] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="bg-[#0A0E17]/95 backdrop-blur-xl border-b border-[#1E2430] px-6 py-6 flex flex-col gap-1 shadow-2xl shadow-black/40">
+          {navLinks.map((link, idx) => {
+            const isActive = isLinkActive(link);
+            return (
+              <a
+                key={idx}
+                href={link.target}
+                onClick={(e) => handleNavClick(e, link.target)}
+                className={`text-sm font-medium py-3.5 border-b border-[#1E2430]/60 transition-colors ${
+                  isActive ? 'text-[#C6A15B]' : 'text-[#C7CAD4] hover:text-white'
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+
+          <a
+            href="/contact"
+            onClick={(e) => handleNavClick(e, '/contact')}
+            className="mt-5 inline-flex items-center justify-center px-5 py-3 rounded-full text-sm font-semibold tracking-wide bg-[#ECE8DE] text-[#0A0E17] hover:bg-[#C6A15B] transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B]"
+          >
+            Start Project
+          </a>
+
+          <div className="flex items-center gap-2 pt-5" aria-label="Availability status">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7FB89A] opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#7FB89A]" />
+            </span>
+            <span className="text-[11px] tracking-wide text-[#6F7688]">Open for new partnerships</span>
           </div>
-        )}
-
+        </div>
       </div>
     </nav>
   );
