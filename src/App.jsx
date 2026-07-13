@@ -12,6 +12,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   const navigate = useNavigate();
@@ -76,6 +77,12 @@ export default function App() {
         <Route 
           path="/terms-conditions" 
           element={<TermsConditions currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Fallback Route Matrix Strategy: Nested 404 Handler reflecting layout elements perfectly */}
+        <Route 
+          path="*" 
+          element={<NotFound />} 
         />
       </Route>
     </Routes>
