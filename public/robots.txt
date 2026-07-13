@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /cgi-bin/
+
+Sitemap: https://onyxstacklabs-agency.vercel.app/sitemap.xml
