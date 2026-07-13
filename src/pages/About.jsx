@@ -70,16 +70,16 @@ export default function About({ currentPath, navigateToNode }) {
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 sm:pt-40 sm:pb-28">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
-              Corporate Dossier
+              About OnyxStack Labs
             </div>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
-              Architecting Resilient <br />
+              Building Modern Software <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500">
-                Enterprise Operations
+                for Growing Businesses
               </span>
             </h1>
             <p className="text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl mb-10 font-sans">
-              OnyxStack Labs builds production-grade software applications, custom ERP pipelines, and tailored cognitive AI systems for organizations that view technology as a long-term compound asset.
+              OnyxStack Labs is a software development company focused on building modern web applications, AI-powered solutions, enterprise software, and scalable digital platforms. We combine clean engineering, thoughtful design, and reliable technologies to help businesses transform ideas into successful digital products.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a 
@@ -87,14 +87,14 @@ export default function About({ currentPath, navigateToNode }) {
                 onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
                 className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
               >
-                Initiate Consultation
+                Start Your Project
               </a>
               <a 
                 href="#narrative" 
                 onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
                 className="border border-neutral-800 hover:border-neutral-700 bg-neutral-900/30 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300"
               >
-                Read Corporate Story
+                Learn About Us
               </a>
             </div>
           </div>
