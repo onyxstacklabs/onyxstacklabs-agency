@@ -1,18 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  Code2,
-  Boxes,
-  Sparkles,
-  Cloud,
-  Smartphone,
-  Globe,
-  ArrowUpRight
-} from 'lucide-react';
 
 /**
  * Clients Component
  * Enterprise trust section for OnyxStack Labs — consistent with the site's
  * ink / brass / slate-blue design system established across the product.
+ * Icons are inline SVGs — no external icon package required.
  */
 
 // Count-up hook: animates a numeric value from 0 to `end` once the element
@@ -74,35 +66,86 @@ function useCountUp(end, { duration = 1600, decimals = 0 } = {}) {
   return [ref, display];
 }
 
+// Lightweight inline SVG icon set (no external dependency)
+const IconCode = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const IconLayers = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+    <polyline points="2 17 12 22 22 17" />
+    <polyline points="2 12 12 17 22 12" />
+  </svg>
+);
+
+const IconSparkles = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
+  </svg>
+);
+
+const IconCloud = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.26A8 8 0 1 0 4 15.25" />
+    <path d="M8 19h9.5" />
+  </svg>
+);
+
+const IconSmartphone = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="6" y="2" width="12" height="20" rx="2" />
+    <line x1="11" y1="18" x2="13" y2="18" />
+  </svg>
+);
+
+const IconGlobe = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
+const IconArrowUpRight = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <line x1="7" y1="17" x2="17" y2="7" />
+    <polyline points="7 7 17 7 17 17" />
+  </svg>
+);
+
 export default function Clients() {
   const trustCards = [
     {
-      icon: Code2,
+      icon: IconCode,
       title: 'Custom Software',
       desc: 'Bespoke applications built around how your team actually works, not a generic template.'
     },
     {
-      icon: Boxes,
+      icon: IconLayers,
       title: 'ERP Systems',
       desc: 'Unified systems that connect operations, inventory, and finance into one reliable source of truth.'
     },
     {
-      icon: Sparkles,
+      icon: IconSparkles,
       title: 'AI Automation',
       desc: 'Practical AI woven into existing workflows to cut manual work, not bolted on for the sake of it.'
     },
     {
-      icon: Cloud,
+      icon: IconCloud,
       title: 'Cloud Solutions',
       desc: 'Infrastructure that scales with demand and stays stable under real production traffic.'
     },
     {
-      icon: Smartphone,
+      icon: IconSmartphone,
       title: 'Mobile Apps',
       desc: 'Native-feeling iOS and Android experiences backed by a single, well-structured codebase.'
     },
     {
-      icon: Globe,
+      icon: IconGlobe,
       title: 'Enterprise Websites',
       desc: 'Fast, accessible, conversion-ready websites built to represent large organizations well.'
     }
@@ -190,12 +233,12 @@ export default function Clients() {
 
                 <div className="relative z-10">
                   <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#C6A15B]/10 border border-[#C6A15B]/20 text-[#C6A15B] mb-5 transition-transform duration-300 group-hover:scale-110">
-                    <Icon className="w-5 h-5" aria-hidden="true" strokeWidth={1.75} />
+                    <Icon className="w-5 h-5" aria-hidden="true" />
                   </div>
 
                   <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-1.5">
                     {card.title}
-                    <ArrowUpRight
+                    <IconArrowUpRight
                       className="w-3.5 h-3.5 text-[#6F7688] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                       aria-hidden="true"
                     />
