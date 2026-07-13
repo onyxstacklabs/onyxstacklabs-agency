@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 // LIVE DATA CORE IMPORTS
 import { transmitLeadToFirebase } from './config/firebase';
@@ -17,8 +18,11 @@ import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 
 export default function App() {
-  // Reactive routing node tracker
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Reactive routing node tracker mapped cleanly to React Router DOM values
+  const currentPath = location.pathname;
   const [activeSection, setActiveSection] = useState('');
 
   // Fallback SEO title sync natively without external dependencies
@@ -26,12 +30,8 @@ export default function App() {
     document.title = "OnyxStack Labs | Enterprise Software & AI Automation Agency";
   }, []);
 
-  // Monitor browser history state changes & handle scroll spies safely
+  // Monitor scroll spies safely across viewports
   useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
-
     const handleScrollSpy = () => {
       const sections = ['services', 'portfolio', 'why-choose-us', 'process', 'contact'];
       const scrollPosition = window.scrollY + 200;
@@ -49,18 +49,15 @@ export default function App() {
       }
     };
 
-    window.addEventListener('popstate', handleLocationChange);
     window.addEventListener('scroll', handleScrollSpy);
     return () => {
-      window.removeEventListener('popstate', handleLocationChange);
       window.removeEventListener('scroll', handleScrollSpy);
     };
   }, []);
 
-  // Structural Navigation Helper
+  // Structural Navigation Helper mapped to React Router's stack push logic
   const navigateToNode = (path) => {
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
+    navigate(path);
   };
 
   // Lead Generation State Architecture
@@ -213,50 +210,60 @@ export default function App() {
     }
   };
 
-  if (currentPath === '/onyx-control-tower') {
-    return <OnyxAdmin navigateToNode={navigateToNode} />;
-  }
-
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth">
-      
-      {/* Backdrop Ambient Effects */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_60%)] pointer-events-none z-0" />
-      <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
-
-      {/* MODULAR REFACTORED SECTIONS */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection={activeSection} 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
+    <Routes>
+      {/* Target Route: Onyx Admin Control Tower Control Deck */}
+      <Route 
+        path="/onyx-control-tower" 
+        element={<OnyxAdmin navigateToNode={navigateToNode} />} 
       />
-      
-      <Hero />
-      
-      <Services coreServices={coreServices} />
-      
-      <Portfolio projects={siteConfig.projects} />
-      
-      <WhyChooseUs valueProps={valueProps} />
-      
-      <Process deliveryProcess={deliveryProcess} />
-      
-      <TechStack techStackBadges={techStackBadges} />
-      
-      <ContactForm 
-        formData={formData}
-        setFormData={setFormData}
-        submissionState={submissionState}
-        setSubmissionState={setSubmissionState}
-        errors={errors}
-        handleLeadFormTransmission={handleLeadFormTransmission}
-        siteConfig={siteConfig}
-      />
-      
-      <Footer siteConfig={siteConfig} />
 
-    </div>
+      {/* Target Route: Core Application Framework Landing Node */}
+      <Route 
+        path="/" 
+        element={
+          <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth">
+            
+            {/* Backdrop Ambient Effects */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_60%)] pointer-events-none z-0" />
+            <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
+            <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
+
+            {/* MODULAR REFACTORED SECTIONS */}
+            <Navbar 
+              currentPath={currentPath} 
+              activeSection={activeSection} 
+              navigateToNode={navigateToNode} 
+              siteConfig={siteConfig} 
+            />
+            
+            <Hero />
+            
+            <Services coreServices={coreServices} />
+            
+            <Portfolio projects={siteConfig.projects} />
+            
+            <WhyChooseUs valueProps={valueProps} />
+            
+            <Process deliveryProcess={deliveryProcess} />
+            
+            <TechStack techStackBadges={techStackBadges} />
+            
+            <ContactForm 
+              formData={formData}
+              setFormData={setFormData}
+              submissionState={submissionState}
+              setSubmissionState={setSubmissionState}
+              errors={errors}
+              handleLeadFormTransmission={handleLeadFormTransmission}
+              siteConfig={siteConfig}
+            />
+            
+            <Footer siteConfig={siteConfig} />
+
+          </div>
+        } 
+      />
+    </Routes>
   );
 }
