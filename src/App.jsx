@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
+// LAYOUT SYSTEM IMPORT
+import MainLayout from './layouts/MainLayout';
+
 // LIVE DATA CORE IMPORTS
 import OnyxAdmin from './pages/OnyxAdmin';
 import Home from './pages/Home';
@@ -28,41 +31,52 @@ export default function App() {
 
   return (
     <Routes>
-      {/* Target Route: Onyx Admin Control Tower Control Deck */}
+      {/* Target Route: Isolated Onyx Admin Control Tower Control Deck (Outside MainLayout) */}
       <Route 
         path="/onyx-control-tower" 
         element={<OnyxAdmin navigateToNode={navigateToNode} />} 
       />
 
-      {/* Target Route: Core Application Framework Landing Node */}
+      {/* Public Pages Node Network Wrapper (Nested under MainLayout Context) */}
       <Route 
-        path="/" 
-        element={<Home currentPath={currentPath} navigateToNode={navigateToNode} />} 
-      />
+        element={
+          <MainLayout 
+            currentPath={currentPath} 
+            activeSection="" 
+            navigateToNode={navigateToNode} 
+          />
+        }
+      >
+        {/* Target Route: Core Application Framework Landing Node */}
+        <Route 
+          index 
+          element={<Home currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
 
-      {/* Target Route: Corporate Architecture About Information Matrix */}
-      <Route 
-        path="/about" 
-        element={<About currentPath={currentPath} navigateToNode={navigateToNode} />} 
-      />
+        {/* Target Route: Corporate Architecture About Information Matrix */}
+        <Route 
+          path="/about" 
+          element={<About currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
 
-      {/* Target Route: High-Conversion Lead Ingress Node */}
-      <Route 
-        path="/contact" 
-        element={<Contact currentPath={currentPath} navigateToNode={navigateToNode} />} 
-      />
+        {/* Target Route: High-Conversion Lead Ingress Node */}
+        <Route 
+          path="/contact" 
+          element={<Contact currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
 
-      {/* Target Route: Global Privacy Policy & Sovereign Data Framework */}
-      <Route 
-        path="/privacy-policy" 
-        element={<PrivacyPolicy currentPath={currentPath} navigateToNode={navigateToNode} />} 
-      />
+        {/* Target Route: Global Privacy Policy & Sovereign Data Framework */}
+        <Route 
+          path="/privacy-policy" 
+          element={<PrivacyPolicy currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
 
-      {/* Target Route: Master Terms of Service & Contract Governance */}
-      <Route 
-        path="/terms-conditions" 
-        element={<TermsConditions currentPath={currentPath} navigateToNode={navigateToNode} />} 
-      />
+        {/* Target Route: Master Terms of Service & Contract Governance */}
+        <Route 
+          path="/terms-conditions" 
+          element={<TermsConditions currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+      </Route>
     </Routes>
   );
 }
