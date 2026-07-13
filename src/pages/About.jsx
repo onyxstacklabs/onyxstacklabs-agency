@@ -3,10 +3,6 @@ import React, { useEffect } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
-// MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
 export default function About({ currentPath, navigateToNode }) {
   
   // Set explicit subview window focus on mounting phase
@@ -66,14 +62,6 @@ export default function About({ currentPath, navigateToNode }) {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[800px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.07),transparent_55%)] pointer-events-none z-0" />
       <div className="absolute top-[2000px] right-0 w-[600px] h-[600px] bg-[#2563EB]/[0.02] blur-[180px] pointer-events-none" />
       <div className="absolute bottom-[800px] left-0 w-[700px] h-[700px] bg-[#06B6D4]/[0.015] blur-[220px] pointer-events-none" />
-
-      {/* GLOBAL INTERFACE FRAME NAVIGATION LAYER */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection="" 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
       
       {/* MAIN TARGET MATRIX CONTROLLER */}
       <div className="relative z-10 distribution-container-layer">
@@ -251,9 +239,6 @@ export default function About({ currentPath, navigateToNode }) {
         </section>
 
       </div>
-
-      {/* GLOBAL FOOT INTERFACE FRAME LAYER */}
-      <Footer siteConfig={siteConfig} />
 
     </div>
   );
