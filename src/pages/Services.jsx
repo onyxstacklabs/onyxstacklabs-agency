@@ -3,10 +3,6 @@ import React, { useEffect, useState } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
-// MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
 export default function Services({ currentPath, navigateToNode }) {
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -80,14 +76,6 @@ export default function Services({ currentPath, navigateToNode }) {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06),transparent_60%)] pointer-events-none z-0" />
       <div className="absolute top-[1800px] left-0 w-[500px] h-[500px] bg-[#2563EB]/[0.015] blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[600px] right-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
-
-      {/* CORE FRAME NAVIGATION LAYER */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection="" 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
 
       {/* SYSTEM CONTROLLER CONTAINER */}
       <div className="relative z-10">
@@ -262,9 +250,6 @@ export default function Services({ currentPath, navigateToNode }) {
         </section>
 
       </div>
-
-      {/* CORE FRAME FOOTER LAYER */}
-      <Footer siteConfig={siteConfig} />
 
     </div>
   );
