@@ -1,8 +1,9 @@
+// src/App.jsx
 import React, { useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
-// LAYOUT SYSTEM IMPORT
-import MainLayout from './layouts/MainLayout.jsx';
+// LAYOUT SYSTEM IMPORT (Updated to exact case-sensitive folder path matching 'Layouts')
+import MainLayout from './Layouts/MainLayout.jsx';
 
 // LIVE DATA CORE IMPORTS
 import OnyxAdmin from './pages/OnyxAdmin';
