@@ -1,35 +1,82 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import siteConfig from '../config/siteConfig';
+import React, { useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
-/**
- * MainLayout
- * High-performance corporate layout wrapping the application frame.
- * Seamlessly manages root navigation variables down to the UI interface nodes.
- */
-export default function MainLayout({ currentPath, activeSection, navigateToNode }) {
+// LAYOUT SYSTEM IMPORT (Updated to match standard production PascalCase folder tracking)
+import MainLayout from './Layouts/MainLayout.jsx';
+
+// LIVE DATA CORE IMPORTS
+import OnyxAdmin from './pages/OnyxAdmin';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+
+export default function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Reactive routing node tracker mapped cleanly to React Router DOM values
+  const currentPath = location.pathname;
+
+  // Fallback SEO title sync natively without external dependencies
+  useEffect(() => {
+    document.title = "OnyxStack Labs | Enterprise Software & AI Automation Agency";
+  }, []);
+
+  // Structural Navigation Helper mapped to React Router's stack push logic
+  const navigateToNode = (path) => {
+    navigate(path);
+  };
+
   return (
-    <div className="relative min-h-screen bg-[#050505] text-white flex flex-col overflow-x-hidden antialiased selection:bg-[#06B6D4]/30 selection:text-white">
-      {/* Background Micro-Grid Ambient Mesh */}
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff03_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none z-0" aria-hidden="true" />
-
-      {/* Global Application Navigation Header Layer */}
-      <Navbar
-        currentPath={currentPath}
-        activeSection={activeSection}
-        navigateToNode={navigateToNode}
-        siteConfig={siteConfig}
+    <Routes>
+      {/* Target Route: Isolated Onyx Admin Control Tower Control Deck (Outside MainLayout) */}
+      <Route 
+        path="/onyx-control-tower" 
+        element={<OnyxAdmin navigateToNode={navigateToNode} />} 
       />
 
-      {/* Primary Routing Portal Frame */}
-      <main className="flex-grow w-full relative z-10 focus:outline-none">
-        <Outlet />
-      </main>
+      {/* Public Pages Node Network Wrapper (Nested under MainLayout Context) */}
+      <Route 
+        element={
+          <MainLayout 
+            currentPath={currentPath} 
+            activeSection="" 
+            navigateToNode={navigateToNode} 
+          />
+        }
+      >
+        {/* Target Route: Core Application Framework Landing Node */}
+        <Route 
+          index 
+          element={<Home currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
 
-      {/* Corporate Identity & Link Repository Footer */}
-      <Footer siteConfig={siteConfig} />
-    </div>
+        {/* Target Route: Corporate Architecture About Information Matrix */}
+        <Route 
+          path="/about" 
+          element={<About currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: High-Conversion Lead Ingress Node */}
+        <Route 
+          path="/contact" 
+          element={<Contact currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Global Privacy Policy & Sovereign Data Framework */}
+        <Route 
+          path="/privacy-policy" 
+          element={<PrivacyPolicy currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Master Terms of Service & Contract Governance */}
+        <Route 
+          path="/terms-conditions" 
+          element={<TermsConditions currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+      </Route>
+    </Routes>
   );
 }
