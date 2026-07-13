@@ -3,10 +3,6 @@ import React, { useEffect, useState } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
-// MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
 export default function Contact({ currentPath, navigateToNode }) {
   const [activeFaq, setActiveFaq] = useState(null);
 
@@ -111,14 +107,6 @@ export default function Contact({ currentPath, navigateToNode }) {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[850px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06),transparent_65%)] pointer-events-none z-0" />
       <div className="absolute top-[1200px] right-0 w-[450px] h-[450px] bg-[#06B6D4]/[0.015] blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[600px] left-0 w-[500px] h-[500px] bg-blue-600/[0.01] blur-[180px] pointer-events-none" />
-
-      {/* DETACHED NAVIGATION INTERACTION LAYER */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection="" 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
 
       {/* CORE FRAMEWORK BODY CONTENT STREAM */}
       <div className="relative z-10 conversion-lead-generation-scope">
@@ -345,9 +333,6 @@ export default function Contact({ currentPath, navigateToNode }) {
         </section>
 
       </div>
-
-      {/* CORE GLOBAL FOOTER ACCESS COUPLING */}
-      <Footer siteConfig={siteConfig} />
 
     </div>
   );
