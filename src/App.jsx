@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
-// LAYOUT SYSTEM IMPORT (Explicitly specified extension for strict Unix filesystems)
+// LAYOUT SYSTEM IMPORT
 import MainLayout from './layouts/MainLayout.jsx';
 
 // LIVE DATA CORE IMPORTS
