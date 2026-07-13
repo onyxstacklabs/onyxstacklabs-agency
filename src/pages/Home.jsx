@@ -8,7 +8,9 @@ import { siteConfig } from '../config/siteConfig';
 import Hero from '../components/Hero';
 import Clients from '../components/Clients';
 import Stats from '../components/Stats';
+import BrandShowcase from '../components/BrandShowcase';
 import Services from '../components/Services';
+import FeaturedProjects from '../components/FeaturedProjects';
 import Portfolio from '../components/Portfolio';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Process from '../components/Process';
@@ -209,7 +211,11 @@ export default function Home({ currentPath, navigateToNode }) {
       
       <Stats />
       
+      <BrandShowcase />
+      
       <Services coreServices={coreServices} />
+      
+      <FeaturedProjects />
       
       <Portfolio projects={siteConfig.projects} />
       
