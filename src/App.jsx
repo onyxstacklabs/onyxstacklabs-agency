@@ -5,6 +5,9 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import OnyxAdmin from './pages/OnyxAdmin';
 import Home from './pages/Home';
 import About from './pages/About';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
 
 export default function App() {
   const navigate = useNavigate();
@@ -41,6 +44,24 @@ export default function App() {
       <Route 
         path="/about" 
         element={<About currentPath={currentPath} navigateToNode={navigateToNode} />} 
+      />
+
+      {/* Target Route: High-Conversion Lead Ingress Node */}
+      <Route 
+        path="/contact" 
+        element={<Contact currentPath={currentPath} navigateToNode={navigateToNode} />} 
+      />
+
+      {/* Target Route: Global Privacy Policy & Sovereign Data Framework */}
+      <Route 
+        path="/privacy-policy" 
+        element={<PrivacyPolicy currentPath={currentPath} navigateToNode={navigateToNode} />} 
+      />
+
+      {/* Target Route: Master Terms of Service & Contract Governance */}
+      <Route 
+        path="/terms-conditions" 
+        element={<TermsConditions currentPath={currentPath} navigateToNode={navigateToNode} />} 
       />
     </Routes>
   );
