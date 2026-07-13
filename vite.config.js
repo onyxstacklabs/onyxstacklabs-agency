@@ -1,19 +1,24 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Production Build Matrix Optimization Engine
+// Production Build Optimization Matrix Engine for Maximum SEO Loading Speed Metrics
 export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    minify: 'terser', // Premium minification logic for low latency
-    sourcemap: false, // Turn off for source security in production pipelines
+    minify: 'terser', 
+    sourcemap: false, 
+    terserOptions: {
+      compress: {
+        drop_console: true, // Drops console messages to reduce core JavaScript payload size
+        drop_debugger: true
+      }
+    },
     rollupOptions: {
       output: {
+        // Balances cache persistence with minimal initial payload delivery
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          firebase: ['firebase/app', 'firebase/firestore'] // Splitting core dependencies for rapid loading metrics
+          vendor: ['react', 'react-dom']
         }
       }
     }
