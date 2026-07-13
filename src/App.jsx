@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 // LIVE DATA CORE IMPORTS
 import OnyxAdmin from './pages/OnyxAdmin';
 import Home from './pages/Home';
+import About from './pages/About';
 
 export default function App() {
   const navigate = useNavigate();
@@ -34,6 +35,12 @@ export default function App() {
       <Route 
         path="/" 
         element={<Home currentPath={currentPath} navigateToNode={navigateToNode} />} 
+      />
+
+      {/* Target Route: Corporate Architecture About Information Matrix */}
+      <Route 
+        path="/about" 
+        element={<About currentPath={currentPath} navigateToNode={navigateToNode} />} 
       />
     </Routes>
   );
