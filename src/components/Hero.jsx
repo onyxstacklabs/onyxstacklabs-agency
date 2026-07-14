@@ -2,13 +2,62 @@ import React from "react";
 import heroBanner from "../assets/images/hero-banner.webp";
 
 export default function Hero() {
-  const featurePills = ["Custom Software", "AI Automation", "Cloud Infrastructure", "Enterprise Security"];
+  const featurePills = [
+    {
+      label: "Custom Software",
+      icon: (
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+      )
+    },
+    {
+      label: "AI Automation",
+      icon: (
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
+        </svg>
+      )
+    },
+    {
+      label: "Cloud Infrastructure",
+      icon: (
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.26A8 8 0 1 0 4 15.25" />
+          <path d="M8 19h9.5" />
+        </svg>
+      )
+    },
+    {
+      label: "Enterprise Security",
+      icon: (
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z" />
+          <polyline points="9 12 11 14 15 10" />
+        </svg>
+      )
+    }
+  ];
 
   const valueStats = [
     { value: "100%", label: "Custom Development" },
     { value: "AI READY", label: "Automation Sync" },
     { value: "24/7", label: "Dedicated Support" },
     { value: "PREMIUM", label: "Enterprise Quality" }
+  ];
+
+  const particles = [
+    { top: "12%", left: "8%", size: "3px", delay: "0s", duration: "9s" },
+    { top: "22%", left: "88%", size: "2px", delay: "1.2s", duration: "11s" },
+    { top: "35%", left: "18%", size: "4px", delay: "2.4s", duration: "8s" },
+    { top: "48%", left: "72%", size: "2px", delay: "0.6s", duration: "10s" },
+    { top: "58%", left: "42%", size: "3px", delay: "3.1s", duration: "12s" },
+    { top: "68%", left: "12%", size: "2px", delay: "1.8s", duration: "9.5s" },
+    { top: "15%", left: "55%", size: "2px", delay: "2.9s", duration: "10.5s" },
+    { top: "78%", left: "82%", size: "3px", delay: "0.3s", duration: "11.5s" },
+    { top: "30%", left: "32%", size: "2px", delay: "4s", duration: "9s" },
+    { top: "85%", left: "50%", size: "3px", delay: "1.5s", duration: "10s" }
   ];
 
   return (
@@ -54,6 +103,40 @@ export default function Hero() {
             background: "radial-gradient(circle, rgba(147,197,253,0.06) 0%, transparent 70%)"
           }}
         />
+        {/* Directional lighting: blue from right, cyan from below, white highlight above */}
+        <div
+          className="absolute top-0 right-0 w-[500px] h-[700px] opacity-30 blur-[130px]"
+          style={{ background: "radial-gradient(circle at 100% 0%, rgba(37,99,213,0.14) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] opacity-25 blur-[120px]"
+          style={{ background: "radial-gradient(ellipse, rgba(6,182,212,0.14) 0%, transparent 75%)" }}
+        />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] opacity-[0.05] blur-[100px]"
+          style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, transparent 75%)" }}
+        />
+        {/* Vignette */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 80% 70% at 50% 40%, transparent 55%, rgba(0,0,0,0.55) 100%)" }}
+        />
+        {/* Ambient particles */}
+        {particles.map((p, idx) => (
+          <span
+            key={idx}
+            className="absolute rounded-full bg-cyan-200 motion-safe:animate-[pulse_ease-in-out_infinite]"
+            style={{
+              top: p.top,
+              left: p.left,
+              width: p.size,
+              height: p.size,
+              opacity: 0.18,
+              animationDelay: p.delay,
+              animationDuration: p.duration
+            }}
+          />
+        ))}
         <div 
           className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
           style={{
@@ -95,9 +178,10 @@ export default function Hero() {
             <span
               key={idx}
               role="listitem"
-              className="px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-neutral-300 border border-white/[0.07] bg-white/[0.015] backdrop-blur-sm transition-colors duration-300 hover:border-cyan-500/25 hover:text-white"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-neutral-300 border border-white/[0.07] bg-white/[0.015] backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/25 hover:text-white hover:bg-white/[0.03] hover:shadow-[0_0_16px_rgba(6,182,212,0.15)]"
             >
-              {pill}
+              <span className="text-cyan-400/80">{pill.icon}</span>
+              {pill.label}
             </span>
           ))}
         </div>
@@ -107,45 +191,81 @@ export default function Hero() {
           <a
             href="#contact"
             aria-label="Initialize a business discussion project with OnyxStack Labs"
-            className="group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white text-black font-semibold text-sm tracking-wide uppercase transition-all duration-300 hover:bg-neutral-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(6,182,212,0.4)]"
+            className="group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white text-black font-semibold text-sm tracking-wide uppercase transition-all duration-300 hover:bg-neutral-100 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(6,182,212,0.4)] overflow-hidden"
           >
-            Start Your Project
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out motion-reduce:hidden"
+              style={{
+                background: "linear-gradient(115deg, transparent 20%, rgba(6,182,212,0.35) 45%, rgba(255,255,255,0.55) 50%, rgba(6,182,212,0.35) 55%, transparent 80%)"
+              }}
+            />
+            <span className="relative">Start Your Project</span>
           </a>
 
           <a
             href="#portfolio"
             aria-label="Browse the engineering portfolio and software case studies"
-            className="group w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.01] text-white font-medium text-sm tracking-wide uppercase backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.04] hover:border-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+            className="group w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.01] text-white font-medium text-sm tracking-wide uppercase backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.05] hover:border-cyan-400/30 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(6,182,212,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
           >
             View Portfolio
           </a>
         </div>
 
-        {/* TRUSTED INDICATOR */}
-        <div className="flex items-center gap-2 mt-7 sm:mt-8 text-[11px] sm:text-xs text-neutral-500 tracking-wide">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+        {/* PREMIUM TRUST INDICATOR */}
+        <div className="flex items-center gap-3 mt-8 sm:mt-9 text-[11px] sm:text-xs text-neutral-500 tracking-wide">
+          <div className="flex items-center -space-x-2" aria-hidden="true">
+            <span className="w-6 h-6 rounded-full border border-[#050505] bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
+            <span className="w-6 h-6 rounded-full border border-[#050505] bg-gradient-to-br from-blue-500 to-indigo-600 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
+            <span className="w-6 h-6 rounded-full border border-[#050505] bg-gradient-to-br from-neutral-300 to-neutral-500 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
+          </div>
+          <span className="flex items-center gap-2">
+            <span className="text-cyan-300 tracking-tight" aria-hidden="true">★★★★★</span>
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+            </span>
+            Trusted by growing teams across 18+ countries
           </span>
-          Trusted by growing teams across 18+ countries
         </div>
       </header>
 
       {/* BANNER VISUAL CENTERPIECE CONTAINER */}
       <div className="relative mt-20 sm:mt-24 lg:mt-28 w-full max-w-6xl mx-auto z-10 px-2 sm:px-4 lg:px-0">
-        {/* PREMIUM BLUE AMBIENT ACCENT GLOW BEHIND BANNER */}
+        {/* CONNECTION LINES: BADGE / CONTENT -> BANNER */}
+        <svg
+          className="absolute -top-16 sm:-top-20 left-1/2 -translate-x-1/2 w-[2px] h-16 sm:h-20 pointer-events-none hidden sm:block motion-reduce:hidden"
+          aria-hidden="true"
+        >
+          <line
+            x1="1" y1="0" x2="1" y2="100%"
+            stroke="url(#heroLineGradient)"
+            strokeWidth="1"
+            className="motion-safe:animate-[pulse_9s_ease-in-out_infinite]"
+          />
+          <defs>
+            <linearGradient id="heroLineGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="rgba(6,182,212,0)" />
+              <stop offset="50%" stopColor="rgba(6,182,212,0.5)" />
+              <stop offset="100%" stopColor="rgba(6,182,212,0)" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* LAYER 1: OUTER AMBIENT GLOW */}
         <div 
-          className="absolute -inset-4 sm:-inset-12 rounded-3xl opacity-50 blur-[90px] pointer-events-none z-0"
+          className="absolute -inset-4 sm:-inset-12 rounded-3xl opacity-50 blur-[90px] pointer-events-none z-0 motion-safe:animate-[pulse_11s_ease-in-out_infinite]"
           style={{
             background: "radial-gradient(circle, rgba(37,99,213,0.25) 0%, rgba(6,182,212,0.12) 45%, transparent 75%)"
           }}
         />
 
-        {/* FLOATING GLASS FRAME WRAPPER FOR HERO BANNER */}
-        <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-700 hover:border-white/[0.15] hover:shadow-[0_40px_110px_rgba(37,99,213,0.18)] hover:-translate-y-1 motion-reduce:hover:translate-y-0 group overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none" />
-          {/* Inner bevel ring for added depth */}
-          <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04] ring-1 ring-inset ring-white/[0.03]">
+        {/* LAYER 2: GLASS BORDER / LAYER 3: DARK FRAME */}
+        <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-700 hover:border-white/[0.16] hover:shadow-[0_40px_110px_rgba(37,99,213,0.2)] hover:-translate-y-1 motion-reduce:hover:translate-y-0 group overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.015] via-transparent to-white/[0.04] pointer-events-none" />
+
+          {/* LAYER 4: INNER BEVEL */}
+          <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04] ring-1 ring-inset ring-white/[0.04]">
             <img
               src={heroBanner}
               alt="OnyxStack Labs enterprise software platform showing dashboard, automation, and infrastructure overview"
@@ -154,16 +274,29 @@ export default function Hero() {
               fetchpriority="high"
               width="1920"
               height="1080"
-              className="w-full h-auto object-cover opacity-95 transition-all duration-700 scale-100 filter contrast-[1.02]"
+              className="w-full h-auto object-cover opacity-95 transition-transform duration-700 group-hover:scale-[1.015] filter contrast-[1.02]"
             />
-            {/* Subtle top sheen for glass realism */}
-            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
+
+            {/* LAYER 5: TOP HIGHLIGHT REFLECTION */}
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none" />
+
+            {/* Side vignette for depth */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ boxShadow: "inset 0 0 90px 20px rgba(0,0,0,0.35)" }}
+            />
           </div>
         </div>
+
+        {/* LAYER 6: BOTTOM CYAN GROUND REFLECTION */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 -bottom-10 sm:-bottom-14 w-[85%] h-16 sm:h-20 rounded-full opacity-40 blur-[50px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse, rgba(6,182,212,0.35) 0%, transparent 75%)" }}
+        />
       </div>
 
       {/* CONTINUOUS NAVIGATION GATE ACTION NODE */}
-      <div className="mt-16 sm:mt-20 lg:mt-24 z-10 flex justify-center">
+      <div className="mt-20 sm:mt-24 lg:mt-28 z-10 flex justify-center">
         <a
           href="#services"
           aria-label="Scroll smoothly into OnyxStack Core Technology Stack Modules"
