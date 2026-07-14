@@ -13,12 +13,10 @@ import finalCtaImage from '../assets/images/about/about-final-cta.webp';
 
 export default function About({ currentPath, navigateToNode }) {
   
-  // Set explicit subview window focus on mounting phase
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Section 4 Data: Core Values Matrix
   const coreValues = [
     { title: "Integrity", desc: "We believe in honest partnerships. From transparent communication to reliable timelines, we deliver on our promises without hidden surprises." },
     { title: "Craftsmanship", desc: "We write clean, well-documented code designed to last. Shortcuts create technical debt, so we focus on building stable foundations from day one." },
@@ -28,7 +26,6 @@ export default function About({ currentPath, navigateToNode }) {
     { title: "Shared Success", desc: "We don't just build software and walk away. We invest deeply in your goals, working closely with your team to drive real business growth." }
   ];
 
-  // Section 5 Data: Enterprise Value Props
   const differentiators = [
     { title: "Professional Development", desc: "Our team writes clean, modular, production-ready code that complies with the highest industry standards, ensuring seamless handoffs." },
     { title: "Scalable Architecture", desc: "We design robust systems engineered to handle growing traffic, high transactional volumes, and future business expansions smoothly." },
@@ -38,21 +35,19 @@ export default function About({ currentPath, navigateToNode }) {
     { title: "Long-Term Partnerships", desc: "We support your platform long after launch with dedicated systems optimization, proactive monitoring, and iterative feature development." }
   ];
 
-  // Section 6 Data: Verified Technical Stack Matrix
   const stackItems = [
-    { name: "React", category: "Frontend Engine", glow: "hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]" },
-    { name: "Vite", category: "Build Systems", glow: "hover:border-purple-500/40 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]" },
-    { name: "Firebase", category: "Cloud Platform", glow: "hover:border-amber-500/40 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]" },
-    { name: "Tailwind CSS", category: "Design Layer", glow: "hover:border-sky-400/40 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]" },
-    { name: "Node.js", category: "Runtime Environment", glow: "hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]" },
-    { name: "Express.js", category: "API Framework", glow: "hover:border-neutral-400/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]" },
-    { name: "MongoDB", category: "Database Layer", glow: "hover:border-green-600/40 hover:shadow-[0_0_20px_rgba(22,163,74,0.15)]" },
-    { name: "Gemini AI", category: "Intelligence Matrix", glow: "hover:border-blue-500/40 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]" },
-    { name: "Git", category: "Version Infrastructure", glow: "hover:border-orange-500/40 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)]" },
-    { name: "Vercel", category: "Edge Deployment", glow: "hover:border-neutral-100/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]" }
+    { name: "React", category: "Frontend Engine", glow: "group-hover:border-cyan-500/40 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]" },
+    { name: "Vite", category: "Build Systems", glow: "group-hover:border-purple-500/40 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]" },
+    { name: "Firebase", category: "Cloud Platform", glow: "group-hover:border-amber-500/40 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]" },
+    { name: "Tailwind CSS", category: "Design Layer", glow: "group-hover:border-sky-400/40 group-hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]" },
+    { name: "Node.js", category: "Runtime Environment", glow: "group-hover:border-emerald-500/40 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]" },
+    { name: "Express.js", category: "API Framework", glow: "group-hover:border-neutral-400/40 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]" },
+    { name: "MongoDB", category: "Database Layer", glow: "group-hover:border-green-600/40 group-hover:shadow-[0_0_20px_rgba(22,163,74,0.15)]" },
+    { name: "Gemini AI", category: "Intelligence Matrix", glow: "group-hover:border-blue-500/40 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]" },
+    { name: "Git", category: "Version Infrastructure", glow: "group-hover:border-orange-500/40 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.15)]" },
+    { name: "Vercel", category: "Edge Deployment", glow: "group-hover:border-neutral-100/40 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]" }
   ];
 
-  // Section 7 Data: Engineering Roadmap Steps
   const workflows = [
     { step: "01", label: "Discovery", desc: "We begin by understanding your business goals, target audience, and functional requirements to define a precise project scope." },
     { step: "02", label: "Planning", desc: "Our team maps out the technical architecture, choose the best data models, and schedules clear milestones for the development cycle." },
@@ -81,9 +76,9 @@ export default function About({ currentPath, navigateToNode }) {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
                 Our Agency Profile
               </div>
-              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
+              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1] group">
                 Engineering reliable software <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500 transition-all duration-300 group-hover:text-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
                   built to scale with your business
                 </span>
               </h1>
@@ -94,32 +89,33 @@ export default function About({ currentPath, navigateToNode }) {
                 <a 
                   href="#contact-initiate" 
                   onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                  className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                  className="relative overflow-hidden bg-neutral-100 text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5"
                 >
                   Get In Touch
                 </a>
                 <a 
                   href="#narrative" 
                   onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="border border-neutral-800 hover:border-neutral-700 bg-neutral-900/30 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300"
+                  className="border border-neutral-800 bg-neutral-900/30 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5"
                 >
                   Our Story
                 </a>
               </div>
             </div>
             
-            {/* HERO IMAGE CONTAINER */}
+            {/* HERO IMAGE CONTAINER - FIXED */}
             <div className="lg:col-span-5 w-full flex justify-center items-center">
-              <div className="relative group w-full max-w-lg lg:max-w-none">
-                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-blue-500 opacity-20 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-800 bg-neutral-950 overflow-hidden shadow-2xl">
+              <div className="relative group w-full">
+                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-blue-500 opacity-20 blur-lg group-hover:opacity-40 transition-all duration-500" />
+                <div className="relative w-full rounded-2xl border border-neutral-800/80 bg-neutral-950 overflow-hidden shadow-2xl backdrop-blur-sm">
                   <img 
                     src={heroImage} 
                     alt="OnyxStack Labs Enterprise Workspace" 
-                    className="w-full h-auto object-cover aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] transform transition-transform duration-700 group-hover:scale-[1.02]"
+                    className="w-full h-full min-h-[300px] lg:min-h-[400px] object-cover aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     loading="eager"
                     decoding="async"
                   />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
             </div>
@@ -132,21 +128,24 @@ export default function About({ currentPath, navigateToNode }) {
             {/* COMPANY STORY IMAGE */}
             <div className="lg:col-span-5 order-last lg:order-first">
               <div className="relative group">
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#06B6D4]/30 to-purple-500/10 opacity-10 blur-md group-hover:opacity-20 transition-all duration-500" />
-                <img 
-                  src={companyStoryImage} 
-                  alt="The OnyxStack Labs Story" 
-                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[4/3] transform transition-transform duration-700 group-hover:scale-[1.01]"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4]/40 to-purple-500/20 opacity-10 blur-lg group-hover:opacity-35 transition-all duration-500" />
+                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
+                  <img 
+                    src={companyStoryImage} 
+                    alt="The OnyxStack Labs Story" 
+                    className="w-full h-auto object-cover rounded-2xl aspect-[4/3] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                </div>
               </div>
             </div>
             
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-              <div className="md:col-span-4">
+              <div className="md:col-span-4 group">
                 <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Who We Are</p>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">The story behind OnyxStack Labs</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans transition-all duration-300 group-hover:text-cyan-400">The story behind OnyxStack Labs</h2>
               </div>
               <div className="md:col-span-8 text-neutral-400 space-y-6 text-sm sm:text-base leading-relaxed font-sans">
                 <p>
@@ -164,36 +163,45 @@ export default function About({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 3: MISSION & VISION */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group">
-                <div className="w-8 h-8 rounded-lg bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center text-[#06B6D4] mb-6 font-mono text-sm font-bold">M</div>
-                <h3 className="text-lg font-bold text-white mb-3">Our Mission</h3>
-                <p className="text-sm text-neutral-400 leading-relaxed font-sans">
-                  To equip growing organizations with high-quality custom software that simplifies everyday operational tasks, fosters sustainable innovation, and builds tangible, long-term commercial value.
-                </p>
+              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)] hover:-translate-y-1">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <div className="w-8 h-8 rounded-lg bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center text-[#06B6D4] mb-6 font-mono text-sm font-bold transition-all duration-300 group-hover:bg-[#06B6D4]/20 group-hover:border-[#06B6D4]/40">M</div>
+                  <h3 className="text-lg font-bold text-white mb-3 transition-colors duration-300 group-hover:text-cyan-400">Our Mission</h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+                    To equip growing organizations with high-quality custom software that simplifies everyday operational tasks, fosters sustainable innovation, and builds tangible, long-term commercial value.
+                  </p>
+                </div>
               </div>
-              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group">
-                <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 font-mono text-sm font-bold">V</div>
-                <h3 className="text-lg font-bold text-white mb-3">Our Vision</h3>
-                <p className="text-sm text-neutral-400 leading-relaxed font-sans">
-                  To be the world's most trusted software development partner, recognized for creating scalable, resilient digital products that set the standard for modern interface design and reliable web performance.
-                </p>
+              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(37,99,235,0.08)] hover:-translate-y-1">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 font-mono text-sm font-bold transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-500/40">V</div>
+                  <h3 className="text-lg font-bold text-white mb-3 transition-colors duration-300 group-hover:text-blue-400">Our Vision</h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+                    To be the world's most trusted software development partner, recognized for creating scalable, resilient digital products that set the standard for modern interface design and reliable web performance.
+                  </p>
+                </div>
               </div>
             </div>
             
             {/* MISSION VISION IMAGE */}
             <div className="lg:col-span-5 w-full">
               <div className="relative group">
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500/20 to-[#06B6D4]/20 opacity-10 blur-md" />
-                <img 
-                  src={missionVisionImage} 
-                  alt="Our Mission and Vision Support Visual" 
-                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[4/3] transform transition-transform duration-700 group-hover:scale-[1.01]"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-blue-500/20 to-[#06B6D4]/20 opacity-10 blur-lg group-hover:opacity-35 transition-all duration-500" />
+                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
+                  <img 
+                    src={missionVisionImage} 
+                    alt="Our Mission and Vision Support Visual" 
+                    className="w-full h-auto object-cover rounded-2xl aspect-[4/3] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                </div>
               </div>
             </div>
           </div>
@@ -203,17 +211,20 @@ export default function About({ currentPath, navigateToNode }) {
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-8">
-              <div className="max-w-3xl mb-12">
+              <div className="max-w-3xl mb-12 group">
                 <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">What We Stand For</p>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">The principles that guide our everyday decisions</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">The principles that guide our everyday decisions</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {coreValues.map((val, idx) => (
-                  <div key={idx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:border-neutral-800 transition-colors duration-300">
-                    <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-3 flex items-center gap-3">
-                      <span className="text-[#06B6D4] font-bold">//</span> {val.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{val.desc}</p>
+                  <div key={idx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 relative group transition-all duration-300 hover:border-neutral-800 hover:shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:-translate-y-0.5">
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-cyan-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative z-10">
+                      <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-3 flex items-center gap-3 transition-colors duration-300 group-hover:text-cyan-400">
+                        <span className="text-[#06B6D4] font-bold">//</span> {val.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{val.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -222,14 +233,17 @@ export default function About({ currentPath, navigateToNode }) {
             {/* CORE VALUES SUPPORTING IMAGE */}
             <div className="lg:col-span-4 lg:sticky lg:top-24">
               <div className="relative group">
-                <div className="absolute -inset-1 rounded-2xl bg-[#06B6D4]/10 opacity-15 blur-sm" />
-                <img 
-                  src={coreValuesImage} 
-                  alt="OnyxStack Labs Core Values" 
-                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 group-hover:scale-[1.01]"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="absolute -inset-1.5 rounded-2xl bg-[#06B6D4]/15 opacity-15 blur-lg group-hover:opacity-35 transition-all duration-500" />
+                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
+                  <img 
+                    src={coreValuesImage} 
+                    alt="OnyxStack Labs Core Values" 
+                    className="w-full h-auto object-cover rounded-2xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                </div>
               </div>
             </div>
           </div>
@@ -237,15 +251,15 @@ export default function About({ currentPath, navigateToNode }) {
 
         {/* SECTION 5: WHY CHOOSE ONYXSTACK LABS */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-12">
+          <div className="max-w-3xl mb-12 group">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">The Agency Difference</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Why businesses choose us over other developers</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Why businesses choose us over other developers</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {differentiators.map((diff, idx) => (
-              <div key={idx} className="p-6 rounded-xl border border-neutral-900/30 bg-gradient-to-b from-neutral-950 to-[#050505] relative">
-                <div className="absolute top-0 left-6 w-8 h-[1px] bg-gradient-to-r from-[#06B6D4] to-transparent" />
-                <h3 className="text-base font-bold text-white mb-3 font-sans">{diff.title}</h3>
+              <div key={idx} className="p-6 rounded-xl border border-neutral-900/30 bg-gradient-to-b from-neutral-950 to-[#050505] relative group transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.06)] hover:-translate-y-1">
+                <div className="absolute top-0 left-6 w-8 h-[1px] bg-gradient-to-r from-[#06B6D4] to-transparent group-hover:w-16 transition-all duration-500" />
+                <h3 className="text-base font-bold text-white mb-3 font-sans transition-colors duration-300 group-hover:text-[#06B6D4]">{diff.title}</h3>
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{diff.desc}</p>
               </div>
             ))}
@@ -256,18 +270,20 @@ export default function About({ currentPath, navigateToNode }) {
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-8">
-              <div className="max-w-3xl mb-12">
+              <div className="max-w-3xl mb-12 group">
                 <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Our Core Toolkit</p>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Proven modern frameworks for reliable digital platforms</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Proven modern frameworks for reliable digital platforms</h2>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {stackItems.map((item, idx) => (
                   <div 
                     key={idx} 
-                    className={`p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 text-left transition-all duration-300 cursor-default ${item.glow}`}
+                    className="group p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 text-left transition-all duration-300 cursor-default hover:bg-neutral-900/30 hover:border-neutral-800"
                   >
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1">{item.category}</p>
-                    <h4 className="text-sm font-bold text-white tracking-wide font-sans">{item.name}</h4>
+                    <div className={`transition-all duration-300 ${item.glow} rounded-xl`}>
+                      <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1 transition-colors duration-300 group-hover:text-neutral-400">{item.category}</p>
+                      <h4 className="text-sm font-bold text-white tracking-wide font-sans transition-colors duration-300 group-hover:text-[#06B6D4]">{item.name}</h4>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -276,14 +292,17 @@ export default function About({ currentPath, navigateToNode }) {
             {/* TECHNOLOGY STACK IMAGE */}
             <div className="lg:col-span-4">
               <div className="relative group">
-                <div className="absolute -inset-1.5 rounded-2xl bg-purple-500/10 opacity-20 blur-md" />
-                <img 
-                  src={technologyStackImage} 
-                  alt="OnyxStack Labs Engineering Workspace" 
-                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 group-hover:scale-[1.01]"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="absolute -inset-1.5 rounded-2xl bg-purple-500/15 opacity-20 blur-lg group-hover:opacity-35 transition-all duration-500" />
+                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
+                  <img 
+                    src={technologyStackImage} 
+                    alt="OnyxStack Labs Engineering Workspace" 
+                    className="w-full h-auto object-cover rounded-2xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                </div>
               </div>
             </div>
           </div>
@@ -291,17 +310,17 @@ export default function About({ currentPath, navigateToNode }) {
 
         {/* SECTION 7: DEVELOPMENT PROCESS MAP */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-16">
+          <div className="max-w-3xl mb-16 group">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">How We Work</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Our clean, predictable software development lifecycle</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Our clean, predictable software development lifecycle</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {workflows.map((flow, idx) => (
-              <div key={idx} className="relative group">
-                <div className="text-3xl font-bold font-mono text-neutral-800 mb-3 tracking-tighter group-hover:text-[#06B6D4] transition-colors duration-300">
+              <div key={idx} className="relative group transition-all duration-300 hover:-translate-y-0.5">
+                <div className="text-3xl font-bold font-mono text-neutral-800 mb-3 tracking-tighter transition-all duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
                   {flow.step}
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 font-sans">{flow.label}</h3>
+                <h3 className="text-base font-bold text-white mb-2 font-sans transition-colors duration-300 group-hover:text-white">{flow.label}</h3>
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{flow.desc}</p>
               </div>
             ))}
@@ -309,23 +328,24 @@ export default function About({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 8: FINAL SYSTEM CONSOLE CTA */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-900/60">
-          <div className="relative p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-neutral-950 overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 min-h-[320px]">
-            {/* BACKGROUND SUPPORTING IMAGE */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
+          <div className="relative p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-neutral-950 overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 min-h-[320px] group">
+            
+            {/* FIXED BACKGROUND SUPPORTING IMAGE */}
             <div className="absolute inset-0 z-0">
               <img 
                 src={finalCtaImage} 
                 alt="Engineering Background" 
-                className="w-full h-full object-cover opacity-15 mix-blend-luminosity" 
+                className="w-full h-full object-cover opacity-10 mix-blend-luminosity transform scale-100 group-hover:scale-[1.05] transition-transform duration-[2000ms] ease-out" 
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/90 to-neutral-950/40" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.06),transparent_60%)]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/95 to-neutral-950/40" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.06),transparent_60%)] group-hover:opacity-80 transition-opacity duration-1000" />
             </div>
             
             <div className="max-w-2xl relative z-10">
-              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4 transition-all duration-300 group-hover:text-shadow-[0_0_30px_rgba(6,182,212,0.25)]">
                 Let's turn your product ideas into real, functional code
               </h2>
               <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">
@@ -336,7 +356,7 @@ export default function About({ currentPath, navigateToNode }) {
               <a 
                 href="#contact-terminal" 
                 onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="inline-block bg-white hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] whitespace-nowrap"
+                className="inline-block bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Talk to our Team
               </a>
