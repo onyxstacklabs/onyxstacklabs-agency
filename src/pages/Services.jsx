@@ -3,15 +3,14 @@ import React, { useEffect, useState } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
-// PREMIUM SHOWCASE IMAGE ASSETS
-import heroBanner from '../assets/images/hero-banner.webp';
-import serviceCustomSoftware from '../assets/images/service-custom-software.webp';
-import serviceWebDevelopment from '../assets/images/service-web-development.webp';
-import serviceAiAutomation from '../assets/images/service-ai-automation.webp';
-import serviceCloudSolutions from '../assets/images/service-cloud-solutions.webp';
-import serviceCyberSecurity from '../assets/images/service-cyber-security.webp';
-import serviceMobileAppDevelopment from '../assets/images/service-mobile-app-development.webp';
-import serviceEnterpriseSoftware from '../assets/images/service-enterprise-software.webp';
+// PREMIUM IMAGE ASSETS — EXACT PATHS, DO NOT RENAME
+import heroBanner from "../assets/images/hero-banner.webp";
+import serviceAiAutomation from "../assets/images/service-ai-automation.webp";
+import serviceCloudSolutions from "../assets/images/service-cloud-solutions.webp";
+import serviceCyberSecurity from "../assets/images/service-cyber-security.webp";
+import serviceEnterpriseSoftware from "../assets/images/service-enterprise-software.webp";
+import serviceMobileAppDevelopment from "../assets/images/service-mobile-app-development.webp";
+import serviceWebDevelopment from "../assets/images/service-web-development.webp";
 
 export default function Services({ currentPath, navigateToNode }) {
   const [openFaq, setOpenFaq] = useState(null);
@@ -21,7 +20,7 @@ export default function Services({ currentPath, navigateToNode }) {
     window.scrollTo(0, 0);
   }, []);
 
-  // Section 2 Data: Premium Featured Services Showcase
+  // Section 2 Data: Premium Featured Services Showcase (exactly 6, image mapping is FINAL)
   const featuredServices = [
     {
       label: "Bespoke Engineering",
@@ -32,8 +31,8 @@ export default function Services({ currentPath, navigateToNode }) {
         "Modular codebases built for longevity",
         "Direct engineering ownership, no handoffs"
       ],
-      image: serviceCustomSoftware,
-      alt: "Custom software development engineering workspace"
+      image: serviceEnterpriseSoftware,
+      alt: "Custom enterprise software development"
     },
     {
       label: "Web Platforms",
@@ -49,7 +48,7 @@ export default function Services({ currentPath, navigateToNode }) {
     },
     {
       label: "Intelligent Systems",
-      title: "AI Solutions & Automation",
+      title: "AI Solutions & Integrations",
       desc: "Practical artificial intelligence embedded directly into your operations. We deploy models and automated pipelines that remove manual overhead and surface decisions faster.",
       features: [
         "Custom AI and NLP integrations",
@@ -73,7 +72,7 @@ export default function Services({ currentPath, navigateToNode }) {
     },
     {
       label: "Security Engineering",
-      title: "Cyber Security Hardening",
+      title: "Cyber Security",
       desc: "Security treated as architecture, not an afterthought. We audit, harden, and continuously monitor your systems against the vulnerabilities that matter most.",
       features: [
         "Full-stack vulnerability audits",
@@ -114,16 +113,8 @@ export default function Services({ currentPath, navigateToNode }) {
     { title: "Ongoing Maintenance & Support", desc: "Providing active software lifecycle support, regular technical security updates, structural code adjustments, and routine version upgrades." }
   ];
 
-  // Image map for the Services Grid: only cards with a matching title get a top image.
-  // All remaining cards keep their premium glowing icon treatment.
-  const gridCardImages = {
-    "Custom Software Development": { src: serviceEnterpriseSoftware, alt: "Custom enterprise software development" },
-    "Modern Web Applications": { src: serviceWebDevelopment, alt: "Modern web application development" },
-    "AI Solutions & Integrations": { src: serviceAiAutomation, alt: "AI solutions and automation integrations" },
-    "Cloud Scale Deployment": { src: serviceCloudSolutions, alt: "Cloud scale deployment infrastructure" }
-  };
-
-  // Inline SVG icon set matched one-to-one with servicesList order
+  // Inline SVG icon set matched one-to-one with servicesList order.
+  // These 13 cards remain icon-only — they are never converted into image cards.
   const serviceIcons = [
     // Custom Software Development
     <path key="i1" strokeLinecap="round" strokeLinejoin="round" d="M9 18l-6-6 6-6M15 6l6 6-6 6" />,
@@ -256,6 +247,10 @@ export default function Services({ currentPath, navigateToNode }) {
           from { opacity: 0; transform: translateY(28px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes heroFade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
         @keyframes floatSlow {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
@@ -268,6 +263,9 @@ export default function Services({ currentPath, navigateToNode }) {
         }
         .fade-up {
           animation: fadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .hero-fade {
+          animation: heroFade 900ms ease both;
         }
         .float-slow {
           animation: floatSlow 6s ease-in-out infinite;
@@ -284,15 +282,14 @@ export default function Services({ currentPath, navigateToNode }) {
           animation: sheenSweep 1.1s ease;
         }
         @media (prefers-reduced-motion: reduce) {
-          .fade-up, .float-slow { animation: none !important; opacity: 1 !important; transform: none !important; }
+          .fade-up, .float-slow, .hero-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
           .group:hover .sheen::after { animation: none !important; }
           * { transition-duration: 0.01ms !important; }
         }
       `}</style>
 
       {/* VISUAL BACKGROUND GRADIENT SYSTEM */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06),transparent_60%)] pointer-events-none z-0" />
-      <div className="absolute top-[1800px] left-0 w-[500px] h-[500px] bg-[#2563EB]/[0.015] blur-[150px] pointer-events-none" />
+      <div className="absolute top-[900px] left-0 w-[500px] h-[500px] bg-[#2563EB]/[0.015] blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[600px] right-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
       {/* Subtle structural grid + mesh layer */}
       <div
@@ -315,11 +312,23 @@ export default function Services({ currentPath, navigateToNode }) {
       {/* SYSTEM CONTROLLER CONTAINER */}
       <div className="relative z-10">
 
-        {/* SECTION 1: HERO CONTAINER */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 sm:pt-40 sm:pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12 lg:gap-10 items-center">
-            <div className="fade-up">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
+        {/* SECTION 1: HERO CONTAINER — FULL-WIDTH PREMIUM BACKGROUND HERO */}
+        <section className="relative w-full min-h-[560px] sm:min-h-[640px] flex items-center overflow-hidden hero-fade">
+          <div className="absolute inset-0 z-0">
+            <img
+              src={heroBanner}
+              alt="OnyxStack Labs enterprise software development showcase"
+              loading="eager"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[#050505]/80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-[#050505]/30" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.12),transparent_60%)]" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-32 sm:py-40 w-full">
+            <div className="max-w-4xl fade-up">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6 backdrop-blur-sm">
                 Our Capabilities
               </div>
               <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
@@ -328,7 +337,7 @@ export default function Services({ currentPath, navigateToNode }) {
                   Tailored for Business Growth
                 </span>
               </h1>
-              <p className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed mb-10 font-sans">
+              <p className="text-base sm:text-lg text-neutral-300 max-w-2xl leading-relaxed mb-10 font-sans">
                 OnyxStack Labs is a modern software development company that crafts secure web applications, smart AI solutions, and performant cloud tools. We match intentional, low-friction visual layout design with robust MERN stack architecture to convert product strategies into reliable business outcomes.
               </p>
               <div className="flex flex-wrap items-center gap-4">
@@ -342,145 +351,103 @@ export default function Services({ currentPath, navigateToNode }) {
                 <a
                   href="#services-catalog"
                   onClick={(e) => { e.preventDefault(); document.getElementById('services-catalog')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="border border-neutral-800 hover:border-neutral-700 bg-neutral-900/20 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="border border-neutral-700 hover:border-neutral-500 bg-neutral-900/30 backdrop-blur-sm text-neutral-200 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   View Services
                 </a>
               </div>
             </div>
-
-            <div className="fade-up" style={{ animationDelay: '120ms' }}>
-              <div className="group relative float-slow max-w-md mx-auto lg:max-w-none">
-                <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#06B6D4]/40 via-transparent to-transparent opacity-60 blur-sm pointer-events-none" />
-                <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-neutral-950/60 backdrop-blur-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 hover:shadow-[0_25px_70px_-10px_rgba(6,182,212,0.3)] hover:border-[#06B6D4]/30">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 pointer-events-none" />
-                  <img
-                    src={heroBanner}
-                    alt="OnyxStack Labs enterprise software development showcase"
-                    loading="eager"
-                    className="w-full h-[280px] sm:h-[360px] lg:h-[420px] object-cover"
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* SECTION 2: PREMIUM FEATURED SERVICES SHOWCASE */}
+        {/* SECTION 2: PREMIUM FEATURED SERVICES SHOWCASE — 6 LARGE IMAGE CARDS */}
         <section aria-labelledby="featured-services-heading" className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
           <div className="max-w-3xl mb-16 fade-up">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Premium Featured Services</p>
             <h2 id="featured-services-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Six flagship capabilities, engineered end-to-end</h2>
           </div>
 
-          <div className="flex flex-col gap-20 sm:gap-28">
-            {featuredServices.map((item, idx) => {
-              const reversed = idx % 2 === 1;
-              return (
-                <div
-                  key={idx}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center fade-up`}
-                  style={{ animationDelay: `${idx * 60}ms` }}
-                >
-                  <div className={`${reversed ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-4">{item.label}</p>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 leading-tight">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-neutral-400 leading-relaxed mb-6">{item.desc}</p>
-                    <ul className="space-y-3 mb-8">
-                      {item.features.map((f, fIdx) => (
-                        <li key={fIdx} className="flex items-start gap-3 text-sm text-neutral-300">
-                          <span className="mt-1 flex-shrink-0 w-4 h-4 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/30 flex items-center justify-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" />
-                          </span>
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap items-center gap-4">
-                      <a
-                        href="#contact-redirect"
-                        onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                        className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                      >
-                        Discuss This Service
-                      </a>
-                      <a
-                        href="#services-catalog"
-                        onClick={(e) => { e.preventDefault(); document.getElementById('services-catalog')?.scrollIntoView({ behavior: 'smooth' }); }}
-                        className="border border-neutral-800 hover:border-neutral-700 bg-transparent text-neutral-300 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                      >
-                        See Full Catalog
-                      </a>
-                    </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {featuredServices.map((item, idx) => (
+              <div
+                key={idx}
+                className="group relative rounded-3xl overflow-hidden border border-white/10 bg-neutral-950/60 backdrop-blur-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 hover:-translate-y-1 hover:border-[#06B6D4]/30 hover:shadow-[0_25px_70px_-10px_rgba(6,182,212,0.25)] fade-up"
+                style={{ animationDelay: `${idx * 60}ms` }}
+              >
+                <div className="sheen relative w-full h-[240px] sm:h-[280px] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-[#06B6D4]/30 text-[#06B6D4] text-[10px] font-mono uppercase tracking-widest backdrop-blur-sm">
+                    {item.label}
                   </div>
-
-                  <div className={`${reversed ? 'lg:order-1' : 'lg:order-2'}`}>
-                    <div className="group relative float-slow" style={{ animationDelay: `${idx * 400}ms` }}>
-                      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#06B6D4]/40 via-transparent to-transparent opacity-60 blur-sm pointer-events-none" />
-                      <div className="sheen relative rounded-3xl overflow-hidden border border-white/10 bg-neutral-950/60 backdrop-blur-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:shadow-[0_25px_70px_-10px_rgba(6,182,212,0.25)] group-hover:border-[#06B6D4]/30">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none" />
-                        <img
-                          src={item.image}
-                          alt={item.alt}
-                          loading={idx === 0 ? 'eager' : 'lazy'}
-                          className="w-full h-[280px] sm:h-[360px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                        />
-                      </div>
-                    </div>
+                  <div className="absolute -bottom-6 right-6 w-14 h-14 rounded-2xl bg-[#0a0a0a] border border-[#06B6D4]/25 flex items-center justify-center text-[#06B6D4] shadow-[0_0_25px_rgba(6,182,212,0.35)] group-hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] transition-all duration-500">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />
+                    </svg>
                   </div>
                 </div>
-              );
-            })}
+
+                <div className="p-6 pt-10">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight group-hover:text-[#06B6D4] transition-colors duration-300">{item.title}</h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed mb-5">{item.desc}</p>
+                  <ul className="space-y-2.5 mb-6">
+                    {item.features.map((f, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-3 text-sm text-neutral-300">
+                        <span className="mt-1 flex-shrink-0 w-4 h-4 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/30 flex items-center justify-center">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" />
+                        </span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact-redirect"
+                    onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
+                    className="inline-flex items-center gap-2 bg-neutral-100 hover:bg-[#06B6D4] text-black px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  >
+                    Discuss This Service
+                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
-        {/* SECTION 3: SERVICES CAPABILITIES GRID */}
+        {/* SECTION 3: SERVICES CAPABILITIES GRID — ICON-ONLY, NEVER IMAGE CARDS */}
         <section id="services-catalog" className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60 scroll-mt-24">
           <div className="max-w-3xl mb-16 fade-up">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Service Matrix</p>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Full-scale digital products built with professional clarity</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {servicesList.map((service, idx) => {
-              const cardImage = gridCardImages[service.title];
-              return (
-                <div
-                  key={idx}
-                  className="group relative rounded-2xl border border-neutral-900 bg-neutral-950/40 backdrop-blur-sm overflow-hidden hover:border-[#06B6D4]/30 hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between shadow-none hover:shadow-[0_20px_45px_-20px_rgba(6,182,212,0.35)]"
-                >
-                  <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/0 to-transparent group-hover:via-[#06B6D4]/60 transition-all duration-500 z-20" />
-                  <div className="absolute -top-16 -right-16 w-40 h-40 bg-[#06B6D4]/0 group-hover:bg-[#06B6D4]/[0.06] rounded-full blur-3xl transition-all duration-500 pointer-events-none z-0" />
-
-                  {cardImage && (
-                    <div className="relative w-full h-[200px] overflow-hidden rounded-t-2xl">
-                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent z-10 pointer-events-none" />
-                      <img
-                        src={cardImage.src}
-                        alt={cardImage.alt}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-                      />
-                    </div>
-                  )}
-
-                  <div className="relative z-10 p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <div className="w-12 h-12 rounded-xl bg-[#06B6D4]/5 border border-[#06B6D4]/15 flex items-center justify-center text-[#06B6D4] mb-5 backdrop-blur-sm group-hover:border-[#06B6D4]/40 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:rotate-3 transition-all duration-500">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
-                          {serviceIcons[idx]}
-                        </svg>
-                      </div>
-                      <h3 className="text-base font-bold text-white mb-3 font-sans tracking-wide group-hover:text-[#06B6D4] transition-colors duration-300">{service.title}</h3>
-                      <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{service.desc}</p>
-                    </div>
-                    <div className="pt-6 border-t border-neutral-900/60 mt-6 flex items-center justify-between">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 group-hover:text-[#06B6D4] transition-colors duration-300">SERVICE.NODE // READY</span>
-                      <span className="text-[#06B6D4] text-sm transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
-                    </div>
+            {servicesList.map((service, idx) => (
+              <div
+                key={idx}
+                className="group relative p-6 rounded-2xl border border-neutral-900 bg-neutral-950/40 backdrop-blur-sm overflow-hidden hover:border-[#06B6D4]/30 hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between shadow-none hover:shadow-[0_20px_45px_-20px_rgba(6,182,212,0.35)]"
+              >
+                <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/0 to-transparent group-hover:via-[#06B6D4]/60 transition-all duration-500" />
+                <div className="absolute -top-16 -right-16 w-40 h-40 bg-[#06B6D4]/0 group-hover:bg-[#06B6D4]/[0.06] rounded-full blur-3xl transition-all duration-500 pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-[#06B6D4]/5 border border-[#06B6D4]/15 flex items-center justify-center text-[#06B6D4] mb-5 backdrop-blur-sm group-hover:border-[#06B6D4]/40 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:rotate-3 transition-all duration-500">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
+                      {serviceIcons[idx]}
+                    </svg>
                   </div>
+                  <h3 className="text-base font-bold text-white mb-3 font-sans tracking-wide group-hover:text-[#06B6D4] transition-colors duration-300">{service.title}</h3>
+                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{service.desc}</p>
                 </div>
-              );
-            })}
+                <div className="relative z-10 pt-6 border-t border-neutral-900/60 mt-6 flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 group-hover:text-[#06B6D4] transition-colors duration-300">SERVICE.NODE // READY</span>
+                  <span className="text-[#06B6D4] text-sm transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
