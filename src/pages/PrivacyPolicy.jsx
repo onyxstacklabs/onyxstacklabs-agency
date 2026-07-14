@@ -182,7 +182,7 @@ export default function PrivacyPolicy() {
                 <span className="font-mono text-xs text-[#06B6D4]">6.0</span> Encryption Shielding
               </h2>
               <p>
-                We use strict security measures to protect your data. All database mutations run behind solid **Transport Layer Security (TLS 1.3)** wrappers. Persistent corporate records are encrypted at rest using industry-standard **AES-256 blocks**.
+                We use strict security measures to protect your data. All database mutations run behind solid <strong>Transport Layer Security (TLS 1.3)</strong> wrappers. Persistent corporate records are encrypted at rest using industry-standard <strong>AES-256 blocks</strong>.
               </p>
               <p>
                 Access to operational databases is restricted to core engineering personnel under multi-factor authentication (MFA) protocols and monitored via comprehensive audit logs to stop unauthorized data manipulation.
@@ -237,7 +237,7 @@ export default function PrivacyPolicy() {
               <div className="p-5 rounded-xl border border-neutral-900 bg-neutral-950/60 font-mono text-xs space-y-1.5 max-w-md">
                 <div className="text-white font-bold">OnyxStack Labs LLC</div>
                 <div className="text-neutral-400">Attn: Legal Compliance & Privacy Node</div>
-                <div className="text-neutral-400">Corporate Email: <a href="mailto:legal@onyxstacklabs.com" className="text-[#06B6D4] hover:underline">legal@onyxstacklabs.com</a></div>
+                <div className="text-neutral-400">Corporate Email: <a href="mailto:onyxstacklabs@gmail.com" className="text-[#06B6D4] hover:underline">onyxstacklabs@gmail.com</a></div>
               </div>
             </article>
 
