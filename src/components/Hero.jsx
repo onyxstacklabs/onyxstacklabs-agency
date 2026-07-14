@@ -1,53 +1,7 @@
 import React from "react";
-import heroDashboard from "../assets/hero-dashboard.svg";
+import heroBanner from "../assets/images/hero-banner.webp";
 
 export default function Hero() {
-  const floatingCards = [
-    {
-      label: "AI AUTOMATION",
-      value: "ONLINE 24/7",
-      alignment: "lg:-left-12 lg:top-16",
-      icon: (
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
-        </svg>
-      )
-    },
-    {
-      label: "CLOUD READY",
-      value: "ENTERPRISE GRADE",
-      alignment: "lg:-right-12 lg:top-32",
-      icon: (
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.26A8 8 0 1 0 4 15.25" />
-          <path d="M8 19h9.5" />
-        </svg>
-      )
-    },
-    {
-      label: "INFRASTRUCTURE",
-      value: "SECURE NODE",
-      alignment: "lg:-left-8 lg:bottom-24",
-      icon: (
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z" />
-          <polyline points="9 12 11 14 15 10" />
-        </svg>
-      )
-    },
-    {
-      label: "DEPLOYMENTS",
-      value: "FAST DELIVERY",
-      alignment: "lg:-right-8 lg:bottom-16",
-      icon: (
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
-        </svg>
-      )
-    }
-  ];
-
   const featurePills = ["Custom Software", "AI Automation", "Cloud Infrastructure", "Enterprise Security"];
 
   const valueStats = [
@@ -177,53 +131,33 @@ export default function Hero() {
         </div>
       </header>
 
-      {/* DASHBOARD SYSTEM INTERFACE CONTAINER */}
-      <div className="relative mt-20 sm:mt-24 lg:mt-28 w-full max-w-5xl mx-auto z-10 px-2 sm:px-4 lg:px-0">
-        {/* COMPREHENSIVE CONTROL AMBIENT ACCENT GLOW */}
+      {/* BANNER VISUAL CENTERPIECE CONTAINER */}
+      <div className="relative mt-20 sm:mt-24 lg:mt-28 w-full max-w-6xl mx-auto z-10 px-2 sm:px-4 lg:px-0">
+        {/* PREMIUM BLUE AMBIENT ACCENT GLOW BEHIND BANNER */}
         <div 
-          className="absolute -inset-4 sm:-inset-10 rounded-3xl opacity-40 blur-[80px] pointer-events-none z-0"
+          className="absolute -inset-4 sm:-inset-12 rounded-3xl opacity-50 blur-[90px] pointer-events-none z-0"
           style={{
-            background: "radial-gradient(circle, rgba(6,182,212,0.2) 0%, rgba(37,99,213,0.05) 70%, transparent 100%)"
+            background: "radial-gradient(circle, rgba(37,99,213,0.25) 0%, rgba(6,182,212,0.12) 45%, transparent 75%)"
           }}
         />
 
-        {/* VISIONOS FLOATING UI CONTROL NODES MATRIX */}
-        {floatingCards.map((card, idx) => (
-          <div
-            key={idx}
-            className={`hidden lg:flex absolute ${card.alignment} z-30 flex-col min-w-[180px] px-4.5 py-3.5 rounded-xl bg-[#090d16]/60 border border-white/[0.06] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 hover:scale-105 hover:border-cyan-500/30 group pointer-events-auto`}
-          >
-            <div className="flex items-center gap-2">
-              <span className="flex items-center justify-center w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 transition-colors duration-300 group-hover:bg-cyan-500/20">
-                {card.icon}
-              </span>
-              <span className="text-[9px] font-bold text-neutral-400 tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-cyan-400">
-                {card.label}
-              </span>
-            </div>
-            <span className="text-sm font-bold text-white mt-2 tracking-wide">
-              {card.value}
-            </span>
-          </div>
-        ))}
-
-        {/* MASTER BRACKET PERSPECTIVE WRAPPER FRAMING HERO DASHBOARD */}
-        <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-700 hover:border-white/[0.15] hover:shadow-[0_40px_100px_rgba(6,182,212,0.1)] group overflow-hidden">
+        {/* FLOATING GLASS FRAME WRAPPER FOR HERO BANNER */}
+        <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-700 hover:border-white/[0.15] hover:shadow-[0_40px_110px_rgba(37,99,213,0.18)] hover:-translate-y-1 motion-reduce:hover:translate-y-0 group overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none" />
           {/* Inner bevel ring for added depth */}
           <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04] ring-1 ring-inset ring-white/[0.03]">
             <img
-              src={heroDashboard}
-              alt="OnyxStack Enterprise Aggregation System Dashboard Interface"
+              src={heroBanner}
+              alt="OnyxStack Labs enterprise software platform showing dashboard, automation, and infrastructure overview"
               loading="eager"
               decoding="async"
               fetchpriority="high"
-              width="1024"
-              height="576"
-              className="w-full h-auto object-cover opacity-90 transition-all duration-700 scale-100 filter contrast-[1.02]"
+              width="1920"
+              height="1080"
+              className="w-full h-auto object-cover opacity-95 transition-all duration-700 scale-100 filter contrast-[1.02]"
             />
             {/* Subtle top sheen for glass realism */}
-            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
