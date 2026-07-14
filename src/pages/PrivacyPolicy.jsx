@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-// LIVE DATA CORE IMPORTS
-import { siteConfig } from '../config/siteConfig';
-
-// MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
-export default function PrivacyPolicy({ currentPath, navigateToNode }) {
+export default function PrivacyPolicy() {
   const [activeSection, setActiveSection] = useState("introduction");
 
   // Synchronize layout scroll vector on component activation
@@ -51,14 +44,6 @@ export default function PrivacyPolicy({ currentPath, navigateToNode }) {
       {/* BRAND AMBIENT STRUCTURAL MASK GRAPHICS */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.04),transparent_60%)] pointer-events-none z-0" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-600/[0.01] blur-[150px] pointer-events-none" />
-
-      {/* DETACHED NAVIGATION INTERACTION LAYER */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection="" 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
 
       {/* CORE FRAMEWORK BODY CONTENT STREAM */}
       <div className="relative z-10 privacy-compliance-registry">
@@ -261,9 +246,6 @@ export default function PrivacyPolicy({ currentPath, navigateToNode }) {
         </section>
 
       </div>
-
-      {/* CORE GLOBAL FOOTER ACCESS COUPLING */}
-      <Footer siteConfig={siteConfig} />
 
     </div>
   );
