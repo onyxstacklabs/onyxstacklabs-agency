@@ -3,6 +3,14 @@ import React, { useEffect } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
+// ASSETS IMPORTS
+import heroImage from '../assets/images/about/about-hero-enterprise-workspace.webp';
+import companyStoryImage from '../assets/images/about/about-company-story.webp';
+import missionVisionImage from '../assets/images/about/about-mission-vision.webp';
+import coreValuesImage from '../assets/images/about/about-core-values.webp';
+import technologyStackImage from '../assets/images/about/about-technology-stack.webp';
+import finalCtaImage from '../assets/images/about/about-final-cta.webp';
+
 export default function About({ currentPath, navigateToNode }) {
   
   // Set explicit subview window focus on mounting phase
@@ -68,94 +76,162 @@ export default function About({ currentPath, navigateToNode }) {
         
         {/* SECTION 1: HERO CONTAINER */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 sm:pt-40 sm:pb-28">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
-              Our Agency Profile
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 max-w-4xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
+                Our Agency Profile
+              </div>
+              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
+                Engineering reliable software <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500">
+                  built to scale with your business
+                </span>
+              </h1>
+              <p className="text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl mb-10 font-sans">
+                OnyxStack Labs is an agile software development company specializing in custom software, high-performance web development, smart AI solutions, and cloud applications. We build digital products that combine intentional design with robust production engineering to help businesses automate operations and scale with confidence.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <a 
+                  href="#contact-initiate" 
+                  onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
+                  className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                >
+                  Get In Touch
+                </a>
+                <a 
+                  href="#narrative" 
+                  onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="border border-neutral-800 hover:border-neutral-700 bg-neutral-900/30 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300"
+                >
+                  Our Story
+                </a>
+              </div>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
-              Engineering reliable software <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500">
-                built to scale with your business
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl mb-10 font-sans">
-              OnyxStack Labs is an agile software development company specializing in custom software, high-performance web development, smart AI solutions, and cloud applications. We build digital products that combine intentional design with robust production engineering to help businesses automate operations and scale with confidence.
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <a 
-                href="#contact-initiate" 
-                onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
-              >
-                Get In Touch
-              </a>
-              <a 
-                href="#narrative" 
-                onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="border border-neutral-800 hover:border-neutral-700 bg-neutral-900/30 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300"
-              >
-                Our Story
-              </a>
+            
+            {/* HERO IMAGE CONTAINER */}
+            <div className="lg:col-span-5 w-full flex justify-center items-center">
+              <div className="relative group w-full max-w-lg lg:max-w-none">
+                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-blue-500 opacity-20 blur-lg group-hover:opacity-35 transition-all duration-500" />
+                <div className="relative rounded-2xl border border-neutral-800 bg-neutral-950 overflow-hidden shadow-2xl">
+                  <img 
+                    src={heroImage} 
+                    alt="OnyxStack Labs Enterprise Workspace" 
+                    className="w-full h-auto object-cover aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] transform transition-transform duration-700 group-hover:scale-[1.02]"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* SECTION 2: COMPANY STORY */}
         <section id="company-narrative" className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60 scroll-mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-4">
-              <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Who We Are</p>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">The story behind OnyxStack Labs</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* COMPANY STORY IMAGE */}
+            <div className="lg:col-span-5 order-last lg:order-first">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#06B6D4]/30 to-purple-500/10 opacity-10 blur-md group-hover:opacity-20 transition-all duration-500" />
+                <img 
+                  src={companyStoryImage} 
+                  alt="The OnyxStack Labs Story" 
+                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[4/3] transform transition-transform duration-700 group-hover:scale-[1.01]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
-            <div className="lg:col-span-8 text-neutral-400 space-y-6 text-sm sm:text-base leading-relaxed font-sans">
-              <p>
-                OnyxStack Labs was founded to bridge the gap between fast product delivery and durable product engineering. We realized that many fast-growing brands struggle with brittle technical systems because their developers relied on short-term fixes over scalable software architectures.
-              </p>
-              <p>
-                We built our agency to give businesses a better alternative: high-quality software craftsmanship that aligns perfectly with real commercial business objectives. Whether we are building custom React development solutions, refining business automation tools, or assembling full MERN stack solutions, we deliver systems that run smoothly from launch day and scale effortlessly as your needs grow.
-              </p>
-              <p>
-                Today, we act as an extended engineering team for forward-thinking companies. We work closely with scaling startups and mid-market organizations to replace operational bottlenecks with elegant, intuitive, and secure platforms.
-              </p>
+            
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+              <div className="md:col-span-4">
+                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Who We Are</p>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">The story behind OnyxStack Labs</h2>
+              </div>
+              <div className="md:col-span-8 text-neutral-400 space-y-6 text-sm sm:text-base leading-relaxed font-sans">
+                <p>
+                  OnyxStack Labs was founded to bridge the gap between fast product delivery and durable product engineering. We realized that many fast-growing brands struggle with brittle technical systems because their developers relied on short-term fixes over scalable software architectures.
+                </p>
+                <p>
+                  We built our agency to give businesses a better alternative: high-quality software craftsmanship that aligns perfectly with real commercial business objectives. Whether we are building custom React development solutions, refining business automation tools, or assembling full MERN stack solutions, we deliver systems that run smoothly from launch day and scale effortlessly as your needs grow.
+                </p>
+                <p>
+                  Today, we act as an extended engineering team for forward-thinking companies. We work closely with scaling startups and mid-market organizations to replace operational bottlenecks with elegant, intuitive, and secure platforms.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* SECTION 3: MISSION & VISION */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group">
-              <div className="w-8 h-8 rounded-lg bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center text-[#06B6D4] mb-6 font-mono text-sm font-bold">M</div>
-              <h3 className="text-lg font-bold text-white mb-3">Our Mission</h3>
-              <p className="text-sm text-neutral-400 leading-relaxed font-sans">
-                To equip growing organizations with high-quality custom software that simplifies everyday operational tasks, fosters sustainable innovation, and builds tangible, long-term commercial value.
-              </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group">
+                <div className="w-8 h-8 rounded-lg bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center text-[#06B6D4] mb-6 font-mono text-sm font-bold">M</div>
+                <h3 className="text-lg font-bold text-white mb-3">Our Mission</h3>
+                <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+                  To equip growing organizations with high-quality custom software that simplifies everyday operational tasks, fosters sustainable innovation, and builds tangible, long-term commercial value.
+                </p>
+              </div>
+              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group">
+                <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 font-mono text-sm font-bold">V</div>
+                <h3 className="text-lg font-bold text-white mb-3">Our Vision</h3>
+                <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+                  To be the world's most trusted software development partner, recognized for creating scalable, resilient digital products that set the standard for modern interface design and reliable web performance.
+                </p>
+              </div>
             </div>
-            <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group">
-              <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 font-mono text-sm font-bold">V</div>
-              <h3 className="text-lg font-bold text-white mb-3">Our Vision</h3>
-              <p className="text-sm text-neutral-400 leading-relaxed font-sans">
-                To be the world's most trusted software development partner, recognized for creating scalable, resilient digital products that set the standard for modern interface design and reliable web performance.
-              </p>
+            
+            {/* MISSION VISION IMAGE */}
+            <div className="lg:col-span-5 w-full">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500/20 to-[#06B6D4]/20 opacity-10 blur-md" />
+                <img 
+                  src={missionVisionImage} 
+                  alt="Our Mission and Vision Support Visual" 
+                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[4/3] transform transition-transform duration-700 group-hover:scale-[1.01]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
           </div>
         </section>
 
         {/* SECTION 4: CORE VALUES */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">What We Stand For</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">The principles that guide our everyday decisions</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreValues.map((val, idx) => (
-              <div key={idx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:border-neutral-800 transition-colors duration-300">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-3 flex items-center gap-3">
-                  <span className="text-[#06B6D4] font-bold">//</span> {val.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{val.desc}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-8">
+              <div className="max-w-3xl mb-12">
+                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">What We Stand For</p>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">The principles that guide our everyday decisions</h2>
               </div>
-            ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {coreValues.map((val, idx) => (
+                  <div key={idx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:border-neutral-800 transition-colors duration-300">
+                    <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-3 flex items-center gap-3">
+                      <span className="text-[#06B6D4] font-bold">//</span> {val.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{val.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* CORE VALUES SUPPORTING IMAGE */}
+            <div className="lg:col-span-4 lg:sticky lg:top-24">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-[#06B6D4]/10 opacity-15 blur-sm" />
+                <img 
+                  src={coreValuesImage} 
+                  alt="OnyxStack Labs Core Values" 
+                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 group-hover:scale-[1.01]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -178,20 +254,38 @@ export default function About({ currentPath, navigateToNode }) {
 
         {/* SECTION 6: TECHNOLOGIES RUNTIME ENVIRONMENT */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Our Core Toolkit</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Proven modern frameworks for reliable digital platforms</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {stackItems.map((item, idx) => (
-              <div 
-                key={idx} 
-                className={`p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 text-left transition-all duration-300 cursor-default ${item.glow}`}
-              >
-                <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1">{item.category}</p>
-                <h4 className="text-sm font-bold text-white tracking-wide font-sans">{item.name}</h4>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-8">
+              <div className="max-w-3xl mb-12">
+                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Our Core Toolkit</p>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Proven modern frameworks for reliable digital platforms</h2>
               </div>
-            ))}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {stackItems.map((item, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 text-left transition-all duration-300 cursor-default ${item.glow}`}
+                  >
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1">{item.category}</p>
+                    <h4 className="text-sm font-bold text-white tracking-wide font-sans">{item.name}</h4>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* TECHNOLOGY STACK IMAGE */}
+            <div className="lg:col-span-4">
+              <div className="relative group">
+                <div className="absolute -inset-1.5 rounded-2xl bg-purple-500/10 opacity-20 blur-md" />
+                <img 
+                  src={technologyStackImage} 
+                  alt="OnyxStack Labs Engineering Workspace" 
+                  className="w-full h-auto object-cover rounded-2xl border border-neutral-900 shadow-xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 group-hover:scale-[1.01]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -216,8 +310,20 @@ export default function About({ currentPath, navigateToNode }) {
 
         {/* SECTION 8: FINAL SYSTEM CONSOLE CTA */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-900/60">
-          <div className="p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-gradient-to-r from-neutral-950 via-neutral-950 to-neutral-900/50 relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.04),transparent_50%)] pointer-events-none" />
+          <div className="relative p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-neutral-950 overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 min-h-[320px]">
+            {/* BACKGROUND SUPPORTING IMAGE */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src={finalCtaImage} 
+                alt="Engineering Background" 
+                className="w-full h-full object-cover opacity-15 mix-blend-luminosity" 
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/90 to-neutral-950/40" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.06),transparent_60%)]" />
+            </div>
+            
             <div className="max-w-2xl relative z-10">
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4">
                 Let's turn your product ideas into real, functional code
