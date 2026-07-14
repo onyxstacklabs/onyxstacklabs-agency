@@ -71,8 +71,8 @@ export default function About({ currentPath, navigateToNode }) {
         
         {/* SECTION 1: HERO CONTAINER */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 sm:pt-40 sm:pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div className="lg:col-span-6 max-w-4xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
                 Our Agency Profile
               </div>
@@ -103,18 +103,20 @@ export default function About({ currentPath, navigateToNode }) {
               </div>
             </div>
             
-            {/* HERO IMAGE CONTAINER - FIXED */}
-            <div className="lg:col-span-5 w-full flex justify-center items-center">
-              <div className="relative group w-full">
+            {/* HERO IMAGE CONTAINER - BALANCED & RESPONSIVE */}
+            <div className="lg:col-span-6 w-full flex justify-center items-center">
+              <div className="relative group w-full max-w-[620px] lg:max-w-none">
                 <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-blue-500 opacity-20 blur-lg group-hover:opacity-40 transition-all duration-500" />
-                <div className="relative w-full rounded-2xl border border-neutral-800/80 bg-neutral-950 overflow-hidden shadow-2xl backdrop-blur-sm">
-                  <img 
-                    src={heroImage} 
-                    alt="OnyxStack Labs Enterprise Workspace" 
-                    className="w-full h-full min-h-[300px] lg:min-h-[400px] object-cover aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    loading="eager"
-                    decoding="async"
-                  />
+                <div className="relative w-full rounded-2xl border border-neutral-800/80 bg-neutral-950/80 p-2 overflow-hidden shadow-2xl backdrop-blur-sm">
+                  <div className="w-full h-full overflow-hidden rounded-xl">
+                    <img 
+                      src={heroImage} 
+                      alt="OnyxStack Labs Enterprise Workspace" 
+                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
                   <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
@@ -127,16 +129,18 @@ export default function About({ currentPath, navigateToNode }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* COMPANY STORY IMAGE */}
             <div className="lg:col-span-5 order-last lg:order-first">
-              <div className="relative group">
+              <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
                 <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4]/40 to-purple-500/20 opacity-10 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
-                  <img 
-                    src={companyStoryImage} 
-                    alt="The OnyxStack Labs Story" 
-                    className="w-full h-auto object-cover rounded-2xl aspect-[4/3] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
+                  <div className="w-full h-full overflow-hidden rounded-xl">
+                    <img 
+                      src={companyStoryImage} 
+                      alt="The OnyxStack Labs Story" 
+                      className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
@@ -190,16 +194,18 @@ export default function About({ currentPath, navigateToNode }) {
             
             {/* MISSION VISION IMAGE */}
             <div className="lg:col-span-5 w-full">
-              <div className="relative group">
+              <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
                 <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-blue-500/20 to-[#06B6D4]/20 opacity-10 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
-                  <img 
-                    src={missionVisionImage} 
-                    alt="Our Mission and Vision Support Visual" 
-                    className="w-full h-auto object-cover rounded-2xl aspect-[4/3] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
+                  <div className="w-full h-full overflow-hidden rounded-xl">
+                    <img 
+                      src={missionVisionImage} 
+                      alt="Our Mission and Vision Support Visual" 
+                      className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
@@ -232,16 +238,18 @@ export default function About({ currentPath, navigateToNode }) {
             
             {/* CORE VALUES SUPPORTING IMAGE */}
             <div className="lg:col-span-4 lg:sticky lg:top-24">
-              <div className="relative group">
+              <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
                 <div className="absolute -inset-1.5 rounded-2xl bg-[#06B6D4]/15 opacity-15 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
-                  <img 
-                    src={coreValuesImage} 
-                    alt="OnyxStack Labs Core Values" 
-                    className="w-full h-auto object-cover rounded-2xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
+                  <div className="w-full h-full overflow-hidden rounded-xl">
+                    <img 
+                      src={coreValuesImage} 
+                      alt="OnyxStack Labs Core Values" 
+                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
@@ -291,16 +299,18 @@ export default function About({ currentPath, navigateToNode }) {
             
             {/* TECHNOLOGY STACK IMAGE */}
             <div className="lg:col-span-4">
-              <div className="relative group">
+              <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
                 <div className="absolute -inset-1.5 rounded-2xl bg-purple-500/15 opacity-20 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 overflow-hidden shadow-2xl bg-neutral-950">
-                  <img 
-                    src={technologyStackImage} 
-                    alt="OnyxStack Labs Engineering Workspace" 
-                    className="w-full h-auto object-cover rounded-2xl aspect-[3/4] lg:aspect-[4/5] transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
+                  <div className="w-full h-full overflow-hidden rounded-xl">
+                    <img 
+                      src={technologyStackImage} 
+                      alt="OnyxStack Labs Engineering Workspace" 
+                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
@@ -332,15 +342,15 @@ export default function About({ currentPath, navigateToNode }) {
           <div className="relative p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-neutral-950 overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 min-h-[320px] group">
             
             {/* FIXED BACKGROUND SUPPORTING IMAGE */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
               <img 
                 src={finalCtaImage} 
                 alt="Engineering Background" 
-                className="w-full h-full object-cover opacity-10 mix-blend-luminosity transform scale-100 group-hover:scale-[1.05] transition-transform duration-[2000ms] ease-out" 
+                className="w-full h-full object-cover opacity-25 mix-blend-luminosity transform scale-100 group-hover:scale-[1.05] transition-transform duration-[2000ms] ease-out" 
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/95 to-neutral-950/40" />
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/90 to-neutral-950/40" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.06),transparent_60%)] group-hover:opacity-80 transition-opacity duration-1000" />
             </div>
             
