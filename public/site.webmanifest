@@ -1,0 +1,26 @@
+{
+  "name": "OnyxStack Labs",
+  "short_name": "OnyxStack",
+  "description": "Enterprise Software, AI Automation & Cloud Development Agency",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0E17",
+  "theme_color": "#0A0E17",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
