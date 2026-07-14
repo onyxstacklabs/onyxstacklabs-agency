@@ -3,11 +3,52 @@ import heroDashboard from "../assets/hero-dashboard.svg";
 
 export default function Hero() {
   const floatingCards = [
-    { label: "AI AUTOMATION", value: "ONLINE 24/7", alignment: "lg:-left-12 lg:top-16" },
-    { label: "CLOUD READY", value: "ENTERPRISE GRADE", alignment: "lg:-right-12 lg:top-32" },
-    { label: "INFRASTRUCTURE", value: "SECURE NODE", alignment: "lg:-left-8 lg:bottom-24" },
-    { label: "DEPLOYMENTS", value: "FAST DELIVERY", alignment: "lg:-right-8 lg:bottom-16" }
+    {
+      label: "AI AUTOMATION",
+      value: "ONLINE 24/7",
+      alignment: "lg:-left-12 lg:top-16",
+      icon: (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
+        </svg>
+      )
+    },
+    {
+      label: "CLOUD READY",
+      value: "ENTERPRISE GRADE",
+      alignment: "lg:-right-12 lg:top-32",
+      icon: (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.26A8 8 0 1 0 4 15.25" />
+          <path d="M8 19h9.5" />
+        </svg>
+      )
+    },
+    {
+      label: "INFRASTRUCTURE",
+      value: "SECURE NODE",
+      alignment: "lg:-left-8 lg:bottom-24",
+      icon: (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z" />
+          <polyline points="9 12 11 14 15 10" />
+        </svg>
+      )
+    },
+    {
+      label: "DEPLOYMENTS",
+      value: "FAST DELIVERY",
+      alignment: "lg:-right-8 lg:bottom-16",
+      icon: (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+      )
+    }
   ];
+
+  const featurePills = ["Custom Software", "AI Automation", "Cloud Infrastructure", "Enterprise Security"];
 
   const valueStats = [
     { value: "100%", label: "Custom Development" },
@@ -23,6 +64,17 @@ export default function Hero() {
     >
       {/* ADVANCED OPTIMIZED HARDWARE-ACCELERATED BACKGROUND MESH */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 will-change-transform transform-gpu">
+        {/* Fine structural grid layer */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage: "radial-gradient(ellipse 70% 55% at 50% 30%, black 40%, transparent 90%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 55% at 50% 30%, black 40%, transparent 90%)"
+          }}
+        />
         <div 
           className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1400px] h-[600px] sm:h-[800px] rounded-full mix-blend-screen opacity-70 blur-[130px] sm:blur-[160px] will-change-transform transform-gpu"
           style={{
@@ -41,6 +93,13 @@ export default function Hero() {
             background: "radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)"
           }}
         />
+        {/* Secondary slow-drifting mesh accent for depth */}
+        <div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full mix-blend-screen opacity-30 blur-[140px] motion-safe:animate-[pulse_10s_ease-in-out_infinite]"
+          style={{
+            background: "radial-gradient(circle, rgba(147,197,253,0.06) 0%, transparent 70%)"
+          }}
+        />
         <div 
           className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
           style={{
@@ -54,7 +113,7 @@ export default function Hero() {
         {/* ULTRA-PREMIUM CONTEXT BADGE */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-md shadow-[0_1px_2px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] text-[10px] sm:text-[11px] font-medium tracking-[0.2em] text-neutral-300 uppercase transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/[0.04]">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+            <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
           </span>
           Next-Gen Engineering Frameworks
@@ -76,6 +135,19 @@ export default function Hero() {
           OnyxStack Labs engineers elite web architectures, cloud-native infrastructure platforms, and context-aware artificial intelligence automation pipelines crafted to scale multi-million dollar business ecosystems.
         </p>
 
+        {/* FEATURE PILL ROW */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-6 sm:mt-7 px-4 sm:px-0" role="list" aria-label="Core service areas">
+          {featurePills.map((pill, idx) => (
+            <span
+              key={idx}
+              role="listitem"
+              className="px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-neutral-300 border border-white/[0.07] bg-white/[0.015] backdrop-blur-sm transition-colors duration-300 hover:border-cyan-500/25 hover:text-white"
+            >
+              {pill}
+            </span>
+          ))}
+        </div>
+
         {/* PREMIUM KEYBOARD ACCESSIBLE ACTION BUTTON INTERFACES */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
           <a
@@ -94,6 +166,15 @@ export default function Hero() {
             View Portfolio
           </a>
         </div>
+
+        {/* TRUSTED INDICATOR */}
+        <div className="flex items-center gap-2 mt-7 sm:mt-8 text-[11px] sm:text-xs text-neutral-500 tracking-wide">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+          </span>
+          Trusted by growing teams across 18+ countries
+        </div>
       </header>
 
       {/* DASHBOARD SYSTEM INTERFACE CONTAINER */}
@@ -110,12 +191,17 @@ export default function Hero() {
         {floatingCards.map((card, idx) => (
           <div
             key={idx}
-            className={`hidden lg:flex absolute ${card.alignment} z-30 flex-col min-w-[170px] px-4.5 py-3.5 rounded-xl bg-[#090d16]/60 border border-white/[0.06] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 hover:scale-105 hover:border-cyan-500/30 group pointer-events-auto`}
+            className={`hidden lg:flex absolute ${card.alignment} z-30 flex-col min-w-[180px] px-4.5 py-3.5 rounded-xl bg-[#090d16]/60 border border-white/[0.06] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 hover:scale-105 hover:border-cyan-500/30 group pointer-events-auto`}
           >
-            <span className="text-[9px] font-bold text-neutral-400 tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-cyan-400">
-              {card.label}
-            </span>
-            <span className="text-sm font-bold text-white mt-1.5 tracking-wide">
+            <div className="flex items-center gap-2">
+              <span className="flex items-center justify-center w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 transition-colors duration-300 group-hover:bg-cyan-500/20">
+                {card.icon}
+              </span>
+              <span className="text-[9px] font-bold text-neutral-400 tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-cyan-400">
+                {card.label}
+              </span>
+            </div>
+            <span className="text-sm font-bold text-white mt-2 tracking-wide">
               {card.value}
             </span>
           </div>
@@ -124,7 +210,8 @@ export default function Hero() {
         {/* MASTER BRACKET PERSPECTIVE WRAPPER FRAMING HERO DASHBOARD */}
         <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-700 hover:border-white/[0.15] hover:shadow-[0_40px_100px_rgba(6,182,212,0.1)] group overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.03] pointer-events-none" />
-          <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04]">
+          {/* Inner bevel ring for added depth */}
+          <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04] ring-1 ring-inset ring-white/[0.03]">
             <img
               src={heroDashboard}
               alt="OnyxStack Enterprise Aggregation System Dashboard Interface"
@@ -135,6 +222,8 @@ export default function Hero() {
               height="576"
               className="w-full h-auto object-cover opacity-90 transition-all duration-700 scale-100 filter contrast-[1.02]"
             />
+            {/* Subtle top sheen for glass realism */}
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
@@ -147,7 +236,7 @@ export default function Hero() {
           className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/[0.06] bg-white/[0.02] text-neutral-400 transition-all duration-300 hover:text-cyan-400 hover:border-cyan-500/30 hover:bg-cyan-500/[0.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
         >
           <svg
-            className="w-4 h-4 animate-[bounce_3s_infinite]"
+            className="w-4 h-4 motion-safe:animate-[bounce_3s_infinite]"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
