@@ -58,46 +58,6 @@ export default function Home({ currentPath, navigateToNode }) {
   const [submissionState, setSubmissionState] = useState('IDLE'); 
   const [errors, setErrors] = useState({});
 
-  // Core Services Array derived from site parameters
-  const coreServices = [
-    {
-      icon: (
-        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-        </svg>
-      ),
-      title: "Custom Web Applications",
-      description: "Engineered from the ground up using React and Vite for blazing-fast performance, elite responsiveness, and clean code maintainability."
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-        </svg>
-      ),
-      title: "Android Applications",
-      description: "Feature-rich mobile cross-platform blueprints optimized for high user adoption, modern interface dynamics, and flawless cloud data synchronization."
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 21l8.904-4.473L21 9l-3.383-3.383m-7.804 10.287l3.383-3.383m-3.383 3.383L3 14l6.813-6.813M16.5 6.5L18 5m-1.5 1.5L15 8m1.5-1.5l1.5 1.5m-1.5-1.5L13.5 5" />
-        </svg>
-      ),
-      title: "AI & Business Automation",
-      description: "Integrate premium artificial intelligence frameworks like Gemini AI to read unstructured text, optimize manual pipelines, and save thousands of operational hours."
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
-        </svg>
-      ),
-      title: "Management Systems (ERP)",
-      description: "Tailored enterprise solutions designed for complex organizational requirements, real-time balance accounts, and complete operational command."
-    }
-  ];
-
   const valueProps = [
     { title: "Fast Delivery", desc: "No bloated timelines. We deploy hyper-optimized MVP configurations and custom software quickly without taking shortcut measures on code health." },
     { title: "Modern UI", desc: "Interfaces polished for premium engagement. Your applications will naturally match the world-class design languages of Vercel, Stripe, and Linear." },
@@ -213,7 +173,10 @@ export default function Home({ currentPath, navigateToNode }) {
       
       <BrandShowcase />
       
-      <Services coreServices={coreServices} />
+      <Services
+        currentPath={currentPath}
+        navigateToNode={navigateToNode}
+      />
       
       <FeaturedProjects />
       
