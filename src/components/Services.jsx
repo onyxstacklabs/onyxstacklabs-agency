@@ -114,63 +114,49 @@ export default function Services({ currentPath, navigateToNode }) {
   ];
 
   // Inline SVG icon set matched one-to-one with servicesList order.
-  // These 13 cards remain icon-only — they are never converted into image cards.
   const serviceIcons = [
-    // Custom Software Development
     <path key="i1" strokeLinecap="round" strokeLinejoin="round" d="M9 18l-6-6 6-6M15 6l6 6-6 6" />,
-    // Modern Web Applications
     <g key="i2">
       <rect x="3" y="5" width="18" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 9h18" />
       <circle cx="6" cy="7" r="0.5" fill="currentColor" stroke="none" />
     </g>,
-    // MERN Stack Development
     <g key="i3">
       <path strokeLinecap="round" strokeLinejoin="round" d="M4 7l8-4 8 4-8 4-8-4z" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M4 12l8 4 8-4" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M4 17l8 4 8-4" />
     </g>,
-    // React Development
     <g key="i4">
       <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
       <ellipse cx="12" cy="12" rx="9" ry="4" />
       <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(60 12 12)" />
       <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(120 12 12)" />
     </g>,
-    // Firebase Development
     <path key="i5" strokeLinecap="round" strokeLinejoin="round" d="M7 20l3.2-15.6 2.1 4.4 1.6-2.6L18 20a10 10 0 01-11-0z" />,
-    // AI Solutions & Integrations
     <g key="i6">
       <rect x="7" y="7" width="10" height="10" rx="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2 2M17.5 17.5l2 2M19.5 4.5l-2 2M6.5 17.5l-2 2" />
     </g>,
-    // Business Automation
     <g key="i7">
       <circle cx="12" cy="12" r="3" strokeLinecap="round" strokeLinejoin="round" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6" />
     </g>,
-    // Enterprise Software & Admin Dashboards
     <g key="i8">
       <rect x="3" y="3" width="8" height="8" rx="1" strokeLinecap="round" strokeLinejoin="round" />
       <rect x="13" y="3" width="8" height="5" rx="1" strokeLinecap="round" strokeLinejoin="round" />
       <rect x="13" y="10" width="8" height="11" rx="1" strokeLinecap="round" strokeLinejoin="round" />
       <rect x="3" y="13" width="8" height="8" rx="1" strokeLinecap="round" strokeLinejoin="round" />
     </g>,
-    // ERP Systems
     <g key="i9">
       <path strokeLinecap="round" strokeLinejoin="round" d="M4 21V9l8-5 8 5v12" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 21v-6h6v6M9 12h.01M15 12h.01M12 9h.01" />
     </g>,
-    // API Development & Integration
     <g key="i10">
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v4M15 3v4M9 17v4M15 17v4" />
       <rect x="6" y="7" width="12" height="10" rx="2" strokeLinecap="round" strokeLinejoin="round" />
     </g>,
-    // Cloud Scale Deployment
     <path key="i11" strokeLinecap="round" strokeLinejoin="round" d="M7 18a4.5 4.5 0 01-.6-8.96A5.5 5.5 0 0117 8.5a4 4 0 01-.5 7.98H7z" />,
-    // Performance Optimization
     <path key="i12" strokeLinecap="round" strokeLinejoin="round" d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />,
-    // Ongoing Maintenance & Support
     <path key="i13" strokeLinecap="round" strokeLinejoin="round" d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 005.4-5.4l-2.8 2.8-2-2 2.8-2.8z" />
   ];
 
@@ -203,18 +189,104 @@ export default function Services({ currentPath, navigateToNode }) {
     </g>
   ];
 
-  // Section 5 Data: Core Engineering Technologies
+  // Section 5 Data: Core Engineering Technologies with Modern Lucide Style Path Equivalents
   const techStack = [
-    { name: "React", type: "Interface Engine", border: "hover:border-cyan-500/30" },
-    { name: "Node.js", type: "Backend Runtime", border: "hover:border-emerald-500/30" },
-    { name: "Express.js", type: "API Framework", border: "hover:border-neutral-500/30" },
-    { name: "MongoDB", type: "Document Database", border: "hover:border-green-500/30" },
-    { name: "Firebase", type: "Cloud Architecture", border: "hover:border-amber-500/30" },
-    { name: "Tailwind CSS", type: "Design Utilities", border: "hover:border-sky-400/30" },
-    { name: "Vite", type: "Compilation Pipeline", border: "hover:border-purple-500/30" },
-    { name: "Gemini AI", type: "Cognitive Processing", border: "hover:border-blue-500/30" },
-    { name: "Git", type: "Version Control", border: "hover:border-orange-500/30" },
-    { name: "Vercel", type: "Edge Optimization", border: "hover:border-neutral-200/30" }
+    { 
+      name: "React", 
+      type: "Interface Engine",
+      icon: (
+        <g>
+          <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+          <ellipse cx="12" cy="12" rx="9" ry="4" />
+          <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(60 12 12)" />
+          <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(120 12 12)" />
+        </g>
+      )
+    },
+    { 
+      name: "Node.js", 
+      type: "Backend Runtime",
+      icon: (
+        <g>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L3.5 7v10L12 22l8.5-5V7L12 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 22V12" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.5 7L12 12l8.5-5" />
+        </g>
+      )
+    },
+    { 
+      name: "Express", 
+      type: "API Framework",
+      icon: (
+        <g>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </g>
+      )
+    },
+    { 
+      name: "MongoDB", 
+      type: "Document Database",
+      icon: (
+        <g>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 2c0 0-5 3.5-5 8.5S12 22 12 22s5-6.5 5-11.5S12 22 12 2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v20" />
+        </g>
+      )
+    },
+    { 
+      name: "Firebase", 
+      type: "Cloud Architecture",
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7 20l3.2-15.6 2.1 4.4 1.6-2.6L18 20a10 10 0 01-11-0z" />
+      )
+    },
+    { 
+      name: "Tailwind", 
+      type: "Design Utilities",
+      icon: (
+        <g>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-1.2 0-2.4.6-3.3 1.7-2.6 3.3-1.6 7.3 1.5 8.8 1.5.8 3.1 1.4 3.1 2.5 0 1.1-1.3 1.5-2.3 1.5-1.9 0-3.3-.9-4.2-2.1L4.5 17c1.3 2.1 4 3.5 7.5 3.5 1.5 0 3-.5 4.1-1.4 2.8-2.5 2.5-6.8-.2-8.3-1.8-1-3.6-1.6-3.6-2.8 0-.9 1.1-1.4 2.1-1.4 1.6 0 2.9.7 3.7 1.7l2.2-2.3C18.9 4.3 16 3 12 3z" />
+        </g>
+      )
+    },
+    { 
+      name: "Vite", 
+      type: "Compilation Pipeline",
+      icon: (
+        <g>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />
+        </g>
+      )
+    },
+    { 
+      name: "Gemini AI", 
+      type: "Cognitive Processing",
+      icon: (
+        <g>
+          <rect x="7" y="7" width="10" height="10" rx="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2 2M17.5 17.5l2 2M19.5 4.5l-2 2M6.5 17.5l-2 2" />
+        </g>
+      )
+    },
+    { 
+      name: "Git", 
+      type: "Version Control",
+      icon: (
+        <g>
+          <circle cx="18" cy="18" r="3" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="6" cy="6" r="3" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="6" cy="18" r="3" strokeLinecap="round" strokeLinejoin="round" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M18 15V9a4 4 0 00-4-4H9M6 9v6" />
+        </g>
+      )
+    },
+    { 
+      name: "Vercel", 
+      type: "Edge Optimization",
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l10 18H2L12 2z" />
+      )
+    }
   ];
 
   // Section 6 Data: System Delivery Sequence Map
@@ -419,7 +491,7 @@ export default function Services({ currentPath, navigateToNode }) {
           </div>
         </section>
 
-        {/* SECTION 3: SERVICES CAPABILITIES GRID — ICON-ONLY, NEVER IMAGE CARDS */}
+        {/* SECTION 3: SERVICES CAPABILITIES GRID — THE REFERENCE MASTER DESIGN SYSTEM */}
         <section id="services-catalog" className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60 scroll-mt-24">
           <div className="max-w-3xl mb-16 fade-up">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Service Matrix</p>
@@ -451,7 +523,7 @@ export default function Services({ currentPath, navigateToNode }) {
           </div>
         </section>
 
-        {/* SECTION 4: WHY OUR SERVICES */}
+        {/* SECTION 4: REDESIGNED ENGINEERING BENCHMARKS */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
           <div className="max-w-3xl mb-16 fade-up">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Engineering Benchmarks</p>
@@ -459,31 +531,58 @@ export default function Services({ currentPath, navigateToNode }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {advantages.map((adv, idx) => (
-              <div key={idx} className="group relative p-6 rounded-xl border border-neutral-900/60 bg-gradient-to-b from-neutral-950 to-[#050505] hover:border-neutral-700/60 transition-all duration-500 hover:-translate-y-0.5">
-                <div className="absolute top-0 left-6 w-10 h-[1px] bg-gradient-to-r from-[#06B6D4] to-transparent" />
-                <div className="w-9 h-9 rounded-lg bg-[#06B6D4]/5 border border-[#06B6D4]/15 flex items-center justify-center text-[#06B6D4] mb-4 group-hover:shadow-[0_0_16px_rgba(6,182,212,0.25)] transition-all duration-500">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-4.5 h-4.5">
-                    {advantageIcons[idx]}
-                  </svg>
+              <div
+                key={idx}
+                className="group relative p-6 rounded-2xl border border-neutral-900 bg-neutral-950/40 backdrop-blur-sm overflow-hidden hover:border-[#06B6D4]/30 hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between shadow-none hover:shadow-[0_20px_45px_-20px_rgba(6,182,212,0.35)]"
+              >
+                <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/0 to-transparent group-hover:via-[#06B6D4]/60 transition-all duration-500" />
+                <div className="absolute -top-16 -right-16 w-40 h-40 bg-[#06B6D4]/0 group-hover:bg-[#06B6D4]/[0.06] rounded-full blur-3xl transition-all duration-500 pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-[#06B6D4]/5 border border-[#06B6D4]/15 flex items-center justify-center text-[#06B6D4] mb-5 backdrop-blur-sm group-hover:border-[#06B6D4]/40 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:rotate-3 transition-all duration-500">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
+                      {advantageIcons[idx]}
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-3 font-sans tracking-wide group-hover:text-[#06B6D4] transition-colors duration-300">{adv.title}</h3>
+                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{adv.desc}</p>
                 </div>
-                <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-3">{adv.title}</h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{adv.desc}</p>
+                <div className="relative z-10 pt-6 border-t border-neutral-900/60 mt-6 flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 group-hover:text-[#06B6D4] transition-colors duration-300">BENCHMARK.METRIC // ACTIVE</span>
+                  <span className="text-[#06B6D4] text-sm transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* SECTION 5: TECHNOLOGIES DISPLAY ARRAY */}
+        {/* SECTION 5: REDESIGNED TECHNOLOGY STACK */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-12 fade-up">
+          <div className="max-w-3xl mb-16 fade-up">
             <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Our Toolkit</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Vetted frameworks used to craft modern web applications</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">Powering enterprise software with proven technologies</h2>
+            <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">We construct robust technical environments engineered from foundations designed to survive scale, speed bottlenecks, and demanding security landscapes.</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {techStack.map((tech, idx) => (
-              <div key={idx} className={`group p-5 rounded-xl border border-neutral-900 bg-neutral-950/70 backdrop-blur-sm cursor-default transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-15px_rgba(6,182,212,0.4)] ${tech.border}`}>
-                <p className="text-[9px] font-mono uppercase tracking-widest text-neutral-500 mb-1">{tech.type}</p>
-                <h4 className="text-sm font-bold text-white font-sans">{tech.name}</h4>
+              <div
+                key={idx}
+                className="group relative p-6 rounded-2xl border border-neutral-900 bg-neutral-950/40 backdrop-blur-sm overflow-hidden hover:border-[#06B6D4]/30 hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between shadow-none hover:shadow-[0_20px_45px_-20px_rgba(6,182,212,0.35)]"
+              >
+                <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/0 to-transparent group-hover:via-[#06B6D4]/60 transition-all duration-500" />
+                <div className="absolute -top-16 -right-16 w-40 h-40 bg-[#06B6D4]/0 group-hover:bg-[#06B6D4]/[0.06] rounded-full blur-3xl transition-all duration-500 pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-[#06B6D4]/5 border border-[#06B6D4]/15 flex items-center justify-center text-[#06B6D4] mb-5 backdrop-blur-sm group-hover:border-[#06B6D4]/40 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:rotate-3 transition-all duration-500">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
+                      {tech.icon}
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-1 font-sans tracking-wide group-hover:text-[#06B6D4] transition-colors duration-300">{tech.name}</h3>
+                  <p className="text-xs text-neutral-500 font-mono uppercase tracking-widest">{tech.type}</p>
+                </div>
+                <div className="relative z-10 pt-4 border-t border-neutral-900/60 mt-6 flex items-center justify-between">
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-neutral-600 group-hover:text-[#06B6D4] transition-colors duration-300">CORE.STACK</span>
+                  <span className="text-[#06B6D4] text-xs transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                </div>
               </div>
             ))}
           </div>
