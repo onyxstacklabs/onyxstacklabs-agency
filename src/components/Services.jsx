@@ -239,7 +239,7 @@ export default function Services({ currentPath, navigateToNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth relative overflow-hidden">
+    <div id="services" className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth relative overflow-hidden">
 
       {/* MOTION + SIGNATURE STYLE ENGINE (CSS ONLY, NO LIBRARIES) */}
       <style>{`
@@ -375,12 +375,11 @@ export default function Services({ currentPath, navigateToNode }) {
                 style={{ animationDelay: `${idx * 60}ms` }}
               >
                 <div className="sheen relative w-full h-[240px] sm:h-[280px] overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    loading={idx === 0 ? 'eager' : 'lazy'}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-                  />
+                  src={item.image}
+                  alt={item.alt}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
                   <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-[#06B6D4]/30 text-[#06B6D4] text-[10px] font-mono uppercase tracking-widest backdrop-blur-sm">
                     {item.label}
