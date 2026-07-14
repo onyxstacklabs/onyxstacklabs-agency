@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-// LIVE DATA CORE IMPORTS
-import { siteConfig } from '../config/siteConfig';
-
-// MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
-export default function TermsConditions({ currentPath, navigateToNode }) {
-  const [activeTermSection, setActiveTermSection] = useState("acceptance");
+export default function TermsConditions() {
+  const [activeTermSection, setActiveTermSection] = useState("introduction");
 
   // Synchronize layout scroll vector on component activation
   useEffect(() => {
@@ -17,17 +10,21 @@ export default function TermsConditions({ currentPath, navigateToNode }) {
 
   // Structural Navigation Register for Terms & Conditions Mapping
   const complianceIndices = [
-    { id: "acceptance", label: "1.0 Acceptance Matrix" },
-    { id: "services", label: "2.0 Service Scope & Sprints" },
-    { id: "responsibilities", label: "3.0 Client Dependencies" },
-    { id: "payments", label: "4.0 Payments & Billing Models" },
-    { id: "intellectual", label: "5.0 Intellectual Property Ledger" },
-    { id: "confidentiality", label: "6.0 Data Confidentiality Isolation" },
-    { id: "liability", label: "7.0 Liability Bounds" },
-    { id: "termination", label: "8.0 Agreement Termination Hooks" },
-    { id: "governing", label: "9.0 Jurisdictional Governing Law" },
-    { id: "changes", label: "10.0 Lifecycle Mutations" },
-    { id: "contact", label: "11.0 Official Communications Node" }
+    { id: "introduction", label: "1.0 Introduction" },
+    { id: "acceptance", label: "2.0 Acceptance of Terms" },
+    { id: "services", label: "3.0 Services" },
+    { id: "responsibilities", label: "4.0 Client Responsibilities" },
+    { id: "scope", label: "5.0 Project Scope" },
+    { id: "payments", label: "6.0 Payments & Billing" },
+    { id: "intellectual", label: "7.0 Intellectual Property" },
+    { id: "confidentiality", label: "8.0 Confidentiality" },
+    { id: "thirdparty", label: "9.0 Third-Party Services" },
+    { id: "liability", label: "10.0 Limitation of Liability" },
+    { id: "warranties", label: "11.0 Disclaimer of Warranties" },
+    { id: "termination", label: "12.0 Termination" },
+    { id: "governing", label: "13.0 Governing Law" },
+    { id: "changes", label: "14.0 Changes to These Terms" },
+    { id: "contact", label: "15.0 Contact Information" }
   ];
 
   const handleScrollToTermNode = (id) => {
@@ -49,22 +46,14 @@ export default function TermsConditions({ currentPath, navigateToNode }) {
 
   return (
     <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black relative overflow-hidden">
-      
+
       {/* BRAND AMBIENT STRUCTURAL MASK GRAPHICS */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.04),transparent_60%)] pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/[0.01] blur-[150px] pointer-events-none" />
 
-      {/* DETACHED NAVIGATION INTERACTION LAYER */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection="" 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
-
       {/* CORE FRAMEWORK BODY CONTENT STREAM */}
       <div className="relative z-10 master-terms-compliance-scope">
-        
+
         {/* SECTION 1: HERO CONTROL PANEL HEADER */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-12 sm:pt-40 sm:pb-16 border-b border-neutral-900/60">
           <div className="max-w-3xl">
@@ -72,23 +61,23 @@ export default function TermsConditions({ currentPath, navigateToNode }) {
               Legal Operations System // Effective Date: July 13, 2026
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-sans">
-              Master Terms of Service & <br />
+              Terms &amp; Conditions <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-blue-500">
-                Corporate Governance Rules
+                Corporate Governance Agreement
               </span>
             </h1>
             <p className="text-sm text-neutral-400 max-w-2xl leading-relaxed font-sans">
-              These terms constitute the core binding operational framework executed between OnyxStack Labs and our client entities governing all custom react builds, platform consulting, and digital architecture delivery cycles.
+              These Terms and Conditions constitute the binding operational agreement between OnyxStack Labs and its client entities, governing all custom software engineering, cloud architecture, and digital delivery engagements.
             </p>
           </div>
         </section>
 
         {/* DOUBLE-COLUMN TERMS FRAMEWORK ASSEMBLY */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* LEFT BOUNDARY: STICKY CONTEXTUAL JUMP-INDEX DESKTOP INDEXER */}
           <aside className="hidden lg:block lg:col-span-3 sticky top-32 space-y-2 border-l border-neutral-900 pl-4">
-            <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-wider block mb-4">Agreement Keys</span>
+            <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-wider block mb-4">Agreement Index</span>
             {complianceIndices.map((sec) => (
               <button
                 key={sec.id}
@@ -102,153 +91,216 @@ export default function TermsConditions({ currentPath, navigateToNode }) {
 
           {/* RIGHT BOUNDARY: ASYMMETRIC LEGAL SPECIFICATIONS BODY */}
           <div className="lg:col-span-9 max-w-3xl space-y-16 text-neutral-300 font-sans text-sm sm:text-base leading-relaxed">
-            
-            {/* SECTION 2: ACCEPTANCE OF TERMS */}
+
+            {/* SECTION: INTRODUCTION */}
+            <article id="introduction" className="scroll-mt-32 space-y-4">
+              <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
+                <span className="font-mono text-xs text-[#06B6D4]">1.0</span> Introduction
+              </h2>
+              <p>
+                OnyxStack Labs ("the Company," "We," "Our," or "Us") is an enterprise software engineering agency delivering custom applications, cloud infrastructure, artificial intelligence integrations, and technical consulting services to businesses worldwide.
+              </p>
+              <p>
+                This document sets out the terms under which We provide services to Our clients. It applies to every proposal, statement of work, and engagement initiated through Our website, contact channels, or contractual agreements.
+              </p>
+            </article>
+
+            {/* SECTION: ACCEPTANCE OF TERMS */}
             <article id="acceptance" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">1.0</span> Acceptance Matrix
+                <span className="font-mono text-xs text-[#06B6D4]">2.0</span> Acceptance of Terms
               </h2>
               <p>
-                By accessing our digital interfaces, contracting custom architecture workflows, or initiating communication via our automated database routing nodes, you accept and agree to comply with all provisions contained within this Master Agreement. 
+                By accessing Our website, requesting a proposal, or engaging Our services in any capacity, you agree to be bound by these Terms and Conditions in full. If you are entering into this agreement on behalf of an organization, you confirm that you hold the authority to bind that organization to these terms.
               </p>
               <p>
-                If you are acting as an agent for a corporate entity, you affirm that you have the complete legal authority to bind that corporate entity to these active operational parameters. If you do not agree to these rules, you must cease all system operations immediately.
+                If you do not agree with any part of these terms, you must discontinue use of Our services and website immediately.
               </p>
             </article>
 
-            {/* SECTION 3: SERVICES */}
+            {/* SECTION: SERVICES */}
             <article id="services" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">2.0</span> Service Scope & Sprints
+                <span className="font-mono text-xs text-[#06B6D4]">3.0</span> Services
               </h2>
               <p>
-                OnyxStack Labs delivers premium custom software engineering, cloud system architecture consulting, and machine learning pipeline integrations. 
+                We provide custom software development, web and mobile application engineering, ERP systems, business process automation, artificial intelligence integration, and cloud infrastructure services. The specific scope, deliverables, and timeline for each engagement are defined in a signed Statement of Work ("SOW") or equivalent written agreement.
               </p>
               <p>
-                Every engagement requires a custom-signed **Statement of Work (SOW)** or explicit technical specification roadmap detailing distinct execution sprints, deliverables, and resource allocation windows. Any modifications to an initialized SOW require formal engineering scope evaluations.
+                Any modification to an active SOW requires mutual written approval and may result in adjusted timelines or fees.
               </p>
             </article>
 
-            {/* SECTION 4: CLIENT RESPONSIBILITIES */}
+            {/* SECTION: CLIENT RESPONSIBILITIES */}
             <article id="responsibilities" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">3.0</span> Client Dependencies
+                <span className="font-mono text-xs text-[#06B6D4]">4.0</span> Client Responsibilities
               </h2>
               <p>
-                The execution speed of our engineering sprints depends directly on client responsiveness. You agree to provide clear technical access tokens, precise database requirements, design asset variables, and timely approvals necessary for milestone continuation.
+                Timely project delivery depends on client cooperation. Clients agree to provide accurate requirements, necessary account access, design assets, and prompt feedback or approvals required to progress each milestone.
               </p>
               <blockquote>
                 <p className="p-4 rounded-xl bg-neutral-950 border-l-2 border-amber-500/60 text-xs text-neutral-400 font-mono">
-                  // Dependency Warning: OnyxStack Labs is not liable for project lifecycle delays resulting from third-party account configuration gaps, missing credential setups, or internal client-side approval stalls.
+                  // Notice: The Company is not responsible for delays caused by incomplete client input, missing credentials, or delayed approvals on the client's part.
                 </p>
               </blockquote>
             </article>
 
-            {/* SECTION 5: PAYMENTS & BILLING */}
-            <article id="payments" className="scroll-mt-32 space-y-4">
+            {/* SECTION: PROJECT SCOPE */}
+            <article id="scope" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">4.0</span> Payments & Billing Models
+                <span className="font-mono text-xs text-[#06B6D4]">5.0</span> Project Scope
               </h2>
               <p>
-                Client entities agree to compensate OnyxStack Labs under fixed milestone billing configurations or structured multi-week engineering allocations as explicitly detailed within individual contract instruments.
+                Each engagement is governed by the scope defined in the relevant SOW. Work requested outside that scope is treated as a change request and may require a separate estimate, revised timeline, or additional fees prior to commencement.
+              </p>
+              <p>
+                We reserve the right to decline change requests that materially conflict with the technical architecture or timeline of an active project.
+              </p>
+            </article>
+
+            {/* SECTION: PAYMENTS & BILLING */}
+            <article id="payments" className="scroll-mt-32 space-y-4">
+              <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
+                <span className="font-mono text-xs text-[#06B6D4]">6.0</span> Payments &amp; Billing
+              </h2>
+              <p>
+                Clients agree to compensate the Company according to the billing structure — fixed milestone, retainer, or hourly — specified in the applicable contract.
               </p>
               <ul className="space-y-3 pl-5 list-disc text-neutral-400 text-sm">
-                <li><strong className="text-neutral-200">Invoicing Operations:</strong> Standard accounts must settle balance logs within 14 calendar days of automated system delivery notifications.</li>
-                <li><strong className="text-neutral-200">Late Account Flags:</strong> Overdue records face late assessment charges configured at 1.5% per month or the legal maximum allowed by your home jurisdiction.</li>
-                <li><strong className="text-neutral-200">System Interruption:</strong> We reserve the explicit right to pause development servers, halt active staging links, and lock environment branches if accounts fall into severe payment default loops.</li>
+                <li><strong className="text-neutral-200">Invoicing:</strong> Invoices are due within 14 calendar days of issuance unless otherwise agreed in writing.</li>
+                <li><strong className="text-neutral-200">Late Payments:</strong> Overdue balances may incur a late fee of 1.5% per month, or the maximum rate permitted under applicable law.</li>
+                <li><strong className="text-neutral-200">Suspension of Work:</strong> The Company reserves the right to pause development, disable staging environments, and restrict repository access in cases of extended payment default.</li>
               </ul>
             </article>
 
-            {/* SECTION 6: INTELLECTUAL PROPERTY */}
+            {/* SECTION: INTELLECTUAL PROPERTY */}
             <article id="intellectual" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">5.0</span> Intellectual Property Ledger
+                <span className="font-mono text-xs text-[#06B6D4]">7.0</span> Intellectual Property
               </h2>
               <p>
-                All proprietary design scripts, React codebases, API route setups, and custom modules created specifically for your product pass entirely to your corporate entity upon complete final settlement of all associated financial accounts.
+                Upon full and final payment, ownership of all custom code, designs, and deliverables created specifically for the client's project transfers to the client.
               </p>
               <p>
-                OnyxStack Labs preserves explicit ownership over preexisting engineering scaffolds, reusable component architectures, automated testing scripts, and foundational infrastructure wireframes utilized during production. We grant your company a permanent, royalty-free license to use these embedded core engines.
+                The Company retains ownership of its pre-existing tools, internal frameworks, reusable components, and proprietary methodologies used during development, and grants the client a perpetual, royalty-free license to use these elements as embedded within the delivered product.
               </p>
             </article>
 
-            {/* SECTION 7: CONFIDENTIALITY */}
+            {/* SECTION: CONFIDENTIALITY */}
             <article id="confidentiality" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">6.0</span> Data Confidentiality Isolation
+                <span className="font-mono text-xs text-[#06B6D4]">8.0</span> Confidentiality
               </h2>
               <p>
-                Both parties commit to keeping all system architectures, private key parameters, enterprise roadmaps, financial files, and custom algorithmic strategies confidential. 
+                Both parties agree to keep confidential all non-public information exchanged during the engagement, including technical architecture, business plans, financial data, and proprietary strategies.
               </p>
               <p>
-                Confidential information will not be exposed to downstream tracking entities or third-party agencies unless explicitly authorized in writing or demanded by formal legal frameworks or court mandates.
+                Confidential information will not be disclosed to third parties except where required by law, court order, or with the prior written consent of the disclosing party.
               </p>
             </article>
 
-            {/* SECTION 8: LIMITATION OF LIABILITY */}
+            {/* SECTION: THIRD-PARTY SERVICES */}
+            <article id="thirdparty" className="scroll-mt-32 space-y-4">
+              <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
+                <span className="font-mono text-xs text-[#06B6D4]">9.0</span> Third-Party Services
+              </h2>
+              <p>
+                Our services may integrate with third-party platforms, including cloud hosting providers, payment processors, analytics tools, and APIs. The Company is not responsible for outages, changes in pricing, or policy changes made by these third-party providers.
+              </p>
+              <p>
+                Clients are responsible for maintaining valid accounts and complying with the terms of service of any third-party platform used in connection with their project.
+              </p>
+            </article>
+
+            {/* SECTION: LIMITATION OF LIABILITY */}
             <article id="liability" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">7.0</span> Liability Bounds
+                <span className="font-mono text-xs text-[#06B6D4]">10.0</span> Limitation of Liability
               </h2>
               <p>
-                OnyxStack Labs delivers application codebases on an "As-Is" and "As-Available" functional standard. We provide no direct warranties that application execution maps will experience absolute zero runtime interruptions.
+                To the maximum extent permitted by law, the Company shall not be liable for indirect, incidental, special, or consequential damages, including lost revenue, data loss, or business interruption arising from the use of Our services.
               </p>
               <p>
-                To the maximum extent permitted by applicable international law, OnyxStack Labs will not be held liable for indirect, incidental, special, or consequential damages. This includes corporate revenue losses, data store deletions, server security breaches, or cloud hosting cost anomalies. Our total liability cap is strictly limited to the absolute financial amount paid by the client to us under the active contract loop.
+                The Company's total liability under any engagement is limited to the total amount paid by the client for the specific project giving rise to the claim.
               </p>
             </article>
 
-            {/* SECTION 9: TERMINATION */}
+            {/* SECTION: DISCLAIMER OF WARRANTIES */}
+            <article id="warranties" className="scroll-mt-32 space-y-4">
+              <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
+                <span className="font-mono text-xs text-[#06B6D4]">11.0</span> Disclaimer of Warranties
+              </h2>
+              <p>
+                Services and deliverables are provided on an <strong>"as-is"</strong> and <strong>"as-available"</strong> basis. The Company makes no warranty that software will be entirely free of defects, uninterrupted, or compatible with every third-party system.
+              </p>
+              <p>
+                Any warranties beyond those expressly stated in a signed SOW are disclaimed to the fullest extent permitted by applicable law.
+              </p>
+            </article>
+
+            {/* SECTION: TERMINATION */}
             <article id="termination" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">8.0</span> Agreement Termination Hooks
+                <span className="font-mono text-xs text-[#06B6D4]">12.0</span> Termination
               </h2>
               <p>
-                Either party may terminate active service contracts with a 30-day formal written notice if the counterparty commits a material breach of terms and fails to correct the violation within that specific period.
+                Either party may terminate an active engagement with 30 days' written notice if the other party materially breaches these terms and fails to remedy the breach within that period.
               </p>
               <p>
-                Upon contract termination, the client agrees to settle outstanding payments for all verified development hours and completed milestones delivered up to the official termination date.
+                Upon termination, the client agrees to pay for all verified work completed up to the effective termination date.
               </p>
             </article>
 
-            {/* SECTION 10: GOVERNING LAW */}
+            {/* SECTION: GOVERNING LAW */}
             <article id="governing" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">9.0</span> Jurisdictional Governing Law
+                <span className="font-mono text-xs text-[#06B6D4]">13.0</span> Governing Law
               </h2>
               <p>
-                These terms, along with all associated development agreements, are governed by and construed in strict accordance with the laws of Delaware, United States, without regard to its conflict of law principles.
+                These Terms and any related agreements are governed by and construed in accordance with the laws applicable in the Company's jurisdiction of operation, without regard to conflict-of-law principles.
               </p>
               <p>
-                Any formal legal actions or arbitration procedures arising from these system terms must be resolved exclusively within the state or federal courts located in the designated state of jurisdiction.
+                Any disputes arising from these terms shall be resolved through the appropriate courts or arbitration bodies with jurisdiction over the Company's place of business.
               </p>
             </article>
 
-            {/* SECTION 11: CHANGES TO TERMS */}
+            {/* SECTION: CHANGES TO THESE TERMS */}
             <article id="changes" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">10.0</span> Lifecycle Mutations
+                <span className="font-mono text-xs text-[#06B6D4]">14.0</span> Changes to These Terms
               </h2>
               <p>
-                We reserve the right to mutate or adjust these legal terms at any moment. Modified frameworks take effect immediately upon updating this component view. 
+                The Company reserves the right to update these Terms and Conditions at any time. Updates take effect immediately upon publication on this page.
               </p>
               <p>
-                Your continued use of our web services, form elements, or custom code repositories after updates are published constitutes full acceptance of the updated terms.
+                Continued use of Our services or website following any update constitutes acceptance of the revised terms.
               </p>
             </article>
 
-            {/* SECTION 12: CONTACT INFORMATION */}
+            {/* SECTION: CONTACT INFORMATION */}
             <article id="contact" className="scroll-mt-32 space-y-4">
               <h2 className="text-lg font-bold text-white font-sans flex items-center gap-3">
-                <span className="font-mono text-xs text-[#06B6D4]">11.0</span> Official Communications Node
+                <span className="font-mono text-xs text-[#06B6D4]">15.0</span> Contact Information
               </h2>
               <p>
-                If your legal department or risk analysis team requires clarifications or revisions regarding this Master Agreement, please contact our contracts office directly:
+                For questions regarding this agreement, please contact Our team directly:
               </p>
               <div className="p-5 rounded-xl border border-neutral-900 bg-neutral-950/60 font-mono text-xs space-y-1.5 max-w-md">
-                <div className="text-white font-bold">OnyxStack Labs LLC</div>
-                <div className="text-neutral-400">Attn: Engineering Contracts & Corporate Governance</div>
-                <div className="text-neutral-400">Official Ingress: <a href="mailto:contracts@onyxstacklabs.com" className="text-[#06B6D4] hover:underline">contracts@onyxstacklabs.com</a></div>
+                <div className="text-white font-bold">OnyxStack Labs</div>
+                <div className="text-neutral-400">
+                  Email:{' '}
+                  <a href="mailto:onyxstacklabs@gmail.com" className="text-[#06B6D4] hover:underline">
+                    onyxstacklabs@gmail.com
+                  </a>
+                </div>
+                <div className="text-neutral-400">
+                  Website:{' '}
+                  <a href="https://onyxstacklabs-agency.vercel.app" className="text-[#06B6D4] hover:underline">
+                    onyxstacklabs-agency.vercel.app
+                  </a>
+                </div>
+                <div className="text-neutral-400">Headquarters: Pakistan</div>
               </div>
             </article>
 
@@ -257,9 +309,6 @@ export default function TermsConditions({ currentPath, navigateToNode }) {
         </section>
 
       </div>
-
-      {/* CORE GLOBAL FOOTER ACCESS COUPLING */}
-      <Footer siteConfig={siteConfig} />
 
     </div>
   );
