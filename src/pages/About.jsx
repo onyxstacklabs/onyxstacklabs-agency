@@ -36,16 +36,16 @@ export default function About({ currentPath, navigateToNode }) {
   ];
 
   const stackItems = [
-    { name: "React", category: "Frontend Engine", glow: "group-hover:border-cyan-500/40 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]" },
-    { name: "Vite", category: "Build Systems", glow: "group-hover:border-purple-500/40 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]" },
-    { name: "Firebase", category: "Cloud Platform", glow: "group-hover:border-amber-500/40 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]" },
-    { name: "Tailwind CSS", category: "Design Layer", glow: "group-hover:border-sky-400/40 group-hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]" },
-    { name: "Node.js", category: "Runtime Environment", glow: "group-hover:border-emerald-500/40 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]" },
-    { name: "Express.js", category: "API Framework", glow: "group-hover:border-neutral-400/40 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]" },
-    { name: "MongoDB", category: "Database Layer", glow: "group-hover:border-green-600/40 group-hover:shadow-[0_0_20px_rgba(22,163,74,0.15)]" },
-    { name: "Gemini AI", category: "Intelligence Matrix", glow: "group-hover:border-blue-500/40 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]" },
-    { name: "Git", category: "Version Infrastructure", glow: "group-hover:border-orange-500/40 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.15)]" },
-    { name: "Vercel", category: "Edge Deployment", glow: "group-hover:border-neutral-100/40 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]" }
+    { name: "React", category: "Frontend Engine", glow: "group-hover:border-cyan-500/40 group-hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]" },
+    { name: "Vite", category: "Build Systems", glow: "group-hover:border-purple-500/40 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.15)]" },
+    { name: "Firebase", category: "Cloud Platform", glow: "group-hover:border-amber-500/40 group-hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]" },
+    { name: "Tailwind CSS", category: "Design Layer", glow: "group-hover:border-sky-400/40 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.15)]" },
+    { name: "Node.js", category: "Runtime Environment", glow: "group-hover:border-emerald-500/40 group-hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]" },
+    { name: "Express.js", category: "API Framework", glow: "group-hover:border-neutral-400/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]" },
+    { name: "MongoDB", category: "Database Layer", glow: "group-hover:border-green-600/40 group-hover:shadow-[0_0_25px_rgba(22,163,74,0.15)]" },
+    { name: "Gemini AI", category: "Intelligence Matrix", glow: "group-hover:border-blue-500/40 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.15)]" },
+    { name: "Git", category: "Version Infrastructure", glow: "group-hover:border-orange-500/40 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.15)]" },
+    { name: "Vercel", category: "Edge Deployment", glow: "group-hover:border-neutral-100/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.15)]" }
   ];
 
   const workflows = [
@@ -59,97 +59,114 @@ export default function About({ currentPath, navigateToNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth relative overflow-hidden">
+    <div className="min-h-screen bg-[#050505] text-[#F3F4F6] font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth relative overflow-hidden">
       
       {/* BACKGROUND AMBIENT INFRASTRUCTURE NODE */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[800px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.07),transparent_55%)] pointer-events-none z-0" />
-      <div className="absolute top-[2000px] right-0 w-[600px] h-[600px] bg-[#2563EB]/[0.02] blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-[800px] left-0 w-[700px] h-[700px] bg-[#06B6D4]/[0.015] blur-[220px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1000px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.12),transparent_60%)] pointer-events-none z-0" />
+      <div className="absolute top-[1200px] left-0 w-[500px] h-[500px] bg-[#06B6D4]/[0.02] blur-[150px] pointer-events-none" />
+      <div className="absolute top-[2200px] right-0 w-[600px] h-[600px] bg-[#2563EB]/[0.03] blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-[1000px] left-0 w-[700px] h-[700px] bg-[#06B6D4]/[0.02] blur-[220px] pointer-events-none" />
       
+      {/* GRID MESH OVERLAY */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
       {/* MAIN TARGET MATRIX CONTROLLER */}
       <div className="relative z-10 distribution-container-layer">
         
         {/* SECTION 1: HERO CONTAINER */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 sm:pt-40 sm:pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            <div className="lg:col-span-6 max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24 sm:pt-48 sm:pb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
+            
+            {/* LEFT CONTENT CONTAINER */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-left">
+              <div className="inline-flex self-start items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-[11px] font-mono uppercase tracking-widest mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
                 Our Agency Profile
               </div>
-              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1] group">
-                Engineering reliable software <br />
+              
+              <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-[1.08] group">
+                Engineering reliable software <br className="hidden sm:inline" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500 transition-all duration-300 group-hover:text-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
                   built to scale with your business
                 </span>
               </h1>
+              
               <p className="text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl mb-10 font-sans">
                 OnyxStack Labs is an agile software development company specializing in custom software, high-performance web development, smart AI solutions, and cloud applications. We build digital products that combine intentional design with robust production engineering to help businesses automate operations and scale with confidence.
               </p>
+              
               <div className="flex flex-wrap items-center gap-4">
                 <a 
                   href="#contact-initiate" 
                   onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                  className="relative overflow-hidden bg-neutral-100 text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5"
+                  className="relative overflow-hidden bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5"
                 >
                   Get In Touch
                 </a>
                 <a 
                   href="#narrative" 
                   onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="border border-neutral-800 bg-neutral-900/30 text-neutral-300 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5"
+                  className="border border-neutral-800 bg-neutral-900/40 text-neutral-300 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5"
                 >
                   Our Story
                 </a>
               </div>
             </div>
             
-            {/* HERO IMAGE CONTAINER - BALANCED & RESPONSIVE */}
-            <div className="lg:col-span-6 w-full flex justify-center items-center">
-              <div className="relative group w-full max-w-[620px] lg:max-w-none">
-                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-blue-500 opacity-20 blur-lg group-hover:opacity-40 transition-all duration-500" />
-                <div className="relative w-full rounded-2xl border border-neutral-800/80 bg-neutral-950/80 p-2 overflow-hidden shadow-2xl backdrop-blur-sm">
-                  <div className="w-full h-full overflow-hidden rounded-xl">
+            {/* HERO IMAGE CONTAINER */}
+            <div className="lg:col-span-5 w-full flex justify-center items-center">
+              <div className="relative group w-full max-w-[560px] lg:max-w-none">
+                {/* Layered glowing system */}
+                <div className="absolute -inset-2 rounded-2xl bg-gradient-to-tr from-[#06B6D4] to-blue-600 opacity-20 blur-xl group-hover:opacity-40 transition-all duration-700" />
+                <div className="absolute -inset-0.5 rounded-2xl bg-[#06B6D4]/10 border border-[#06B6D4]/20 pointer-events-none" />
+                
+                {/* Image core structure */}
+                <div className="relative w-full rounded-2xl border border-neutral-800 bg-neutral-950 p-2 overflow-hidden shadow-3xl backdrop-blur-md">
+                  <div className="w-full overflow-hidden rounded-xl bg-neutral-900/50">
                     <img 
                       src={heroImage} 
                       alt="OnyxStack Labs Enterprise Workspace" 
-                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.025]"
                       loading="eager"
                       decoding="async"
                     />
                   </div>
-                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 2: COMPANY STORY */}
-        <section id="company-narrative" className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60 scroll-mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* COMPANY STORY IMAGE */}
-            <div className="lg:col-span-5 order-last lg:order-first">
-              <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
-                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#06B6D4]/40 to-purple-500/20 opacity-10 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
-                  <div className="w-full h-full overflow-hidden rounded-xl">
-                    <img 
-                      src={companyStoryImage} 
-                      alt="The OnyxStack Labs Story" 
-                      className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/10 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
             </div>
             
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+          </div>
+        </section>
+
+        {/* SECTION 2: COMPANY STORY */}
+        <section id="company-narrative" className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60 scroll-mt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            {/* COMPANY STORY IMAGE */}
+            <div className="lg:col-span-5 order-last lg:order-first">
+              <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
+                <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-[#06B6D4]/30 to-purple-500/20 opacity-15 blur-xl group-hover:opacity-35 transition-all duration-700" />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950">
+                  <div className="w-full overflow-hidden rounded-xl bg-neutral-900/30">
+                    <img 
+                      src={companyStoryImage} 
+                      alt="The OnyxStack Labs Story" 
+                      className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/15 rounded-2xl pointer-events-none transition-all duration-500" />
+                </div>
+              </div>
+            </div>
+            
+            {/* COMPANY STORY CONTENT */}
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
               <div className="md:col-span-4 group">
-                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Who We Are</p>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans transition-all duration-300 group-hover:text-cyan-400">The story behind OnyxStack Labs</h2>
+                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">// Who We Are</p>
+                <h2 className="text-2xl sm:text-3.5xl font-bold tracking-tight text-white font-sans transition-all duration-300 group-hover:text-cyan-400">The story behind OnyxStack Labs</h2>
               </div>
               <div className="md:col-span-8 text-neutral-400 space-y-6 text-sm sm:text-base leading-relaxed font-sans">
                 <p>
@@ -163,70 +180,82 @@ export default function About({ currentPath, navigateToNode }) {
                 </p>
               </div>
             </div>
+            
           </div>
         </section>
 
         {/* SECTION 3: MISSION & VISION */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)] hover:-translate-y-1">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            {/* CARDS CONTAINER */}
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              {/* MISSION CARD */}
+              <div className="p-8 sm:p-10 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/20 relative group transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_40px_rgba(6,182,212,0.06)] hover:-translate-y-1">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
-                  <div className="w-8 h-8 rounded-lg bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center text-[#06B6D4] mb-6 font-mono text-sm font-bold transition-all duration-300 group-hover:bg-[#06B6D4]/20 group-hover:border-[#06B6D4]/40">M</div>
-                  <h3 className="text-lg font-bold text-white mb-3 transition-colors duration-300 group-hover:text-cyan-400">Our Mission</h3>
+                  <div className="w-10 h-10 rounded-xl bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center text-[#06B6D4] mb-8 font-mono text-sm font-bold transition-all duration-300 group-hover:bg-[#06B6D4]/20 group-hover:border-[#06B6D4]/40">M</div>
+                  <h3 className="text-xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-cyan-400">Our Mission</h3>
                   <p className="text-sm text-neutral-400 leading-relaxed font-sans">
                     To equip growing organizations with high-quality custom software that simplifies everyday operational tasks, fosters sustainable innovation, and builds tangible, long-term commercial value.
                   </p>
                 </div>
               </div>
-              <div className="p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/40 relative group transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(37,99,235,0.08)] hover:-translate-y-1">
+              
+              {/* VISION CARD */}
+              <div className="p-8 sm:p-10 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/20 relative group transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_40px_rgba(37,99,235,0.06)] hover:-translate-y-1">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 font-mono text-sm font-bold transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-500/40">V</div>
-                  <h3 className="text-lg font-bold text-white mb-3 transition-colors duration-300 group-hover:text-blue-400">Our Vision</h3>
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-8 font-mono text-sm font-bold transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-500/40">V</div>
+                  <h3 className="text-xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-blue-400">Our Vision</h3>
                   <p className="text-sm text-neutral-400 leading-relaxed font-sans">
                     To be the world's most trusted software development partner, recognized for creating scalable, resilient digital products that set the standard for modern interface design and reliable web performance.
                   </p>
                 </div>
               </div>
+              
             </div>
             
             {/* MISSION VISION IMAGE */}
             <div className="lg:col-span-5 w-full">
               <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
-                <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-blue-500/20 to-[#06B6D4]/20 opacity-10 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
-                  <div className="w-full h-full overflow-hidden rounded-xl">
+                <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-blue-500/20 to-[#06B6D4]/20 opacity-15 blur-xl group-hover:opacity-35 transition-all duration-700" />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950">
+                  <div className="w-full h-full overflow-hidden rounded-xl bg-neutral-900/30">
                     <img 
                       src={missionVisionImage} 
                       alt="Our Mission and Vision Support Visual" 
-                      className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
-                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/15 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
             </div>
+            
           </div>
         </section>
 
         {/* SECTION 4: CORE VALUES */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            
+            {/* VALUE LIST */}
             <div className="lg:col-span-8">
               <div className="max-w-3xl mb-12 group">
-                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">What We Stand For</p>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">The principles that guide our everyday decisions</h2>
+                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">// What We Stand For</p>
+                <h2 className="text-2xl sm:text-3.5xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">The principles that guide our everyday decisions</h2>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 {coreValues.map((val, idx) => (
-                  <div key={idx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 relative group transition-all duration-300 hover:border-neutral-800 hover:shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:-translate-y-0.5">
+                  <div key={idx} className="p-8 rounded-xl border border-neutral-900 bg-neutral-950/40 relative group transition-all duration-300 hover:border-neutral-800 hover:shadow-[0_0_25px_rgba(6,182,212,0.05)] hover:-translate-y-0.5">
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-cyan-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="relative z-10">
-                      <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-3 flex items-center gap-3 transition-colors duration-300 group-hover:text-cyan-400">
+                      <h3 className="text-sm font-mono uppercase tracking-wider text-white mb-4 flex items-center gap-3 transition-colors duration-300 group-hover:text-cyan-400">
                         <span className="text-[#06B6D4] font-bold">//</span> {val.title}
                       </h3>
                       <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{val.desc}</p>
@@ -237,37 +266,39 @@ export default function About({ currentPath, navigateToNode }) {
             </div>
             
             {/* CORE VALUES SUPPORTING IMAGE */}
-            <div className="lg:col-span-4 lg:sticky lg:top-24">
+            <div className="lg:col-span-4 lg:sticky lg:top-28">
               <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
-                <div className="absolute -inset-1.5 rounded-2xl bg-[#06B6D4]/15 opacity-15 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
-                  <div className="w-full h-full overflow-hidden rounded-xl">
+                <div className="absolute -inset-2 rounded-2xl bg-[#06B6D4]/15 opacity-15 blur-xl group-hover:opacity-35 transition-all duration-700" />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950">
+                  <div className="w-full h-full overflow-hidden rounded-xl bg-neutral-900/30">
                     <img 
                       src={coreValuesImage} 
                       alt="OnyxStack Labs Core Values" 
-                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="w-full h-auto max-h-[460px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
-                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/15 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
             </div>
+            
           </div>
         </section>
 
         {/* SECTION 5: WHY CHOOSE ONYXSTACK LABS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-12 group">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">The Agency Difference</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Why businesses choose us over other developers</h2>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60">
+          <div className="max-w-3xl mb-16 group">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">// The Agency Difference</p>
+            <h2 className="text-2xl sm:text-3.5xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Why businesses choose us over other developers</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {differentiators.map((diff, idx) => (
-              <div key={idx} className="p-6 rounded-xl border border-neutral-900/30 bg-gradient-to-b from-neutral-950 to-[#050505] relative group transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.06)] hover:-translate-y-1">
-                <div className="absolute top-0 left-6 w-8 h-[1px] bg-gradient-to-r from-[#06B6D4] to-transparent group-hover:w-16 transition-all duration-500" />
-                <h3 className="text-base font-bold text-white mb-3 font-sans transition-colors duration-300 group-hover:text-[#06B6D4]">{diff.title}</h3>
+              <div key={idx} className="p-8 rounded-xl border border-neutral-900/40 bg-gradient-to-b from-neutral-950 to-[#050505] relative group transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.06)] hover:-translate-y-1">
+                <div className="absolute top-0 left-8 w-8 h-[2px] bg-gradient-to-r from-[#06B6D4] to-transparent group-hover:w-20 transition-all duration-500" />
+                <h3 className="text-lg font-bold text-white mb-4 font-sans transition-colors duration-300 group-hover:text-[#06B6D4]">{diff.title}</h3>
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{diff.desc}</p>
               </div>
             ))}
@@ -275,21 +306,24 @@ export default function About({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 6: TECHNOLOGIES RUNTIME ENVIRONMENT */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            {/* GRID CONTENT */}
             <div className="lg:col-span-8">
               <div className="max-w-3xl mb-12 group">
-                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Our Core Toolkit</p>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Proven modern frameworks for reliable digital platforms</h2>
+                <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">// Our Core Toolkit</p>
+                <h2 className="text-2xl sm:text-3.5xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Proven modern frameworks for reliable digital platforms</h2>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
                 {stackItems.map((item, idx) => (
                   <div 
                     key={idx} 
-                    className="group p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 text-left transition-all duration-300 cursor-default hover:bg-neutral-900/30 hover:border-neutral-800"
+                    className="group p-6 rounded-xl border border-neutral-900 bg-neutral-950/80 text-left transition-all duration-300 cursor-default hover:bg-neutral-900/30 hover:border-neutral-800"
                   >
                     <div className={`transition-all duration-300 ${item.glow} rounded-xl`}>
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1 transition-colors duration-300 group-hover:text-neutral-400">{item.category}</p>
+                      <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2 transition-colors duration-300 group-hover:text-neutral-400">{item.category}</p>
                       <h4 className="text-sm font-bold text-white tracking-wide font-sans transition-colors duration-300 group-hover:text-[#06B6D4]">{item.name}</h4>
                     </div>
                   </div>
@@ -300,37 +334,40 @@ export default function About({ currentPath, navigateToNode }) {
             {/* TECHNOLOGY STACK IMAGE */}
             <div className="lg:col-span-4">
               <div className="relative group w-full max-w-[480px] lg:max-w-none mx-auto">
-                <div className="absolute -inset-1.5 rounded-2xl bg-purple-500/15 opacity-20 blur-lg group-hover:opacity-35 transition-all duration-500" />
-                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950/80">
-                  <div className="w-full h-full overflow-hidden rounded-xl">
+                <div className="absolute -inset-2 rounded-2xl bg-purple-500/15 opacity-20 blur-xl group-hover:opacity-35 transition-all duration-700" />
+                <div className="relative rounded-2xl border border-neutral-900 p-2 overflow-hidden shadow-2xl bg-neutral-950">
+                  <div className="w-full h-full overflow-hidden rounded-xl bg-neutral-900/30">
                     <img 
                       src={technologyStackImage} 
                       alt="OnyxStack Labs Engineering Workspace" 
-                      className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="w-full h-auto max-h-[460px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
-                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/20 rounded-2xl pointer-events-none transition-all duration-500" />
+                  <div className="absolute inset-0 border border-white/0 group-hover:border-cyan-500/15 rounded-2xl pointer-events-none transition-all duration-500" />
                 </div>
               </div>
             </div>
+            
           </div>
         </section>
 
         {/* SECTION 7: DEVELOPMENT PROCESS MAP */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60">
           <div className="max-w-3xl mb-16 group">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">How We Work</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Our clean, predictable software development lifecycle</h2>
+            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">// How We Work</p>
+            <h2 className="text-2xl sm:text-3.5xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-cyan-400">Our clean, predictable software development lifecycle</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+          
+          {/* TIMELINE FLEXIBILITY WORKFLOW */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 relative">
             {workflows.map((flow, idx) => (
-              <div key={idx} className="relative group transition-all duration-300 hover:-translate-y-0.5">
-                <div className="text-3xl font-bold font-mono text-neutral-800 mb-3 tracking-tighter transition-all duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+              <div key={idx} className="relative group transition-all duration-300 hover:-translate-y-1 p-6 rounded-2xl border border-neutral-950 bg-neutral-950/20 hover:bg-neutral-900/10 hover:border-neutral-900/60">
+                <div className="text-4xl font-black font-mono text-neutral-800 mb-4 tracking-tighter transition-all duration-500 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_20px_rgba(6,182,212,0.4)]">
                   {flow.step}
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 font-sans transition-colors duration-300 group-hover:text-white">{flow.label}</h3>
+                <h3 className="text-lg font-bold text-white mb-3 font-sans transition-colors duration-300 group-hover:text-cyan-300">{flow.label}</h3>
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{flow.desc}</p>
               </div>
             ))}
@@ -338,35 +375,39 @@ export default function About({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 8: FINAL SYSTEM CONSOLE CTA */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="relative p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-neutral-950 overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 min-h-[320px] group">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60">
+          <div className="relative p-10 sm:p-20 rounded-3xl border border-neutral-900 bg-neutral-950 overflow-hidden text-center sm:text-left flex flex-col lg:flex-row items-center justify-between gap-10 min-h-[360px] group">
             
             {/* FIXED BACKGROUND SUPPORTING IMAGE */}
             <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
               <img 
                 src={finalCtaImage} 
                 alt="Engineering Background" 
-                className="w-full h-full object-cover opacity-25 mix-blend-luminosity transform scale-100 group-hover:scale-[1.05] transition-transform duration-[2000ms] ease-out" 
+                className="w-full h-full object-cover opacity-20 mix-blend-luminosity transform scale-100 group-hover:scale-[1.04] transition-transform duration-[2000ms] ease-out" 
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/90 to-neutral-950/40" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.06),transparent_60%)] group-hover:opacity-80 transition-opacity duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/95 to-neutral-950/40" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.08),transparent_60%)] group-hover:opacity-90 transition-opacity duration-1000" />
             </div>
             
-            <div className="max-w-2xl relative z-10">
-              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4 transition-all duration-300 group-hover:text-shadow-[0_0_30px_rgba(6,182,212,0.25)]">
+            <div className="max-w-3xl relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-[10px] font-mono uppercase tracking-widest mb-6">
+                Let's Build Something Great
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-5 transition-all duration-300 group-hover:text-shadow-[0_0_30px_rgba(6,182,212,0.25)] leading-[1.15]">
                 Let's turn your product ideas into real, functional code
               </h2>
-              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">
+              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans max-w-2xl">
                 Tell us about your project requirements. Our engineering team is ready to map out your digital solution and help build your next modern web applications.
               </p>
             </div>
+            
             <div className="relative z-10 flex-shrink-0">
               <a 
                 href="#contact-terminal" 
                 onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="inline-block bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
+                className="inline-block bg-white text-black px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-1 whitespace-nowrap"
               >
                 Talk to our Team
               </a>
