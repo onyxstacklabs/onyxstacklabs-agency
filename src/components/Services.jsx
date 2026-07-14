@@ -375,11 +375,12 @@ export default function Services({ currentPath, navigateToNode }) {
                 style={{ animationDelay: `${idx * 60}ms` }}
               >
                 <div className="sheen relative w-full h-[240px] sm:h-[280px] overflow-hidden">
-                  src={item.image}
-                  alt={item.alt}
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-                />
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
                   <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-[#06B6D4]/30 text-[#06B6D4] text-[10px] font-mono uppercase tracking-widest backdrop-blur-sm">
                     {item.label}
@@ -530,7 +531,7 @@ export default function Services({ currentPath, navigateToNode }) {
                     aria-expanded={isOpen}
                   >
                     <span className="text-sm sm:text-base font-medium font-sans">{faq.q}</span>
-                    <span className={`flex-shrink-0 w-6 h-6 rounded-full border border-neutral-800 flex items-center justify-center text-neutral-500 transition-all duration-300 ${isOpen ? 'rotate-45 border-[#06B6D4]/40 text-[#06B6D4]' : ''}`} aria-hidden="true">
+                    <span className={`flex-shrink-0 w-6 h-6 rounded-full border border-neutral-800 flex-shrink-0 flex items-center justify-center text-neutral-500 transition-all duration-300 ${isOpen ? 'rotate-45 border-[#06B6D4]/40 text-[#06B6D4]' : ''}`} aria-hidden="true">
                       +
                     </span>
                   </button>
