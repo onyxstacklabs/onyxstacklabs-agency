@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 /**
  * CTA Component
@@ -42,13 +41,28 @@ const IconHandshake = (props) => (
   </svg>
 );
 
-export default function CTA() {
+export default function CTA({ navigateToNode }) {
   const trustBadges = [
     { icon: IconShieldCheck, label: 'Enterprise Ready' },
     { icon: IconLock, label: 'Secure Development' },
     { icon: IconSparkles, label: 'AI Powered' },
     { icon: IconHandshake, label: 'Long-Term Support' }
   ];
+
+  // Handler for custom navigation properties used across the project's state-driven routing
+  const handleNavigation = (e, path, sectionId) => {
+    e.preventDefault();
+    if (navigateToNode) {
+      navigateToNode(path);
+      if (sectionId) {
+        setTimeout(() => {
+          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+    } else {
+      window.location.href = path;
+    }
+  };
 
   return (
     <section
@@ -109,22 +123,24 @@ export default function CTA() {
 
             {/* Dual Conversion Routing Paths */}
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center mb-12">
-              <Link
-                to="/contact"
+              <a
+                href="#contact"
+                onClick={(e) => handleNavigation(e, '/', 'contact')}
                 className="group/btn w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 bg-white text-black font-semibold text-sm rounded-xl shadow-[0_4px_25px_rgba(6,182,212,0.15)] hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070B]"
                 aria-label="Start your software project with OnyxStack Labs"
               >
                 Start Your Project
                 <IconArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" aria-hidden="true" />
-              </Link>
+              </a>
 
-              <Link
-                to="/work"
+              <a
+                href="#portfolio"
+                onClick={(e) => handleNavigation(e, '/portfolio')}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-9 py-4 bg-[#0F172A] border border-[#1E293B] hover:border-[#06B6D4]/40 hover:bg-[#111A2E] text-white font-semibold text-sm rounded-xl hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(6,182,212,0.12)] active:translate-y-0 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070B]"
                 aria-label="View OnyxStack Labs' enterprise software portfolio"
               >
                 View Portfolio
-              </Link>
+              </a>
             </div>
 
             {/* Trust Badges */}
