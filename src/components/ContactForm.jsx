@@ -1,3 +1,4 @@
+// components/ContactForm.jsx
 import React from 'react';
 
 export default function ContactForm({ 
@@ -12,39 +13,39 @@ export default function ContactForm({
   return (
     <section id="contact" className="relative z-10 py-28 px-6 overflow-hidden" aria-labelledby="contact-title">
       {/* Premium Top Transition Splitter */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-neutral-800/80 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-slate-800/80 to-transparent" />
       
       {/* Ambient background glow matching enterprise style */}
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-cyan-950/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/3 w-[300px] h-[300px] bg-blue-950/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="relative max-w-2xl mx-auto bg-gradient-to-b from-[#090909]/95 to-[#050505]/95 border border-neutral-800/60 hover:border-neutral-700/50 rounded-3xl p-6 md:p-10 space-y-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_50px_-12px_rgba(6,182,212,0.05)] backdrop-blur-xl transition-all duration-500">
+      <div className="relative max-w-2xl mx-auto bg-gradient-to-b from-[#0F172A]/95 to-[#05070B]/95 border border-[#1E293B] hover:border-slate-700/50 rounded-3xl p-6 md:p-10 space-y-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_50px_-12px_rgba(6,182,212,0.05)] backdrop-blur-xl transition-all duration-500">
         
         {/* Decorative corner accents for a premium technical look */}
-        <div className="absolute top-0 left-8 w-16 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+        <div className="absolute top-0 left-8 w-16 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/30 to-transparent" />
         <div className="absolute bottom-0 right-8 w-16 h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
 
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-800/20 text-[9px] text-[#06B6D4] font-mono uppercase tracking-widest mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-[#1E293B] text-[9px] text-[#06B6D4] font-mono uppercase tracking-widest mx-auto">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
             Active Channel
           </div>
-          <h2 id="contact-title" className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white bg-gradient-to-b from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">
+          <h2 id="contact-title" className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
             Let's Build Your Next Project
           </h2>
-          <p className="text-xs text-neutral-400 font-normal max-w-md mx-auto leading-relaxed tracking-wide">
+          <p className="text-xs text-slate-400 font-normal max-w-md mx-auto leading-relaxed tracking-wide">
             Drop your custom application parameters directly into our active design consultation funnel pipeline.
           </p>
         </div>
 
         {submissionState === 'SUCCESS' ? (
-          <div className="bg-neutral-900/30 border border-emerald-500/20 rounded-2xl p-8 text-center space-y-5 animate-fade-in backdrop-blur-sm">
-            <div className="w-12 h-12 rounded-full bg-emerald-950/30 border border-emerald-500/40 text-[#00e676] flex items-center justify-center mx-auto text-xl shadow-[0_0_20px_rgba(0,230,118,0.15)]">
+          <div className="bg-slate-900/10 border border-emerald-500/20 rounded-2xl p-8 text-center space-y-5 animate-fade-in backdrop-blur-sm">
+            <div className="w-12 h-12 rounded-full bg-emerald-950/30 border border-emerald-500/40 text-[#00e676] flex items-center justify-center mx-auto text-xl shadow-[0_0_20px_rgba(0,230,118,0.15)] animate-bounce">
               ✓
             </div>
             <div className="space-y-1.5">
               <h3 className="text-base font-bold text-[#00e676] font-mono uppercase tracking-widest">Project Request Cached</h3>
-              <p className="text-xs text-neutral-400 max-w-sm mx-auto leading-relaxed">
+              <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
                 Your project specifications have been successfully transmitted. Our engineering partners will reach out within 24 hours.
               </p>
             </div>
@@ -58,7 +59,7 @@ export default function ContactForm({
         ) : (
           <form onSubmit={handleLeadFormTransmission} className="space-y-6">
             <div className="space-y-1.5">
-              <label htmlFor="companyName" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Company Name</label>
+              <label htmlFor="companyName" className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block">Company Name</label>
               <input 
                 type="text" 
                 id="companyName"
@@ -66,18 +67,18 @@ export default function ContactForm({
                 placeholder={siteConfig?.agencyName || "OnyxStack Labs"} 
                 value={formData.companyName}
                 onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                className={`w-full bg-[#030303] border ${
+                className={`w-full bg-[#05070B] border ${
                   errors.companyName 
                     ? 'border-red-500/50 focus:ring-red-500/30 focus:border-red-500' 
-                    : 'border-neutral-800/80 hover:border-neutral-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
-                } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50`}
+                    : 'border-[#1E293B] hover:border-slate-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
+                } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-slate-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50`}
               />
               {errors.companyName && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.companyName}</p>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-1.5">
-                <label htmlFor="email" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Email Address</label>
+                <label htmlFor="email" className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block">Email Address</label>
                 <input 
                   type="email" 
                   id="email"
@@ -85,17 +86,17 @@ export default function ContactForm({
                   placeholder="onyxstacklabs@gmail.com" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className={`w-full bg-[#030303] border ${
+                  className={`w-full bg-[#05070B] border ${
                     errors.email 
                       ? 'border-red-500/50 focus:ring-red-500/30 focus:border-red-500' 
-                      : 'border-neutral-800/80 hover:border-neutral-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
-                  } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50`}
+                      : 'border-[#1E293B] hover:border-slate-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
+                  } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-slate-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50`}
                 />
                 {errors.email && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.email}</p>}
               </div>
 
               <div className="space-y-1.5">
-                <label htmlFor="phone" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Phone Number</label>
+                <label htmlFor="phone" className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block">Phone Number</label>
                 <input 
                   type="tel" 
                   id="phone"
@@ -103,18 +104,18 @@ export default function ContactForm({
                   placeholder="+92 344 5800630" 
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className={`w-full bg-[#030303] border ${
+                  className={`w-full bg-[#05070B] border ${
                     errors.phone 
                       ? 'border-red-500/50 focus:ring-red-500/30 focus:border-red-500' 
-                      : 'border-neutral-800/80 hover:border-neutral-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
-                  } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50`}
+                      : 'border-[#1E293B] hover:border-slate-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
+                  } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-slate-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50`}
                 />
                 {errors.phone && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.phone}</p>}
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="details" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Project Scope & Details</label>
+              <label htmlFor="details" className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block">Project Scope & Details</label>
               <textarea 
                 id="details"
                 rows="4"
@@ -122,30 +123,30 @@ export default function ContactForm({
                 placeholder="Describe your customized system goals, required AI features, or workflow challenges..." 
                 value={formData.details}
                 onChange={(e) => setFormData({...formData, details: e.target.value})}
-                className={`w-full bg-[#030303] border ${
+                className={`w-full bg-[#05070B] border ${
                   errors.details 
                     ? 'border-red-500/50 focus:ring-red-500/30 focus:border-red-500' 
-                    : 'border-neutral-800/80 hover:border-neutral-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
-                } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-neutral-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] resize-none disabled:opacity-50`}
+                    : 'border-[#1E293B] hover:border-slate-700/80 focus:border-[#06B6D4] focus:ring-[#06B6D4]/15'
+                } focus:ring-4 rounded-xl py-3 px-4 text-xs text-white placeholder-slate-700 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] resize-none disabled:opacity-50`}
               />
               {errors.details && <p className="text-red-400 text-[10px] font-mono mt-1">{errors.details}</p>}
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="budget" className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 block">Estimated Budget Allocation</label>
+              <label htmlFor="budget" className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block">Estimated Budget Allocation</label>
               <div className="relative">
                 <select 
                   id="budget"
                   disabled={submissionState === 'SUBMITTING'}
                   value={formData.budget}
                   onChange={(e) => setFormData({...formData, budget: e.target.value})}
-                  className="w-full bg-[#030303] border border-neutral-800/80 hover:border-neutral-700/80 focus:border-[#06B6D4] rounded-xl py-3 px-4 text-xs text-white outline-none cursor-pointer appearance-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-300 disabled:opacity-50"
+                  className="w-full bg-[#05070B] border border-[#1E293B] hover:border-slate-700/80 focus:border-[#06B6D4] rounded-xl py-3 px-4 text-xs text-white outline-none cursor-pointer appearance-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-300 disabled:opacity-50"
                 >
                   <option>Standard MVP ($1,000 - $2,000)</option>
                   <option>Premium Business Tier ($2,000 - $5,000)</option>
                   <option>Enterprise Custom Architecture ($5,000+)</option>
                 </select>
-                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500">
+                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                   </svg>
