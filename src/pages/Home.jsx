@@ -188,7 +188,7 @@ export default function Home({ currentPath, navigateToNode }) {
       
       <TechStack techStackBadges={techStackBadges} />
       
-      <CTA />
+      <CTA navigateToNode={navigateToNode} />
       
       <ContactForm 
         formData={formData}
