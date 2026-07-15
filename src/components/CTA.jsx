@@ -52,15 +52,34 @@ export default function CTA({ navigateToNode }) {
   // Handler for custom navigation properties used across the project's state-driven routing
   const handleNavigation = (e, path, sectionId) => {
     e.preventDefault();
-    if (navigateToNode) {
-      navigateToNode(path);
-      if (sectionId) {
-        setTimeout(() => {
-          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
+
+    const isHome = window.location.pathname === '/' || window.location.pathname === '';
+
+    if (isHome) {
+      // Already on home, target immediately if it exists
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
-      window.location.href = path;
+      // Not on home, trigger state/routing change
+      if (navigateToNode) {
+        navigateToNode(path);
+
+        // Dynamically poll until element mounts to prevent race-condition and static delays
+        const checkExist = setInterval(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            clearInterval(checkExist);
+          }
+        }, 30);
+
+        // Fail-safe cleanup
+        setTimeout(() => clearInterval(checkExist), 3000);
+      } else {
+        window.location.href = path;
+      }
     }
   };
 
