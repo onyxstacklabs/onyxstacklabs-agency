@@ -1,3 +1,4 @@
+// pages/Contact.jsx
 import React, { useEffect, useMemo, useState } from 'react';
 
 // LIVE DATA CORE IMPORTS
@@ -133,49 +134,51 @@ export default function Contact({ currentPath, navigateToNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0E17] text-[#ECE8DE] antialiased selection:bg-[#C6A15B]/30 selection:text-white relative overflow-hidden">
+    <div className="min-h-screen bg-[#05070B] text-slate-100 antialiased selection:bg-[#06B6D4]/30 selection:text-white relative overflow-hidden">
 
-      {/* BRAND AMBIENT STRUCTURAL MASK GRAPHICS */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[850px] bg-[radial-gradient(ellipse_at_top,rgba(198,161,91,0.07),transparent_65%)] pointer-events-none z-0" />
-      <div className="absolute top-[1200px] right-0 w-[450px] h-[450px] bg-[#C6A15B]/[0.02] blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[600px] left-0 w-[500px] h-[500px] bg-[#4A5578]/[0.05] blur-[180px] pointer-events-none" />
+      {/* BRAND AMBIENT STRUCTURAL MASK GRAPHICS (Cyan and Blue glows matching the rest of the site) */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[850px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.1),transparent_65%)] pointer-events-none z-0" />
+      <div className="absolute top-[300px] left-1/4 w-[500px] h-[500px] bg-cyan-950/20 blur-[150px] pointer-events-none rounded-full" />
+      <div className="absolute top-[800px] right-1/4 w-[600px] h-[600px] bg-blue-950/15 blur-[180px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-[200px] left-10 w-[400px] h-[400px] bg-cyan-950/10 blur-[140px] pointer-events-none rounded-full" />
 
       {/* CORE FRAMEWORK BODY CONTENT STREAM */}
-      <div className="relative z-10 conversion-lead-generation-scope">
+      <div className="relative z-10">
 
         {/* SECTION 1: HERO CONTROL PANEL HEADER */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-14 sm:pt-36 sm:pb-20 text-center sm:text-left">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-12 sm:pt-36 sm:pb-16 text-center sm:text-left">
           <div className="max-w-4xl mx-auto sm:mx-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6A15B]/10 border border-[#C6A15B]/25 text-[#C6A15B] text-[11px] uppercase tracking-[0.2em] mb-7">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-[#1E293B] text-[#06B6D4] text-[10px] font-mono uppercase tracking-[0.2em] mb-7">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
               Contact &amp; Project Scoping
             </div>
-            <h1 className="font-serif text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6 leading-[1.08]">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 leading-[1.1] uppercase">
               Talk to the engineers <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C6A15B] via-[#D9C08B] to-[#8FA3C6]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-[#2563EB] to-cyan-300">
                 who will build your product.
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-[#A8ADBB] max-w-2xl leading-relaxed mx-auto sm:mx-0">
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mx-auto sm:mx-0">
               Tell us what you're building. A senior architect — not a sales rep — will review it and schedule a scoping call to talk through architecture, timeline, and cost.
             </p>
 
             {/* SIGNATURE ELEMENT: LIVE ENGINEERING DESK STATUS */}
             <div
-              className="mt-9 inline-flex items-center gap-3 rounded-full border border-[#232838] bg-[#11151F]/70 pl-3 pr-5 py-2 mx-auto sm:mx-0"
+              className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-[#1E293B] bg-[#0F172A]/80 backdrop-blur-md pl-4 pr-5 py-2.5 mx-auto sm:mx-0 shadow-lg shadow-black/25"
               role="status"
               aria-live="polite"
             >
               <span className="relative flex h-2.5 w-2.5 shrink-0">
                 {deskStatus.online && (
-                  <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7FB89A] opacity-60" />
+                  <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06B6D4] opacity-75" />
                 )}
                 <span
-                  className={`relative inline-flex rounded-full h-2.5 w-2.5 ${deskStatus.online ? 'bg-[#7FB89A]' : 'bg-[#5A6172]'}`}
+                  className={`relative inline-flex rounded-full h-2.5 w-2.5 ${deskStatus.online ? 'bg-[#06B6D4]' : 'bg-slate-500'}`}
                 />
               </span>
-              <span className="text-xs sm:text-sm text-[#D8D4C9]">
-                <span className="font-semibold text-white">{deskStatus.label}.</span>{' '}
-                <span className="text-[#9BA1AF]">{deskStatus.detail}</span>
+              <span className="text-xs sm:text-sm text-slate-300 text-left">
+                <span className="font-bold text-white">{deskStatus.label}.</span>{' '}
+                <span className="text-slate-400">{deskStatus.detail}</span>
               </span>
             </div>
           </div>
@@ -188,33 +191,34 @@ export default function Contact({ currentPath, navigateToNode }) {
           <div className="lg:col-span-5 space-y-10">
 
             {/* SECTION 2: CONTACT INFORMATION MATRICES */}
-            <div className="p-6 rounded-2xl border border-[#1E2430] bg-[#11151F]/60 space-y-4">
-              <h3 className="text-[11px] uppercase tracking-[0.2em] text-[#C6A15B] font-semibold">Reach Us Directly</h3>
+            <div className="p-8 rounded-2xl border border-[#1E293B] bg-[#0F172A]/80 backdrop-blur-md space-y-6 shadow-xl shadow-black/30 relative overflow-hidden group hover:border-[#06B6D4]/30 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-[2px] h-0 group-hover:h-full bg-gradient-to-b from-[#06B6D4] to-[#2563EB] transition-all duration-500" />
+              <h3 className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#06B6D4] font-semibold">Reach Us Directly</h3>
 
-              <div className="space-y-4 pt-1">
+              <div className="space-y-5 pt-1">
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Email</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-1">Email</span>
                   <a
                     href={`mailto:${contactInfo.email}`}
-                    className="text-sm text-white hover:text-[#C6A15B] transition-colors underline decoration-[#2A3040] underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] rounded"
+                    className="text-base text-white hover:text-[#06B6D4] transition-colors underline decoration-[#1E293B] hover:decoration-[#06B6D4]/50 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded"
                   >
                     {contactInfo.email}
                   </a>
                 </div>
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Website</span>
-                  <span className="text-sm text-[#C7CAD4]">{contactInfo.website}</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-1">Website</span>
+                  <span className="text-base text-slate-300 font-mono">{contactInfo.website}</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-[#1E2430]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-5 border-t border-[#1E293B]">
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Typical Response</span>
-                    <span className="text-sm text-[#ECE8DE] font-semibold">{contactInfo.responseTime}</span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-1">Typical Response</span>
+                    <span className="text-sm text-white font-bold">{contactInfo.responseTime}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#6F7688] block mb-0.5">Working Hours</span>
-                    <span className="text-sm text-[#9BA1AF]">{contactInfo.businessHours}</span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-1">Working Hours</span>
+                    <span className="text-sm text-slate-300 font-mono">{contactInfo.businessHours}</span>
                   </div>
                 </div>
               </div>
@@ -222,17 +226,18 @@ export default function Contact({ currentPath, navigateToNode }) {
 
             {/* SECTION 4: WHY CONTACT ONYXSTACK LABS PILLARS */}
             <div className="space-y-5">
-              <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#6F7688] font-semibold">Why Teams Work With Us</h4>
+              <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 font-semibold pl-1">Why Teams Work With Us</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                 {valuePillars.map((p, pIdx) => (
                   <div
                     key={pIdx}
-                    className="p-4 rounded-xl border border-[#1E2430] bg-[#11151F]/30 transition-colors hover:border-[#C6A15B]/30"
+                    className="p-5 rounded-2xl border border-[#1E293B] bg-[#0F172A]/40 backdrop-blur-sm transition-all duration-300 hover:border-[#06B6D4]/30 hover:bg-[#0F172A]/60 group"
                   >
-                    <h5 className="text-[13px] font-semibold text-white mb-1.5 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B] shrink-0" aria-hidden="true" /> {p.title}
+                    <h5 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] group-hover:bg-cyan-400 group-hover:scale-125 transition-all duration-300 shrink-0" aria-hidden="true" />
+                      {p.title}
                     </h5>
-                    <p className="text-xs text-[#9BA1AF] leading-relaxed pl-3.5">{p.desc}</p>
+                    <p className="text-xs text-slate-400 leading-relaxed pl-3.5">{p.desc}</p>
                   </div>
                 ))}
               </div>
@@ -242,12 +247,13 @@ export default function Contact({ currentPath, navigateToNode }) {
 
           {/* RIGHT INTERACTION BOUNDARY: SECTION 3 EXTENSIBLE DATA FORM */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-9 rounded-2xl border border-[#1E2430] bg-gradient-to-b from-[#11151F] to-[#11151F]/50 shadow-2xl shadow-black/40 relative">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#C6A15B]/[0.03] blur-[60px] pointer-events-none rounded-full" />
+            <div className="p-6 sm:p-10 rounded-2xl border border-[#1E293B] bg-gradient-to-b from-[#0F172A]/90 to-[#0F172A]/40 shadow-2xl shadow-black/50 backdrop-blur-md relative overflow-hidden group">
+              <div className="absolute -top-12 -right-12 w-48 h-48 bg-cyan-500/[0.03] blur-[60px] pointer-events-none rounded-full" />
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/30 to-transparent" />
 
-              <div className="mb-7">
-                <h2 className="font-serif text-xl sm:text-2xl font-semibold text-white tracking-tight">Start a project scoping request</h2>
-                <p className="text-sm text-[#9BA1AF] mt-1.5">Share a few details about what you're building — we'll follow up by email to schedule a call.</p>
+              <div className="mb-8">
+                <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">Start a project scoping request</h2>
+                <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">Share a few details about what you're building — we'll follow up by email to schedule a call.</p>
               </div>
 
               {/* Form Validation Notifications UI Blocks */}
@@ -255,9 +261,9 @@ export default function Contact({ currentPath, navigateToNode }) {
                 <div
                   role="status"
                   aria-live="polite"
-                  className="mb-6 p-4 rounded-xl bg-[#7FB89A]/10 border border-[#7FB89A]/30 text-[#9FCBB2] text-sm leading-relaxed flex gap-2.5"
+                  className="mb-6 p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm leading-relaxed flex gap-2.5 shadow-[0_0_15px_rgba(16,185,129,0.05)]"
                 >
-                  <span aria-hidden="true">✓</span>
+                  <span aria-hidden="true" className="font-bold text-emerald-400">✓</span>
                   <span>Message sent. A solutions architect will reach out at the email you provided shortly.</span>
                 </div>
               )}
@@ -266,19 +272,19 @@ export default function Contact({ currentPath, navigateToNode }) {
                 <div
                   role="alert"
                   aria-live="assertive"
-                  className="mb-6 p-4 rounded-xl bg-[#D98277]/10 border border-[#D98277]/30 text-[#E2A69C] text-sm flex gap-2.5"
+                  className="mb-6 p-4 rounded-xl bg-red-950/20 border border-red-500/30 text-red-400 text-xs sm:text-sm flex gap-2.5 shadow-[0_0_15px_rgba(239,68,68,0.05)]"
                 >
-                  <span aria-hidden="true">⚠</span>
+                  <span aria-hidden="true" className="font-bold text-red-400">⚠</span>
                   <span>{submitError}</span>
                 </div>
               )}
 
               {/* EXECUTABLE FORM LAYER - BACKEND LOGIC REMEDIES UNTOUCHED RE-SKINNED DESIGN */}
-              <form onSubmit={handleFormSubmit} className="space-y-5" noValidate={false}>
+              <form onSubmit={handleFormSubmit} className="space-y-6" noValidate={false}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="contact-name" className="block text-[11px] uppercase tracking-wider text-[#6F7688] mb-1.5">
-                      Name <span className="text-[#C6A15B]" aria-hidden="true">*</span>
+                    <label htmlFor="contact-name" className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Name <span className="text-[#06B6D4]" aria-hidden="true">*</span>
                     </label>
                     <input
                       id="contact-name"
@@ -289,12 +295,12 @@ export default function Contact({ currentPath, navigateToNode }) {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Jane Doe"
-                      className="w-full bg-[#0A0E17] border border-[#232838] rounded-xl px-4 py-3 text-sm text-white placeholder-[#4A5063] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus:border-[#C6A15B]/50 transition-colors"
+                      className="w-full bg-[#05070B] border border-[#1E293B] hover:border-slate-700/80 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-4 focus:ring-[#06B6D4]/15 focus:border-[#06B6D4] transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-[11px] uppercase tracking-wider text-[#6F7688] mb-1.5">
-                      Work Email <span className="text-[#C6A15B]" aria-hidden="true">*</span>
+                    <label htmlFor="contact-email" className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Work Email <span className="text-[#06B6D4]" aria-hidden="true">*</span>
                     </label>
                     <input
                       id="contact-email"
@@ -305,14 +311,14 @@ export default function Contact({ currentPath, navigateToNode }) {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="j.doe@enterprise.com"
-                      className="w-full bg-[#0A0E17] border border-[#232838] rounded-xl px-4 py-3 text-sm text-white placeholder-[#4A5063] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus:border-[#C6A15B]/50 transition-colors"
+                      className="w-full bg-[#05070B] border border-[#1E293B] hover:border-slate-700/80 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-4 focus:ring-[#06B6D4]/15 focus:border-[#06B6D4] transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="contact-subject" className="block text-[11px] uppercase tracking-wider text-[#6F7688] mb-1.5">
-                    Subject <span className="text-[#C6A15B]" aria-hidden="true">*</span>
+                  <label htmlFor="contact-subject" className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
+                    Subject <span className="text-[#06B6D4]" aria-hidden="true">*</span>
                   </label>
                   <input
                     id="contact-subject"
@@ -323,13 +329,13 @@ export default function Contact({ currentPath, navigateToNode }) {
                     value={formData.subject}
                     onChange={handleInputChange}
                     placeholder="e.g. Multi-tenant platform architecture"
-                    className="w-full bg-[#0A0E17] border border-[#232838] rounded-xl px-4 py-3 text-sm text-white placeholder-[#4A5063] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus:border-[#C6A15B]/50 transition-colors"
+                    className="w-full bg-[#05070B] border border-[#1E293B] hover:border-slate-700/80 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-4 focus:ring-[#06B6D4]/15 focus:border-[#06B6D4] transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-[11px] uppercase tracking-wider text-[#6F7688] mb-1.5">
-                    Project Details <span className="text-[#C6A15B]" aria-hidden="true">*</span>
+                  <label htmlFor="contact-message" className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
+                    Project Details <span className="text-[#06B6D4]" aria-hidden="true">*</span>
                   </label>
                   <textarea
                     id="contact-message"
@@ -340,7 +346,7 @@ export default function Contact({ currentPath, navigateToNode }) {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Tell us about scale, timeline, existing systems, and any integrations you'll need..."
-                    className="w-full bg-[#0A0E17] border border-[#232838] rounded-xl px-4 py-3 text-sm text-white placeholder-[#4A5063] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus:border-[#C6A15B]/50 transition-colors resize-none"
+                    className="w-full bg-[#05070B] border border-[#1E293B] hover:border-slate-700/80 rounded-xl px-4 py-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-4 focus:ring-[#06B6D4]/15 focus:border-[#06B6D4] transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] resize-none"
                   />
                 </div>
 
@@ -348,16 +354,26 @@ export default function Contact({ currentPath, navigateToNode }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full py-4 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#11151F] ${
+                    className={`w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] focus:ring-offset-2 focus:ring-offset-[#0F172A] ${
                       isSubmitting
-                        ? 'bg-[#1B2130] text-[#5A6172] cursor-not-allowed'
-                        : 'bg-[#ECE8DE] hover:bg-[#C6A15B] text-[#0A0E17] hover:shadow-[0_0_24px_rgba(198,161,91,0.25)]'
+                        ? 'bg-cyan-950 text-cyan-700 cursor-not-allowed shadow-none'
+                        : 'bg-[#06B6D4] hover:bg-cyan-400 text-black shadow-[0_4px_20px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] active:scale-[0.99]'
                     }`}
                   >
-                    {isSubmitting ? 'Sending…' : 'Send project details'}
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-3.5 w-3.5 text-cyan-700" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Verifying Transmission...
+                      </span>
+                    ) : (
+                      'Send project details'
+                    )}
                   </button>
-                  <p className="text-xs text-[#6F7688] text-center mt-3">
-                    Prefer email? Write to <a href={`mailto:${contactInfo.email}`} className="underline decoration-[#2A3040] underline-offset-4 hover:text-[#C6A15B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] rounded">{contactInfo.email}</a> directly.
+                  <p className="text-[10px] text-slate-500 text-center mt-4">
+                    Prefer email? Write to <a href={`mailto:${contactInfo.email}`} className="underline decoration-[#1E293B] hover:decoration-[#06B6D4]/50 hover:text-[#06B6D4] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded">{contactInfo.email}</a> directly.
                   </p>
                 </div>
               </form>
@@ -368,12 +384,12 @@ export default function Contact({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 5: COMPREHENSIVE INGRESS & PRIVACY FAQS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-[#1E2430] mt-12">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-[#1E293B] mt-12">
           <div className="max-w-3xl mb-12">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-[#C6A15B] mb-3 font-semibold">Common Questions</p>
-            <h2 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight text-white">Before you reach out</h2>
+            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#06B6D4] mb-3 font-semibold">Common Questions</p>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase">Before you reach out</h2>
           </div>
-          <div className="space-y-3 max-w-4xl">
+          <div className="space-y-4 max-w-4xl">
             {contactFaqs.map((faq, idx) => {
               const panelId = `faq-panel-${idx}`;
               const buttonId = `faq-button-${idx}`;
@@ -381,7 +397,7 @@ export default function Contact({ currentPath, navigateToNode }) {
               return (
                 <div
                   key={idx}
-                  className="rounded-xl border border-[#1E2430] bg-[#11151F]/40 overflow-hidden transition-colors hover:border-[#2A3040]"
+                  className="rounded-2xl border border-[#1E293B] bg-[#0F172A]/40 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-[#06B6D4]/30"
                 >
                   <h3>
                     <button
@@ -389,11 +405,11 @@ export default function Contact({ currentPath, navigateToNode }) {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => toggleFaq(idx)}
-                      className="w-full text-left p-5 flex items-center justify-between gap-4 text-sm sm:text-base font-semibold text-[#D8D4C9] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus-visible:ring-inset"
+                      className="w-full text-left p-6 flex items-center justify-between gap-4 text-sm sm:text-base font-bold text-slate-200 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-inset"
                     >
                       <span>{faq.q}</span>
                       <span
-                        className={`text-[#C6A15B] text-xl leading-none transition-transform duration-200 motion-reduce:transition-none ${isOpen ? 'rotate-45' : 'rotate-0'}`}
+                        className={`text-[#06B6D4] text-xl font-mono leading-none transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-45 text-red-400' : 'rotate-0'}`}
                         aria-hidden="true"
                       >
                         +
@@ -404,12 +420,12 @@ export default function Contact({ currentPath, navigateToNode }) {
                     id={panelId}
                     role="region"
                     aria-labelledby={buttonId}
-                    className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
                       isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-5 pb-5 pt-1 text-sm text-[#9BA1AF] leading-relaxed border-t border-[#1E2430]/60 mt-1">
+                      <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-400 leading-relaxed border-t border-[#1E293B]/60">
                         {faq.a}
                       </div>
                     </div>
@@ -421,15 +437,16 @@ export default function Contact({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 6: CLOSING HIGH-CONVERSION CALL TO ACTION CORE PANEL */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24 border-t border-[#1E2430]">
-          <div className="p-8 sm:p-14 rounded-3xl border border-[#1E2430] bg-gradient-to-br from-[#11151F] via-[#11151F] to-[#161B26] text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C6A15B]/[0.03] blur-[120px] pointer-events-none rounded-full" />
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24 border-t border-[#1E293B]">
+          <div className="p-8 sm:p-14 rounded-3xl border border-[#1E293B] bg-gradient-to-br from-[#0F172A] via-[#0F172A] to-[#1E293B]/50 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 relative overflow-hidden group hover:border-[#06B6D4]/20 transition-all duration-300 shadow-2xl shadow-black/50">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/[0.02] blur-[120px] pointer-events-none rounded-full" />
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/20 to-transparent" />
 
             <div className="max-w-2xl">
-              <h2 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight text-white mb-3">
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-3 uppercase">
                 Not ready to write a brief yet?
               </h2>
-              <p className="text-sm text-[#9BA1AF] leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 A short intro call works too — send a couple of lines through the form above and we'll take it from there.
               </p>
             </div>
@@ -437,7 +454,7 @@ export default function Contact({ currentPath, navigateToNode }) {
             <div className="flex-shrink-0">
               <button
                 onClick={() => { window.scrollTo({ top: 400, behavior: 'smooth' }); }}
-                className="bg-[#ECE8DE] hover:bg-[#C6A15B] text-[#0A0E17] px-8 py-4 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 hover:shadow-[0_0_24px_rgba(198,161,91,0.3)] whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0E17]"
+                className="bg-slate-100 hover:bg-[#06B6D4] text-[#05070B] px-8 py-4 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_24px_rgba(6,182,212,0.3)] whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070B] active:scale-[0.98]"
               >
                 Back to the form
               </button>
