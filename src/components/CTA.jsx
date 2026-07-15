@@ -119,7 +119,7 @@ export default function CTA() {
               </Link>
 
               <Link
-                to="/portfolio"
+                to="/work"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-9 py-4 bg-[#0F172A] border border-[#1E293B] hover:border-[#06B6D4]/40 hover:bg-[#111A2E] text-white font-semibold text-sm rounded-xl hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(6,182,212,0.12)] active:translate-y-0 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070B]"
                 aria-label="View OnyxStack Labs' enterprise software portfolio"
               >
