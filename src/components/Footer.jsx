@@ -58,109 +58,117 @@ export default function Footer({ siteConfig }) {
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 pb-16 items-stretch">
 
           {/* BRAND GLASS CARD */}
-          <div className="sm:col-span-2 lg:col-span-4 p-8 rounded-2xl border border-[#1E293B] bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 flex flex-col justify-between group">
-            <div className="space-y-5">
+          <div className="sm:col-span-2 lg:col-span-4 p-8 rounded-2xl border border-[#1E293B]/70 bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 flex flex-col justify-between group">
+            <div className="space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#06B6D4] shadow-[0_0_12px_rgba(6,182,212,0.8)] group-hover:animate-pulse" aria-hidden="true" />
                 <span className="text-sm font-black tracking-widest text-white uppercase font-sans">
                   {siteConfig?.agencyName || 'OnyxStack Labs'}
                 </span>
               </div>
-              <p className="text-[10px] font-mono text-[#06B6D4] uppercase tracking-[0.25em] font-bold">
-                Building Smarter Solutions
-              </p>
-              <p className="text-sm text-slate-400 leading-relaxed font-sans">
-                A premium enterprise software agency engineering custom platforms, cloud
-                infrastructure, and applied AI for businesses that plan to be around a long time.
-              </p>
+              <div className="space-y-3">
+                <p className="text-[10px] font-mono text-[#06B6D4] uppercase tracking-[0.25em] font-bold">
+                  Building Smarter Solutions
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed font-sans font-light">
+                  A premium enterprise software agency engineering custom platforms, cloud
+                  infrastructure, and applied AI for businesses that plan to be around a long time.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* QUICK LINKS GLASS CARD */}
           <nav 
-            className="lg:col-span-2 p-8 rounded-2xl border border-[#1E293B] bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 space-y-5" 
+            className="lg:col-span-2 p-8 rounded-2xl border border-[#1E293B]/70 bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 flex flex-col justify-between" 
             aria-label="Quick Links"
           >
-            <h3 className="text-[11px] uppercase tracking-[0.25em] text-slate-400 font-mono font-bold">
-              Quick Links
-            </h3>
-            <ul className="space-y-4 text-sm text-slate-400">
-              {quickLinks.map((link, idx) => (
-                <li key={idx}>
-                  <a
-                    href={link.target}
-                    onClick={(e) => handleFooterNavClick(e, link.target)}
-                    className="block hover:text-[#06B6D4] focus:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-colors duration-200 font-sans"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-6">
+              <h3 className="text-[11px] uppercase tracking-[0.25em] text-slate-400 font-mono font-bold">
+                Quick Links
+              </h3>
+              <ul className="space-y-4 text-sm text-slate-400">
+                {quickLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={link.target}
+                      onClick={(e) => handleFooterNavClick(e, link.target)}
+                      className="inline-block hover:text-[#06B6D4] hover:translate-x-1 hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] focus:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-all duration-300 font-sans font-medium"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </nav>
 
           {/* LEGAL GLASS CARD */}
           <nav 
-            className="lg:col-span-2 p-8 rounded-2xl border border-[#1E293B] bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 space-y-5" 
+            className="lg:col-span-2 p-8 rounded-2xl border border-[#1E293B]/70 bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 flex flex-col justify-between" 
             aria-label="Legal"
           >
-            <h3 className="text-[11px] uppercase tracking-[0.25em] text-slate-400 font-mono font-bold">
-              Legal
-            </h3>
-            <ul className="space-y-4 text-sm text-slate-400">
-              {legalLinks.map((link, idx) => (
-                <li key={idx}>
-                  <a
-                    href={link.target}
-                    className="block hover:text-[#06B6D4] focus:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-colors duration-200 font-sans"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-6">
+              <h3 className="text-[11px] uppercase tracking-[0.25em] text-slate-400 font-mono font-bold">
+                Legal
+              </h3>
+              <ul className="space-y-4 text-sm text-slate-400">
+                {legalLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={link.target}
+                      className="inline-block hover:text-[#06B6D4] hover:translate-x-1 hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] focus:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-all duration-300 font-sans font-medium"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </nav>
 
           {/* CONTACT GLASS CARD */}
           <section 
-            className="lg:col-span-4 p-8 rounded-2xl border border-[#1E293B] bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 space-y-5" 
+            className="lg:col-span-4 p-8 rounded-2xl border border-[#1E293B]/70 bg-[#0F172A]/40 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.08),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:-translate-y-1 hover:bg-[#0F172A]/60 flex flex-col justify-between" 
             aria-label="Contact Information"
           >
-            <h3 className="text-[11px] uppercase tracking-[0.25em] text-slate-400 font-mono font-bold">
-              Contact
-            </h3>
-            <div className="space-y-4">
-              <div>
-                <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1.5 font-bold">Email</span>
-                <a
-                  href={`mailto:${email}`}
-                  className="text-sm text-white hover:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-colors duration-200 break-all font-sans font-medium"
-                >
-                  {email}
-                </a>
-              </div>
-              
-              <div>
-                <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1.5 font-bold">Phone / WhatsApp</span>
-                <a
-                  href={`tel:${phone.replace(/\s+/g, '')}`}
-                  className="text-sm text-white hover:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-colors duration-200 font-sans font-medium"
-                >
-                  {phone}
-                </a>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4 pt-1 border-t border-[#1E293B]/60">
+            <div className="space-y-6">
+              <h3 className="text-[11px] uppercase tracking-[0.25em] text-slate-400 font-mono font-bold">
+                Contact
+              </h3>
+              <div className="space-y-5">
                 <div>
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1 font-bold">Website</span>
-                  <span className="text-sm text-slate-300 font-mono text-[13px]">{website}</span>
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1 font-bold">Email</span>
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-sm text-white/90 hover:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-colors duration-200 break-all font-sans font-semibold tracking-wide"
+                  >
+                    {email}
+                  </a>
                 </div>
+                
                 <div>
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1 font-bold">Headquarters</span>
-                  <span className="text-sm text-slate-300 font-sans">{siteConfig?.headquarters || 'Pakistan'}</span>
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1 font-bold">Phone / WhatsApp</span>
+                  <a
+                    href={`tel:${phone.replace(/\s+/g, '')}`}
+                    className="text-sm text-white/90 hover:text-[#06B6D4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] rounded transition-colors duration-200 font-sans font-semibold tracking-wide"
+                  >
+                    {phone}
+                  </a>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#1E293B]/60">
+                  <div>
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1 font-bold">Website</span>
+                    <span className="text-sm text-slate-300 font-mono text-[13px] font-medium">{website}</span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-[#06B6D4] block mb-1 font-bold">Headquarters</span>
+                    <span className="text-sm text-slate-300 font-sans font-medium">{siteConfig?.headquarters || 'Pakistan'}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -168,7 +176,7 @@ export default function Footer({ siteConfig }) {
         </div>
 
         {/* SOCIAL + COPYRIGHT STRIP */}
-        <div className="border-t border-[#1E293B] pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="border-t border-[#1E293B] mt-6 pt-10 flex flex-col sm:flex-row justify-between items-center gap-6">
 
           <nav
             className="flex flex-wrap items-center justify-center gap-3.5"
@@ -179,7 +187,7 @@ export default function Footer({ siteConfig }) {
               href="https://github.com/onyxstacklabs"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+              className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
               aria-label="OnyxStack Labs on GitHub"
             >
               <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -193,7 +201,7 @@ export default function Footer({ siteConfig }) {
                 href={siteConfig.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
                 aria-label="OnyxStack Labs on LinkedIn"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -208,7 +216,7 @@ export default function Footer({ siteConfig }) {
                 href={siteConfig.socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
                 aria-label="OnyxStack Labs on Facebook"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -223,7 +231,7 @@ export default function Footer({ siteConfig }) {
                 href={siteConfig.socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
                 aria-label="OnyxStack Labs on Instagram"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -238,7 +246,7 @@ export default function Footer({ siteConfig }) {
                 href={siteConfig.socialLinks.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
                 aria-label="OnyxStack Labs on YouTube"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -253,7 +261,7 @@ export default function Footer({ siteConfig }) {
                 href={siteConfig.socialLinks.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
                 aria-label="OnyxStack Labs on TikTok"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -268,7 +276,7 @@ export default function Footer({ siteConfig }) {
                 href={siteConfig.socialLinks.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-[#06B6D4] hover:text-cyan-300 hover:border-[#06B6D4]/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-[#1E293B] bg-[#0F172A]/40 text-[#06B6D4] hover:text-cyan-300 hover:border-[#06B6D4]/80 hover:scale-[1.06] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] transition-all duration-300 backdrop-blur-sm"
                 aria-label="OnyxStack Labs on WhatsApp"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
