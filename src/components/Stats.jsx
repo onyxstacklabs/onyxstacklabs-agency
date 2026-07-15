@@ -163,35 +163,39 @@ export default function Stats() {
 
   return (
     <section
-      className="relative w-full py-20 lg:py-28 bg-[#0A0E17] overflow-hidden"
+      className="relative w-full py-24 lg:py-32 bg-[#05070B] overflow-hidden"
       aria-labelledby="stats-heading"
     >
-      {/* Ambient background glow, consistent with the rest of the site */}
+      {/* High-fidelity layered ambient background glows */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-[#C6A15B]/[0.05] to-[#6E8BB0]/[0.05] blur-[140px] rounded-full pointer-events-none"
+        className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-[#C6A15B]/[0.06] to-transparent blur-[120px] rounded-full pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#4B627E]/[0.07] to-transparent blur-[140px] rounded-full pointer-events-none"
         aria-hidden="true"
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         {/* SECTION HEADER */}
-        <div className="flex flex-col items-center text-center space-y-5 mb-16 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#11151F] border border-[#1E2430] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C6A15B]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B]" aria-hidden="true" />
+        <div className="flex flex-col items-center text-center space-y-6 mb-20 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0D111A]/80 border border-[#1E2533] text-[10px] font-bold uppercase tracking-[0.25em] text-[#C6A15B] shadow-inner shadow-black/40 backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B] animate-pulse" aria-hidden="true" />
             Our Impact
           </div>
 
           <h2
             id="stats-heading"
-            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.1] text-white"
+            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.15] text-white"
           >
             Driving Measurable{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#C6A15B] via-[#D9C08B] to-[#6E8BB0]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#C6A15B] via-[#E2C792] to-[#8FAACF]">
               Results
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#9BA1AF] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#949FAF] leading-relaxed max-w-2xl">
             OnyxStack Labs focuses on performance, reliability, and software that scales — every
             number below reflects work our clients depend on in production.
           </p>
@@ -199,7 +203,7 @@ export default function Stats() {
 
         {/* METRICS GRID */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full"
           role="region"
           aria-label="OnyxStack Labs performance statistics"
         >
@@ -210,46 +214,65 @@ export default function Stats() {
                 key={idx}
                 ref={metric.ref}
                 tabIndex={0}
-                className="group relative flex flex-col justify-between p-7 sm:p-8 rounded-2xl bg-[#11151F]/60 border border-[#1E2430] transition-all duration-300 ease-out outline-none hover:-translate-y-1.5 hover:border-[#C6A15B]/40 focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus-visible:border-[#C6A15B]/50 motion-reduce:hover:translate-y-0"
+                className="group relative flex flex-col justify-between p-8 rounded-2xl bg-gradient-to-b from-[#0D111A]/90 to-[#090C12]/95 border border-[#1A202C] shadow-2xl shadow-black/80 transition-all duration-500 ease-out outline-none hover:-translate-y-2 hover:border-[#C6A15B]/30 hover:shadow-[0_20px_50px_rgba(5,7,11,0.9)] focus-visible:ring-2 focus-visible:ring-[#C6A15B]/50 focus-visible:border-[#C6A15B]/50 motion-reduce:hover:translate-y-0 will-change-transform"
               >
-                {/* Internal accent glow */}
+                {/* Premium Inner Glow Mask */}
                 <div
-                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,rgba(198,161,91,0.05),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.015] to-transparent pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                {/* Internal accent hover glow */}
+                <div
+                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(800px_circle_at_var(--mouse-x,0px)_var(--mouse-y,0px),rgba(198,161,91,0.04),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at top left, rgba(198, 161, 91, 0.05) 0%, transparent 60%)'
+                  }}
                   aria-hidden="true"
                 />
 
                 <div className="relative z-10">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#C6A15B]/10 border border-[#C6A15B]/20 text-[#C6A15B] mb-5 transition-transform duration-300 group-hover:scale-110">
-                    <Icon className="w-4.5 h-4.5" aria-hidden="true" />
+                  {/* Icon Container with sophisticated gradient ring */}
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#121824] to-[#0A0D14] border border-[#242C3C] text-[#C6A15B] mb-6 transition-all duration-500 group-hover:scale-105 group-hover:border-[#C6A15B]/40 group-hover:text-[#E2C792] group-hover:shadow-[0_0_15px_rgba(198,161,91,0.15)]">
+                    <Icon className="w-5 h-5 transition-transform duration-500 group-hover:rotate-[3deg]" aria-hidden="true" />
                   </div>
 
-                  <div className="font-serif text-4xl sm:text-5xl font-semibold tracking-tight text-white tabular-nums group-hover:text-[#C6A15B] transition-colors duration-300">
+                  {/* Stat Value */}
+                  <div className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-white tabular-nums group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[#D9C08B] transition-all duration-500">
                     {metric.value}
                   </div>
 
-                  <div className="mt-2 text-base font-semibold text-[#D8D4C9] tracking-tight">
+                  {/* Label */}
+                  <div className="mt-3.5 text-base font-semibold text-[#E5E1D8] tracking-tight transition-colors duration-300 group-hover:text-white">
                     {metric.label}
                   </div>
 
-                  <p className="mt-1.5 text-sm text-[#9BA1AF] leading-relaxed">
+                  {/* Description */}
+                  <p className="mt-2 text-sm text-[#8A93A6] leading-relaxed font-normal transition-colors duration-300 group-hover:text-[#A1AAC0]">
                     {metric.desc}
                   </p>
                 </div>
 
-                {/* Bottom divider accent */}
-                <div className="relative z-10 mt-6 pt-4 border-t border-[#1E2430] flex items-center justify-between">
-                  <span className="text-[11px] uppercase tracking-wider text-[#6F7688]">
+                {/* Premium Border-Bottom Accent & Footer Card Divider */}
+                <div className="relative z-10 mt-8 pt-5 border-t border-[#181E2B] flex items-center justify-between transition-colors duration-500 group-hover:border-[#222B3D]">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#5F6779] transition-colors duration-300 group-hover:text-[#8894AD]">
                     Live Metric
                   </span>
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#3A4152] group-hover:bg-[#C6A15B] group-hover:shadow-[0_0_8px_rgba(198,161,91,0.6)] transition-all duration-300"
-                    aria-hidden="true"
-                  />
+                  <div className="relative flex items-center justify-center w-2 h-2">
+                    <span
+                      className="absolute w-1.5 h-1.5 rounded-full bg-[#2A3142] group-hover:bg-[#C6A15B] transition-all duration-500"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="absolute w-3.5 h-3.5 rounded-full bg-[#C6A15B]/0 group-hover:bg-[#C6A15B]/10 group-hover:animate-ping transition-all duration-500"
+                      aria-hidden="true"
+                    />
+                  </div>
                 </div>
 
-                {/* Outer gradient border glow on hover */}
+                {/* Edge Glow Overlay */}
                 <div
-                  className="absolute -inset-px rounded-2xl bg-gradient-to-b from-[#C6A15B]/15 via-transparent to-[#6E8BB0]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-sm -z-10"
+                  className="absolute -inset-px rounded-2xl border border-transparent group-hover:border-[#C6A15B]/20 transition-colors duration-500 pointer-events-none -z-10"
                   aria-hidden="true"
                 />
               </div>
