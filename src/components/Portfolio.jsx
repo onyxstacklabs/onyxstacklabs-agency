@@ -182,6 +182,15 @@ function ProjectImage({ src, alt, onOpen }) {
   );
 }
 
+/*
+  ProjectLightbox
+  ---------------
+  The Android/browser "Back" behaviour is handled entirely at the Portfolio
+  parent level (see openLightbox / closeLightbox / popstate listener below).
+  This component is purely presentational — every close trigger inside it
+  (X button, backdrop click) calls the single `onClose` prop, which always
+  resolves through the same history-aware close path.
+*/
 function ProjectLightbox({ image, onClose }) {
   useEffect(() => {
     if (!image) return undefined;
@@ -191,11 +200,12 @@ function ProjectLightbox({ image, onClose }) {
     };
 
     document.addEventListener('keydown', handleKeyDown);
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
     };
   }, [image, onClose]);
 
@@ -211,7 +221,7 @@ function ProjectLightbox({ image, onClose }) {
     >
       <button
         type="button"
-        onClick={onClose}
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
         aria-label="Close image preview"
         className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-neutral-900/80 border border-neutral-700 text-neutral-300 hover:text-white hover:border-[#06B6D4]/50 hover:bg-neutral-800 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4]"
       >
@@ -223,28 +233,30 @@ function ProjectLightbox({ image, onClose }) {
         src={image.src}
         alt={image.alt}
         onClick={(e) => e.stopPropagation()}
-        className="max-w-full max-h-[85vh] rounded-2xl border border-neutral-800 shadow-[0_25px_60px_rgba(0,0,0,0.7)] object-contain"
+        className="max-w-full max-h-[85vh] rounded-2xl border border-neutral-800 shadow-[0_25px_60px_rgba(0,0,0,0.7)] object-contain animate-[lightboxScaleIn_0.25s_ease-out]"
       />
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes lightboxScaleIn {
+          from { opacity: 0; transform: scale(0.96); }
+          to { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
     </div>
   );
 }
 
-function ActionButton({ href, label, variant, icon }) {
-  const baseClasses =
-    'flex-1 flex items-center justify-center gap-2 rounded-xl px-4 py-3 font-mono font-bold text-[11px] uppercase tracking-widest text-center transition-all duration-300 ease-out backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]';
-
-  const variantClasses =
-    variant === 'primary'
-      ? 'bg-gradient-to-r from-[#06B6D4] to-[#2563EB] text-black border border-transparent hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] hover:-translate-y-0.5'
-      : 'bg-neutral-900/60 text-neutral-300 border border-neutral-800 hover:border-[#06B6D4]/40 hover:text-white hover:bg-neutral-900/90 hover:-translate-y-0.5';
-
+function ActionButton({ href, label, icon }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className={`${baseClasses} ${variantClasses}`}
+      className="w-full flex items-center justify-center gap-2 rounded-xl px-4 py-3 font-mono font-bold text-[11px] uppercase tracking-widest text-center transition-all duration-300 ease-out backdrop-blur-sm bg-gradient-to-r from-[#06B6D4] to-[#2563EB] text-black border border-transparent hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
     >
       {icon}
       <span>{label}</span>
@@ -254,13 +266,41 @@ function ActionButton({ href, label, variant, icon }) {
 
 export default function Portfolio() {
   const [lightboxImage, setLightboxImage] = useState(null);
+  // Tracks whether the currently-open lightbox pushed its own history entry,
+  // so closeLightbox() knows whether to pop it via history.back().
+  const pushedHistoryRef = useRef(false);
 
   const openLightbox = useCallback((src, alt) => {
     setLightboxImage({ src, alt });
+    window.history.pushState({ portfolioLightbox: true }, '');
+    pushedHistoryRef.current = true;
   }, []);
 
   const closeLightbox = useCallback(() => {
-    setLightboxImage(null);
+    if (pushedHistoryRef.current) {
+      // Pop the dummy history entry we pushed on open. This triggers the
+      // popstate listener below, which performs the actual state close —
+      // keeping the Android back-button path and the X/ESC/outside-click
+      // paths perfectly in sync, with zero real navigation.
+      pushedHistoryRef.current = false;
+      window.history.back();
+    } else {
+      setLightboxImage(null);
+    }
+  }, []);
+
+  // Single source of truth for closing on Android/browser Back button.
+  // popstate fires when the user presses Back (consuming our dummy entry)
+  // and also when closeLightbox() calls history.back() itself — either way
+  // it only ever clears the lightbox state, never leaves the page.
+  useEffect(() => {
+    const handlePopState = () => {
+      setLightboxImage(null);
+      pushedHistoryRef.current = false;
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   return (
@@ -329,29 +369,17 @@ export default function Portfolio() {
                 onOpen={openLightbox}
               />
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <ActionButton
-                  href={project.liveUrl}
-                  label="View Live Demo"
-                  variant="primary"
-                  icon={
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                    </svg>
-                  }
-                />
-                <ActionButton
-                  href={project.githubUrl}
-                  label="View GitHub Repository"
-                  variant="secondary"
-                  icon={
-                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                    </svg>
-                  }
-                />
-              </div>
+              {/* Action Button — Live Demo only; GitHub button removed
+                  (official GitHub profile already lives in site-wide social icons) */}
+              <ActionButton
+                href={project.liveUrl}
+                label="View Live Demo"
+                icon={
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
+                }
+              />
 
               {/* Technology Stack */}
               <div className="flex flex-wrap gap-1.5 pt-4 border-t border-neutral-900/60">
