@@ -117,6 +117,116 @@ const IconArrowUpRight = (props) => (
   </svg>
 );
 
+// Minimalist inline SVG Icons for Stats Cards
+const IconTrendUp = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+    <polyline points="17 6 23 6 23 12" />
+  </svg>
+);
+
+const IconHeart = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+  </svg>
+);
+
+const IconClock = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const IconActivity = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </svg>
+);
+
+// Tech Stack Minimal SVGs mapping
+const techStackDetails = [
+  {
+    name: 'React',
+    icon: (props) => (
+      <svg viewBox="-11.5 -10.23174 23 20.46348" fill="none" stroke="currentColor" strokeWidth="1" {...props}>
+        <circle cx="0" cy="0" r="2.05" fill="currentColor"/>
+        <g stroke="currentColor">
+          <ellipse rx="11" ry="4.2"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+        </g>
+      </svg>
+    )
+  },
+  {
+    name: 'Firebase',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M5 3.5L19 7l-2 13.5L12 22l-5-1.5L5 3.5z" />
+        <path d="M12 10l-4 4.5h8L12 10z" />
+      </svg>
+    )
+  },
+  {
+    name: 'Node.js',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M12 2L3.5 7v10L12 22l8.5-5V7L12 2z" />
+        <path d="M12 22V12" />
+        <path d="M3.5 7L12 12" />
+        <path d="M20.5 7L12 12" />
+      </svg>
+    )
+  },
+  {
+    name: 'MongoDB',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M12 2c0 0-4 4.5-4 9.5C8 16 10 18 12 22c2-4 4-6 4-10.5C16 6.5 12 2 12 2z" />
+        <path d="M12 2v20" />
+      </svg>
+    )
+  },
+  {
+    name: 'Gemini AI',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M12 2v20M2 12h20M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" />
+      </svg>
+    )
+  },
+  {
+    name: 'Vercel',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <polygon points="12 2 22 20 2 20" />
+      </svg>
+    )
+  },
+  {
+    name: 'Tailwind CSS',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M12 16c-3 0-5.5-1.5-7-4 1.5-2.5 4-4 7-4s5.5 1.5 7 4c-1.5 2.5-4 4-7 4z" />
+        <circle cx="12" cy="12" r="2.5" />
+      </svg>
+    )
+  },
+  {
+    name: 'Git',
+    icon: (props) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="18" cy="18" r="3" />
+        <circle cx="6" cy="6" r="3" />
+        <line x1="6" y1="9" x2="6" y2="18" />
+        <line x1="9" y1="12" x2="15" y2="18" />
+      </svg>
+    )
+  }
+];
+
 export default function Clients() {
   const trustCards = [
     {
@@ -151,17 +261,39 @@ export default function Clients() {
     }
   ];
 
-  const techStack = ['React', 'Firebase', 'Node.js', 'MongoDB', 'Gemini AI', 'Vercel', 'Tailwind CSS', 'Git'];
-
   const [projectsRef, projectsValue] = useCountUp(120);
   const [satisfactionRef, satisfactionValue] = useCountUp(98);
   const [responseRef, responseValue] = useCountUp(12);
 
   const stats = [
-    { ref: projectsRef, value: `${projectsValue}+`, label: 'Projects Delivered' },
-    { ref: satisfactionRef, value: `${satisfactionValue}%`, label: 'Client Satisfaction' },
-    { ref: responseRef, value: `<${responseValue}h`, label: 'Avg. Response Time' },
-    { ref: null, value: '24/7', label: 'Ongoing Support' }
+    { 
+      ref: projectsRef, 
+      value: `${projectsValue}+`, 
+      label: 'DELIVERED PROJECTS', 
+      desc: 'Production-ready solutions deployed globally.', 
+      icon: IconTrendUp 
+    },
+    { 
+      ref: satisfactionRef, 
+      value: `${satisfactionValue}%`, 
+      label: 'CLIENT SATISFACTION', 
+      desc: 'Long-term corporate enterprise partnerships.', 
+      icon: IconHeart 
+    },
+    { 
+      ref: responseRef, 
+      value: `<${responseValue}h`, 
+      label: 'RESPONSE LATENCY', 
+      desc: 'SLA-driven technical support responsiveness.', 
+      icon: IconClock 
+    },
+    { 
+      ref: null, 
+      value: '24/7', 
+      label: 'ONGOING SUPPORT', 
+      desc: 'Continuous infrastructure and code monitoring.', 
+      icon: IconActivity 
+    }
   ];
 
   return (
@@ -254,51 +386,80 @@ export default function Clients() {
           })}
         </div>
 
-        {/* STATISTICS ROW */}
+        {/* STATISTICS ROW REDESIGNED AS PREMIUM INDEPENDENT ENTERPRISE CARDS */}
         <div
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 px-8 sm:px-12 rounded-2xl border border-white/[0.08] bg-[#090909] mb-24 relative overflow-hidden"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-24"
           role="group"
           aria-label="OnyxStack Labs performance statistics"
         >
-          {/* Subtle line background glow */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#06B6D4]/[0.02] to-transparent pointer-events-none" aria-hidden="true" />
-          
-          {stats.map((stat, index) => (
-            <div 
-              key={index} 
-              ref={stat.ref} 
-              className="group flex flex-col items-center text-center relative transition-all duration-300 hover:scale-[1.03]"
-            >
-              <span className="font-sans text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300 tabular-nums tracking-tight">
-                {stat.value}
-              </span>
-              <span className="mt-3 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4]">
-                {stat.label}
-              </span>
-            </div>
-          ))}
+          {stats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            return (
+              <div 
+                key={index} 
+                ref={stat.ref} 
+                className="group relative flex flex-col justify-between p-6 rounded-2xl bg-[#090909] border border-white/[0.06] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#06B6D4]/35 hover:shadow-[0_12px_40px_-12px_rgba(6,182,212,0.12)]"
+              >
+                {/* Subtle Inner Gradient Finish */}
+                <div 
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none" 
+                  aria-hidden="true" 
+                />
+                
+                {/* Dynamic Cyber Glow Spotlight */}
+                <div 
+                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(6,182,212,0.02),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
+                  aria-hidden="true" 
+                />
+
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4]">
+                      {stat.label}
+                    </span>
+                    <div className="text-neutral-500 transition-all duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">
+                      <IconComponent className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
+                    </div>
+                  </div>
+
+                  <div className="mt-2">
+                    <span className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300 tabular-nums tracking-tight">
+                      {stat.value}
+                    </span>
+                    <p className="mt-2 text-xs text-neutral-500 leading-relaxed font-light group-hover:text-neutral-400 transition-colors duration-300">
+                      {stat.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* TECH STACK STRIP */}
+        {/* TECH STACK STRIP REDESIGNED AS ENTERPRISE BADGES */}
         <div className="flex flex-col items-center gap-6">
           <span className="text-[11px] uppercase tracking-[0.25em] text-neutral-500 font-bold">
             Built With Tools We Trust
           </span>
           <div
-            className="flex flex-wrap items-center justify-center gap-3 max-w-4xl"
+            className="flex flex-wrap items-center justify-center gap-3.5 max-w-4xl"
             role="list"
             aria-label="Technologies used by OnyxStack Labs"
           >
-            {techStack.map((tech, index) => (
-              <span
-                key={index}
-                role="listitem"
-                tabIndex={0}
-                className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-neutral-400 bg-[#090909] border border-white/[0.08] transition-all duration-300 outline-none hover:text-white hover:border-[#06B6D4]/35 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] cursor-default motion-reduce:hover:translate-y-0"
-              >
-                {tech}
-              </span>
-            ))}
+            {techStackDetails.map((tech, index) => {
+              const TechIcon = tech.icon;
+              return (
+                <div
+                  key={index}
+                  role="listitem"
+                  tabIndex={0}
+                  className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-semibold text-neutral-400 bg-[#090909] border border-white/[0.06] backdrop-blur-md transition-all duration-300 outline-none hover:text-white hover:border-[#06B6D4]/35 hover:scale-[1.04] hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] cursor-default"
+                >
+                  <TechIcon className="w-4 h-4 text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_5px_rgba(6,182,212,0.5)]" />
+                  <span className="tracking-wide">{tech.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
