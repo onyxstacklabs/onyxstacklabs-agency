@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 /**
  * Clients Component
- * Enterprise trust section for OnyxStack Labs — consistent with the site's
- * ink / brass / slate-blue design system established across the product.
- * Icons are inline SVGs — no external icon package required.
+ * Enterprise trust section for OnyxStack Labs — completely refactored to align with
+ * the modern high-performance cyan/blue dark mode design language.
+ * Icons are optimized inline SVGs — zero external dependency overhead.
  */
 
 // Count-up hook: animates a numeric value from 0 to `end` once the element
@@ -66,7 +66,7 @@ function useCountUp(end, { duration = 1600, decimals = 0 } = {}) {
   return [ref, display];
 }
 
-// Lightweight inline SVG icon set (no external dependency)
+// Lightweight inline SVG icon set (highly optimized and modernized)
 const IconCode = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
     <polyline points="16 18 22 12 16 6" />
@@ -166,39 +166,43 @@ export default function Clients() {
 
   return (
     <section
-      className="relative w-full py-20 lg:py-28 bg-[#0A0E17] overflow-hidden"
+      className="relative w-full py-24 lg:py-36 bg-[#050505] overflow-hidden"
       aria-labelledby="clients-heading"
     >
-      {/* Ambient background glow, consistent with the rest of the site */}
+      {/* Premium Ambient Background Glows */}
       <div
-        className="absolute top-1/3 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#C6A15B]/[0.05] blur-[130px] rounded-full pointer-events-none"
+        className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-[#06B6D4]/[0.03] blur-[150px] rounded-full pointer-events-none select-none"
         aria-hidden="true"
       />
       <div
-        className="absolute top-1/2 right-1/5 -translate-y-1/2 w-80 h-80 bg-[#6E8BB0]/[0.06] blur-[110px] rounded-full pointer-events-none"
+        className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#2563EB]/[0.03] blur-[170px] rounded-full pointer-events-none select-none"
         aria-hidden="true"
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         {/* SECTION HEADER */}
-        <div className="flex flex-col items-center text-center space-y-5 mb-16 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#11151F] border border-[#1E2430] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C6A15B]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B] motion-safe:animate-pulse" aria-hidden="true" />
+        <div className="flex flex-col items-center text-center space-y-6 mb-20 max-w-3xl mx-auto">
+          {/* Premium Glass Badge */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#06B6D4] backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:border-[#06B6D4]/30 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all duration-300">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06B6D4] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#06B6D4]"></span>
+            </span>
             Trusted By Growing Teams
           </div>
 
           <h2
             id="clients-heading"
-            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.1] text-white"
+            className="font-sans text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-white"
           >
             Trusted by Businesses{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#C6A15B] via-[#D9C08B] to-[#6E8BB0]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#06B6D4] via-[#3B82F6] to-[#2563EB]">
               Building for the Future
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#9BA1AF] leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl font-light">
             OnyxStack Labs designs and ships scalable software, custom automation, and resilient cloud
             infrastructure for startups, established SMEs, and enterprise teams alike.
           </p>
@@ -206,7 +210,7 @@ export default function Clients() {
 
         {/* TRUST CARDS GRID */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 w-full mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-24"
           role="list"
           aria-label="Services OnyxStack Labs delivers"
         >
@@ -217,33 +221,33 @@ export default function Clients() {
                 key={index}
                 role="listitem"
                 tabIndex={0}
-                className="group relative flex flex-col p-6 rounded-2xl bg-[#11151F]/70 border border-[#1E2430] transition-all duration-300 ease-out outline-none hover:-translate-y-1.5 hover:border-[#C6A15B]/40 focus-visible:ring-2 focus-visible:ring-[#C6A15B] focus-visible:border-[#C6A15B]/50 motion-reduce:hover:translate-y-0"
+                className="group relative flex flex-col p-8 rounded-2xl bg-[#090909] border border-white/[0.08] transition-all duration-300 ease-out outline-none hover:-translate-y-1.5 hover:border-[#06B6D4]/35 hover:shadow-[0_12px_40px_-12px_rgba(6,182,212,0.12)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:border-[#06B6D4]/50 motion-reduce:hover:translate-y-0"
               >
-                {/* Gradient accent bar */}
+                {/* Micro Top Accent Bar */}
                 <div
-                  className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-[#C6A15B]/0 to-transparent group-hover:via-[#C6A15B]/70 transition-all duration-500"
+                  className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#06B6D4]/50 transition-all duration-500"
                   aria-hidden="true"
                 />
 
-                {/* Soft glow on hover */}
+                {/* Cyber Glow Accent */}
                 <div
-                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(198,161,91,0.06),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(6,182,212,0.03),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   aria-hidden="true"
                 />
 
-                <div className="relative z-10">
-                  <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#C6A15B]/10 border border-[#C6A15B]/20 text-[#C6A15B] mb-5 transition-transform duration-300 group-hover:scale-110">
-                    <Icon className="w-5 h-5" aria-hidden="true" />
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.08] text-[#06B6D4] mb-6 transition-all duration-300 group-hover:bg-[#06B6D4]/10 group-hover:border-[#06B6D4]/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                    <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-1.5">
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-1.5">
                     {card.title}
                     <IconArrowUpRight
-                      className="w-3.5 h-3.5 text-[#6F7688] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                      className="w-4 h-4 text-neutral-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                       aria-hidden="true"
                     />
                   </h3>
-                  <p className="text-sm text-[#9BA1AF] leading-relaxed">{card.desc}</p>
+                  <p className="text-sm text-neutral-400 leading-relaxed font-light">{card.desc}</p>
                 </div>
               </div>
             );
@@ -252,16 +256,23 @@ export default function Clients() {
 
         {/* STATISTICS ROW */}
         <div
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 py-10 px-6 sm:px-10 rounded-2xl border border-[#1E2430] bg-[#11151F]/50 mb-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 px-8 sm:px-12 rounded-2xl border border-white/[0.08] bg-[#090909] mb-24 relative overflow-hidden"
           role="group"
           aria-label="OnyxStack Labs performance statistics"
         >
+          {/* Subtle line background glow */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#06B6D4]/[0.02] to-transparent pointer-events-none" aria-hidden="true" />
+          
           {stats.map((stat, index) => (
-            <div key={index} ref={stat.ref} className="flex flex-col items-center text-center">
-              <span className="font-serif text-3xl sm:text-4xl font-semibold text-white tabular-nums">
+            <div 
+              key={index} 
+              ref={stat.ref} 
+              className="group flex flex-col items-center text-center relative transition-all duration-300 hover:scale-[1.03]"
+            >
+              <span className="font-sans text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300 tabular-nums tracking-tight">
                 {stat.value}
               </span>
-              <span className="mt-1.5 text-[11px] sm:text-xs uppercase tracking-wider text-[#6F7688]">
+              <span className="mt-3 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4]">
                 {stat.label}
               </span>
             </div>
@@ -269,12 +280,12 @@ export default function Clients() {
         </div>
 
         {/* TECH STACK STRIP */}
-        <div className="flex flex-col items-center gap-5">
-          <span className="text-[11px] uppercase tracking-[0.2em] text-[#6F7688] font-semibold">
+        <div className="flex flex-col items-center gap-6">
+          <span className="text-[11px] uppercase tracking-[0.25em] text-neutral-500 font-bold">
             Built With Tools We Trust
           </span>
           <div
-            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+            className="flex flex-wrap items-center justify-center gap-3 max-w-4xl"
             role="list"
             aria-label="Technologies used by OnyxStack Labs"
           >
@@ -283,7 +294,7 @@ export default function Clients() {
                 key={index}
                 role="listitem"
                 tabIndex={0}
-                className="px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-[#9BA1AF] bg-[#11151F] border border-[#1E2430] transition-all duration-300 outline-none hover:text-white hover:border-[#C6A15B]/40 hover:-translate-y-0.5 hover:shadow-[0_0_16px_rgba(198,161,91,0.15)] focus-visible:ring-2 focus-visible:ring-[#C6A15B] cursor-default motion-reduce:hover:translate-y-0"
+                className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-neutral-400 bg-[#090909] border border-white/[0.08] transition-all duration-300 outline-none hover:text-white hover:border-[#06B6D4]/35 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] cursor-default motion-reduce:hover:translate-y-0"
               >
                 {tech}
               </span>
