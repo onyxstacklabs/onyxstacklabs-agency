@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /*.json$
 Disallow: /cgi-bin/
 
-Sitemap: https://onyxstacklabs-agency.vercel.app/sitemap.xml
+Sitemap: https://onyxstacklabs.com/sitemap.xml
