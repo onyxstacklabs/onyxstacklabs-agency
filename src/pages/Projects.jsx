@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
@@ -6,6 +7,23 @@ import { siteConfig } from '../config/siteConfig';
 // MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
+// SELECTION CORNER FRAMER VARIANT COEFFICIENTS
+const fxFadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
+
+const fxStaggerContainer = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.04 } }
+};
+
+const fxTabPanelVariant = {
+  hidden: { opacity: 0, scale: 0.98, y: 10 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, scale: 0.99, y: -5, transition: { duration: 0.2, ease: 'easeIn' } }
+};
 
 export default function Projects({ currentPath, navigateToNode }) {
   const [activeCase, setActiveCase] = useState(0);
@@ -31,7 +49,8 @@ export default function Projects({ currentPath, navigateToNode }) {
       ],
       stack: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
       benefits: "Reduced administrative operational processing latency by 64% and completely eliminated localized database downtime records across all target campus networks.",
-      accent: "from-cyan-500/20 to-blue-600/5"
+      accent: "from-cyan-500/20 to-blue-600/5",
+      metric: "64% Latency Reduction"
     },
     {
       name: "OnyxStack Tailors",
@@ -47,7 +66,8 @@ export default function Projects({ currentPath, navigateToNode }) {
       ],
       stack: ["React", "Firebase", "Express.js", "Vite"],
       benefits: "Lowered production material waste margins below 2% within ninety days and cut fulfillment turnaround cycles by an average of four business days.",
-      accent: "from-purple-500/20 to-indigo-600/5"
+      accent: "from-purple-500/20 to-indigo-600/5",
+      metric: "<2% Material Waste"
     },
     {
       name: "OnyxStack GatePass",
@@ -63,7 +83,8 @@ export default function Projects({ currentPath, navigateToNode }) {
       ],
       stack: ["React", "Node.js", "MongoDB", "Git"],
       benefits: "Achieved immediate identity verification response times (~180ms) and established perfect compliance tracking for enterprise data center security audits.",
-      accent: "from-emerald-500/20 to-teal-600/5"
+      accent: "from-emerald-500/20 to-teal-600/5",
+      metric: "~180ms Auth Speed"
     },
     {
       name: "OnyxStack Lottery",
@@ -79,7 +100,8 @@ export default function Projects({ currentPath, navigateToNode }) {
       ],
       stack: ["React", "Firebase", "Vercel", "Tailwind CSS"],
       benefits: "Restored user platform retention metrics by providing fully transparent drawing data, while lowering database processing costs during peak traffic waves.",
-      accent: "from-amber-500/20 to-orange-600/5"
+      accent: "from-amber-500/20 to-orange-600/5",
+      metric: "100% Audit Transparency"
     },
     {
       name: "OnyxStack Cricket",
@@ -95,7 +117,8 @@ export default function Projects({ currentPath, navigateToNode }) {
       ],
       stack: ["React", "Gemini AI", "Node.js", "Vite"],
       benefits: "Increased fan platform interaction averages by 140% due to instantaneous updates, providing zero lag during high-concurrency match events.",
-      accent: "from-rose-500/20 to-red-600/5"
+      accent: "from-rose-500/20 to-red-600/5",
+      metric: "140% Engagement Gain"
     }
   ];
 
@@ -116,12 +139,13 @@ export default function Projects({ currentPath, navigateToNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth relative overflow-hidden">
+    <div className="min-h-screen bg-[#030303] text-neutral-200 font-sans antialiased selection:bg-cyan-500 selection:text-black relative overflow-hidden">
       
       {/* BRAND AMBIENT DIGITAL GRAPHICS MATRICES */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[800px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06),transparent_65%)] pointer-events-none z-0" />
-      <div className="absolute top-[1800px] left-0 w-[500px] h-[500px] bg-[#2563EB]/[0.015] blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[600px] right-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[220px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.12),transparent_55%)] pointer-events-none z-0" />
+      <div className="absolute top-0 left-0 right-0 h-[600px] bg-[linear-gradient(to_right,#1f1f1f12_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f12_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none z-0 opacity-70 border-b border-neutral-900/40" />
+      <div className="absolute top-[1000px] right-0 w-[500px] h-[500px] bg-cyan-500/[0.02] blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[500px] left-0 w-[600px] h-[600px] bg-blue-600/[0.02] blur-[160px] pointer-events-none" />
 
       {/* CORE NAVBAR ROUTER INTEGRATION INJECTION */}
       <Navbar 
@@ -132,123 +156,190 @@ export default function Projects({ currentPath, navigateToNode }) {
       />
 
       {/* COMPONENT BODY LAYER FRAME */}
-      <div className="relative z-10 distribution-case-studies-scope">
+      <main className="relative z-10 distribution-case-studies-scope" id="main-content">
         
         {/* SECTION 1: HERO DISPLAY CONTAINER */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 sm:pt-40 sm:pb-24">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
+        <header className="max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-20 sm:pt-48 sm:pb-32">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={fxFadeUp}
+            className="max-w-5xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.05)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               Engineering Analytics Logs
             </div>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.08] font-sans">
               Enterprise Software Case Studies: <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-300 to-blue-500">
-                Proven Technical Performance
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-cyan-400">
+                Proven Technical Architecture
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed font-sans">
-              Review detailed technical breakdowns of our production systems, architectural methodologies, and specific operational solutions engineered for scaling institutions.
+            <p className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed mb-10 font-sans tracking-wide">
+              Review detailed technical breakdowns of our production systems, architectural methodologies, and specific operational solutions engineered for scaling platforms.
             </p>
-          </div>
-        </section>
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={() => { navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
+                className="bg-white hover:bg-cyan-400 text-black px-7 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.35)] transform hover:-translate-y-0.5"
+              >
+                Initiate Project Intake
+              </button>
+              <button
+                onClick={() => {
+                  document.getElementById('case-studies-matrix')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="border border-neutral-800 hover:border-cyan-500/40 bg-neutral-950/40 hover:bg-neutral-900/60 text-neutral-300 px-7 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-200 backdrop-blur-sm"
+              >
+                Explore Active Logs
+              </button>
+            </div>
+          </motion.div>
+        </header>
 
         {/* SECTION 2: EXTENSIVE CORPORATE CASE STUDIES CAPABILITIES CONTAINER */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-12">
+        <section id="case-studies-matrix" className="max-w-7xl mx-auto px-6 md:px-12 py-16 scroll-mt-24">
           
           {/* TAB ARCHITECTURE ELEMENT TRIGGER LIST */}
-          <div className="flex flex-wrap items-center gap-2 border-b border-neutral-900 pb-4 mb-12">
-            {caseStudies.map((cs, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveCase(idx)}
-                className={`px-5 py-2.5 rounded-lg text-xs font-mono uppercase tracking-widest transition-all duration-200 focus:outline-none ${activeCase === idx ? 'bg-[#06B6D4]/10 border border-[#06B6D4]/30 text-[#06B6D4] font-bold' : 'border border-transparent text-neutral-500 hover:text-neutral-300'}`}
-              >
-                {cs.name}
-              </button>
-            ))}
+          <div className="border-b border-neutral-900 pb-4 mb-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h2 className="text-xs font-mono uppercase tracking-widest text-cyan-400 tracking-[0.2em]">// Featured Engineering Deployments</h2>
+            <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Project Case Studies">
+              {caseStudies.map((cs, idx) => (
+                <button
+                  key={idx}
+                  role="tab"
+                  id={`project-tab-${idx}`}
+                  aria-selected={activeCase === idx}
+                  aria-controls={`project-panel-${idx}`}
+                  onClick={() => setActiveCase(idx)}
+                  className={`px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-widest transition-all duration-200 relative ${
+                    activeCase === idx 
+                      ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold' 
+                      : 'border border-transparent text-neutral-500 hover:text-neutral-300'
+                  }`}
+                >
+                  {cs.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* ACTIVE CONTENT SHEET LAYER */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* CORE TECHNICAL SPEC CARD CARD */}
-            <div className="lg:col-span-8 p-8 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/20 relative">
-              <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl ${caseStudies[activeCase].accent} blur-[80px] pointer-events-none rounded-full`} />
-              
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900 pb-6 mb-6 relative z-10">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">{caseStudies[activeCase].type}</span>
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-1">{caseStudies[activeCase].name}</h2>
-                </div>
-                <div className="px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/30 text-[10px] font-mono uppercase tracking-widest text-[#06B6D4]">
-                  {caseStudies[activeCase].status}
-                </div>
-              </div>
+            {/* CORE TECHNICAL SPEC CARD */}
+            <div className="lg:col-span-8 min-h-[580px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCase}
+                  id={`project-panel-${activeCase}`}
+                  role="tabpanel"
+                  aria-labelledby={`project-tab-${activeCase}`}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fxTabPanelVariant}
+                  className="p-8 sm:p-12 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/30 min-h-[580px] flex flex-col justify-between relative overflow-hidden backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.4)] group"
+                >
+                  <div className={`absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl ${caseStudies[activeCase].accent} blur-[100px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110`} />
+                  
+                  <div>
+                    <div className="flex flex-wrap items-start justify-between gap-4 border-b border-neutral-900/80 pb-6 mb-8 relative z-10">
+                      <div>
+                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">{caseStudies[activeCase].type}</span>
+                        <h3 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-1 font-sans">{caseStudies[activeCase].name}</h3>
+                      </div>
+                      <div className="px-3 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/20 text-[10px] font-mono uppercase tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                        {caseStudies[activeCase].status}
+                      </div>
+                    </div>
 
-              <div className="space-y-6 relative z-10 text-sm sm:text-base leading-relaxed text-neutral-400 font-sans">
-                <div>
-                  <h3 className="text-xs font-mono uppercase tracking-widest text-white mb-2">// Project Overview</h3>
-                  <p>{caseStudies[activeCase].overview}</p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  <div className="p-5 rounded-xl bg-neutral-900/30 border border-neutral-900">
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-red-400 mb-2">Identified Operational Bottleneck</h4>
-                    <p className="text-xs sm:text-sm">{caseStudies[activeCase].problem}</p>
+                    <div className="space-y-8 text-sm sm:text-base leading-relaxed text-neutral-400 font-sans">
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-cyan-500/80 mb-2.5 flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-cyan-400" />
+                          Project Overview
+                        </h4>
+                        <p className="text-neutral-300 leading-relaxed tracking-wide">{caseStudies[activeCase].overview}</p>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="p-5 rounded-xl bg-neutral-900/40 border border-neutral-900">
+                          <h5 className="text-xs font-mono uppercase tracking-widest text-rose-400 mb-2">// Legacy Bottleneck</h5>
+                          <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">{caseStudies[activeCase].problem}</p>
+                        </div>
+                        <div className="p-5 rounded-xl bg-cyan-950/10 border border-cyan-500/10">
+                          <h5 className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// Engineered Solution</h5>
+                          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">{caseStudies[activeCase].solution}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-neutral-500 mb-3 flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-neutral-600" />
+                          Key Architectural Features
+                        </h4>
+                        <ul className="space-y-2.5">
+                          {caseStudies[activeCase].features.map((feat, fIdx) => (
+                            <li key={fIdx} className="flex items-start gap-3 text-xs sm:text-sm text-neutral-400">
+                              <span className="text-cyan-400 font-mono select-none mt-0.5">0{fIdx + 1}.</span>
+                              <span className="tracking-wide">{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div className="p-5 rounded-xl bg-cyan-950/10 border border-[#06B6D4]/10">
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-2">Engineered System Solution</h4>
-                    <p className="text-xs sm:text-sm">{caseStudies[activeCase].solution}</p>
+
+                  <div className="mt-10 pt-6 border-t border-neutral-900/80">
+                    <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-neutral-500 mb-3">Quantifiable Enterprise Benefits</h4>
+                    <div className="bg-gradient-to-r from-cyan-950/20 to-neutral-900/10 p-4.5 rounded-xl border border-cyan-500/10 backdrop-blur-sm shadow-[inset_0_1px_10px_rgba(6,182,212,0.02)]">
+                      <p className="text-neutral-300 italic text-xs sm:text-sm font-sans leading-relaxed">
+                        "{caseStudies[activeCase].benefits}"
+                      </p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="pt-2">
-                  <h3 className="text-xs font-mono uppercase tracking-widest text-white mb-3">// Key Technical Features Built</h3>
-                  <ul className="space-y-2">
-                    {caseStudies[activeCase].features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm">
-                        <span className="text-[#06B6D4] font-mono mt-0.5">✓</span>
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="pt-4 border-t border-neutral-900/60">
-                  <h3 className="text-xs font-mono uppercase tracking-widest text-white mb-2">// Business Capital & Operational Outcomes</h3>
-                  <p className="text-neutral-200 bg-neutral-900/40 p-4 rounded-xl border border-neutral-900 text-xs sm:text-sm font-sans italic">
-                    "{caseStudies[activeCase].benefits}"
-                  </p>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* SIDE PANEL META METRICS METADATA LAYER */}
             <div className="lg:col-span-4 space-y-6">
               
+              {/* PRIMARY PROJECT METRIC HIGHLIGHT */}
+              <div className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 backdrop-blur-sm relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/[0.01] blur-md rounded-full pointer-events-none" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 block mb-2">Primary Node Outcome</span>
+                <div className="text-2xl sm:text-3xl font-bold font-mono tracking-tight text-white mb-1">
+                  {caseStudies[activeCase].metric}
+                </div>
+                <div className="text-[10px] font-mono text-cyan-400/80">Verified Production Benchmarking Log</div>
+              </div>
+
               {/* STACK LIST CONTAINER */}
-              <div className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/60">
-                <h3 className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-4">Allocated Stack Matrix</h3>
-                <div className="flex flex-wrap gap-2">
+              <div className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/60 backdrop-blur-sm">
+                <h3 className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-4 tracking-wider">Allocated Stack Matrix</h3>
+                <div className="flex flex-wrap gap-2.5">
                   {caseStudies[activeCase].stack.map((tech, tIdx) => (
-                    <span key={tIdx} className="px-3 py-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-xs font-mono text-white">
+                    <span key={tIdx} className="px-3.5 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-xs font-mono text-neutral-200 shadow-sm hover:border-neutral-700 transition-colors">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* ACTION CALL MODULE */}
-              <div className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/20 space-y-4">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Live Sandbox Protocol</h4>
-                <p className="text-xs text-neutral-400 leading-relaxed font-sans">
-                  Inspect the front-facing layout interface models and verified sandboxed API response streams for this deployment node.
+              {/* ACTION MODULE */}
+              <div className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/20 backdrop-blur-sm space-y-4">
+                <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500 tracking-wider">System Validation Protocol</h4>
+                <p className="text-xs text-neutral-400 leading-relaxed font-sans tracking-wide">
+                  Evaluate client-facing user interfaces and secure automated state response mechanisms configured for this operational stack.
                 </p>
                 <button
-                  onClick={() => alert(`Launching public deployment sandbox frame for ${caseStudies[activeCase].name}...`)}
-                  className="w-full text-center py-3 rounded-lg bg-neutral-900 hover:bg-[#06B6D4] text-neutral-300 hover:text-black text-xs font-mono uppercase tracking-widest font-bold transition-all duration-300 focus:outline-none"
+                  onClick={() => alert(`Initializing deployment mirror configuration sandbox routing for ${caseStudies[activeCase].name}...`)}
+                  className="w-full text-center py-3.5 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-cyan-500/40 hover:bg-cyan-500 hover:text-black text-neutral-300 text-xs font-mono uppercase tracking-widest font-bold transition-all duration-300 focus:outline-none shadow-sm"
                 >
-                  Launch Sandbox View
+                  Launch Live Preview
                 </button>
               </div>
 
@@ -258,82 +349,135 @@ export default function Projects({ currentPath, navigateToNode }) {
         </section>
 
         {/* SECTION 3: SYSTEM DESIGN DEVELOPMENT METHODOLOGY PROTOCOLS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-16">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Workflow Execution</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">Our Technical Project Implementation Pipeline</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxFadeUp}
+            className="max-w-3xl mb-16"
+          >
+            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Workflow Orchestration</p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-sans">Our Technical Project Implementation Pipeline</h2>
+          </motion.div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxStaggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {methodologies.map((meth, mIdx) => (
-              <div key={mIdx} className="p-6 rounded-xl border border-neutral-900 bg-gradient-to-b from-neutral-950 to-[#050505] relative">
-                <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest block mb-4">{meth.step}</span>
-                <h3 className="text-base font-bold text-white mb-2 font-sans tracking-wide">{meth.title}</h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{meth.desc}</p>
-              </div>
+              <motion.div 
+                key={mIdx} 
+                variants={fxFadeUp}
+                className="p-6.5 rounded-xl border border-neutral-900/80 bg-gradient-to-b from-neutral-950 to-[#060606] relative group hover:border-neutral-800 transition-all duration-300 shadow-md"
+              >
+                <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest block mb-4 transition-colors duration-300 group-hover:text-cyan-400/70">{meth.step}</span>
+                <h3 className="text-sm font-bold text-white mb-2.5 font-sans tracking-wide mt-2">{meth.title}</h3>
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide">{meth.desc}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 4: GLOBAL METRICS MATRIX AND SYSTEM RESULTS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-16">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">System Metrics</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">Compounding Performance Metrics Across Production Environments</h2>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxFadeUp}
+            className="max-w-3xl mb-16"
+          >
+            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Cumulative Velocity</p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-sans">Compounding Performance Metrics Across Ecosystems</h2>
+          </motion.div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxStaggerContainer}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {globalImpactMetrics.map((gim, gIdx) => (
-              <div key={gIdx} className="p-6 rounded-xl border border-neutral-900/40 bg-neutral-950/20 text-center sm:text-left">
-                <div className="text-3xl sm:text-4xl font-bold font-mono tracking-tight text-white mb-1">
+              <motion.div 
+                key={gIdx} 
+                variants={fxFadeUp}
+                className="p-6 sm:p-8 rounded-xl border border-neutral-900/60 bg-neutral-950/20 text-center sm:text-left backdrop-blur-sm shadow-sm hover:border-neutral-800 transition-colors"
+              >
+                <div className="text-3xl sm:text-5xl font-bold font-mono tracking-tight text-white mb-2 bg-clip-text bg-gradient-to-r from-white to-neutral-400">
                   {gim.value}
                 </div>
-                <div className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-neutral-500 leading-relaxed">
+                <div className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-neutral-500 leading-relaxed tracking-wide">
                   {gim.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 5: MASTER ALLOCATED CORE TECHNOLOGIES ARRAY */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#06B6D4] mb-3">Ecosystem Array</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">Core Platforms Powering Our Client Application Ecosystems</h2>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyan-500/[0.01] blur-[140px] pointer-events-none" />
+          
+          <div className="max-w-3xl mb-12 relative z-10">
+            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Integrated Infrastructure</p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-sans">Core Platforms Powering Client Application Ecosystems</h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {["React Engine", "Node.js Platform", "MongoDB Infrastructure", "Firebase Cloud Solutions", "Gemini Cognitive AI"].map((coreTech, ctIdx) => (
-              <div key={ctIdx} className="p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 hover:border-neutral-800 transition-colors duration-200">
-                <h4 className="text-sm font-bold text-white font-sans tracking-wide mb-1">{coreTech}</h4>
-                <p className="text-[9px] font-mono uppercase tracking-widest text-neutral-500">Verified System Asset</p>
-              </div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxStaggerContainer}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 relative z-10"
+          >
+            {["React Frontend", "Node.js Platform", "MongoDB Core", "Firebase Clusters", "Gemini Inference API"].map((coreTech, ctIdx) => (
+              <motion.div 
+                key={ctIdx} 
+                variants={fxFadeUp}
+                whileHover={{ borderStandard: "1px solid rgba(6,182,212,0.2)", scale: 1.02 }}
+                className="p-5 rounded-xl border border-neutral-900 bg-neutral-950/80 hover:bg-neutral-900/40 transition-all duration-200 shadow-sm"
+              >
+                <h4 className="text-sm font-bold text-neutral-200 font-sans tracking-wide mb-1">{coreTech}</h4>
+                <p className="text-[9px] font-mono uppercase tracking-widest text-neutral-500">Verified Node Asset</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 6: COMPREHENSIVE CALL TO ACTION CONSOLE TUNNEL */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-900/60">
-          <div className="p-8 sm:p-16 rounded-3xl border border-neutral-900 bg-gradient-to-r from-neutral-950 via-neutral-950 to-neutral-900/40 relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8">
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.03),transparent_45%)] pointer-events-none" />
-            <div className="max-w-2xl relative z-10">
-              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-28 border-t border-neutral-900/50">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fxFadeUp}
+            className="p-8 sm:p-16 rounded-3xl border border-neutral-800/80 bg-gradient-to-tr from-neutral-950 via-neutral-950 to-neutral-900/20 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.5)] group"
+          >
+            <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05),transparent_70%)] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
+            
+            <div className="max-w-3xl relative z-10">
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4 font-sans leading-tight">
                 Ready to Engineer Your Own Performance Case Study?
               </h2>
-              <p className="text-sm text-neutral-400 leading-relaxed font-sans">
-                Bring your scaling challenges into our system framework. Connect with our principal engineering architects to deploy custom software optimized for your specific operational goals.
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide max-w-2xl">
+                Bring your unique scaling challenges into our system framework. Connect with our principal engineering architects to deploy robust software solutions optimized precisely for your operational targets.
               </p>
             </div>
-            <div className="relative z-10 flex-shrink-0">
+            
+            <div className="relative z-10 flex-shrink-0 w-full sm:w-auto">
               <button 
                 onClick={() => { navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="inline-block bg-white hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest font-bold transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] whitespace-nowrap"
+                className="w-full sm:w-auto text-center bg-white hover:bg-cyan-400 text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest font-mono transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] transform hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Establish Pipeline Connection
               </button>
             </div>
-          </div>
+          </motion.div>
         </section>
 
-      </div>
+      </main>
 
       {/* CORE GLOBAL FOOTER MODULE STRUCTURE */}
       <Footer siteConfig={siteConfig} />
