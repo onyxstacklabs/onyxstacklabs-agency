@@ -14,24 +14,20 @@ import {
   ChevronLeft,
   Check
 } from 'lucide-react';
-// Bulletproof fix: Import everything as a namespace to catch any named export variant
-import * as blogData from '../data/blogArticles';
+import { blogArticlesData } from '../data/blogArticles';
 
 export default function BlogArticle() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
 
-  // Automatically find whichever array is exported from the data file (handles 'articles', 'posts', etc.)
-  const articlesArray = Object.values(blogData).find(Array.isArray) || [];
-
-  // Find article index and current document
-  const articleIndex = articlesArray.findIndex((a) => a.slug === slug);
-  const article = articlesArray[articleIndex];
+  // blogArticlesData is an object keyed by slug — look up directly
+  const articlesArray = Object.values(blogArticlesData);
+  const article = blogArticlesData[slug];
 
   // Route Guarding & SEO Handling
   useEffect(() => {
-    if (articleIndex === -1 || !article) {
+    if (!article) {
       navigate('/404', { replace: true });
       return;
     }
@@ -43,15 +39,15 @@ export default function BlogArticle() {
     document.title = `${article.title} | OnyxStack Labs`;
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', article.subtitle || article.excerpt || '');
+      metaDescription.setAttribute('content', article.metaDescription || article.subtitle || article.summary || '');
     }
-  }, [slug, article, articleIndex, navigate]);
+  }, [slug, article, navigate]);
 
   if (!article) return null;
 
-  // Resolve adjacent structural nodes
-  const prevArticle = articleIndex > 0 ? articlesArray[articleIndex - 1] : null;
-  const nextArticle = articleIndex < articlesArray.length - 1 ? articlesArray[articleIndex + 1] : null;
+  // Resolve adjacent structural nodes via explicit prevSlug/nextSlug fields
+  const prevArticle = article.prevSlug ? blogArticlesData[article.prevSlug] : null;
+  const nextArticle = article.nextSlug ? blogArticlesData[article.nextSlug] : null;
 
   // Resolve Related Cluster Matches (excluding current token context)
   const relatedArticles = articlesArray
@@ -137,7 +133,7 @@ export default function BlogArticle() {
                 variants={fadeInUp}
                 className="text-lg sm:text-xl text-gray-400 font-light leading-relaxed"
               >
-                {article.subtitle || article.excerpt}
+                {article.subtitle || article.summary || article.excerpt}
               </motion.p>
 
               {/* Author Metrics */}
@@ -147,11 +143,11 @@ export default function BlogArticle() {
               >
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center font-bold text-white shadow-lg border border-white/10">
-                    {article.author ? article.author.charAt(0) : <User className="w-5 h-5" />}
+                    {article.author?.avatar || (article.author?.name ? article.author.name.charAt(0) : <User className="w-5 h-5" />)}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white">{article.author || 'OnyxStack Expert'}</div>
-                    <div className="text-xs text-gray-500">Technical Intelligence Architecture</div>
+                    <div className="text-sm font-semibold text-white">{article.author?.name || 'OnyxStack Expert'}</div>
+                    <div className="text-xs text-gray-500">{article.author?.role || 'Technical Intelligence Architecture'}</div>
                   </div>
                 </div>
 
@@ -162,7 +158,7 @@ export default function BlogArticle() {
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Clock className="w-4 h-4 text-blue-400" />
-                    {article.readingTime || '5 min read'}
+                    {article.readTime || article.readingTime || '5 min read'}
                   </span>
                 </div>
               </motion.div>
@@ -190,62 +186,65 @@ export default function BlogArticle() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="prose prose-invert max-w-none space-y-6 text-gray-300 leading-relaxed text-base sm:text-lg"
             >
-              {Array.isArray(article.content) ? (
-                article.content.map((block, idx) => {
-                  if (block.type === 'paragraph') return <p key={idx}>{block.text}</p>;
-                  if (block.type === 'heading') return <h2 key={idx} className="text-2xl font-bold text-white mt-8 mb-4">{block.text}</h2>;
-                  if (block.type === 'quote') {
-                    return (
-                      <blockquote key={idx} className="border-l-4 border-purple-500 bg-purple-500/5 px-6 py-4 my-6 rounded-r-xl italic text-gray-200">
-                        {block.text}
-                      </blockquote>
-                    );
-                  }
-                  if (block.type === 'code') {
-                    return (
-                      <div key={idx} className="relative rounded-xl overflow-hidden bg-gray-900 border border-gray-800 my-6 font-mono text-sm shadow-inner">
-                        <div className="bg-gray-950 px-4 py-2 flex justify-between items-center border-b border-gray-800/60 text-xs text-gray-400">
-                          <span>{block.language || 'javascript'}</span>
-                        </div>
-                        <pre className="p-4 overflow-x-auto text-purple-300"><code>{block.code}</code></pre>
+              {article.content?.intro && (
+                <p>{article.content.intro}</p>
+              )}
+
+              {Array.isArray(article.content?.sections) && article.content.sections.map((section) => (
+                <div key={section.id}>
+                  {section.heading && (
+                    <h2 id={section.id} className="text-2xl font-bold text-white mt-8 mb-4">
+                      {section.heading}
+                    </h2>
+                  )}
+
+                  {section.text && <p>{section.text}</p>}
+
+                  {section.tip && (
+                    <blockquote className="border-l-4 border-purple-500 bg-purple-500/5 px-6 py-4 my-6 rounded-r-xl italic text-gray-200">
+                      <span className="not-italic font-semibold text-purple-400 mr-2">Tip:</span>
+                      {section.tip}
+                    </blockquote>
+                  )}
+
+                  {section.note && (
+                    <blockquote className="border-l-4 border-purple-500 bg-purple-500/5 px-6 py-4 my-6 rounded-r-xl italic text-gray-200">
+                      <span className="not-italic font-semibold text-purple-400 mr-2">Note:</span>
+                      {section.note}
+                    </blockquote>
+                  )}
+
+                  {section.warning && (
+                    <blockquote className="border-l-4 border-purple-500 bg-purple-500/5 px-6 py-4 my-6 rounded-r-xl italic text-gray-200">
+                      <span className="not-italic font-semibold text-purple-400 mr-2">Warning:</span>
+                      {section.warning}
+                    </blockquote>
+                  )}
+
+                  {section.quote && (
+                    <blockquote className="border-l-4 border-purple-500 bg-purple-500/5 px-6 py-4 my-6 rounded-r-xl italic text-gray-200">
+                      "{section.quote}"
+                    </blockquote>
+                  )}
+
+                  {Array.isArray(section.bestPractices) && section.bestPractices.length > 0 && (
+                    <ul className="list-disc list-inside space-y-2 text-gray-300">
+                      {section.bestPractices.map((bp, i) => (
+                        <li key={i}>{bp}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {section.code && (
+                    <div className="relative rounded-xl overflow-hidden bg-gray-900 border border-gray-800 my-6 font-mono text-sm shadow-inner">
+                      <div className="bg-gray-950 px-4 py-2 flex justify-between items-center border-b border-gray-800/60 text-xs text-gray-400">
+                        <span>{section.language || 'javascript'}</span>
                       </div>
-                    );
-                  }
-                  return null;
-                })
-              ) : (
-                <div className="whitespace-pre-line space-y-4">
-                  {article.content || "Detailed system runtime optimization content is currently being distributed across edge caches. Check back momentarily."}
+                      <pre className="p-4 overflow-x-auto text-purple-300"><code>{section.code}</code></pre>
+                    </div>
+                  )}
                 </div>
-              )}
-
-              {/* Validation Quote Framework Render block */}
-              {!Array.isArray(article.content) && (
-                <blockquote className="border-l-4 border-purple-500 bg-purple-500/5 px-6 py-4 my-8 rounded-r-xl italic text-gray-200">
-                  "Excellence in infrastructure design implies architectural elegance, predictive modular patterns, and an uncompromising commitment to edge-runtime optimizations."
-                </blockquote>
-              )}
-
-              {/* Validation Structural Code Mirror Render block */}
-              {!Array.isArray(article.content) && (
-                <div className="relative rounded-xl overflow-hidden bg-[#0b0f19] border border-gray-800/80 my-8 font-mono text-sm shadow-2xl">
-                  <div className="bg-[#050811] px-4 py-2 flex justify-between items-center border-b border-gray-800/60 text-xs text-gray-400">
-                    <span>onyxStackConfig.js</span>
-                  </div>
-                  <pre className="p-4 overflow-x-auto text-emerald-400">
-                    <code>{`export default defineConfig({
-  target: 'edge-runtime',
-  optimization: {
-    splitChunks: true,
-    dynamicImports: 'preload'
-  },
-  experimental: {
-    glowingGradients: true
-  }
-});`}</code>
-                  </pre>
-                </div>
-              )}
+              ))}
             </motion.div>
 
             {/* Meta Tags Footer Segment */}
