@@ -9,9 +9,18 @@ import MainLayout from './Layouts/MainLayout.jsx';
 import OnyxAdmin from './pages/OnyxAdmin';
 import Home from './pages/Home';
 import About from './pages/About';
+import Services from './pages/Services';
+import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
+import Industries from './pages/Industries';
+import Projects from './pages/Projects';
+import Pricing from './pages/Pricing';
+import Blog from './pages/Blog';
+import Careers from './pages/Careers';
+import CookiesPolicy from './pages/CookiesPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
+import ThankYou from './pages/ThankYou';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -61,10 +70,58 @@ export default function App() {
           element={<About currentPath={currentPath} navigateToNode={navigateToNode} />} 
         />
 
+        {/* Target Route: Architectural Capability & Core Service Meshes */}
+        <Route 
+          path="/services" 
+          element={<Services currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Structural Case Studies & Corporate Portfolio Showcase */}
+        <Route 
+          path="/portfolio" 
+          element={<Portfolio currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
         {/* Target Route: High-Conversion Lead Ingress Node */}
         <Route 
           path="/contact" 
           element={<Contact currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Deep Industry Verticals & Domain Engineering Solutions */}
+        <Route 
+          path="/industries" 
+          element={<Industries currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Enterprise Initiatives & System Build Projects Layout */}
+        <Route 
+          path="/projects" 
+          element={<Projects currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Scalable Value Tiers & Transparent Pricing Topography */}
+        <Route 
+          path="/pricing" 
+          element={<Pricing currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Technical Insights & AI Automation Engineering Blog */}
+        <Route 
+          path="/blog" 
+          element={<Blog currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Core Engineering Recruitment & Open Career Desks */}
+        <Route 
+          path="/careers" 
+          element={<Careers currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Global Compliance, Tracking & Cookies Policy Matrix */}
+        <Route 
+          path="/cookies-policy" 
+          element={<CookiesPolicy currentPath={currentPath} navigateToNode={navigateToNode} />} 
         />
 
         {/* Target Route: Global Privacy Policy & Sovereign Data Framework */}
@@ -77,6 +134,12 @@ export default function App() {
         <Route 
           path="/terms-conditions" 
           element={<TermsConditions currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Success Feedback & High-Conversion Lead Handshake Terminal */}
+        <Route 
+          path="/thank-you" 
+          element={<ThankYou currentPath={currentPath} navigateToNode={navigateToNode} />} 
         />
 
         {/* Fallback Route Matrix Strategy: Nested 404 Handler reflecting layout elements perfectly */}
