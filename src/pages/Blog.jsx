@@ -48,6 +48,7 @@ export default function Blog({ currentPath, navigateToNode }) {
   // Section 2 Data: Hero Editorial Spotlight Article
   const featuredArticle = {
     id: "feat-01",
+    slug: "gemini-cognitive-fabrics-react-architecture",
     category: "AI",
     date: "July 10, 2026",
     readTime: "7 min read",
@@ -60,6 +61,7 @@ export default function Blog({ currentPath, navigateToNode }) {
   const articles = [
     {
       id: "art-01",
+      slug: "optimizing-react-core-initialization-loops",
       category: "React",
       date: "July 02, 2026",
       readTime: "5 min read",
@@ -69,6 +71,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-02",
+      slug: "distributed-serverless-configurations-edge-routing",
       category: "Web Development",
       date: "June 28, 2026",
       readTime: "6 min read",
@@ -78,6 +81,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-03",
+      slug: "design-systems-translating-typography-hierarchies",
       category: "UI/UX",
       date: "June 19, 2026",
       readTime: "4 min read",
@@ -87,6 +91,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-04",
+      slug: "managing-connection-limits-firebase-realtime",
       category: "Firebase",
       date: "June 12, 2026",
       readTime: "5 min read",
@@ -96,6 +101,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-05",
+      slug: "financial-pitfalls-off-the-shelf-themes",
       category: "Business",
       date: "May 30, 2026",
       readTime: "8 min read",
@@ -105,6 +111,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-06",
+      slug: "building-high-performance-webviews-mobile",
       category: "Mobile Apps",
       date: "May 22, 2026",
       readTime: "6 min read",
@@ -114,6 +121,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-07",
+      slug: "onyxstack-school-architecture-review",
       category: "Case Studies",
       date: "May 15, 2026",
       readTime: "9 min read",
@@ -123,6 +131,7 @@ export default function Blog({ currentPath, navigateToNode }) {
     },
     {
       id: "art-08",
+      slug: "automating-document-context-sorting-chains",
       category: "AI",
       date: "May 04, 2026",
       readTime: "7 min read",
@@ -148,8 +157,8 @@ export default function Blog({ currentPath, navigateToNode }) {
     }
   };
 
-  const launchArticleAlert = (title) => {
-    alert(`Initializing core article repository reader node for: \n"${title}"\n\n[CMS Interface Pipeline Connected]`);
+  const handleNavigation = (slug) => {
+    navigateToNode(`/blog/${slug}`);
   };
 
   return (
@@ -220,7 +229,7 @@ export default function Blog({ currentPath, navigateToNode }) {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fxFadeUp}
-              onClick={() => launchArticleAlert(featuredArticle.title)}
+              onClick={() => handleNavigation(featuredArticle.slug)}
               className="group p-6 sm:p-10 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/30 cursor-pointer hover:border-neutral-700 transition-all duration-300 relative overflow-hidden backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
             >
               <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-cyan-500/[0.02] blur-[120px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
@@ -308,7 +317,7 @@ export default function Blog({ currentPath, navigateToNode }) {
                   <motion.div 
                     key={art.id}
                     variants={fxGridItemVariant}
-                    onClick={() => launchArticleAlert(art.title)}
+                    onClick={() => handleNavigation(art.slug)}
                     className="group rounded-xl border border-neutral-900/80 bg-neutral-950/40 p-5.5 cursor-pointer hover:border-neutral-700/80 hover:bg-gradient-to-b hover:from-neutral-950 hover:to-neutral-900/10 transition-all duration-300 flex flex-col justify-between min-h-[440px] shadow-md backdrop-blur-sm relative overflow-hidden"
                   >
                     <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/[0.005] blur-xl rounded-full pointer-events-none" />
@@ -453,7 +462,7 @@ export default function Blog({ currentPath, navigateToNode }) {
             variants={fxFadeUp}
             className="p-8 sm:p-16 rounded-3xl border border-neutral-800/80 bg-gradient-to-tr from-neutral-950 via-neutral-950 to-neutral-900/20 text-center sm:text-left flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.5)] group"
           >
-            <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.04),transparent_70%)] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
+            <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-cyan-500/[0.04] blur-[100px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
             
             <div className="max-w-3xl relative z-10">
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4 font-sans leading-tight">
