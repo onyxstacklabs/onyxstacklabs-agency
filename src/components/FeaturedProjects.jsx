@@ -21,13 +21,20 @@ import {
   Maximize2
 } from 'lucide-react';
 
-// Systematic asset integration matching strict file criteria
-import tailorsDashboard from 'src/assets/images/portfolio/portfolio-tailors-dashboard.webp';
-import schoolDashboard from 'src/assets/images/portfolio/portfolio-school-dashboard.webp';
-import gatepassDashboard from 'src/assets/images/portfolio/portfolio-gatepass-dashboard.webp';
-import lotteryDashboard from 'src/assets/images/portfolio/portfolio-lottery-dashboard.webp';
-import cricketDashboard from 'src/assets/images/portfolio/portfolio-cricket-dashboard.webp';
-import loanAuthentication from 'src/assets/images/portfolio/portfolio-loan-authentication.webp';
+// Corrected relative path integrations for Vite/Vercel production build
+import tailorsDashboard from "../assets/images/portfolio/portfolio-tailors-dashboard.webp";
+import schoolDashboard from "../assets/images/portfolio/portfolio-school-dashboard.webp";
+import gatepassDashboard from "../assets/images/portfolio/portfolio-gatepass-dashboard.webp";
+import lotteryDashboard from "../assets/images/portfolio/portfolio-lottery-dashboard.webp";
+import cricketDashboard from "../assets/images/portfolio/portfolio-cricket-dashboard.webp";
+import mudraDashboard from "../assets/images/portfolio/portfolio-loan-authentication.webp";
+
+import tailorsSupporting from "../assets/images/portfolio/portfolio-tailors-supporting.webp";
+import schoolSupporting from "../assets/images/portfolio/portfolio-school-supporting.webp";
+import gatepassSupporting from "../assets/images/portfolio/portfolio-gatepass-supporting.webp";
+import lotterySupporting from "../assets/images/portfolio/portfolio-lottery-supporting.webp";
+import cricketSupporting from "../assets/images/portfolio/portfolio-cricket-supporting.webp";
+import mudraSupporting from "../assets/images/portfolio/portfolio-loan-supporting.webp";
 
 export default function FeaturedProjects() {
   const [activeProject, setActiveProject] = useState(null);
@@ -134,7 +141,7 @@ export default function FeaturedProjects() {
       status: "Coming Soon",
       liveUrl: null,
       icon: Wallet,
-      image: loanAuthentication,
+      image: mudraDashboard,
       caseStudy: {
         financeDashboard: "An elegant, premium banking-grade operations dashboard visualizer built with multi-layered layout arrays tracking dynamic monetary capital allocations.",
         reporting: "Automated continuous synthesis systems compiling raw operational ledger files into clean, fully accessible performance reporting records.",
