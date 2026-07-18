@@ -26,7 +26,7 @@ export const blogArticlesData = {
       { id: "security", text: "5. Enterprise Edge Gateways" }
     ],
     content: {
-      intro: "Modern enterprise systems increasingly demand localized, high-fidelity AI inference cycles running right within the client viewport layer. Traditional stateless HTTP request networks introduce unsustainable round-trip latencies ($>1200\text{ms}$). By designing integrated React memory layouts connected directly to persistent context windows, engineers can scale real-time workflows down to sub-second loops.",
+      intro: "Modern enterprise systems increasingly demand localized, high-fidelity AI inference cycles running right within the client viewport layer. Traditional stateless HTTP request networks introduce unsustainable round-trip latencies. By designing integrated React memory layouts connected directly to persistent context windows, engineers can scale real-time workflows down to sub-second loops.",
       sections: [
         {
           id: "abstract",
@@ -75,9 +75,10 @@ export function useTelemetryEngine() {
         }
       ]
     },
-    prevSlug: "optimizing-react-core-initialization-loops",
-    nextSlug: "distributed-serverless-configurations-edge-routing"
+    prevSlug: null,
+    nextSlug: "optimizing-react-core-initialization-loops"
   },
+
   "optimizing-react-core-initialization-loops": {
     id: "art-01",
     slug: "optimizing-react-core-initialization-loops",
@@ -117,6 +118,7 @@ export function useTelemetryEngine() {
     prevSlug: "gemini-cognitive-fabrics-react-architecture",
     nextSlug: "distributed-serverless-configurations-edge-routing"
   },
+
   "distributed-serverless-configurations-edge-routing": {
     id: "art-02",
     slug: "distributed-serverless-configurations-edge-routing",
@@ -153,7 +155,269 @@ export function useTelemetryEngine() {
         }
       ]
     },
-    prevSlug: "gemini-cognitive-fabrics-react-architecture",
+    prevSlug: "optimizing-react-core-initialization-loops",
     nextSlug: "design-systems-translating-typography-hierarchies"
+  },
+
+  "design-systems-translating-typography-hierarchies": {
+    id: "art-03",
+    slug: "design-systems-translating-typography-hierarchies",
+    category: "UI/UX",
+    date: "June 19, 2026",
+    readTime: "4 min read",
+    difficulty: "Intermediate",
+    title: "Design Systems to Component Code: Translating Complex Typography Hierarchies into Utility CSS Tokens",
+    summary: "Establishing atomic layout guidelines that ensure absolute screen-reader accessibility while maintaining dark futuristic visual branding.",
+    author: {
+      name: "Elena Rostov",
+      role: "Design Systems Lead",
+      avatar: "ER"
+    },
+    tags: ["UI/UX", "Architecture", "Tailwind CSS"],
+    metaDescription: "Translate complex design-system typography hierarchies into accessible, maintainable utility CSS tokens.",
+    tableOfContents: [
+      { id: "tokens", text: "1. Establishing Type Tokens" },
+      { id: "accessibility", text: "2. Screen-Reader Parity" }
+    ],
+    content: {
+      intro: "Design systems only remain effective when their typography rules translate cleanly into implementable code. Loose interpretation between design specification and component markup is one of the most common sources of enterprise UI drift.",
+      sections: [
+        {
+          id: "tokens",
+          heading: "Establishing Type Tokens",
+          text: "Every heading, label, and body variant should map to a single named utility token rather than ad-hoc font-size declarations scattered through component files. This keeps visual hierarchy consistent as new pages are built out.",
+          tip: "Name typography tokens by role (e.g. 'heading-lg', 'label-mono') rather than by pixel value, so the scale can evolve without renaming call sites."
+        },
+        {
+          id: "accessibility",
+          heading: "Screen-Reader Parity",
+          text: "Dark, high-contrast branding must still resolve to WCAG-compliant contrast ratios and a correct semantic heading order. Visual hierarchy and document hierarchy are not always the same thing, and enterprise audits routinely catch the gap.",
+          bestPractices: [
+            "Verify contrast ratios against both light and dark surface variants.",
+            "Keep heading levels sequential regardless of visual size overrides.",
+            "Pair decorative type treatments with accessible fallback labels."
+          ]
+        }
+      ]
+    },
+    prevSlug: "distributed-serverless-configurations-edge-routing",
+    nextSlug: "managing-connection-limits-firebase-realtime"
+  },
+
+  "managing-connection-limits-firebase-realtime": {
+    id: "art-04",
+    slug: "managing-connection-limits-firebase-realtime",
+    category: "Firebase",
+    date: "June 12, 2026",
+    readTime: "5 min read",
+    difficulty: "Advanced",
+    title: "Managing Connection Limits and Database Writing Operations in Real-Time Cloud Environments",
+    summary: "Mitigating transactional state overlaps within concurrent document updates by leveraging isolated cloud validation layers.",
+    author: {
+      name: "David Vance",
+      role: "Cloud Infrastructure Engineer",
+      avatar: "DV"
+    },
+    tags: ["Firebase", "Firestore", "Architecture"],
+    metaDescription: "Learn how to manage concurrent write operations and connection ceilings in real-time Firebase-backed applications.",
+    tableOfContents: [
+      { id: "limits", text: "1. Understanding Connection Ceilings" },
+      { id: "writes", text: "2. Isolating Concurrent Write Paths" }
+    ],
+    content: {
+      intro: "Real-time cloud databases give enterprise applications instant state propagation, but that same immediacy introduces contention risk once concurrent write volume scales past a handful of active sessions.",
+      sections: [
+        {
+          id: "limits",
+          heading: "Understanding Connection Ceilings",
+          text: "Every real-time backend enforces a practical ceiling on simultaneous open connections per project tier. Systems that don't plan around this ceiling degrade unpredictably under peak enterprise load rather than failing gracefully.",
+          warning: "Never assume connection limits scale linearly with paid tier upgrades — validate actual concurrent session ceilings against your specific access patterns before launch."
+        },
+        {
+          id: "writes",
+          heading: "Isolating Concurrent Write Paths",
+          text: "Transactional overlaps occur when multiple clients attempt to mutate the same document simultaneously. Routing writes through an isolated validation layer prevents partial or conflicting state from ever reaching persisted storage.",
+          note: "Batch related field updates into a single transaction rather than issuing sequential individual writes to the same document."
+        }
+      ]
+    },
+    prevSlug: "design-systems-translating-typography-hierarchies",
+    nextSlug: "financial-pitfalls-off-the-shelf-themes"
+  },
+
+  "financial-pitfalls-off-the-shelf-themes": {
+    id: "art-05",
+    slug: "financial-pitfalls-off-the-shelf-themes",
+    category: "Business",
+    date: "May 30, 2026",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+    title: "The Financial Pitfalls of Off-the-Shelf Themes: Quantifying Accrued Technical Debt in Scaled Environments",
+    summary: "An analytical study of how rigid layout configurations trap long-term business processes and drive up engineering optimization costs.",
+    author: {
+      name: "Robert Chen",
+      role: "Principal Business Consultant",
+      avatar: "RC"
+    },
+    tags: ["Business", "Architecture", "Optimization"],
+    metaDescription: "Understand the long-term financial cost of building enterprise platforms on rigid off-the-shelf theme foundations.",
+    tableOfContents: [
+      { id: "hidden-cost", text: "1. The Hidden Cost Curve" },
+      { id: "debt", text: "2. Quantifying Accrued Technical Debt" }
+    ],
+    content: {
+      intro: "Off-the-shelf themes look inexpensive at the point of purchase, but the true cost surfaces months later, once a growing business tries to bend a rigid template around processes it was never designed to support.",
+      sections: [
+        {
+          id: "hidden-cost",
+          heading: "The Hidden Cost Curve",
+          text: "Every customization layered onto a closed theme architecture increases the effort required for the next one. Teams frequently underestimate this compounding effect until a routine feature request takes weeks instead of days.",
+          note: "Track engineering hours spent working around theme constraints separately from net-new feature work — the split often reveals the real cost sooner than a budget review would."
+        },
+        {
+          id: "debt",
+          heading: "Quantifying Accrued Technical Debt",
+          text: "Technical debt from rigid foundations compounds silently, showing up as slower release cycles, higher QA overhead, and increased onboarding time for new engineers unfamiliar with theme-specific workarounds.",
+          bestPractices: [
+            "Audit customization layers quarterly against original theme documentation.",
+            "Flag any workaround that required overriding core theme behavior.",
+            "Model the cost of a foundation rebuild against continued incremental patching."
+          ]
+        }
+      ]
+    },
+    prevSlug: "managing-connection-limits-firebase-realtime",
+    nextSlug: "building-high-performance-webviews-mobile"
+  },
+
+  "building-high-performance-webviews-mobile": {
+    id: "art-06",
+    slug: "building-high-performance-webviews-mobile",
+    category: "Mobile Apps",
+    date: "May 22, 2026",
+    readTime: "6 min read",
+    difficulty: "Advanced",
+    title: "Building High-Performance Web Views: Achieving 60 FPS Telemetry Rendering Across Handheld Frameworks",
+    summary: "Leveraging virtualized container trees to map massive real-time data payloads efficiently on lower-tier mobile browser engines.",
+    author: {
+      name: "Liam Sterling",
+      role: "Mobile Platform Engineer",
+      avatar: "LS"
+    },
+    tags: ["Mobile Apps", "Optimization", "Architecture"],
+    metaDescription: "Achieve consistent 60 FPS rendering for data-dense mobile web views using virtualized container strategies.",
+    tableOfContents: [
+      { id: "virtualization", text: "1. Virtualized Container Trees" },
+      { id: "engines", text: "2. Handling Lower-Tier Rendering Engines" }
+    ],
+    content: {
+      intro: "Handheld browser engines have far tighter memory and paint budgets than desktop equivalents. Data-dense enterprise dashboards that feel smooth on a laptop routinely drop frames the moment they're viewed on mid-tier hardware.",
+      sections: [
+        {
+          id: "virtualization",
+          heading: "Virtualized Container Trees",
+          text: "Rendering only the visible slice of a large dataset, and recycling DOM nodes as the viewport scrolls, keeps the active render tree small regardless of total payload size.",
+          tip: "Pair list virtualization with fixed-height row estimation wherever possible — dynamic row heights are the most common cause of scroll jank in virtualized views."
+        },
+        {
+          id: "engines",
+          heading: "Handling Lower-Tier Rendering Engines",
+          text: "Older or budget mobile browser engines allocate less GPU compositing headroom. Reducing simultaneous animated layers and deferring non-critical visual effects keeps frame pacing stable under real-world device conditions.",
+          bestPractices: [
+            "Cap concurrent animated elements visible in a single viewport.",
+            "Defer non-critical telemetry updates until the device reports an idle frame.",
+            "Profile on actual mid-tier hardware, not desktop device emulation alone."
+          ]
+        }
+      ]
+    },
+    prevSlug: "financial-pitfalls-off-the-shelf-themes",
+    nextSlug: "onyxstack-school-architecture-review"
+  },
+
+  "onyxstack-school-architecture-review": {
+    id: "art-07",
+    slug: "onyxstack-school-architecture-review",
+    category: "Case Studies",
+    date: "May 15, 2026",
+    readTime: "9 min read",
+    difficulty: "Intermediate",
+    title: "OnyxStack School Architecture Review: Consolidating Disconnected Datastores for Multi-Campus Platforms",
+    summary: "Deconstructing an institution-level migration into clean, isolated database rows backed by end-to-end cryptographic tokens.",
+    author: {
+      name: "Aria Thorne",
+      role: "Enterprise Solutions Architect",
+      avatar: "AT"
+    },
+    tags: ["Case Studies", "Architecture", "Optimization"],
+    metaDescription: "A case study walkthrough of consolidating fragmented multi-campus datastores into a unified, secure platform architecture.",
+    tableOfContents: [
+      { id: "fragmentation", text: "1. The Fragmentation Problem" },
+      { id: "consolidation", text: "2. Consolidation Strategy" }
+    ],
+    content: {
+      intro: "Multi-campus institutions frequently accumulate disconnected datastores over time, one per campus, program, or legacy vendor rollout. Consolidating them without disrupting daily operations requires a carefully sequenced migration plan.",
+      sections: [
+        {
+          id: "fragmentation",
+          heading: "The Fragmentation Problem",
+          text: "Each disconnected datastore represented a separate source of truth for overlapping student and staff records, making cross-campus reporting slow and error-prone.",
+          note: "Fragmented datastores rarely fail loudly — they fail quietly, as reporting discrepancies that accumulate until they become impossible to ignore."
+        },
+        {
+          id: "consolidation",
+          heading: "Consolidation Strategy",
+          text: "Migrating each campus dataset into isolated, cryptographically token-backed rows within a unified schema allowed per-campus access control to remain intact while enabling unified reporting for the first time.",
+          bestPractices: [
+            "Migrate one campus dataset at a time behind a feature flag.",
+            "Maintain dual-write compatibility during the transition window.",
+            "Validate record parity with automated reconciliation checks after each migration batch."
+          ]
+        }
+      ]
+    },
+    prevSlug: "building-high-performance-webviews-mobile",
+    nextSlug: "automating-document-context-sorting-chains"
+  },
+
+  "automating-document-context-sorting-chains": {
+    id: "art-08",
+    slug: "automating-document-context-sorting-chains",
+    category: "AI",
+    date: "May 04, 2026",
+    readTime: "7 min read",
+    difficulty: "Advanced",
+    title: "Automating Dynamic Document Context Sorting Chains Using Server-Sent Cognitive Pipelines",
+    summary: "How streaming structural semantic nodes lets web interfaces build custom data layout trees dynamically as user parameters adjust.",
+    author: {
+      name: "Alex Rivers",
+      role: "Principal AI Architect",
+      avatar: "AR"
+    },
+    tags: ["AI", "Architecture", "Serverless Edge"],
+    metaDescription: "Automate document context sorting using server-sent semantic pipelines that adapt layout trees to live user parameters.",
+    tableOfContents: [
+      { id: "pipelines", text: "1. Server-Sent Semantic Pipelines" },
+      { id: "layout-trees", text: "2. Dynamic Layout Tree Construction" }
+    ],
+    content: {
+      intro: "Static document sorting rules break down once enterprise interfaces need to reorganize large content sets in response to live user parameters. Streaming the sort context itself, rather than recomputing it per request, keeps interfaces responsive at scale.",
+      sections: [
+        {
+          id: "pipelines",
+          heading: "Server-Sent Semantic Pipelines",
+          text: "Semantic nodes are streamed incrementally as they're classified server-side, allowing the client to begin building an interface before the full document context has finished processing.",
+          tip: "Stream semantic nodes in priority order so above-the-fold content resolves first, even if lower-priority sections are still classifying."
+        },
+        {
+          id: "layout-trees",
+          heading: "Dynamic Layout Tree Construction",
+          text: "As new parameters adjust the desired sort order, the client reassembles the layout tree from already-streamed semantic nodes rather than issuing an entirely new request.",
+          warning: "Avoid rebuilding the full layout tree from scratch on every parameter change — diff against the existing tree to prevent unnecessary re-renders on large document sets."
+        }
+      ]
+    },
+    prevSlug: "onyxstack-school-architecture-review",
+    nextSlug: null
   }
 };
