@@ -1,3 +1,4 @@
+// src/pages/BlogArticle.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -13,16 +14,16 @@ import {
   ChevronLeft,
   Check
 } from 'lucide-react';
-// Fixed: Using named import to match the export structure in data/blogArticles.js
-import { blogArticles } from '../data/blogArticles';
+// Bulletproof fix: Import everything as a namespace to catch any named export variant
+import * as blogData from '../data/blogArticles';
 
 export default function BlogArticle() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
 
-  // Safely handle array resolution regardless of export format variations
-  const articlesArray = Array.isArray(blogArticles) ? blogArticles : [];
+  // Automatically find whichever array is exported from the data file (handles 'articles', 'posts', etc.)
+  const articlesArray = Object.values(blogData).find(Array.isArray) || [];
 
   // Find article index and current document
   const articleIndex = articlesArray.findIndex((a) => a.slug === slug);
