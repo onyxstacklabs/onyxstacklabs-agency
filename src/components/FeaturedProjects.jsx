@@ -189,7 +189,7 @@ export default function FeaturedProjects() {
 
   return (
     <section 
-      className="relative w-full py-20 lg:py-24 bg-[#000000] overflow-hidden select-none font-sans"
+      className="relative w-full py-20 lg:py-24 bg-[#050505] overflow-hidden select-none font-sans"
       aria-labelledby="featured-heading"
     >
       {/* 
@@ -198,22 +198,22 @@ export default function FeaturedProjects() {
         =======================================================================
       */}
       {/* Absolute Thin Glowing Divider Rule */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-neutral-800 via-[#00f2fe]/40 via-neutral-800 to-transparent z-20" aria-hidden="true" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-neutral-800 via-[#06B6D4]/40 via-neutral-800 to-transparent z-20" aria-hidden="true" />
       
       {/* Linear Level Interactive Radial Cyan Glow Over the Top Border Line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[120px] bg-[radial-gradient(ellipse_at_top,rgba(0,242,254,0.07)_0%,transparent_60%)] pointer-events-none z-20" aria-hidden="true" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[120px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.07)_0%,transparent_60%)] pointer-events-none z-20" aria-hidden="true" />
       
       {/* Soft Floating Soft Blur Spheres Behind Section Entry Path */}
-      <div className="absolute top-0 left-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-[#00f2fe]/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }} aria-hidden="true" />
-      <div className="absolute top-12 right-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-[#4facfe]/4 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDuration: '12s' }} aria-hidden="true" />
+      <div className="absolute top-0 left-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-[#06B6D4]/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }} aria-hidden="true" />
+      <div className="absolute top-12 right-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-[#2563EB]/4 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDuration: '12s' }} aria-hidden="true" />
 
       {/* Ultra-low Opacity Micro Engineering Grid Background Mesh */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.006)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.006)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0" aria-hidden="true" />
       {/* ======================================================================= */}
 
       {/* Premium Ambient Micro-Glow Canvas */}
-      <div className="absolute top-1/4 left-1/12 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,242,254,0.06)_0%,transparent_70%)] pointer-events-none mix-blend-screen" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-1/12 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(79,172,254,0.06)_0%,transparent_70%)] pointer-events-none mix-blend-screen" aria-hidden="true" />
+      <div className="absolute top-1/4 left-1/12 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(6,182,212,0.06)_0%,transparent_70%)] pointer-events-none mix-blend-screen" aria-hidden="true" />
+      <div className="absolute bottom-1/4 right-1/12 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none mix-blend-screen" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         
@@ -221,8 +221,8 @@ export default function FeaturedProjects() {
         <div className="flex flex-col items-center text-center space-y-5 mb-16 max-w-3xl mx-auto">
           
           {/* Accent Upper Badge */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800/60 text-[10px] font-semibold tracking-widest text-[#00f2fe] uppercase backdrop-blur-md shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f2fe] animate-pulse" aria-hidden="true" />
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800/60 text-[10px] font-semibold tracking-widest text-[#06B6D4] uppercase backdrop-blur-md shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" aria-hidden="true" />
             Enterprise Portfolio
           </div>
 
@@ -232,7 +232,7 @@ export default function FeaturedProjects() {
             className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white"
           >
             Engineered to Solve{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00f2fe] via-[#4facfe] to-neutral-200">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#06B6D4] via-[#2563EB] to-neutral-200">
               Critical Business Challenges
             </span>
           </h2>
@@ -257,11 +257,11 @@ export default function FeaturedProjects() {
             return (
               <div
                 key={idx}
-                className="group relative flex flex-col justify-between p-5 rounded-2xl bg-neutral-950/40 border border-neutral-900/60 backdrop-blur-xl transition-all duration-300 ease-out outline-none hover:-translate-y-1.5 hover:bg-neutral-900/10 hover:border-[#00f2fe]/30 hover:shadow-[0_20px_50px_rgba(0,242,254,0.08)] cursor-default"
+                className="group relative flex flex-col justify-between p-5 rounded-2xl bg-neutral-950/40 border border-neutral-900/60 backdrop-blur-xl transition-all duration-300 ease-out outline-none hover:-translate-y-1.5 hover:bg-neutral-900/10 hover:border-[#06B6D4]/30 hover:shadow-[0_20px_50px_rgba(6,182,212,0.08)] cursor-default"
               >
                 {/* Internal Radial Glow Highlight Layer */}
                 <div 
-                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_at_top,rgba(0,242,254,0.02),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
+                  className="absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.02),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
                   aria-hidden="true" 
                 />
 
@@ -271,7 +271,7 @@ export default function FeaturedProjects() {
                   {/* Metadata Header Block */}
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center p-2 rounded-xl bg-neutral-900/60 border border-neutral-800/80 text-neutral-400 group-hover:text-[#00f2fe] group-hover:border-[#00f2fe]/20 transition-all duration-300">
+                      <div className="flex items-center justify-center p-2 rounded-xl bg-neutral-900/60 border border-neutral-800/80 text-neutral-400 group-hover:text-[#06B6D4] group-hover:border-[#06B6D4]/20 transition-all duration-300">
                         <ProjectIcon className="w-4 h-4" />
                       </div>
                       <h3 className="text-base font-semibold tracking-tight text-neutral-100 group-hover:text-white transition-colors duration-200">
@@ -283,11 +283,11 @@ export default function FeaturedProjects() {
                     <span 
                       className={`inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
                         isLive 
-                          ? 'bg-[#00f2fe]/5 text-[#00f2fe] border border-[#00f2fe]/20 shadow-[0_0_12px_rgba(0,242,254,0.12)]' 
+                          ? 'bg-[#06B6D4]/5 text-[#06B6D4] border border-[#06B6D4]/20 shadow-[0_0_12px_rgba(6,182,212,0.12)]' 
                           : 'bg-neutral-900/60 text-neutral-500 border border-neutral-800/40'
                       }`}
                     >
-                      {isLive && <span className="w-1 h-1 rounded-full bg-[#00f2fe] mr-1.5 animate-ping" />}
+                      {isLive && <span className="w-1 h-1 rounded-full bg-[#06B6D4] mr-1.5 animate-ping" />}
                       {project.status}
                     </span>
                   </div>
@@ -336,7 +336,7 @@ export default function FeaturedProjects() {
                     id={`project-trigger-${idx}`}
                     type="button"
                     onClick={() => openModal(project, idx)}
-                    className="w-full py-2 px-4 rounded-lg bg-neutral-900/60 border border-neutral-800/80 text-xs font-semibold text-neutral-300 transition-all duration-200 hover:bg-gradient-to-r hover:from-[#00f2fe] hover:to-[#4facfe] hover:text-black hover:border-transparent hover:shadow-[0_4px_20px_rgba(0,242,254,0.15)] focus:outline-none focus:ring-1 focus:ring-[#00f2fe]/40"
+                    className="w-full py-2 px-4 rounded-lg bg-neutral-900/60 border border-neutral-800/80 text-xs font-semibold text-neutral-300 transition-all duration-200 hover:bg-gradient-to-r hover:from-[#06B6D4] hover:to-[#2563EB] hover:text-black hover:border-transparent hover:shadow-[0_4px_20px_rgba(6,182,212,0.15)] focus:outline-none focus:ring-1 focus:ring-[#06B6D4]/40"
                     aria-label={`Open production specification dashboard and deep structural analytics overview documentation for ${project.name}`}
                   >
                     View Details
@@ -345,7 +345,7 @@ export default function FeaturedProjects() {
 
                 {/* Peripheral Border Gradient Accent Frame */}
                 <div 
-                  className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-[#00f2fe]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xs z-[-1]" 
+                  className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-[#06B6D4]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xs z-[-1]" 
                   aria-hidden="true" 
                 />
               </div>
@@ -354,16 +354,37 @@ export default function FeaturedProjects() {
         </div>
 
         {/* Closing Conversion Block Linkage */}
-        <div className="mt-20 text-center border-t border-neutral-900/60 pt-10 max-w-xl mx-auto space-y-1">
-          <p className="text-xs font-semibold text-white tracking-tight">
-            Seeking an optimized production software integration?
-          </p>
-          <p className="text-[10px] sm:text-xs font-semibold tracking-wider text-neutral-500 uppercase">
-            Let's execute your project via{' '}
-            <span className="text-neutral-300 font-bold tracking-normal normal-case">
-              enterprise-tier standards.
-            </span>
-          </p>
+        <div className="relative mt-20 max-w-3xl mx-auto">
+          <div
+            className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#06B6D4]/10 via-[#2563EB]/10 to-[#06B6D4]/10 blur-2xl opacity-60 pointer-events-none"
+            aria-hidden="true"
+          />
+          <div className="relative rounded-2xl border border-neutral-900 bg-neutral-950/60 backdrop-blur-md px-6 sm:px-10 py-10 sm:py-12 text-center overflow-hidden">
+            <div
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06),transparent_65%)] pointer-events-none"
+              aria-hidden="true"
+            />
+            <div className="relative z-10 space-y-4">
+              <p className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                Seeking an optimized production software integration?
+              </p>
+              <p className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-500 uppercase">
+                Let's execute your project via{' '}
+                <span className="text-neutral-300 font-bold tracking-normal normal-case">
+                  enterprise-tier standards.
+                </span>
+              </p>
+              <div className="pt-4">
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-[#06B6D4] to-[#2563EB] text-black text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:-translate-y-0.5"
+                >
+                  Start Your Project
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -383,12 +404,12 @@ export default function FeaturedProjects() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Ambient Top Linear Rule Highlight */}
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00f2fe]/20 to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/20 to-transparent pointer-events-none" />
 
             {/* Sticky Header Node Header Panel */}
             <div className="p-5 border-b border-neutral-900/80 flex items-center justify-between bg-neutral-950/80 backdrop-blur-md z-10">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-neutral-900/80 text-[#00f2fe] border border-neutral-800/60">
+                <div className="p-2 rounded-xl bg-neutral-900/80 text-[#06B6D4] border border-neutral-800/60">
                   {React.createElement(activeProject.icon, { className: "w-4 h-4" })}
                 </div>
                 <div>
@@ -406,7 +427,7 @@ export default function FeaturedProjects() {
                     href={activeProject.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00f2fe] text-black text-xs font-bold hover:bg-[#4facfe] hover:shadow-[0_0_15px_rgba(0,242,254,0.25)] transition-all duration-200"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#06B6D4] text-black text-xs font-bold hover:bg-[#2563EB] hover:text-white hover:shadow-[0_0_15px_rgba(6,182,212,0.25)] transition-all duration-200"
                     aria-label={`Open active production instance for ${activeProject.name} inside a separate secure web interface application container`}
                   >
                     Visit Live Demo
@@ -440,7 +461,7 @@ export default function FeaturedProjects() {
               {/* Tech Stack Horizontal Track */}
               <div className="space-y-2">
                 <h4 className="text-[9px] font-bold tracking-widest text-neutral-500 uppercase font-mono flex items-center gap-1.5">
-                  <Terminal className="w-3 h-3 text-[#00f2fe]" /> Core Integrated Stack Technologies
+                  <Terminal className="w-3 h-3 text-[#06B6D4]" /> Core Integrated Stack Technologies
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {activeProject.tags.map((tag, tIdx) => (
@@ -461,7 +482,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.overview && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 backdrop-blur-sm space-y-2 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <div className="w-1 h-2.5 rounded-full bg-[#00f2fe]" /> Project Overview
+                      <div className="w-1 h-2.5 rounded-full bg-[#06B6D4]" /> Project Overview
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.overview}</p>
                   </div>
@@ -470,7 +491,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.businessProblem && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <div className="w-1 h-2.5 rounded-full bg-red-500/80" /> Business Problem
+                      <div className="w-1 h-2.5 rounded-full bg-[#2563EB]/70" /> Business Problem
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.businessProblem}</p>
                   </div>
@@ -479,7 +500,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.solution && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <div className="w-1 h-2.5 rounded-full bg-green-500/80" /> Engineered Solution
+                      <div className="w-1 h-2.5 rounded-full bg-[#06B6D4]" /> Engineered Solution
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.solution}</p>
                   </div>
@@ -488,12 +509,12 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.aiFeatures && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-3 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <div className="w-1 h-2.5 rounded-full bg-[#00f2fe]" /> Core Intelligent Machine Capabilities
+                      <div className="w-1 h-2.5 rounded-full bg-[#06B6D4]" /> Core Intelligent Machine Capabilities
                     </h4>
                     <ul className="space-y-2">
                       {activeProject.caseStudy.aiFeatures.map((feat, fidx) => (
                         <li key={fidx} className="flex items-start gap-2.5 text-xs text-neutral-400 leading-relaxed font-normal">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#00f2fe] mt-0.5 shrink-0" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#06B6D4] mt-0.5 shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -504,7 +525,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.customerManagement && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Users className="w-3.5 h-3.5 text-[#00f2fe]" /> Client Logistical Profiles
+                      <Users className="w-3.5 h-3.5 text-[#06B6D4]" /> Client Logistical Profiles
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.customerManagement}</p>
                   </div>
@@ -513,7 +534,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.measurements && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Maximize2 className="w-3.5 h-3.5 text-[#00f2fe]" /> Geometric Vector Calculations
+                      <Maximize2 className="w-3.5 h-3.5 text-[#06B6D4]" /> Geometric Vector Calculations
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.measurements}</p>
                   </div>
@@ -522,7 +543,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.orders && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Workflow className="w-3.5 h-3.5 text-[#00f2fe]" /> Task Orchestration Grid
+                      <Workflow className="w-3.5 h-3.5 text-[#06B6D4]" /> Task Orchestration Grid
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.orders}</p>
                   </div>
@@ -531,7 +552,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.architecture && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Database className="w-3.5 h-3.5 text-[#00f2fe]" /> Cloud Infrastructure Layer
+                      <Database className="w-3.5 h-3.5 text-[#06B6D4]" /> Cloud Infrastructure Layer
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.architecture}</p>
                   </div>
@@ -540,7 +561,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.businessBenefits && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <LineChart className="w-3.5 h-3.5 text-green-400" /> Core Business Return Matrix
+                      <LineChart className="w-3.5 h-3.5 text-[#06B6D4]" /> Core Business Return Matrix
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.businessBenefits}</p>
                   </div>
@@ -549,7 +570,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.deployment && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Zap className="w-3.5 h-3.5 text-[#00f2fe]" /> Runtime Node Provisioning
+                      <Zap className="w-3.5 h-3.5 text-[#06B6D4]" /> Runtime Node Provisioning
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.deployment}</p>
                   </div>
@@ -558,7 +579,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.scalability && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Cpu className="w-3.5 h-3.5 text-[#00f2fe]" /> Dynamic Load Scalability
+                      <Cpu className="w-3.5 h-3.5 text-[#06B6D4]" /> Dynamic Load Scalability
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.scalability}</p>
                   </div>
@@ -567,7 +588,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.futureRoadmap && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Sparkles className="w-3.5 h-3.5 text-[#00f2fe]" /> Engineering Target Horizons
+                      <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" /> Engineering Target Horizons
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.futureRoadmap}</p>
                   </div>
@@ -577,7 +598,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.erp && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Layers className="w-3.5 h-3.5 text-[#00f2fe]" /> Infrastructure System Framework
+                      <Layers className="w-3.5 h-3.5 text-[#06B6D4]" /> Infrastructure System Framework
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.erp}</p>
                   </div>
@@ -586,7 +607,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.students && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Users className="w-3.5 h-3.5 text-[#00f2fe]" /> Student Information Pipelines
+                      <Users className="w-3.5 h-3.5 text-[#06B6D4]" /> Student Information Pipelines
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.students}</p>
                   </div>
@@ -595,7 +616,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.attendance && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Activity className="w-3.5 h-3.5 text-[#00f2fe]" /> Real-time Biometric Ingestion
+                      <Activity className="w-3.5 h-3.5 text-[#06B6D4]" /> Real-time Biometric Ingestion
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.attendance}</p>
                   </div>
@@ -604,7 +625,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.teachers && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Cpu className="w-3.5 h-3.5 text-[#00f2fe]" /> Administrative Resource Routing
+                      <Cpu className="w-3.5 h-3.5 text-[#06B6D4]" /> Administrative Resource Routing
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.teachers}</p>
                   </div>
@@ -613,7 +634,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.fees && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Wallet className="w-3.5 h-3.5 text-green-400" /> Transactional Ledger Modules
+                      <Wallet className="w-3.5 h-3.5 text-[#06B6D4]" /> Transactional Ledger Modules
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.fees}</p>
                   </div>
@@ -622,7 +643,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.reports && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <FileSpreadsheet className="w-3.5 h-3.5 text-[#00f2fe]" /> Analytical Synthesis Engines
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-[#06B6D4]" /> Analytical Synthesis Engines
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.reports}</p>
                   </div>
@@ -631,7 +652,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.realtimeDatabase && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Database className="w-3.5 h-3.5 text-[#00f2fe]" /> High-Concurrency Store Nodes
+                      <Database className="w-3.5 h-3.5 text-[#06B6D4]" /> High-Concurrency Store Nodes
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.realtimeDatabase}</p>
                   </div>
@@ -640,7 +661,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.security && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-green-400" /> Security Access Controls
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#06B6D4]" /> Security Access Controls
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.security}</p>
                   </div>
@@ -650,7 +671,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.visitorManagement && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2 md:col-span-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Users className="w-3.5 h-3.5 text-[#00f2fe]" /> Facility Traffic Supervision
+                      <Users className="w-3.5 h-3.5 text-[#06B6D4]" /> Facility Traffic Supervision
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.visitorManagement}</p>
                   </div>
@@ -659,7 +680,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.qrVerification && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <QrCode className="w-3.5 h-3.5 text-[#00f2fe]" /> Matrix Cryptographic Scanning
+                      <QrCode className="w-3.5 h-3.5 text-[#06B6D4]" /> Matrix Cryptographic Scanning
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.qrVerification}</p>
                   </div>
@@ -668,7 +689,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.authentication && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Lock className="w-3.5 h-3.5 text-green-400" /> Identity Matrix Terminals
+                      <Lock className="w-3.5 h-3.5 text-[#06B6D4]" /> Identity Matrix Terminals
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.authentication}</p>
                   </div>
@@ -686,7 +707,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.realtimeSecurity && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-red-500" /> Perimeter Failure Overrides
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#2563EB]" /> Perimeter Failure Overrides
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.realtimeSecurity}</p>
                   </div>
@@ -696,7 +717,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.winnerEngine && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Cpu className="w-3.5 h-3.5 text-[#00f2fe]" /> Deterministic Seed Selectors
+                      <Cpu className="w-3.5 h-3.5 text-[#06B6D4]" /> Deterministic Seed Selectors
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.winnerEngine}</p>
                   </div>
@@ -705,7 +726,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.cloudArchitecture && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Layers className="w-3.5 h-3.5 text-[#00f2fe]" /> Geo-Redundant Cluster Routing
+                      <Layers className="w-3.5 h-3.5 text-[#06B6D4]" /> Geo-Redundant Cluster Routing
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.cloudArchitecture}</p>
                   </div>
@@ -715,7 +736,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.realtimeScores && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Activity className="w-3.5 h-3.5 text-[#00f2fe]" /> Microsecond Frame Synchronization
+                      <Activity className="w-3.5 h-3.5 text-[#06B6D4]" /> Microsecond Frame Synchronization
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.realtimeScores}</p>
                   </div>
@@ -724,7 +745,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.statistics && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <FileSpreadsheet className="w-3.5 h-3.5 text-[#00f2fe]" /> Dynamic Progression Layouts
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-[#06B6D4]" /> Dynamic Progression Layouts
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.statistics}</p>
                   </div>
@@ -733,7 +754,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.analytics && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <LineChart className="w-3.5 h-3.5 text-[#00f2fe]" /> Continuous Outcome Processing
+                      <LineChart className="w-3.5 h-3.5 text-[#06B6D4]" /> Continuous Outcome Processing
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.analytics}</p>
                   </div>
@@ -742,7 +763,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.futureAiIntegration && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Sparkles className="w-3.5 h-3.5 text-[#00f2fe]" /> Intended Deep Intelligence Modules
+                      <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" /> Intended Deep Intelligence Modules
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.futureAiIntegration}</p>
                   </div>
@@ -752,7 +773,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.financeDashboard && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Wallet className="w-3.5 h-3.5 text-[#00f2fe]" /> Premium Ledger Simulators
+                      <Wallet className="w-3.5 h-3.5 text-[#06B6D4]" /> Premium Ledger Simulators
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.financeDashboard}</p>
                   </div>
@@ -761,7 +782,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.reporting && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <FileSpreadsheet className="w-3.5 h-3.5 text-[#00f2fe]" /> Automated Continuous Synthesis
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-[#06B6D4]" /> Automated Continuous Synthesis
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.reporting}</p>
                   </div>
@@ -770,7 +791,7 @@ export default function FeaturedProjects() {
                 {activeProject.caseStudy.transactions && (
                   <div className="p-4 rounded-xl bg-neutral-900/20 border border-neutral-900/60 space-y-2">
                     <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Layers className="w-3.5 h-3.5 text-[#00f2fe]" /> Immutable Currency Matrices
+                      <Layers className="w-3.5 h-3.5 text-[#06B6D4]" /> Immutable Currency Matrices
                     </h4>
                     <p className="text-xs text-neutral-400 leading-relaxed font-normal">{activeProject.caseStudy.transactions}</p>
                   </div>
