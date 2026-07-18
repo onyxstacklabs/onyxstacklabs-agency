@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
-import { db } from '../config/firebase'; // Connected to your existing Firebase instance
-import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
+import { db } from '../config/firebase'; 
+import { collection, query, where, onSnapshot } from 'firebase/firestore';
 
 // MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
 import Navbar from '../components/Navbar';
@@ -42,16 +42,36 @@ export default function Blog({ currentPath, navigateToNode }) {
   // Synchronize layout scroll position and connect live Firestore data stream
   useEffect(() => {
     window.scrollTo(0, 0);
+    setLoading(true);
 
-    // Stream query: only read entries where published === true ordered by newest deployment
     const blogsRef = collection(db, 'blogs');
-    const q = query(blogsRef, where('published', '==', true), orderBy('createdAt', 'desc'));
+    
+    // SAFE QUERY: Index error se bachne ke liye direct query lagayi hai
+    const q = query(blogsRef, where('published', '==', true));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const liveArticles = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      let liveArticles = snapshot.docs.map(doc => {
+        const data = doc.data();
+        
+        // Mobile layout fallback formatting to prevent application crashes
+        return {
+          id: doc.id,
+          ...data,
+          title: data.title || "Untitled Blueprint",
+          summary: data.summary || "No description provided for this active node.",
+          category: data.category || "AI",
+          // Object structure handle karne ke liye fallback helper
+          author: typeof data.author === 'object' ? (data.author.name || "Senior Architect") : (data.author || "Senior Architect"),
+          createdAt: data.createdAt || null
+        };
+      });
+
+      // Local level sorting takay bina multi-field index ke bhi newest blog upar aaye
+      liveArticles.sort((a, b) => {
+        const timeA = a.createdAt?.seconds || 0;
+        const timeB = b.createdAt?.seconds || 0;
+        return timeB - timeA; 
+      });
 
       // Extract the absolute headline node if flagged as featured, otherwise fall back to newest entry
       const featuredNode = liveArticles.find(art => art.featured) || liveArticles[0] || null;
@@ -94,7 +114,9 @@ export default function Blog({ currentPath, navigateToNode }) {
   };
 
   const handleNavigation = (slug) => {
-    navigate(`/blog/${slug}`);
+    if (slug) {
+      navigate(`/blog/${slug}`);
+    }
   };
 
   return (
@@ -171,7 +193,7 @@ export default function Blog({ currentPath, navigateToNode }) {
                   whileInView="visible"
                   viewport={{ once: true, margin: "-100px" }}
                   variants={fxFadeUp}
-                  onClick={() => handleNavigation(featuredArticle.slug)}
+                  onClick={() => handleNavigation(featuredArticle.slug || featuredArticle.id)}
                   className="group p-6 sm:p-10 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/30 cursor-pointer hover:border-neutral-700 transition-all duration-300 relative overflow-hidden backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
                 >
                   <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-cyan-500/[0.02] blur-[120px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
@@ -264,7 +286,7 @@ export default function Blog({ currentPath, navigateToNode }) {
                       <motion.div 
                         key={art.id}
                         variants={fxGridItemVariant}
-                        onClick={() => handleNavigation(art.slug)}
+                        onClick={() => handleNavigation(art.slug || art.id)}
                         className="group rounded-xl border border-neutral-900/80 bg-neutral-950/40 p-5.5 cursor-pointer hover:border-neutral-700/80 hover:bg-gradient-to-b hover:from-neutral-950 hover:to-neutral-900/10 transition-all duration-300 flex flex-col justify-between min-h-[440px] shadow-md backdrop-blur-sm relative overflow-hidden"
                       >
                         <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/[0.005] blur-xl rounded-full pointer-events-none" />
@@ -298,7 +320,7 @@ export default function Blog({ currentPath, navigateToNode }) {
                         <div className="mt-8 pt-4 border-t border-neutral-900/60 flex items-center justify-between text-[11px] font-mono">
                           <span className="text-neutral-500 tracking-wide">{art.author}</span>
                           <span className="text-cyan-400/90 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-200">
-                            Read Card <span className="font-sans">rightarrow</span>
+                            Read Card <span className="font-sans">→</span>
                           </span>
                         </div>
                       </motion.div>
