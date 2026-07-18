@@ -16,6 +16,7 @@ import Industries from './pages/Industries';
 import Projects from './pages/Projects';
 import Pricing from './pages/Pricing';
 import Blog from './pages/Blog';
+import BlogArticle from './pages/BlogArticle';
 import Careers from './pages/Careers';
 import CookiesPolicy from './pages/CookiesPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -110,6 +111,12 @@ export default function App() {
         <Route 
           path="/blog" 
           element={<Blog currentPath={currentPath} navigateToNode={navigateToNode} />} 
+        />
+
+        {/* Target Route: Individual Technical Insight Article Node */}
+        <Route 
+          path="/blog/:slug" 
+          element={<BlogArticle currentPath={currentPath} navigateToNode={navigateToNode} />} 
         />
 
         {/* Target Route: Core Engineering Recruitment & Open Career Desks */}
