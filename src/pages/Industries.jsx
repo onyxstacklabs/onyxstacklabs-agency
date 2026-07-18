@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
@@ -7,23 +8,30 @@ import { siteConfig } from '../config/siteConfig';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+// SELECTION CORNER FRAMER VARIANT COEFFICIENTS
+const fxFadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
+
+const fxStaggerContainer = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.04 } }
+};
+
+const fxTabPanelVariant = {
+  hidden: { opacity: 0, scale: 0.98, y: 10 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, scale: 0.99, y: -5, transition: { duration: 0.2, ease: 'easeIn' } }
+};
+
 export default function Industries({ currentPath, navigateToNode }) {
   const [selectedIndustry, setSelectedIndustry] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Reset scroll position on mounting phase
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleIndustryChange = (index) => {
-    if (index === selectedIndustry) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setSelectedIndustry(index);
-      setIsTransitioning(false);
-    }, 180);
-  };
 
   // Section 2 Data: Deep Sector Integration Matrix
   const industryCatalog = [
@@ -162,10 +170,12 @@ export default function Industries({ currentPath, navigateToNode }) {
   return (
     <div className="min-h-screen bg-[#030303] text-neutral-200 font-sans antialiased selection:bg-cyan-500 selection:text-black relative overflow-hidden">
       
-      {/* BRAND AMBIENT RADIAL LIGHTING MASKS */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.08),transparent_50%)] pointer-events-none z-0" />
-      <div className="absolute top-[1200px] right-0 w-[500px] h-[500px] bg-cyan-500/[0.02] blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-blue-600/[0.02] blur-[160px] pointer-events-none" />
+      {/* BACKGROUND GRAPHICS: MATCHES PREMIUM ENTERPRISE V2 DESIGN SYSTEM */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.12),transparent_55%)] pointer-events-none z-0" />
+      <div className="absolute top-0 left-0 right-0 h-[600px] bg-[linear-gradient(to_right,#1f1f1f12_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f12_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none z-0 opacity-70 border-b border-neutral-900/40" />
+      <div className="absolute top-[800px] left-1/4 w-[400px] h-[400px] bg-blue-500/[0.03] blur-[140px] pointer-events-none" />
+      <div className="absolute top-[1500px] right-0 w-[600px] h-[600px] bg-cyan-500/[0.03] blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-[400px] left-0 w-[500px] h-[500px] bg-indigo-600/[0.02] blur-[150px] pointer-events-none" />
 
       {/* FIXED NAVIGATION FRAME INTEGRATION */}
       <Navbar 
@@ -179,204 +189,309 @@ export default function Industries({ currentPath, navigateToNode }) {
       <main className="relative z-10 orchestration-industries-scope" id="main-content">
         
         {/* SECTION 1: HERO CONTAINER PANEL */}
-        <header className="max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-20 sm:pt-44 sm:pb-28">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6">
-              Enterprise Domain Expertise
+        <header className="max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-20 sm:pt-48 sm:pb-32">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={fxFadeUp}
+            className="max-w-5xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.05)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              Enterprise Domain Architecture
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1] font-sans">
-              Custom Digital Infrastructures Built for <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-100 to-blue-400">
-                Complex Industry Verticals
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.08] font-sans">
+              Custom Frameworks Engineered <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-cyan-400">
+                For Strategic Verticals
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed mb-8">
-              We translate specific operational constraints into high-performance software systems. Discover our tailored solutions engineered across key global market sectors.
+            <p className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed mb-10 font-sans tracking-wide">
+              We translate severe operational compliance vectors and complex transaction matrices into pixel-perfect, secure software engines. Explore our multi-tenant specialized blueprints.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => { navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="bg-white hover:bg-cyan-400 text-black px-6 py-3.5 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.25)]"
+                className="bg-white hover:bg-cyan-400 text-black px-7 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.35)] transform hover:-translate-y-0.5"
               >
-                Initiate Architecture Audit
+                Initiate Core Audit
               </button>
               <button
                 onClick={() => {
                   document.getElementById('verticals-grid')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="border border-neutral-800 hover:border-neutral-700 bg-neutral-950/60 text-neutral-300 px-6 py-3.5 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-colors duration-200"
+                className="border border-neutral-800 hover:border-cyan-500/40 bg-neutral-950/40 hover:bg-neutral-900/60 text-neutral-300 px-7 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-200 backdrop-blur-sm"
               >
-                Browse Sector Solutions
+                Browse Sector Matrix
               </button>
             </div>
-          </div>
+          </motion.div>
         </header>
 
         {/* SECTION 2: INDUSTRIES WE SERVE INTERACTIVE PRESENTATION GRID */}
-        <section id="verticals-grid" className="max-w-7xl mx-auto px-6 md:px-12 py-12 scroll-mt-28">
-          <div className="border-b border-neutral-900 pb-4 mb-12">
-            <h2 className="text-xs font-mono uppercase tracking-widest text-cyan-400">// Sector Matrix Selectors</h2>
+        <section id="verticals-grid" className="max-w-7xl mx-auto px-6 md:px-12 py-16 scroll-mt-24">
+          <div className="border-b border-neutral-900 pb-4 mb-12 flex items-center justify-between">
+            <h2 className="text-xs font-mono uppercase tracking-widest text-cyan-400 tracking-[0.2em]">// Sector Matrix Selectors</h2>
+            <span className="text-xs font-mono text-neutral-600 hidden sm:inline">Active Nodes: {industryCatalog.length}</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* LEFT ROW: TRIGGER COLUMN */}
-            <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5" role="tablist" aria-label="Industry Sectors">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fxStaggerContainer}
+              className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3" 
+              role="tablist" 
+              aria-label="Industry Sectors"
+            >
               {industryCatalog.map((ind, iIdx) => (
-                <button
+                <motion.button
+                  variants={fxFadeUp}
                   key={iIdx}
                   role="tab"
                   id={`tab-${iIdx}`}
                   aria-selected={selectedIndustry === iIdx}
                   aria-controls={`panel-${iIdx}`}
-                  onClick={() => handleIndustryChange(iIdx)}
-                  className={`w-full text-left p-4 rounded-xl border transition-all duration-200 flex items-center gap-4 group ${selectedIndustry === iIdx ? 'bg-neutral-950 border-cyan-500/30 text-cyan-400 shadow-[inset_0_0_12px_rgba(6,182,212,0.04)] shadow-cyan-950/20' : 'bg-transparent border-neutral-900/60 text-neutral-400 hover:text-neutral-200 hover:border-neutral-800'}`}
+                  onClick={() => setSelectedIndustry(iIdx)}
+                  whileHover={{ x: 4, transition: { duration: 0.15 } }}
+                  className={`w-full text-left p-4.5 rounded-xl border transition-all duration-300 flex items-center gap-4 group relative overflow-hidden backdrop-blur-sm ${
+                    selectedIndustry === iIdx 
+                      ? 'bg-gradient-to-r from-neutral-950 to-neutral-900/50 border-cyan-500/40 text-cyan-400 shadow-[0_4px_25px_rgba(6,182,212,0.05),inset_0_0_15px_rgba(6,182,212,0.03)]' 
+                      : 'bg-neutral-950/30 border-neutral-900/80 text-neutral-400 hover:text-white hover:border-neutral-800 hover:bg-neutral-900/20'
+                  }`}
                 >
-                  <div className={`p-2 rounded-md transition-colors ${selectedIndustry === iIdx ? 'bg-cyan-500/10 text-cyan-400' : 'bg-neutral-900/50 text-neutral-500 group-hover:text-neutral-300'}`}>
+                  {selectedIndustry === iIdx && (
+                    <motion.div 
+                      layoutId="activeGlowPill"
+                      className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400 to-blue-500" 
+                    />
+                  )}
+                  
+                  <div className={`p-2.5 rounded-lg transition-all duration-300 ${
+                    selectedIndustry === iIdx 
+                      ? 'bg-cyan-500/10 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.15)]' 
+                      : 'bg-neutral-900/60 text-neutral-500 group-hover:text-neutral-300 group-hover:bg-neutral-800/60'
+                  }`}>
                     {ind.icon}
                   </div>
-                  <span className="text-xs sm:text-sm font-bold tracking-wide font-sans">{ind.title}</span>
-                </button>
+                  <span className="text-xs sm:text-sm font-semibold tracking-wide font-sans">{ind.title}</span>
+                </motion.button>
               ))}
-            </div>
+            </motion.div>
 
             {/* RIGHT ROW: SELECTED DISPLAY CORE PANEL */}
-            <div 
-              id={`panel-${selectedIndustry}`}
-              role="tabpanel"
-              aria-labelledby={`tab-${selectedIndustry}`}
-              className={`lg:col-span-8 p-6 sm:p-10 rounded-2xl border border-neutral-900 bg-gradient-to-br from-neutral-950 to-neutral-900/20 min-h-[460px] flex flex-col justify-between relative transition-all duration-200 ${isTransitioning ? 'opacity-40 scale-[0.995] blur-[1px]' : 'opacity-100 scale-100 blur-0'}`}
-            >
-              <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/[0.02] blur-[80px] pointer-events-none rounded-full" />
-              
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
-                    {industryCatalog[selectedIndustry].icon}
-                  </div>
-                  <h3 className="text-2xl font-bold tracking-tight text-white font-sans">{industryCatalog[selectedIndustry].title}</h3>
-                </div>
-
-                <div className="space-y-6 text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">
+            <div className="lg:col-span-8 min-h-[520px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedIndustry}
+                  id={`panel-${selectedIndustry}`}
+                  role="tabpanel"
+                  aria-labelledby={`tab-${selectedIndustry}`}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fxTabPanelVariant}
+                  className="p-8 sm:p-12 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/30 min-h-[520px] flex flex-col justify-between relative overflow-hidden backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.4)] group"
+                >
+                  <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.04),transparent_65%)] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.02),transparent_60%)] pointer-events-none rounded-full" />
+                  
                   <div>
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Operational Scope Overview</h4>
-                    <p className="text-neutral-300 text-sm sm:text-base">{industryCatalog[selectedIndustry].overview}</p>
-                  </div>
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="p-3.5 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.1)]">
+                        {industryCatalog[selectedIndustry].icon}
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-mono tracking-[0.2em] text-neutral-500 uppercase">Operational Target Matrix</span>
+                        <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans mt-0.5">{industryCatalog[selectedIndustry].title}</h3>
+                      </div>
+                    </div>
 
-                  <div>
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">Custom Architecture Implementations</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {industryCatalog[selectedIndustry].solutions.map((sol, sIdx) => (
-                        <span key={sIdx} className="px-3 py-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-xs font-mono text-neutral-200 hover:border-neutral-700 transition-colors">
-                          {sol}
-                        </span>
-                      ))}
+                    <div className="space-y-8 font-sans">
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-cyan-500/80 mb-3 flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-cyan-400" />
+                          Architecture Scope Overview
+                        </h4>
+                        <p className="text-neutral-300 text-sm sm:text-base leading-relaxed tracking-wide">{industryCatalog[selectedIndustry].overview}</p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-neutral-500 mb-4 flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-neutral-600" />
+                          Engineered System Blueprints
+                        </h4>
+                        <div className="flex flex-wrap gap-2.5">
+                          {industryCatalog[selectedIndustry].solutions.map((sol, sIdx) => (
+                            <span key={sIdx} className="px-3.5 py-2 rounded-lg bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-300 hover:border-cyan-500/30 hover:text-white transition-all duration-200 shadow-sm">
+                              {sol}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="mt-8 pt-6 border-t border-neutral-900">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">Target Corporate Outcomes</h4>
-                <p className="text-neutral-400 italic text-xs sm:text-sm font-sans bg-neutral-900/30 p-4 rounded-xl border border-neutral-900">
-                  {industryCatalog[selectedIndustry].benefits}
-                </p>
-              </div>
+                  <div className="mt-10 pt-6 border-t border-neutral-900/80">
+                    <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-neutral-500 mb-3">Quantifiable Enterprise Benefits</h4>
+                    <div className="bg-gradient-to-r from-cyan-950/20 to-neutral-900/10 p-4.5 rounded-xl border border-cyan-500/10 backdrop-blur-sm shadow-[inset_0_1px_10px_rgba(6,182,212,0.02)]">
+                      <p className="text-neutral-400 italic text-xs sm:text-sm font-sans leading-relaxed">
+                        "{industryCatalog[selectedIndustry].benefits}"
+                      </p>
+                    </div>
+                  </div>
 
+                </motion.div>
+              </AnimatePresence>
             </div>
 
           </div>
         </section>
 
         {/* SECTION 3: WHY BUSINESSES CHOOSE ONYXSTACK LABS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-16">
-            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3">Operational Guarantees</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">Engineered for Architectural Stability</h2>
-          </div>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxFadeUp}
+            className="max-w-3xl mb-16"
+          >
+            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Operational Metrics</p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-sans">Engineered for Systemic Core Stability</h2>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxStaggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {premiumValuePillars.map((pillar, pIdx) => (
-              <div key={pIdx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:border-neutral-800/80 transition-all duration-300 hover:-translate-y-0.5 group">
-                <div className="w-1.5 h-6 bg-cyan-500 mb-4 rounded-full group-hover:shadow-[0_0_12px_rgba(6,182,212,0.6)] transition-all" />
-                <h3 className="text-base font-bold text-white mb-2 font-sans tracking-wide">{pillar.title}</h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{pillar.desc}</p>
-              </div>
+              <motion.div 
+                key={pIdx} 
+                variants={fxFadeUp}
+                whileHover={{ y: -4, borderStandard: "1px solid rgba(6,182,212,0.3)" }}
+                className="p-7 rounded-xl border border-neutral-900/80 bg-gradient-to-b from-neutral-950 to-neutral-950/40 hover:border-neutral-800 transition-all duration-300 group shadow-md"
+              >
+                <div className="w-8 h-[2px] bg-gradient-to-r from-cyan-500 to-blue-500 mb-5 rounded-full group-hover:w-16 transition-all duration-300 group-hover:shadow-[0_0_12px_rgba(6,182,212,0.8)]" />
+                <h3 className="text-base font-bold text-white mb-2.5 font-sans tracking-wide group-hover:text-cyan-400 transition-colors">{pillar.title}</h3>
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide">{pillar.desc}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 4: TECHNOLOGIES ACROSS INDUSTRIES DATA MATRIX */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-cyan-500/[0.01] blur-[120px] pointer-events-none" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <div className="lg:col-span-5">
-              <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3">Consolidated Tech Ecosystem</p>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-4 font-sans">Adaptive Stacks for Multi-Tenant Environments</h2>
-              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
-                Instead of forcing rigid systems onto diverse business problems, our engineers configure specialized technological matrices that best balance computation speed with long-term security.
+              <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Technology Matrix</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-5 font-sans leading-tight">Adaptive Framework Networks</h2>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide">
+                We design clean micro-architectures custom mapped to high-volume computational nodes. Our setups strike a rigorous equilibrium between stateless performance loops and fault-tolerant encryption rules.
               </p>
             </div>
-            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fxStaggerContainer}
+              className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4"
+            >
               {[
-                { name: "React Frontend Core", role: "UI Interaction Optimization" },
-                { name: "Node.js Platform", role: "High-Throughput IO Pipelines" },
-                { name: "MongoDB Infrastructure", role: "Dynamic Object Schemas" },
-                { name: "Firebase Cloud Fabrics", role: "Stateless Micro-Triggers" },
-                { name: "Gemini AI Instances", role: "Cognitive Inference Chains" },
-                { name: "Vite Compilation Tools", role: "Sub-Second Fast-Bundling" }
+                { name: "React Frontend Core", role: "Interface Orchestration" },
+                { name: "Node.js Platform", role: "High-Throughput IO Hubs" },
+                { name: "MongoDB Infrastructure", role: "Dynamic Object Matrices" },
+                { name: "Firebase Cloud Fabrics", role: "Stateless Cloud Storage" },
+                { name: "Gemini AI Frameworks", role: "Cognitive Inference Engines" },
+                { name: "Vite Compilation Layers", role: "Optimized Asset Bundling" }
               ].map((techElement, teIdx) => (
-                <div key={teIdx} className="p-4 rounded-xl border border-neutral-900 bg-neutral-950/60 hover:border-neutral-800/60 transition-colors">
-                  <h4 className="text-xs font-bold text-white mb-1 font-mono">{techElement.name}</h4>
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-wider font-sans">{techElement.role}</p>
-                </div>
+                <motion.div 
+                  key={teIdx} 
+                  variants={fxFadeUp}
+                  whileHover={{ borderStandard: "1px solid rgba(6,182,212,0.2)", scale: 1.02 }}
+                  className="p-4.5 rounded-xl border border-neutral-900 bg-neutral-950/70 shadow-sm hover:bg-neutral-900/40 transition-all duration-200"
+                >
+                  <h4 className="text-xs font-bold text-neutral-200 mb-1 font-mono">{techElement.name}</h4>
+                  <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-sans font-medium">{techElement.role}</p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* SECTION 5: ENTERPRISE DEVELOPMENT PROCESS FLOW */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900/60">
-          <div className="max-w-3xl mb-16">
-            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3">Delivery Engineering</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">A Scientific Approach to Software Lifecycle Delivery</h2>
-          </div>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxFadeUp}
+            className="max-w-3xl mb-16"
+          >
+            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Lifecycle Blueprint</p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-sans">Scientific Delivery Parameters</h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fxStaggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
+          >
             {deliveryWorkflowPhases.map((phase, phIdx) => (
-              <div key={phIdx} className="p-6 rounded-xl border border-neutral-900 bg-gradient-to-b from-neutral-950 to-[#050505] relative group hover:border-neutral-800/80 transition-all duration-200">
-                <div className="absolute top-4 right-4 text-xs font-mono font-bold text-neutral-800 group-hover:text-cyan-400/50 transition-colors">
-                  #{phase.id}
+              <motion.div 
+                key={phIdx} 
+                variants={fxFadeUp}
+                className="p-6.5 rounded-xl border border-neutral-900/80 bg-gradient-to-b from-neutral-950 to-[#060606] relative group hover:border-neutral-800 transition-all duration-300 shadow-md"
+              >
+                <div className="absolute top-5 right-5 text-xs font-mono font-bold text-neutral-800 group-hover:text-cyan-500/40 transition-colors duration-300">
+                  // {phase.id}
                 </div>
-                <h3 className="text-sm font-bold text-white mb-3 font-sans tracking-wide mt-2">{phase.phaseName}</h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">{phase.summary || phase.desc}</p>
-              </div>
+                <h3 className="text-sm font-bold text-white mb-3 font-sans tracking-wide mt-2 group-hover:text-cyan-400 transition-colors duration-300">{phase.phaseName}</h3>
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide">{phase.summary || phase.desc}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 6: FIXED CLOSING CALL TO ACTION BLOCK */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-900/60">
-          <div className="p-8 sm:p-14 rounded-3xl border border-neutral-900 bg-gradient-to-tr from-neutral-950 via-neutral-950 to-neutral-900/40 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-cyan-500/[0.02] blur-[100px] pointer-events-none rounded-full" />
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-28 border-t border-neutral-900/50">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fxFadeUp}
+            className="p-8 sm:p-16 rounded-3xl border border-neutral-800/80 bg-gradient-to-tr from-neutral-950 via-neutral-950 to-neutral-900/20 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.5)] group"
+          >
+            <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05),transparent_70%)] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
             
-            <div className="max-w-2xl">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3 font-sans">
-                Ready to Upgrade Your Domain Technology Framework?
+            <div className="max-w-3xl">
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-4 font-sans leading-tight">
+                Accelerate Your Core Domain Infrastructure Architecture
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
-                Connect with our product consultants to lay out a detailed system diagram and structural transition timeline customized specifically for your business domain's demands.
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide max-w-2xl">
+                Connect with our system engineers to lay down clean schema parameters, verify scalability boundaries, and draft a high-fidelity system roadmap tailored exclusively for your specialized business needs.
               </p>
             </div>
 
-            <div className="flex-shrink-0 z-10">
+            <div className="flex-shrink-0 z-10 w-full sm:w-auto">
               <button
                 onClick={() => { navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="bg-neutral-100 hover:bg-cyan-400 text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.25)] whitespace-nowrap"
+                className="w-full sm:w-auto text-center bg-white hover:bg-cyan-400 text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] transform hover:-translate-y-0.5"
               >
-                Schedule Architecture Consultation
+                Schedule Consultation
               </button>
             </div>
-          </div>
+          </motion.div>
         </section>
 
       </main>
