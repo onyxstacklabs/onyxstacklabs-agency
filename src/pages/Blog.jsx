@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
-import { blogArticles } from '../data/blogArticles';
+import { db } from '../config/firebase'; // Connected to your existing Firebase instance
+import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 
 // MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
 import Navbar from '../components/Navbar';
@@ -29,14 +30,41 @@ const fxGridItemVariant = {
 
 export default function Blog({ currentPath, navigateToNode }) {
   const navigate = useNavigate();
+  const [articles, setArticles] = useState([]);
+  const [featuredArticle, setFeaturedArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [subscribedStatus, setSubscribedStatus] = useState(false);
 
-  // Synchronize layout scroll position on mount
+  // Synchronize layout scroll position and connect live Firestore data stream
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Stream query: only read entries where published === true ordered by newest deployment
+    const blogsRef = collection(db, 'blogs');
+    const q = query(blogsRef, where('published', '==', true), orderBy('createdAt', 'desc'));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const liveArticles = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+      // Extract the absolute headline node if flagged as featured, otherwise fall back to newest entry
+      const featuredNode = liveArticles.find(art => art.featured) || liveArticles[0] || null;
+      
+      setFeaturedArticle(featuredNode);
+      setArticles(liveArticles);
+      setLoading(false);
+    }, (error) => {
+      console.error("Firestore frontend collection sync failed: ", error);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   // Section 3 Data: Categorization Filter Facets
@@ -49,107 +77,11 @@ export default function Blog({ currentPath, navigateToNode }) {
     "Gemini AI", "Tailwind CSS", "Serverless Edge", "NextJS", "Optimization", "Firestore", "WebSockets", "Architecture"
   ];
 
-  // Section 2 Data: Hero Editorial Spotlight Article
-  const featuredArticle = {
-    id: "feat-01",
-    slug: "gemini-cognitive-fabrics-react-architecture",
-    category: "AI",
-    date: "July 10, 2026",
-    readTime: "7 min read",
-    title: "Orchestrating Sub-Second Inference Loops: Integrating Gemini Cognitive Fabrics into Modern React Architectures",
-    summary: "An in-depth structural exploration into reducing browser token validation lag, managing real-time websocket micro-triggers, and caching complex analytical prompt models on serverless edge nodes for high-density enterprise environments.",
-    author: "Alex Rivers, Principal AI Architect"
-  };
-
-  // Section 4 Data: Extensible Core Content Matrix (CMS-Ready Schema)
-  const articles = [
-    {
-      id: "art-01",
-      slug: "optimizing-react-core-initialization-loops",
-      category: "React",
-      date: "July 02, 2026",
-      readTime: "5 min read",
-      title: "Optimizing React Core Initialization Loops and Tree-Shaking Dead Compilation Bundles",
-      summary: "How moving from complex runtime frameworks to lightweight compilation setups reduces first paint delays by up to 42% on slow client networks.",
-      author: "Marcus Vance"
-    },
-    {
-      id: "art-02",
-      slug: "distributed-serverless-configurations-edge-routing",
-      category: "Web Development",
-      date: "June 28, 2026",
-      readTime: "6 min read",
-      title: "The Shift to Distributed Serverless Configurations: Designing Resilient Edge Data Routing Patterns",
-      summary: "An structural evaluation of multi-region caching strategies designed to minimize network request hops for stateless enterprise platforms.",
-      author: "Sarah Jenkins"
-    },
-    {
-      id: "art-03",
-      slug: "design-systems-translating-typography-hierarchies",
-      category: "UI/UX",
-      date: "June 19, 2026",
-      readTime: "4 min read",
-      title: "Design Systems to Component Code: Translating Complex Typography Hierarchies into Utility CSS Tokens",
-      summary: "Establishing atomic layout guidelines that ensure absolute screen-reader accessibility while maintaining dark futuristic visual branding.",
-      author: "Elena Rostov"
-    },
-    {
-      id: "art-04",
-      slug: "managing-connection-limits-firebase-realtime",
-      category: "Firebase",
-      date: "June 12, 2026",
-      readTime: "5 min read",
-      title: "Managing Connection Limits and Database Writing Operations in Real-Time Cloud Environments",
-      summary: "Mitigating transactional state overlaps within concurrent document updates by leveraging isolated cloud validation layers.",
-      author: "David Vance"
-    },
-    {
-      id: "art-05",
-      slug: "financial-pitfalls-off-the-shelf-themes",
-      category: "Business",
-      date: "May 30, 2026",
-      readTime: "8 min read",
-      title: "The Financial Pitfalls of Off-the-Shelf Themes: Quantifying Accrued Technical Debt in Scaled Environments",
-      summary: "An analytical study of how rigid layout configurations trap long-term business processes and drive up engineering optimization costs.",
-      author: "Robert Chen"
-    },
-    {
-      id: "art-06",
-      slug: "building-high-performance-webviews-mobile",
-      category: "Mobile Apps",
-      date: "May 22, 2026",
-      readTime: "6 min read",
-      title: "Building High-Performance Web Views: Achieving 60 FPS Telemetry Rendering Across Handheld Frameworks",
-      summary: "Leveraging virtualized container trees to map massive real-time data payloads efficiently on lower-tier mobile browser engines.",
-      author: "Liam Sterling"
-    },
-    {
-      id: "art-07",
-      slug: "onyxstack-school-architecture-review",
-      category: "Case Studies",
-      date: "May 15, 2026",
-      readTime: "9 min read",
-      title: "OnyxStack School Architecture Review: Consolidating Disconnected Datastores for Multi-Campus Platforms",
-      summary: "Deconstructing an institution-level migration into clean, isolated database rows backed by end-to-end cryptographic tokens.",
-      author: "Aria Thorne"
-    },
-    {
-      id: "art-08",
-      slug: "automating-document-context-sorting-chains",
-      category: "AI",
-      date: "May 04, 2026",
-      readTime: "7 min read",
-      title: "Automating Dynamic Document Context Sorting Chains Using Server-Sent Cognitive Pipelines",
-      summary: "How streaming structural semantic nodes lets web interfaces build custom data layout trees dynamically as user parameters adjust.",
-      author: "Alex Rivers"
-    }
-  ];
-
   // Pipeline Filter Processing Functionality
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          article.summary.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = article.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          article.summary?.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -225,140 +157,158 @@ export default function Blog({ currentPath, navigateToNode }) {
           </motion.div>
         </header>
 
-        {/* SECTION 2: EDITORIAL SPOTLIGHT FEATURED ARTICLE HERO */}
-        {(!searchQuery || featuredArticle.title.toLowerCase().includes(searchQuery.toLowerCase())) && (
-          <section className="max-w-7xl mx-auto px-6 md:px-12 py-6">
-            <motion.div 
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={fxFadeUp}
-              onClick={() => handleNavigation(featuredArticle.slug)}
-              className="group p-6 sm:p-10 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/30 cursor-pointer hover:border-neutral-700 transition-all duration-300 relative overflow-hidden backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
-            >
-              <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-cyan-500/[0.02] blur-[120px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
-              
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-                <div className="lg:col-span-5 aspect-[16/10] sm:aspect-[16/9] lg:aspect-square w-full rounded-xl bg-gradient-to-tr from-neutral-900 to-neutral-950 border border-neutral-800/60 flex flex-col justify-between p-6 relative group-hover:border-cyan-500/20 transition-colors duration-300">
-                  <div className="text-neutral-600 font-mono text-[9px] uppercase tracking-[0.2em]">
-                    [ Editorial_Spotlight_Node ]
-                  </div>
-                  <div className="text-cyan-400 font-mono text-4xl lg:text-5xl font-extrabold opacity-25 group-hover:opacity-60 transition-opacity duration-300 select-none">
-                    {featuredArticle.category}://
-                  </div>
-                </div>
-                
-                <div className="lg:col-span-7 space-y-5">
-                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                    <span className="px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold uppercase tracking-widest text-[9px] shadow-[0_0_10px_rgba(6,182,212,0.05)]">
-                      Featured Post
-                    </span>
-                    <span className="text-neutral-500">{featuredArticle.date}</span>
-                    <span className="text-neutral-700">•</span>
-                    <span className="text-neutral-400 font-mono text-xs">{featuredArticle.readTime}</span>
-                  </div>
-                  
-                  <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors duration-200 leading-snug font-sans">
-                    {featuredArticle.title}
-                  </h2>
-                  
-                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-3xl font-sans tracking-wide">
-                    {featuredArticle.summary}
-                  </p>
-                  
-                  <div className="flex items-center justify-between pt-6 border-t border-neutral-900/80">
-                    <span className="text-xs font-mono text-neutral-500 tracking-wide">{featuredArticle.author}</span>
-                    <span className="text-xs font-mono text-cyan-400 flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200 font-bold uppercase tracking-wider">
-                      Read Blueprint Article <span className="font-sans">→</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </section>
-        )}
-
-        {/* SECTION 3: CATEGORIES FACTION FILTER SELECTORS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-12">
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 border-b border-neutral-900 no-scrollbar scroll-smooth">
-            {categories.map((cat, cIdx) => (
-              <button
-                key={cIdx}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-lg text-xs font-mono whitespace-nowrap transition-all duration-200 focus:outline-none relative ${
-                  selectedCategory === cat 
-                    ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold shadow-[0_0_15px_rgba(6,182,212,0.05)]' 
-                    : 'border border-transparent text-neutral-500 hover:text-neutral-300'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+        {loading ? (
+          <div className="max-w-7xl mx-auto px-6 md:px-12 py-20 text-center font-mono text-sm text-neutral-500 animate-pulse">
+            Querying edge database shards...
           </div>
-        </section>
-
-        {/* SECTION 4: LATEST ARTICLES GRID FRAME */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-6">
-          <AnimatePresence mode="wait">
-            {filteredArticles.length === 0 ? (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center py-24 border border-dashed border-neutral-800 rounded-2xl bg-neutral-950/20 backdrop-blur-sm"
-              >
-                <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest tracking-[0.15em]">No corresponding articles matching search keys found.</p>
-              </motion.div>
-            ) : (
-              <motion.div 
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={fxStaggerContainer}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {filteredArticles.map((art) => (
-                  <motion.div 
-                    key={art.id}
-                    variants={fxGridItemVariant}
-                    onClick={() => handleNavigation(art.slug)}
-                    className="group rounded-xl border border-neutral-900/80 bg-neutral-950/40 p-5.5 cursor-pointer hover:border-neutral-700/80 hover:bg-gradient-to-b hover:from-neutral-950 hover:to-neutral-900/10 transition-all duration-300 flex flex-col justify-between min-h-[440px] shadow-md backdrop-blur-sm relative overflow-hidden"
-                  >
-                    <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/[0.005] blur-xl rounded-full pointer-events-none" />
-                    <div>
-                      {/* Visual Card Image Dynamic Placeholder Header */}
-                      <div className="aspect-[16/10] w-full rounded-lg bg-neutral-900 border border-neutral-950 flex flex-col justify-between p-4 mb-5 group-hover:border-neutral-800 transition-colors duration-300 select-none">
-                        <div className="text-[8px] font-mono text-neutral-600 tracking-[0.15em]">[ Grid_Frame_Asset ]</div>
-                        <div className="text-neutral-500 font-mono text-xs tracking-tight">{art.category}://</div>
+        ) : (
+          <>
+            {/* SECTION 2: EDITORIAL SPOTLIGHT FEATURED ARTICLE HERO */}
+            {featuredArticle && (!searchQuery || featuredArticle.title?.toLowerCase().includes(searchQuery.toLowerCase())) && (
+              <section className="max-w-7xl mx-auto px-6 md:px-12 py-6">
+                <motion.div 
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  variants={fxFadeUp}
+                  onClick={() => handleNavigation(featuredArticle.slug)}
+                  className="group p-6 sm:p-10 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/30 cursor-pointer hover:border-neutral-700 transition-all duration-300 relative overflow-hidden backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                >
+                  <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-cyan-500/[0.02] blur-[120px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                    <div className="lg:col-span-5 aspect-[16/10] sm:aspect-[16/9] lg:aspect-square w-full rounded-xl bg-gradient-to-tr from-neutral-900 to-neutral-950 border border-neutral-800/60 flex flex-col justify-between p-6 relative group-hover:border-cyan-500/20 transition-colors duration-300 overflow-hidden">
+                      {featuredArticle.coverImage ? (
+                        <img src={featuredArticle.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" />
+                      ) : null}
+                      <div className="text-neutral-600 font-mono text-[9px] uppercase tracking-[0.2em] relative z-10">
+                        [ Editorial_Spotlight_Node ]
                       </div>
-
-                      <div className="space-y-2.5">
-                        <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500">
-                          <span>{art.date}</span>
-                          <span className="text-neutral-700">•</span>
-                          <span>{art.readTime}</span>
-                        </div>
-                        <h3 className="text-base font-bold text-white tracking-wide group-hover:text-cyan-400 transition-colors duration-200 leading-snug font-sans">
-                          {art.title}
-                        </h3>
-                        <p className="text-xs text-neutral-400 leading-relaxed font-sans tracking-wide line-clamp-3">
-                          {art.summary}
-                        </p>
+                      <div className="text-cyan-400 font-mono text-4xl lg:text-5xl font-extrabold opacity-25 group-hover:opacity-60 transition-opacity duration-300 select-none relative z-10">
+                        {featuredArticle.category}://
                       </div>
                     </div>
-
-                    <div className="mt-8 pt-4 border-t border-neutral-900/60 flex items-center justify-between text-[11px] font-mono">
-                      <span className="text-neutral-500 tracking-wide">{art.author}</span>
-                      <span className="text-cyan-400/90 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-200">
-                        Read Card <span className="font-sans">→</span>
-                      </span>
+                    
+                    <div className="lg:col-span-7 space-y-5">
+                      <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
+                        <span className="px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold uppercase tracking-widest text-[9px] shadow-[0_0_10px_rgba(6,182,212,0.05)]">
+                          Featured Post
+                        </span>
+                        <span className="text-neutral-500">
+                          {featuredArticle.createdAt?.seconds ? new Date(featuredArticle.createdAt.seconds * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Recent'}
+                        </span>
+                        <span className="text-neutral-700">•</span>
+                        <span className="text-neutral-400 font-mono text-xs">{featuredArticle.readTime || '5 min read'}</span>
+                      </div>
+                      
+                      <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors duration-200 leading-snug font-sans">
+                        {featuredArticle.title}
+                      </h2>
+                      
+                      <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-3xl font-sans tracking-wide">
+                        {featuredArticle.summary}
+                      </p>
+                      
+                      <div className="flex items-center justify-between pt-6 border-t border-neutral-900/80">
+                        <span className="text-xs font-mono text-neutral-500 tracking-wide">{featuredArticle.author}</span>
+                        <span className="text-xs font-mono text-cyan-400 flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200 font-bold uppercase tracking-wider">
+                          Read Blueprint Article <span className="font-sans">→</span>
+                        </span>
+                      </div>
                     </div>
-                  </motion.div>
-                ))}
-              </motion.div>
+                  </div>
+                </motion.div>
+              </section>
             )}
-          </AnimatePresence>
-        </section>
+
+            {/* SECTION 3: CATEGORIES FACTION FILTER SELECTORS */}
+            <section className="max-w-7xl mx-auto px-6 md:px-12 py-12">
+              <div className="flex items-center gap-2 overflow-x-auto pb-4 border-b border-neutral-900 no-scrollbar scroll-smooth">
+                {categories.map((cat, cIdx) => (
+                  <button
+                    key={cIdx}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-4 py-2 rounded-lg text-xs font-mono whitespace-nowrap transition-all duration-200 focus:outline-none relative ${
+                      selectedCategory === cat 
+                        ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold shadow-[0_0_15px_rgba(6,182,212,0.05)]' 
+                        : 'border border-transparent text-neutral-500 hover:text-neutral-300'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            {/* SECTION 4: LATEST ARTICLES GRID FRAME */}
+            <section className="max-w-7xl mx-auto px-6 md:px-12 py-6">
+              <AnimatePresence mode="wait">
+                {filteredArticles.length === 0 ? (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-center py-24 border border-dashed border-neutral-800 rounded-2xl bg-neutral-950/20 backdrop-blur-sm"
+                  >
+                    <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest tracking-[0.15em]">No corresponding articles matching search keys found.</p>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={fxStaggerContainer}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {filteredArticles.map((art) => (
+                      <motion.div 
+                        key={art.id}
+                        variants={fxGridItemVariant}
+                        onClick={() => handleNavigation(art.slug)}
+                        className="group rounded-xl border border-neutral-900/80 bg-neutral-950/40 p-5.5 cursor-pointer hover:border-neutral-700/80 hover:bg-gradient-to-b hover:from-neutral-950 hover:to-neutral-900/10 transition-all duration-300 flex flex-col justify-between min-h-[440px] shadow-md backdrop-blur-sm relative overflow-hidden"
+                      >
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/[0.005] blur-xl rounded-full pointer-events-none" />
+                        <div>
+                          {/* Visual Card Image Dynamic Placeholder Header */}
+                          <div className="aspect-[16/10] w-full rounded-lg bg-neutral-900 border border-neutral-950 flex flex-col justify-between p-4 mb-5 group-hover:border-neutral-800 transition-colors duration-300 select-none relative overflow-hidden">
+                            {art.coverImage ? (
+                              <img src={art.coverImage} alt="Cover Image" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-500" />
+                            ) : null}
+                            <div className="text-[8px] font-mono text-neutral-600 tracking-[0.15em] relative z-10">[ Grid_Frame_Asset ]</div>
+                            <div className="text-neutral-500 font-mono text-xs tracking-tight relative z-10">{art.category}://</div>
+                          </div>
+
+                          <div className="space-y-2.5">
+                            <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500">
+                              <span>
+                                {art.createdAt?.seconds ? new Date(art.createdAt.seconds * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}
+                              </span>
+                              <span className="text-neutral-700">•</span>
+                              <span>{art.readTime || '5 min read'}</span>
+                            </div>
+                            <h3 className="text-base font-bold text-white tracking-wide group-hover:text-cyan-400 transition-colors duration-200 leading-snug font-sans">
+                              {art.title}
+                            </h3>
+                            <p className="text-xs text-neutral-400 leading-relaxed font-sans tracking-wide line-clamp-3">
+                              {art.summary}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="mt-8 pt-4 border-t border-neutral-900/60 flex items-center justify-between text-[11px] font-mono">
+                          <span className="text-neutral-500 tracking-wide">{art.author}</span>
+                          <span className="text-cyan-400/90 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-200">
+                            Read Card <span className="font-sans">rightarrow</span>
+                          </span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </section>
+          </>
+        )}
 
         {/* SECTION 5: POPULAR TAGS SYSTEM */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-10">
