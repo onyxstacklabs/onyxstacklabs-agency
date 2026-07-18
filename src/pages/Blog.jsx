@@ -1,8 +1,11 @@
+// src/pages/Blog.jsx
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
+import { blogArticles } from '../data/blogArticles';
 
 // MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
 import Navbar from '../components/Navbar';
@@ -25,6 +28,7 @@ const fxGridItemVariant = {
 };
 
 export default function Blog({ currentPath, navigateToNode }) {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -158,7 +162,7 @@ export default function Blog({ currentPath, navigateToNode }) {
   };
 
   const handleNavigation = (slug) => {
-    navigateToNode(`/blog/${slug}`);
+    navigate(`/blog/${slug}`);
   };
 
   return (
