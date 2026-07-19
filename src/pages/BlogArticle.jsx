@@ -28,13 +28,10 @@ export default function BlogArticle({ currentPath, navigateToNode }) {
       try {
         setLoading(true);
         const blogsRef = collection(db, 'blogs');
-        
-        // Query to match either slug field or fallback document id
         const q = query(blogsRef, where('published', '==', true));
         const querySnapshot = await getDocs(q);
         
         let foundDoc = null;
-        
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           if (data.slug === slug || doc.id === slug) {
@@ -51,7 +48,6 @@ export default function BlogArticle({ currentPath, navigateToNode }) {
             author: typeof foundDoc.author === 'object' ? (foundDoc.author.name || "Senior Architect") : (foundDoc.author || "Senior Architect")
           });
         } else {
-          // If no article matches, route to 404 root cleanly
           navigate('/404', { replace: true });
         }
       } catch (err) {
@@ -66,6 +62,88 @@ export default function BlogArticle({ currentPath, navigateToNode }) {
       fetchArticle();
     }
   }, [slug, navigate]);
+
+  // SOCIAL SHARD DISPATCH LOGIC
+  const handleShare = (platform) => {
+    const articleUrl = window.location.href;
+    const articleTitle = article?.title || "OnyxStack Labs Blueprint";
+
+    if (platform === 'native') {
+      if (navigator.share) {
+        navigator.share({
+          title: articleTitle,
+          url: articleUrl,
+        }).catch(console.error);
+      } else {
+        navigator.clipboard.writeText(articleUrl);
+        alert("Link copied to clipboard node!");
+      }
+      return;
+    }
+
+    let shareUrl = '';
+    if (platform === 'linkedin') {
+      shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`;
+    } else if (platform === 'twitter') {
+      shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(articleTitle)}&url=${encodeURIComponent(articleUrl)}`;
+    } else if (platform === 'whatsapp') {
+      shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(articleTitle + " " + articleUrl)}`;
+    }
+
+    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // DYNAMIC ARCHITECTURAL CONTENT PARSER LAYER
+  const renderFormattedContent = (text) => {
+    if (!text) return null;
+    
+    // Split segments by paragraphs/newlines
+    const paragraphs = text.split('\n');
+
+    return paragraphs.map((para, index) => {
+      const trimmed = para.trim();
+      if (!trimmed) return null;
+
+      // 1. Heading Detection (Strikethrough or custom indicator like ### or explicit capitalization with trailing colon)
+      if (trimmed.startsWith('###') || (trimmed.endsWith(':') && trimmed.length < 60 && !trimmed.startsWith('http'))) {
+        const cleanHeading = trimmed.replace('###', '').trim();
+        return (
+          <h3 key={index} className="text-lg sm:text-xl font-bold text-white tracking-tight pt-6 pb-2 font-sans border-l-2 border-cyan-500/40 pl-3 mt-4">
+            {cleanHeading}
+          </h3>
+        );
+      }
+
+      // 2. Code Block Detection (If line starts with code tags or looks technical)
+      if (trimmed.startsWith('//') && trimmed.length > 30) {
+        return (
+          <pre key={index} className="bg-neutral-950 border border-neutral-900 rounded-xl p-4 font-mono text-xs text-cyan-400 overflow-x-auto my-4 leading-relaxed selection:bg-cyan-500/20">
+            <code>{trimmed}</code>
+          </pre>
+        );
+      }
+
+      // 3. Bullet List Detection
+      if (trimmed.startsWith('*') || trimmed.startsWith('-')) {
+        const cleanBullet = trimmed.substring(1).trim();
+        return (
+          <ul key={index} className="list-none space-y-2 pl-4 my-2">
+            <li className="text-neutral-300 text-sm sm:text-base font-sans tracking-wide flex items-start gap-2.5">
+              <span className="text-cyan-400 font-mono mt-1 text-xs">▪</span>
+              <span>{cleanBullet}</span>
+            </li>
+          </ul>
+        );
+      }
+
+      // 4. Default Standard Paragraph Structure
+      return (
+        <p key={index} className="text-neutral-300 text-sm sm:text-base leading-relaxed tracking-wide font-sans mb-5">
+          {trimmed}
+        </p>
+      );
+    });
+  };
 
   if (loading) {
     return (
@@ -106,13 +184,32 @@ export default function BlogArticle({ currentPath, navigateToNode }) {
 
           {/* COVER IMAGE NODE */}
           {article.coverImage && (
-            <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-900 bg-neutral-950 mb-12">
+            <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-900 bg-neutral-950 mb-8">
               <img src={article.coverImage} alt={article.title} className="w-full h-full object-cover opacity-80" />
             </div>
           )}
 
+          {/* SOCIAL SHARE MATRIX LAYER */}
+          <div className="flex flex-wrap items-center gap-2.5 my-8 pt-4 pb-5 border-b border-neutral-900/60">
+            <span className="text-xs font-mono text-neutral-500 uppercase tracking-wider mr-1">
+              Dispatch Node:
+            </span>
+            <button onClick={() => handleShare('linkedin')} className="px-3 py-1.5 rounded bg-neutral-950 border border-neutral-900 hover:border-cyan-500/40 text-neutral-400 hover:text-white text-[11px] font-mono transition-all duration-200">
+              LinkedIn
+            </button>
+            <button onClick={() => handleShare('twitter')} className="px-3 py-1.5 rounded bg-neutral-950 border border-neutral-900 hover:border-cyan-500/40 text-neutral-400 hover:text-white text-[11px] font-mono transition-all duration-200">
+              X_Corp
+            </button>
+            <button onClick={() => handleShare('whatsapp')} className="px-3 py-1.5 rounded bg-neutral-950 border border-neutral-900 hover:border-cyan-500/40 text-neutral-400 hover:text-white text-[11px] font-mono transition-all duration-200">
+              WhatsApp
+            </button>
+            <button onClick={() => handleShare('native')} className="px-3 py-1.5 rounded bg-cyan-500/10 border border-cyan-500/20 hover:bg-cyan-500/20 text-cyan-400 text-[11px] font-mono transition-all duration-200 sm:ml-auto">
+              Share Node →
+            </button>
+          </div>
+
           {/* AUTHOR METRIC PROFILE */}
-          <div className="flex items-center gap-4 py-6 border-y border-neutral-900/60 mb-10 text-xs font-mono">
+          <div className="flex items-center gap-4 py-4 mb-10 text-xs font-mono">
             <div className="w-8 h-8 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-cyan-400 font-bold font-sans">
               OA
             </div>
@@ -123,8 +220,8 @@ export default function BlogArticle({ currentPath, navigateToNode }) {
           </div>
 
           {/* CONTENT DISPATCH RENDER CORES */}
-          <div className="text-neutral-300 space-y-6 leading-relaxed font-sans text-sm sm:text-base tracking-wide whitespace-pre-wrap">
-            {article.content}
+          <div className="text-neutral-300 space-y-2">
+            {renderFormattedContent(article.content)}
           </div>
 
           {/* PIPELINE FOOTER UTILITY NAVIGATION */}
