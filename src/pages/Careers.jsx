@@ -17,8 +17,8 @@ export default function Careers({ currentPath, navigateToNode }) {
   const [activeApplicationModal, setActiveApplicationModal] = useState(null);
   const [modalStep, setModalStep] = useState(1); // 1: Handshake, 2: Form Input, 3: Processing, 4: Success
   
-  // Form States Matrix
-  const [formData, setFormData] = useState({ candidateName: '', email: '', github: '', stack: '' });
+  // Form States Matrix - Synchronized precisely with OnyxAdmin Hub expectations
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', portfolio: '', experience: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -32,12 +32,11 @@ export default function Careers({ currentPath, navigateToNode }) {
   const handleModalClose = () => {
     setActiveApplicationModal(null);
     setModalStep(1);
-    setFormData({ candidateName: '', email: '', github: '', stack: '' });
+    setFormData({ name: '', email: '', phone: '', portfolio: '', experience: '' });
   };
 
   // DISCORD PIPELINE NOTIFICATION DISPATCHER
   const dispatchDiscordNotification = async (payload) => {
-    // Agar aapka webhook config file mein save hai ya env file mein
     const DISCORD_WEBHOOK_URL = siteConfig?.discordWebhookUrl || "YOUR_DISCORD_WEBHOOK_URL_HERE";
     
     const embedData = {
@@ -47,11 +46,12 @@ export default function Careers({ currentPath, navigateToNode }) {
         title: "🚨 New Enterprise Talent Acquired!",
         color: 43232, // Cyan hex matrix
         fields: [
-          { name: "Target Position", value: `\`${payload.position}\``, inline: true },
-          { name: "Candidate Name", value: payload.candidateName, inline: true },
+          { name: "Target Position / Role", value: `\`${payload.role}\``, inline: true },
+          { name: "Candidate Name", value: payload.name, inline: true },
+          { name: "Contact Phone", value: payload.phone || "Not Provided", inline: true },
           { name: "Email Address", value: payload.email, inline: false },
-          { name: "GitHub Profile", value: payload.github, inline: false },
-          { name: "Core Stack Telemetry", value: `\`\`\`${payload.stack}\`\`\`` }
+          { name: "Portfolio Node", value: payload.portfolio, inline: false },
+          { name: "Core Stack / Experience", value: `\`\`\`${payload.experience}\`\`\`` }
         ],
         footer: { text: "OnyxStack Labs Control Tower Pipeline" },
         timestamp: new Date().toISOString()
@@ -72,22 +72,23 @@ export default function Careers({ currentPath, navigateToNode }) {
   // CORE DATA TRANSMISSION ROUTINE
   const handleIntakeSubmission = async (e) => {
     e.preventDefault();
-    if (!formData.candidateName || !formData.email || !formData.github) return;
+    if (!formData.name || !formData.email || !formData.portfolio || !formData.phone) return;
 
     setModalStep(3); // Processing telemetry status
     
+    // Exact schema matching OnyxAdmin state maps perfectly
     const applicationPayload = {
-      position: activeApplicationModal,
-      candidateName: formData.candidateName,
+      role: activeApplicationModal,
+      name: formData.name,
       email: formData.email,
-      github: formData.github,
-      stack: formData.stack || "Not Specified",
-      status: "pending", // Default workflow status
-      timestamp: serverTimestamp()
+      phone: formData.phone,
+      portfolio: formData.portfolio,
+      experience: formData.experience || "Not Specified",
+      submittedAt: serverTimestamp() // Explicit mapping hook for orderBy query
     };
 
     try {
-      // 1. Database Persistence Execution
+      // 1. Database Persistence Execution targeting the live recruitment_pipeline collection cluster
       await addDoc(collection(db, "recruitment_pipeline"), applicationPayload);
       
       // 2. Discord Cluster Notification Trigger
@@ -265,8 +266,8 @@ export default function Careers({ currentPath, navigateToNode }) {
                     <label className="text-[10px] text-neutral-500 block mb-1 uppercase tracking-wider">Candidate Operator Name*</label>
                     <input 
                       type="text" required
-                      value={formData.candidateName}
-                      onChange={(e) => setFormData({...formData, candidateName: e.target.value})}
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
                       className="w-full bg-[#050505] border border-neutral-900 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#06B6D4]"
                       placeholder="e.g. John Doe"
                     />
@@ -282,11 +283,21 @@ export default function Careers({ currentPath, navigateToNode }) {
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] text-neutral-500 block mb-1 uppercase tracking-wider">GitHub / Repository Link*</label>
+                    <label className="text-[10px] text-neutral-500 block mb-1 uppercase tracking-wider">Contact Phone Number* (WhatsApp Macro Trigger)</label>
+                    <input 
+                      type="tel" required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="w-full bg-[#050505] border border-neutral-900 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#06B6D4]"
+                      placeholder="e.g. +923001234567"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-neutral-500 block mb-1 uppercase tracking-wider">GitHub / Portfolio Link*</label>
                     <input 
                       type="url" required
-                      value={formData.github}
-                      onChange={(e) => setFormData({...formData, github: e.target.value})}
+                      value={formData.portfolio}
+                      onChange={(e) => setFormData({...formData, portfolio: e.target.value})}
                       className="w-full bg-[#050505] border border-neutral-900 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#06B6D4]"
                       placeholder="https://github.com/username"
                     />
@@ -295,8 +306,8 @@ export default function Careers({ currentPath, navigateToNode }) {
                     <label className="text-[10px] text-neutral-500 block mb-1 uppercase tracking-wider">Core Technical Vectors / Stack Summary</label>
                     <textarea 
                       rows="2"
-                      value={formData.stack}
-                      onChange={(e) => setFormData({...formData, stack: e.target.value})}
+                      value={formData.experience}
+                      onChange={(e) => setFormData({...formData, experience: e.target.value})}
                       className="w-full bg-[#050505] border border-neutral-900 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#06B6D4] resize-none"
                       placeholder="React, Next.js, Node, Tailwinds..."
                     />
