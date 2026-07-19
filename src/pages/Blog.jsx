@@ -39,41 +39,44 @@ export default function Blog({ currentPath, navigateToNode }) {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [subscribedStatus, setSubscribedStatus] = useState(false);
 
+  // Helper function to cleanly extract text if document content contains raw HTML tags
+  const cleanExtractText = (rawStr) => {
+    if (!rawStr) return "";
+    return rawStr.replace(/<\/?[^>]+(>|$)/g, " ").trim();
+  };
+
   // Synchronize layout scroll position and connect live Firestore data stream
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
 
     const blogsRef = collection(db, 'blogs');
-    
-    // SAFE QUERY: Index error se bachne ke liye direct query lagayi hai
     const q = query(blogsRef, where('published', '==', true));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       let liveArticles = snapshot.docs.map(doc => {
         const data = doc.data();
+        const rawContent = data.content || "";
+        const cleanSummaryFallback = cleanExtractText(rawContent).substring(0, 160) + "...";
         
-        // Mobile layout fallback formatting to prevent application crashes
         return {
           id: doc.id,
           ...data,
           title: data.title || "Untitled Blueprint",
-          summary: data.summary || "No description provided for this active node.",
+          summary: data.summary || cleanSummaryFallback || "No description provided for this active node.",
           category: data.category || "AI",
-          // Object structure handle karne ke liye fallback helper
           author: typeof data.author === 'object' ? (data.author.name || "Senior Architect") : (data.author || "Senior Architect"),
           createdAt: data.createdAt || null
         };
       });
 
-      // Local level sorting takay bina multi-field index ke bhi newest blog upar aaye
+      // Local level sorting for newest node tracking
       liveArticles.sort((a, b) => {
         const timeA = a.createdAt?.seconds || 0;
         const timeB = b.createdAt?.seconds || 0;
         return timeB - timeA; 
       });
 
-      // Extract the absolute headline node if flagged as featured, otherwise fall back to newest entry
       const featuredNode = liveArticles.find(art => art.featured) || liveArticles[0] || null;
       
       setFeaturedArticle(featuredNode);
@@ -101,7 +104,8 @@ export default function Blog({ currentPath, navigateToNode }) {
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
     const matchesSearch = article.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          article.summary?.toLowerCase().includes(searchQuery.toLowerCase());
+                          article.summary?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          article.category?.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -129,24 +133,14 @@ export default function Blog({ currentPath, navigateToNode }) {
       <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-blue-600/[0.02] blur-[180px] pointer-events-none" />
 
       {/* DETACHED NAVIGATION FRAME INSULATION */}
-      <Navbar 
-        currentPath={currentPath} 
-        activeSection="" 
-        navigateToNode={navigateToNode} 
-        siteConfig={siteConfig} 
-      />
+      <Navbar currentPath={currentPath} activeSection="" navigateToNode={navigateToNode} siteConfig={siteConfig} />
 
       {/* COMPONENT STREAM CONTENT BODY */}
       <main className="relative z-10 scalable-content-blog-scope" id="main-content">
         
         {/* SECTION 1: HERO CONTROL TERMINAL */}
         <header className="max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-16 sm:pt-48 sm:pb-24">
-          <motion.div 
-            initial="hidden"
-            animate="visible"
-            variants={fxFadeUp}
-            className="max-w-5xl"
-          >
+          <motion.div initial="hidden" animate="visible" variants={fxFadeUp} className="max-w-5xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.05)]">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               Knowledge Repository Node
@@ -200,12 +194,10 @@ export default function Blog({ currentPath, navigateToNode }) {
                   
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
                     <div className="lg:col-span-5 aspect-[16/10] sm:aspect-[16/9] lg:aspect-square w-full rounded-xl bg-gradient-to-tr from-neutral-900 to-neutral-950 border border-neutral-800/60 flex flex-col justify-between p-6 relative group-hover:border-cyan-500/20 transition-colors duration-300 overflow-hidden">
-                      {featuredArticle.coverImage ? (
+                      {featuredArticle.coverImage && (
                         <img src={featuredArticle.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" />
-                      ) : null}
-                      <div className="text-neutral-600 font-mono text-[9px] uppercase tracking-[0.2em] relative z-10">
-                        [ Editorial_Spotlight_Node ]
-                      </div>
+                      )}
+                      <div className="text-neutral-600 font-mono text-[9px] uppercase tracking-[0.2em] relative z-10">[ Editorial_Spotlight_Node ]</div>
                       <div className="text-cyan-400 font-mono text-4xl lg:text-5xl font-extrabold opacity-25 group-hover:opacity-60 transition-opacity duration-300 select-none relative z-10">
                         {featuredArticle.category}://
                       </div>
@@ -213,10 +205,8 @@ export default function Blog({ currentPath, navigateToNode }) {
                     
                     <div className="lg:col-span-7 space-y-5">
                       <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                        <span className="px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold uppercase tracking-widest text-[9px] shadow-[0_0_10px_rgba(6,182,212,0.05)]">
-                          Featured Post
-                        </span>
-                        <span className="text-neutral-500">
+                        <span className="px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold uppercase tracking-widest text-[9px] shadow-[0_0_10px_rgba(6,182,212,0.05)]">Featured Post</span>
+                        <span className="text-neutral-400">
                           {featuredArticle.createdAt?.seconds ? new Date(featuredArticle.createdAt.seconds * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Recent'}
                         </span>
                         <span className="text-neutral-700">•</span>
@@ -249,7 +239,7 @@ export default function Blog({ currentPath, navigateToNode }) {
                 {categories.map((cat, cIdx) => (
                   <button
                     key={cIdx}
-                    onClick={() => setSelectedCategory(cat)}
+                    onClick={() => { setSelectedCategory(cat); }}
                     className={`px-4 py-2 rounded-lg text-xs font-mono whitespace-nowrap transition-all duration-200 focus:outline-none relative ${
                       selectedCategory === cat 
                         ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold shadow-[0_0_15px_rgba(6,182,212,0.05)]' 
@@ -266,22 +256,11 @@ export default function Blog({ currentPath, navigateToNode }) {
             <section className="max-w-7xl mx-auto px-6 md:px-12 py-6">
               <AnimatePresence mode="wait">
                 {filteredArticles.length === 0 ? (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-center py-24 border border-dashed border-neutral-800 rounded-2xl bg-neutral-950/20 backdrop-blur-sm"
-                  >
-                    <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest tracking-[0.15em]">No corresponding articles matching search keys found.</p>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-24 border border-dashed border-neutral-800 rounded-2xl bg-neutral-950/20 backdrop-blur-sm">
+                    <p className="text-xs font-mono text-neutral-500 uppercase tracking-[0.15em]">No corresponding articles matching search keys found.</p>
                   </motion.div>
                 ) : (
-                  <motion.div 
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    variants={fxStaggerContainer}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                  >
+                  <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fxStaggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredArticles.map((art) => (
                       <motion.div 
                         key={art.id}
@@ -291,11 +270,10 @@ export default function Blog({ currentPath, navigateToNode }) {
                       >
                         <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/[0.005] blur-xl rounded-full pointer-events-none" />
                         <div>
-                          {/* Visual Card Image Dynamic Placeholder Header */}
                           <div className="aspect-[16/10] w-full rounded-lg bg-neutral-900 border border-neutral-950 flex flex-col justify-between p-4 mb-5 group-hover:border-neutral-800 transition-colors duration-300 select-none relative overflow-hidden">
-                            {art.coverImage ? (
-                              <img src={art.coverImage} alt="Cover Image" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-500" />
-                            ) : null}
+                            {art.coverImage && (
+                              <img src={art.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-500" />
+                            )}
                             <div className="text-[8px] font-mono text-neutral-600 tracking-[0.15em] relative z-10">[ Grid_Frame_Asset ]</div>
                             <div className="text-neutral-500 font-mono text-xs tracking-tight relative z-10">{art.category}://</div>
                           </div>
@@ -352,33 +330,17 @@ export default function Blog({ currentPath, navigateToNode }) {
 
         {/* SECTION 6: WHY FOLLOW OUR TECHNICAL JOURNAL LOGS */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/50 mt-12">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fxFadeUp}
-            className="max-w-3xl mb-16"
-          >
-            <p className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 tracking-[0.2em]">// Content Strategy Philosophy</p>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fxFadeUp} className="max-w-3xl mb-16">
+            <p className="text-xs font-mono uppercase text-cyan-400 mb-3 tracking-[0.2em]">// Content Strategy Philosophy</p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-sans">Why Engineering Teams Bookmark Our Logs</h2>
           </motion.div>
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fxStaggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fxStaggerContainer} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { t: "Bespoke Implementations Only", d: "We skip generic overview essays. Every article focuses directly on deployment blockers, architectural parameters, and verified benchmarks." },
               { t: "CMS-Ready Adaptability", d: "Our layout model uses fully decoupled object loops, ready to synchronize directly to Firestore document queries or GraphQL engines." },
               { t: "Production-Proven Focus", d: "Authored directly by the consultants building custom enterprise commerce cores and security identity checkpoints." }
             ].map((p, pIdx) => (
-              <motion.div 
-                key={pIdx} 
-                variants={fxFadeUp}
-                className="p-7 rounded-xl border border-neutral-900 bg-neutral-950/30 hover:border-neutral-800 transition-all duration-300 relative group shadow-sm"
-              >
+              <motion.div key={pIdx} variants={fxFadeUp} className="p-7 rounded-xl border border-neutral-900 bg-neutral-950/30 hover:border-neutral-800 transition-all duration-300 relative group shadow-sm">
                 <div className="w-1 h-5 bg-cyan-400 mb-5 rounded-full transition-transform duration-300 group-hover:scale-y-110" />
                 <h3 className="text-sm font-bold text-white font-sans tracking-wide mb-2.5">{p.t}</h3>
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans tracking-wide">{p.d}</p>
@@ -389,13 +351,7 @@ export default function Blog({ currentPath, navigateToNode }) {
 
         {/* SECTION 7: NEWSLETTER SUBSCRIPTION CONSOLE ENGINE PANEL */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-12">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fxFadeUp}
-            className="p-8 sm:p-12 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/20 relative overflow-hidden backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] group"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fxFadeUp} className="p-8 sm:p-12 rounded-2xl border border-neutral-800/80 bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900/20 relative overflow-hidden backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] group">
             <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/[0.02] blur-[90px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-105" />
             <div className="max-w-2xl space-y-4 relative z-10">
               <h3 className="text-xl sm:text-2xl font-bold text-white font-sans tracking-tight">Subscribe to Our Structural Release Cycles</h3>
@@ -410,17 +366,10 @@ export default function Blog({ currentPath, navigateToNode }) {
               ) : (
                 <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md pt-3">
                   <input 
-                    type="email" 
-                    required
-                    placeholder="Provide enterprise email..."
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    type="email" required placeholder="Provide enterprise email..." value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)}
                     className="flex-1 bg-[#050505] border border-neutral-800 rounded-xl px-4 py-3.5 text-xs font-mono text-white placeholder-neutral-600 focus:outline-none focus:border-cyan-500/40 focus:ring-1 focus:ring-cyan-500/20 transition-all duration-200"
                   />
-                  <button 
-                    type="submit"
-                    className="bg-white hover:bg-cyan-400 text-black px-6 py-3.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shadow-sm"
-                  >
+                  <button type="submit" className="bg-white hover:bg-cyan-400 text-black px-6 py-3.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shadow-sm">
                     Authorize Hook
                   </button>
                 </form>
@@ -431,13 +380,7 @@ export default function Blog({ currentPath, navigateToNode }) {
 
         {/* SECTION 8: FINAL MASTER DIRECT CALL TO ACTION BLOCK */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-28 border-t border-neutral-900/50">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fxFadeUp}
-            className="p-8 sm:p-16 rounded-3xl border border-neutral-800/80 bg-gradient-to-tr from-neutral-950 via-neutral-950 to-neutral-900/20 text-center sm:text-left flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.5)] group"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fxFadeUp} className="p-8 sm:p-16 rounded-3xl border border-neutral-800/80 bg-gradient-to-tr from-neutral-950 via-neutral-950 to-neutral-900/20 text-center sm:text-left flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.5)] group">
             <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-cyan-500/[0.04] blur-[100px] pointer-events-none rounded-full transition-transform duration-700 group-hover:scale-110" />
             
             <div className="max-w-3xl relative z-10">
@@ -462,9 +405,7 @@ export default function Blog({ currentPath, navigateToNode }) {
 
       </main>
 
-      {/* CORE GLOBAL FOOTER COUPLING */}
       <Footer siteConfig={siteConfig} />
-
     </div>
   );
 }
