@@ -38,47 +38,69 @@ export default function Careers({ currentPath, navigateToNode }) {
       dept: "Engineering",
       type: "Full-Time (Remote)",
       experience: "Senior (4+ Years)",
+      location: "Global",
+      mode: "Remote",
       desc: "Architect scalable B2B dashboards, design atomized layout tokens, and continuously balance sub-second view paint speeds across complex data structures."
     },
     {
       id: "job-02",
-      title: "MERN Stack Developer",
+      title: "Backend Node.js Engineer",
       dept: "Engineering",
       type: "Full-Time (Remote)",
       experience: "Mid-to-Senior",
+      location: "Global",
+      mode: "Remote",
       desc: "Deploy highly concurrent Node/Express APIs, model nested Mongo schemas, and implement multi-tenant validation boundaries to handle extreme traffic shocks safely."
     },
     {
       id: "job-03",
-      title: "Enterprise UI/UX Designer",
-      dept: "Design",
-      type: "Contract-to-FTE",
+      title: "Full Stack MERN Developer",
+      dept: "Engineering",
+      type: "Full-Time (Remote)",
       experience: "Senior (5+ Years)",
-      desc: "Draft sophisticated user flows and pixel-perfect dark theme design structures using systemic component patterns easily translated into utility CSS tokens."
+      location: "Global",
+      mode: "Remote",
+      desc: "Bridge modular React client interfaces with secure distributed microservices. Own features end-to-end, managing deployment state loops across cloud environments."
     },
     {
       id: "job-04",
-      title: "AI Solutions Engineer",
-      dept: "Engineering",
-      type: "Full-Time (Remote)",
-      experience: "Expert Level",
-      desc: "Integrate stateless LLM inference engines, embed secure prompt vectors into active application codebeds, and minimize browser data transit lag."
+      title: "UI/UX Designer",
+      dept: "Design",
+      type: "Contract-to-FTE",
+      experience: "Senior (5+ Years)",
+      location: "Global",
+      mode: "Remote",
+      desc: "Draft sophisticated user flows and pixel-perfect dark theme design structures using systemic component patterns easily translated into utility CSS tokens."
     },
     {
       id: "job-05",
-      title: "Mobile App Developer",
+      title: "AI Engineer",
       dept: "Engineering",
       type: "Full-Time (Remote)",
-      experience: "Senior (React Native)",
-      desc: "Compile optimized view systems across mobile environments, ensuring continuous 60 FPS performance states while processing dense background synchronizations."
+      experience: "Expert Level",
+      location: "Global",
+      mode: "Remote",
+      desc: "Integrate stateless LLM inference engines, embed secure prompt vectors into active application codebeds, and minimize browser data transit lag."
     },
     {
       id: "job-06",
-      title: "Business Development Executive",
-      dept: "Growth",
-      type: "Full-Time / Base+Uncapped",
-      experience: "Enterprise Experience",
-      desc: "Interface directly with corporate decision makers to convert enterprise software bottlenecks into lucrative customized scoping contracts."
+      title: "Flutter Developer",
+      dept: "Engineering",
+      type: "Full-Time (Remote)",
+      experience: "Senior (3+ Years)",
+      location: "Global",
+      mode: "Remote",
+      desc: "Compile optimized cross-platform native engines. Maintain continuous 60 FPS performance states while processing high-concurrency background sync pipelines."
+    },
+    {
+      id: "job-07",
+      title: "DevOps Engineer",
+      dept: "Engineering",
+      type: "Full-Time (Remote)",
+      experience: "Senior",
+      location: "Global",
+      mode: "Remote",
+      desc: "Configure automated multi-region serverless deployment architecture, edge isolation networks, and secure repository integration matrices for total up-time."
     }
   ];
 
@@ -86,8 +108,8 @@ export default function Careers({ currentPath, navigateToNode }) {
   const hiringProcess = [
     { phase: "01. Digital Application", info: "Submit your technical portfolio link, active GitHub profile overview, or structural resume breakdown for pipeline evaluation." },
     { phase: "02. Profile Architecture Review", info: "Our lead engineers screen your repository patterns to look for atomic clean coding habits and smart layout separation loops." },
-    { phase: "03. Strategic Fit Interview", info: "A casual, structured 30-minute sync to analyze communication balance, global remote setup resilience, and workflow synergy." },
-    { phase: "04. Practical Engineering Test", info: "Complete a real-world scope exercise designed to gauge how you structure state logic or layout paradigms. No trick riddles here." },
+    { phase: "03. Technical Interview", info: "A deep dive into structural application design, system state paradigms, runtime performance optimization, and memory isolation vectors." },
+    { phase: "04. Final Interview", info: "A structured session with our engineering leaders to verify communication synergy, global remote alignment, and cross-functional product ownership." },
     { phase: "05. Institutional Offer", info: "Receive a transparent, comprehensive compensation blueprint detailing your base salary packages, equity points, and growth tracks." },
     { phase: "06. Environment Onboarding", info: "Access localized sandbox servers, read production architecture runbooks, and deploy initial code nodes within week one." }
   ];
@@ -160,9 +182,9 @@ export default function Careers({ currentPath, navigateToNode }) {
       <div className="relative z-10 enterprise-recruitment-view-scope">
         
         {/* SECTION 1: HERO BRIEFING TERMINAL */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 sm:pt-40 sm:pb-24 text-center sm:text-left">
-          <div className="max-w-4xl mx-auto sm:mx-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 sm:pt-40 sm:pb-24 text-center sm:text-left relative">
+          <div className="max-w-4xl mx-auto sm:mx-0 transition-all duration-700 transform translate-y-0 opacity-100">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6 animate-pulse">
               Global Operations Pipeline // Open Cadres
             </div>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1] font-sans">
@@ -177,7 +199,7 @@ export default function Careers({ currentPath, navigateToNode }) {
             <div>
               <button
                 onClick={scrollToOpportunities}
-                className="bg-white hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                className="bg-white hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transform hover:-translate-y-0.5"
               >
                 Join Our Team // Review Positions
               </button>
@@ -193,9 +215,9 @@ export default function Careers({ currentPath, navigateToNode }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cultureVectors.map((vec, vIdx) => (
-              <div key={vIdx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/30 hover:border-neutral-800/80 transition-colors group">
+              <div key={vIdx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/30 hover:border-[#06B6D4]/30 hover:bg-neutral-900/20 transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                 <div className="text-xs font-mono text-neutral-600 mb-4 group-hover:text-[#06B6D4] transition-colors">// Vector_0{vIdx + 1}</div>
-                <h3 className="text-sm font-bold text-white font-sans mb-2 tracking-wide">{vec.title}</h3>
+                <h3 className="text-sm font-bold text-white font-sans mb-2 tracking-wide group-hover:text-white transition-colors">{vec.title}</h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-sans">{vec.desc}</p>
               </div>
             ))}
@@ -212,7 +234,7 @@ export default function Careers({ currentPath, navigateToNode }) {
             
             {/* Department Filter Toggle Mechanism */}
             <div className="flex flex-wrap items-center gap-1.5 bg-neutral-950 p-1.5 rounded-xl border border-neutral-900 self-start lg:self-auto">
-              {["All", "Engineering", "Design", "Growth"].map((d, dIdx) => (
+              {["All", "Engineering", "Design"].map((d, dIdx) => (
                 <button
                   key={dIdx}
                   onClick={() => setSelectedDept(d)}
@@ -228,7 +250,7 @@ export default function Careers({ currentPath, navigateToNode }) {
             {filteredJobs.map((job) => (
               <div 
                 key={job.id}
-                className="p-6 rounded-2xl border border-neutral-900/80 bg-gradient-to-b from-neutral-950 to-neutral-950/40 flex flex-col justify-between items-stretch group min-h-[340px]"
+                className="p-6 rounded-2xl border border-neutral-900/80 bg-gradient-to-b from-neutral-950 to-neutral-950/40 flex flex-col justify-between items-stretch group min-h-[360px] transition-all duration-300 hover:border-[#06B6D4]/30 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(6,182,212,0.03)]"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
@@ -238,12 +260,14 @@ export default function Careers({ currentPath, navigateToNode }) {
                     <span className="text-[10px] font-mono text-neutral-500">{job.experience}</span>
                   </div>
                   
-                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#06B6D4] transition-colors font-sans mb-2 tracking-wide">
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#06B6D4] transition-colors font-sans mb-1 tracking-wide">
                     {job.title}
                   </h3>
                   
-                  <div className="text-[10px] font-mono text-[#06B6D4]/80 uppercase tracking-widest mb-4">
-                    {job.type}
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-4">
+                    <span className="text-[#06B6D4]/80">{job.type}</span>
+                    <span>•</span>
+                    <span>{job.location} ({job.mode})</span>
                   </div>
                   
                   <p className="text-xs text-neutral-400 leading-relaxed font-sans line-clamp-4">
@@ -254,7 +278,7 @@ export default function Careers({ currentPath, navigateToNode }) {
                 <div className="mt-8">
                   <button
                     onClick={() => handleApplicationPlaceholder(job.title)}
-                    className="w-full py-3 rounded-xl bg-neutral-900 text-neutral-300 border border-neutral-850 group-hover:border-[#06B6D4]/30 group-hover:bg-[#06B6D4] group-hover:text-black font-mono font-bold text-xs uppercase tracking-wider transition-all"
+                    className="w-full py-3 rounded-xl bg-neutral-900 text-neutral-300 border border-neutral-850 group-hover:border-[#06B6D4]/30 group-hover:bg-[#06B6D4] group-hover:text-black font-mono font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm group-hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
                   >
                     Initialize Application
                   </button>
@@ -272,8 +296,8 @@ export default function Careers({ currentPath, navigateToNode }) {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {hiringProcess.map((proc, pIdx) => (
-              <div key={pIdx} className="p-5 rounded-xl border border-neutral-900/60 bg-neutral-950/10">
-                <h3 className="text-sm font-bold text-white font-mono mb-2 tracking-wide">
+              <div key={pIdx} className="p-5 rounded-xl border border-neutral-900/60 bg-neutral-950/10 hover:border-neutral-800 transition-colors duration-300">
+                <h3 className="text-sm font-bold text-white font-mono mb-2 tracking-wide text-[#06B6D4]">
                   {proc.phase}
                 </h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-sans">{proc.info}</p>
@@ -294,9 +318,9 @@ export default function Careers({ currentPath, navigateToNode }) {
             </div>
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {corporateBenefits.map((ben, bIdx) => (
-                <div key={bIdx} className="p-4 rounded-xl bg-[#050505] border border-neutral-900">
+                <div key={bIdx} className="p-4 rounded-xl bg-[#050505] border border-neutral-900 hover:border-neutral-800 transition-colors">
                   <h4 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-1.5">{ben.category}</h4>
-                  <p className="text-xs text-neutral-500 leading-relaxed font-sans">{ben.benefit}</p>
+                  <p className="text-xs text-neutral-400 leading-relaxed font-sans">{ben.benefit}</p>
                 </div>
               ))}
             </div>
@@ -325,7 +349,7 @@ export default function Careers({ currentPath, navigateToNode }) {
                   </span>
                 </button>
                 {activeFaq === idx && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans border-t border-neutral-900/40 mt-1">
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans border-t border-neutral-900/40 mt-1 bg-neutral-950/20">
                     {faq.a}
                   </div>
                 )}
@@ -348,10 +372,10 @@ export default function Careers({ currentPath, navigateToNode }) {
               </p>
             </div>
 
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleApplicationPlaceholder("Open Specification Alignment")}
-                className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] whitespace-nowrap"
+                className="w-full sm:w-auto bg-neutral-100 hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] whitespace-nowrap transform hover:-translate-y-0.5"
               >
                 Submit Open Specification Profile
               </button>
