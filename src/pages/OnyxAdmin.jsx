@@ -10,9 +10,13 @@ export default function OnyxAdmin() {
   const [passkey, setPasskey] = useState('');
 
   // Enterprise Blog CMS State Matrix
-  const [currentTab, setCurrentTab] = useState('leads'); // 'leads' or 'blog'
+  const [currentTab, setCurrentTab] = useState('leads'); // 'leads', 'blog', or 'recruitment'
   const [blogs, setBlogs] = useState([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
+  
+  // Recruitment Pipeline Core State Matrix
+  const [candidates, setCandidates] = useState([]);
+  const [candidatesLoading, setCandidatesLoading] = useState(true);
   
   // Blog Filter/Sort/Search Pipeline State
   const [blogSearch, setBlogSearch] = useState('');
@@ -114,6 +118,28 @@ export default function OnyxAdmin() {
     return () => unsubscribe();
   }, [isAuthenticated]);
 
+  // Real-time listener for incoming recruitment submissions
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const recruitmentRef = collection(db, 'recruitment_pipeline');
+    const q = query(recruitmentRef, orderBy('submittedAt', 'desc'));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const fetchedCandidates = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setCandidates(fetchedCandidates);
+      setCandidatesLoading(false);
+    }, (error) => {
+      console.error("Firestore recruitment stream error: ", error);
+      setCandidatesLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [isAuthenticated]);
+
   // Core Mutation Logic for updating Lead Status
   const updateLeadStatus = async (leadId, newStatus) => {
     try {
@@ -131,7 +157,7 @@ export default function OnyxAdmin() {
   // Helper to safely open communication channel with dynamic templates
   const triggerWhatsAppCommunication = (phone, companyName) => {
     const cleanPhone = phone.replace(/[^\d+]/g, ''); 
-    const message = `Hello ${companyName},\n\nThis is OnyxStack Labs. We have successfully verified your project parameters and initiated your active engineering funnel.\n\nLet us schedule a quick technical discovery call. Please let us know your availability.`;
+    const message = `Hello ${companyName},\n\nThis is OnyxStack Labs. We have successfully verified your parameters and initiated your active engineering funnel.\n\nLet us schedule a quick technical discovery call. Please let us know your availability.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${cleanPhone}?text=${encodedMessage}`, '_blank');
   };
@@ -332,6 +358,20 @@ export default function OnyxAdmin() {
               </svg>
               Blog Management
             </button>
+
+            <button
+              onClick={() => setCurrentTab('recruitment')}
+              className={`w-full flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest font-mono rounded-lg transition-all duration-200 ${
+                currentTab === 'recruitment' 
+                  ? 'bg-gradient-to-r from-[#00f2fe]/10 to-transparent text-[#00f2fe] border-l-2 border-[#00f2fe]' 
+                  : 'text-slate-400 hover:text-white hover:bg-[#141414]'
+              }`}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Recruitment Pipeline
+            </button>
           </nav>
         </div>
 
@@ -348,19 +388,21 @@ export default function OnyxAdmin() {
             <div className="flex items-center gap-2 mb-1">
               <span className="w-2 h-2 rounded-full bg-[#00f2fe]"></span>
               <h1 className="text-2xl font-black uppercase tracking-wider text-white">
-                {currentTab === 'leads' ? 'Lead Matrix Hub' : 'Enterprise Blog CMS Engine'}
+                {currentTab === 'leads' && 'Lead Matrix Hub'}
+                {currentTab === 'blog' && 'Enterprise Blog CMS Engine'}
+                {currentTab === 'recruitment' && 'Recruitment Control Node'}
               </h1>
             </div>
             <p className="text-xs text-slate-400 uppercase tracking-widest">
-              {currentTab === 'leads' ? 'Central Lead Matrix & Funnel Control' : 'Decoupled Semantic Layout and Content Pipelines'}
+              {currentTab === 'leads' && 'Central Lead Matrix & Funnel Control'}
+              {currentTab === 'blog' && 'Decoupled Semantic Layout and Content Pipelines'}
+              {currentTab === 'recruitment' && 'Dynamic Candidate Sourcing Pipeline Tracking'}
             </p>
           </div>
           <div className="bg-[#111] border border-slate-800 rounded-lg px-4 py-2 text-xs font-mono text-slate-400">
-            {currentTab === 'leads' ? (
-              <>Total Nodes Cached: <span className="text-[#00f2fe] font-bold">{leads.length}</span></>
-            ) : (
-              <>Core Collection Entries: <span className="text-[#00f2fe] font-bold">{blogs.length}</span></>
-            )}
+            {currentTab === 'leads' && <>Total Nodes Cached: <span className="text-[#00f2fe] font-bold">{leads.length}</span></>}
+            {currentTab === 'blog' && <>Core Collection Entries: <span className="text-[#00f2fe] font-bold">{blogs.length}</span></>}
+            {currentTab === 'recruitment' && <>Total Applications: <span className="text-[#00f2fe] font-bold">{candidates.length}</span></>}
           </div>
         </header>
 
@@ -534,7 +576,7 @@ export default function OnyxAdmin() {
                       <p className="text-slate-400 text-sm italic">{blogForm.summary || 'No summary overview assigned.'}</p>
                     </div>
 
-                    <div className="border-t border-slate-900 pt-4 text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-sans">
+                    <div className="border-t border-slate-900 pt-4 text-slate-300 text-sm italic leading-relaxed whitespace-pre-wrap font-sans">
                       {blogForm.content || 'Payload body stream is vacant.'}
                     </div>
 
@@ -921,6 +963,71 @@ export default function OnyxAdmin() {
               </div>
 
             </div>
+          )}
+
+          {/* TAB AREA 3: RECRUITMENT PIPELINE TRACKER MODULE */}
+          {currentTab === 'recruitment' && (
+            <>
+              {candidatesLoading ? (
+                <div className="text-center py-20 text-slate-500 font-mono text-sm animate-pulse">Syncing recruitment streams...</div>
+              ) : candidates.length === 0 ? (
+                <div className="text-center py-20 border border-dashed border-slate-800 rounded-xl">
+                  <p className="text-slate-500 font-mono text-sm">No applications received inside recruitment_pipeline yet.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {candidates.map((candidate) => (
+                    <div key={candidate.id} className="bg-[#121212] border border-slate-800 rounded-xl p-6 transition-all duration-300 flex flex-col justify-between">
+                      
+                      <div>
+                        <div className="flex justify-between items-start gap-4 mb-4">
+                          <div>
+                            <h3 className="text-lg font-bold text-white tracking-wide">{candidate.name || 'Anonymous Applicant'}</h3>
+                            <p className="text-xs text-slate-400 font-mono mt-0.5">{candidate.email}</p>
+                          </div>
+                          <span className="text-[10px] uppercase font-mono font-bold tracking-widest px-2.5 py-1 rounded border bg-[#00f2fe]/10 text-[#00f2fe] border-[#00f2fe]/20">
+                            {candidate.role || 'Unassigned Role'}
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-2 bg-[#181818] border border-slate-900 rounded-lg p-4 mb-4 text-xs font-mono">
+                          <div>
+                            <span className="block text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">Experience & Skills</span>
+                            <span className="text-slate-200 block whitespace-pre-wrap">{candidate.experience || 'Not detailed'}</span>
+                          </div>
+                          {candidate.portfolio && (
+                            <div className="border-t border-slate-900 pt-2 mt-1">
+                              <span className="block text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">Portfolio Node</span>
+                              <a href={candidate.portfolio} target="_blank" rel="noreferrer" className="text-[#00f2fe] hover:underline break-all">
+                                {candidate.portfolio}
+                              </a>
+                            </div>
+                          )}
+                          <div className="border-t border-slate-900 pt-2 mt-1">
+                            <span className="block text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">Submission Timestamp</span>
+                            <span className="text-slate-400 text-[11px]">
+                              {candidate.submittedAt?.seconds ? new Date(candidate.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {candidate.phone && (
+                        <div className="flex justify-end border-t border-slate-900 pt-4 mt-2">
+                          <button
+                            onClick={() => triggerWhatsAppCommunication(candidate.phone, candidate.name)}
+                            className="px-3 py-1.5 bg-white hover:bg-slate-200 text-black text-xs font-bold rounded uppercase tracking-wider transition-all flex items-center gap-1"
+                          >
+                            <span>Contact Candidate</span>
+                          </button>
+                        </div>
+                      )}
+
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
         </main>
