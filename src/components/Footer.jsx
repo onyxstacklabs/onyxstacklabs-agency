@@ -5,20 +5,28 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function Footer({ siteConfig }) {
   const navigate = useNavigate();
 
+  // Optimized Senior Engineer Solution: Handles zero-point viewport scrolling for Home and in-page anchor navigation
   const handleFooterLinkClick = (e, target) => {
-    if (target.startsWith('#')) {
+    if (target.startsWith('#') || target === '/') {
       e.preventDefault();
-      const elementId = target.substring(1);
+      
+      // Dynamic fallbacks: Target 'home' node descriptor or fallback directly to document element zero-bounds
+      const elementId = target === '/' ? 'home' : target.substring(1);
       const currentPath = window.location.pathname;
 
       if (currentPath === '/') {
-        const element = document.getElementById(elementId);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(elementId) || document.documentElement;
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       } else {
+        // Safe deferred programmatic pipeline for single-page cross-route mounting
         navigate('/');
         setTimeout(() => {
-          const element = document.getElementById(elementId);
-          if (element) element.scrollIntoView({ behavior: 'smooth' });
+          const element = document.getElementById(elementId) || document.documentElement;
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }, 250);
       }
     }
@@ -50,7 +58,7 @@ export default function Footer({ siteConfig }) {
   const website = siteConfig?.website || 'www.onyxstacklabs.com';
   const phone = siteConfig?.contactPhone || '+92 344 5800630';
 
-  // Shared ultra-premium card styles to ensure cohesive luxury layout aesthetics
+  // Shared ultra-premium glassmorphism card matrix system
   const cardStyle = "p-6 rounded-2xl border border-[#1E2433] bg-[#090D16]/60 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-300 ease-out hover:border-[#06B6D4]/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15),inset_0_1px_1px_rgba(6,182,212,0.2)] hover:-translate-y-1 active:scale-[0.99] active:border-cyan-400 active:shadow-[0_0_35px_rgba(34,211,238,0.3)] flex flex-col justify-between";
 
   return (
@@ -58,7 +66,7 @@ export default function Footer({ siteConfig }) {
       className="relative border-t border-[#161B26] bg-[#04060A] pt-24 pb-12 px-6 md:px-12 z-10 overflow-hidden text-slate-200 antialiased font-sans select-none"
       aria-label="Site Footer"
     >
-      {/* High-fidelity structural architecture background grid */}
+      {/* High-fidelity architectural blueprint background grid lines */}
       <div 
         className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b0c_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0c_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none" 
         aria-hidden="true" 
@@ -68,7 +76,7 @@ export default function Footer({ siteConfig }) {
         aria-hidden="true" 
       />
 
-      {/* Cyberpunk premium ambient lighting layers */}
+      {/* Corporate luxury ambient radial flares */}
       <div
         className="absolute -top-40 left-1/4 w-[600px] h-[400px] bg-[radial-gradient(circle,rgba(6,182,212,0.08)_0%,transparent_70%)] blur-[130px] rounded-full pointer-events-none"
         aria-hidden="true"
@@ -81,7 +89,7 @@ export default function Footer({ siteConfig }) {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 pb-16 items-stretch">
 
-          {/* BRAND GLASS TOWER */}
+          {/* BRAND TOWER CARD */}
           <div className={`${cardStyle} sm:col-span-2 lg:col-span-3`}>
             <div className="space-y-6">
               <div className="flex items-center gap-3">
@@ -101,8 +109,8 @@ export default function Footer({ siteConfig }) {
             </div>
           </div>
 
-          {/* QUICK LINKS */}
-          <nav className={cardStyle} style={{ '--lg-col': 'span 2' }} className={`${cardStyle} lg:col-span-2`} aria-label="Quick Links">
+          {/* QUICK LINKS LINK MATRIX */}
+          <nav className={`${cardStyle} lg:col-span-2`} aria-label="Quick Links">
             <div className="space-y-5">
               <h3 className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-mono font-bold border-b border-[#1E2433] pb-2">
                 Quick Links
@@ -123,7 +131,7 @@ export default function Footer({ siteConfig }) {
             </div>
           </nav>
 
-          {/* RESOURCES COLUMN */}
+          {/* SYSTEM RESOURCES MATRIX */}
           <nav className={`${cardStyle} lg:col-span-2`} aria-label="Resources">
             <div className="space-y-5">
               <h3 className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-mono font-bold border-b border-[#1E2433] pb-2">
@@ -144,7 +152,7 @@ export default function Footer({ siteConfig }) {
             </div>
           </nav>
 
-          {/* LEGAL COLUMN */}
+          {/* LEGAL POLICY NODES */}
           <nav className={`${cardStyle} lg:col-span-2`} aria-label="Legal">
             <div className="space-y-5">
               <h3 className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-mono font-bold border-b border-[#1E2433] pb-2">
@@ -165,7 +173,7 @@ export default function Footer({ siteConfig }) {
             </div>
           </nav>
 
-          {/* CONTACT MATRIX */}
+          {/* DATA CONNECT DIRECTORIES */}
           <section className={`${cardStyle} lg:col-span-3`} aria-label="Contact Information">
             <div className="space-y-5">
               <h3 className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-mono font-bold border-b border-[#1E2433] pb-2">
@@ -201,7 +209,7 @@ export default function Footer({ siteConfig }) {
           </section>
         </div>
 
-        {/* BOTTOM UTILITY MATRIX */}
+        {/* BOTTOM UTILITY MATRIX ENGINE */}
         <div className="border-t border-[#161B26] mt-6 pt-10 flex flex-col sm:flex-row justify-between items-center gap-6">
           <nav className="flex flex-wrap items-center justify-center gap-4" aria-label="Social Media Nodes">
             <a href="https://github.com/onyxstacklabs" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-11 h-11 rounded-xl border border-[#1E2433] bg-[#090D16]/80 text-slate-400 hover:text-[#06B6D4] hover:border-[#06B6D4]/50 hover:scale-[1.08] hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] active:scale-95 transition-all duration-300 ease-out" aria-label="GitHub Secure Engine">
