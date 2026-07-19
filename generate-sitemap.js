@@ -5,10 +5,9 @@ import { getFirestore, collection, getDocs, query, where } from 'firebase/firest
 
 async function buildSitemap() {
   const BASE_URL = 'https://onyxstacklabs.com';
-  // Standard format formatting: YYYY-MM-DD
   const currentDate = new Date().toISOString().split('T')[0];
 
-  // 1. Core Enterprise App Inventory Layout Node Matrix (Updated with missing production pages)
+  // 1. Core Enterprise App Inventory Layout Node Matrix
   const staticRoutes = [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
@@ -52,31 +51,54 @@ async function buildSitemap() {
     const liveBlogsQuery = query(blogCollectionRef, where('status', '==', 'LIVE'));
     const querySnapshot = await getDocs(liveBlogsQuery);
 
+    const liveBlogs = [];
+    const seenSlugs = new Set();
+
     querySnapshot.forEach(doc => {
       const blogData = doc.data();
       const slug = blogData.slug;
       
-      let lastModDate = currentDate;
-      if (blogData.updatedAt) {
-        const dateObj = blogData.updatedAt.toDate ? blogData.updatedAt.toDate() : new Date(blogData.updatedAt);
-        lastModDate = dateObj.toISOString().split('T')[0];
-      }
+      if (slug && !seenSlugs.has(slug)) {
+        seenSlugs.add(slug);
+        
+        let lastModDate = currentDate;
+        let sortTimestamp = 0;
 
-      if (slug) {
-        xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}/blog/${slug}</loc>\n    <lastmod>${lastModDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
+        if (blogData.updatedAt) {
+          const dateObj = blogData.updatedAt.toDate ? blogData.updatedAt.toDate() : new Date(blogData.updatedAt);
+          if (!isNaN(dateObj.getTime())) {
+            lastModDate = dateObj.toISOString().split('T')[0];
+            sortTimestamp = dateObj.getTime();
+          }
+        }
+
+        liveBlogs.push({
+          slug: slug,
+          lastmod: lastModDate,
+          sortTimestamp: sortTimestamp
+        });
       }
     });
+
+    // Sort blog URLs by newest updatedAt first
+    liveBlogs.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+
+    // Append sorted dynamic blog entries to nodes matrix
+    liveBlogs.forEach(blog => {
+      xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}/blog/${blog.slug}</loc>\n    <lastmod>${blog.lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
+    });
+
   } catch (firestoreError) {
     console.error("Firestore automated sync dropped. Continuing with static core nodes infrastructure fallback layout.", firestoreError);
   }
 
-  // 2. Structural boundary layout processing enforcement parameter
+  // 2. Structural boundary layout processing enforcement parameter - Explicitly Trimming Whitespace Before XML Dec
   const completeSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrlNodes}\n</urlset>`.trim();
 
   // 3. Dual distribution routing deployment fallback logic (Writes to both target vectors)
   const targetDirectories = [
     path.resolve(process.cwd(), 'public', 'sitemap.xml'),
-    path.resolve(process.cwd(), 'dist', 'sitemap.xml') // Safe check if Vercel reads output directly from built asset path
+    path.resolve(process.cwd(), 'dist', 'sitemap.xml')
   ];
 
   targetDirectories.forEach(targetPath => {
