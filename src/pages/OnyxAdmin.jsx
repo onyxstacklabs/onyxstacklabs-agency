@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // Exact relative trajectory mapping targeting the real firebase module location
 import { db } from '../config/firebase'; 
-import { collection, query, orderBy, onSnapshot, doc, updateDoc, addDoc, deleteDoc, serverTimestamp, where } from 'firebase/firestore';
+import { collection, query, onSnapshot, doc, updateDoc, addDoc, deleteDoc, serverTimestamp, where } from 'firebase/firestore';
 
 export default function OnyxAdmin() {
   const [leads, setLeads] = useState([]);
@@ -80,13 +80,22 @@ export default function OnyxAdmin() {
     if (!isAuthenticated) return;
 
     const leadsRef = collection(db, 'agency_leads');
-    const q = query(leadsRef, orderBy('timestamp', 'desc'));
+    // Client-side execution friendly structuring to prevent index requirements
+    const q = query(leadsRef);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedLeads = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
+
+      // High-performance client-side chronological sort mapping
+      fetchedLeads.sort((a, b) => {
+        const timeA = a.timestamp?.seconds || 0;
+        const timeB = b.timestamp?.seconds || 0;
+        return timeB - timeA;
+      });
+
       setLeads(fetchedLeads);
       setLoading(false);
     }, (error) => {
@@ -102,13 +111,21 @@ export default function OnyxAdmin() {
     if (!isAuthenticated) return;
 
     const blogsRef = collection(db, 'blogs');
-    const q = query(blogsRef, orderBy('createdAt', 'desc'));
+    const q = query(blogsRef);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedBlogs = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
+
+      // Handled filtering & ordering inside JavaScript memory model safely
+      fetchedBlogs.sort((a, b) => {
+        const timeA = a.createdAt?.seconds || 0;
+        const timeB = b.createdAt?.seconds || 0;
+        return timeB - timeA;
+      });
+
       setBlogs(fetchedBlogs);
       setBlogsLoading(false);
     }, (error) => {
@@ -119,18 +136,17 @@ export default function OnyxAdmin() {
     return () => unsubscribe();
   }, [isAuthenticated]);
 
-  // Upgraded: Real-time listener for incoming recruitment submissions with dynamic status filters
+  // UPGRADED & INDEX-FREE: Real-time listener for incoming recruitment submissions with dynamic status filters
   useEffect(() => {
     if (!isAuthenticated) return;
     setCandidatesLoading(true);
 
     const recruitmentRef = collection(db, 'recruitment_pipeline');
     
-    // Clean Pipeline Query targeting specific active tabs logic mapping
+    // Clean Pipeline Query targeting specific active tabs logic mapping without composite indexing demands
     const q = query(
       recruitmentRef, 
-      where('status', '==', activeCandidateTab),
-      orderBy('submittedAt', 'desc')
+      where('status', '==', activeCandidateTab)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -138,6 +154,14 @@ export default function OnyxAdmin() {
         id: doc.id,
         ...doc.data()
       }));
+
+      // Client-side sort pipeline to secure fast-rendering and zero Firestore failures
+      fetchedCandidates.sort((a, b) => {
+        const timeA = a.submittedAt?.seconds || 0;
+        const timeB = b.submittedAt?.seconds || 0;
+        return timeB - timeA;
+      });
+
       setCandidates(fetchedCandidates);
       setCandidatesLoading(false);
     }, (error) => {
