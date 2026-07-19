@@ -605,19 +605,32 @@ export default function OnyxAdmin() {
                           />
                         </div>
 
+                        {/* UPGRADED RICH TEXT WRITING MODULE WITH COMPILER ENGINE DIRECTIVES */}
                         <div>
-                          <label className="block text-xs uppercase tracking-widest text-slate-400 mb-1.5">Rich Text Content Core Payload Block</label>
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                            <label className="block text-xs uppercase tracking-widest text-slate-400">Rich Text Content Core Payload Block</label>
+                            
+                            {/* DYNAMIC SEMANTIC PARSING HELPER TERMINAL */}
+                            <div className="flex flex-wrap gap-1.5 bg-black/40 border border-slate-900 rounded-lg p-1.5 text-[10px] font-mono">
+                              <span className="text-slate-500 px-1 font-bold">Parser Rules:</span>
+                              <span className="text-cyan-400 bg-cyan-500/5 px-1.5 py-0.5 border border-cyan-500/10 rounded">### Heading</span>
+                              <span className="text-amber-400 bg-amber-500/5 px-1.5 py-0.5 border border-amber-500/10 rounded">Text Ending With :</span>
+                              <span className="text-emerald-400 bg-emerald-500/5 px-1.5 py-0.5 border border-emerald-500/10 rounded">- List Item</span>
+                              <span className="text-purple-400 bg-purple-500/5 px-1.5 py-0.5 border border-purple-500/10 rounded">// Code Container</span>
+                            </div>
+                          </div>
+
                           <textarea
                             name="content"
                             required
-                            rows="10"
+                            rows="12"
                             value={blogForm.content}
                             onChange={handleBlogFormChange}
-                            placeholder="Write full Markdown or prose content rows here..."
-                            className="w-full bg-[#1a1a1a] border border-slate-800 focus:border-[#00f2fe] rounded-lg px-4 py-3 text-xs font-sans text-white placeholder-slate-600 outline-none transition-all resize-y"
+                            placeholder="Example Output Syntax:&#10;&#10;### 1. Architectural Foundations&#10;This is a normal paragraph layout block row.&#10;&#10;Key Parameters Checklist:&#10;- Optimize structural rendering hooks&#10;- Route clean client-side nodes&#10;&#10;// Code block segment (Start line with double forward slashes)&#10;// const activeNodeCluster = await getDocs(q);"
+                            className="w-full bg-[#1a1a1a] border border-slate-800 focus:border-[#00f2fe] rounded-lg px-4 py-3 text-xs font-sans text-white placeholder-slate-600 outline-none transition-all resize-y leading-relaxed selection:bg-cyan-500/20"
                           />
                           <div className="text-[10px] font-mono text-slate-500 mt-1 flex justify-between">
-                            <span>Computed Output Pipeline: {blogForm.readTime}</span>
+                            <span>Computed Output Pipeline: <strong className="text-cyan-400">{blogForm.readTime}</strong></span>
                             <span>Standard breaks and spaces delineate word maps.</span>
                           </div>
                         </div>
