@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 // LIVE DATA CORE & FIREBASE CONFIG IMPORTS
-import { siteConfig } from '../config/siteConfig';
+import { siteConfig } from '../config/Config';
 import { db } from '../config/firebaseConfig'; // Aapka existing firebase setup
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
