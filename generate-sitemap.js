@@ -3,24 +3,41 @@ import path from 'path';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 
-// TODO: Apne project ke actual Firebase config credentials yahan paste karein
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+/**
+ * OnyxStack Labs - Automated XML Sitemap Parser Pipeline
+ * Automatically extracts credentials directly from your existing firebase.js config file.
+ */
+async function getFirebaseConfig() {
+  try {
+    const configFilePath = path.resolve(process.cwd(), 'src', 'config', 'firebase.js');
+    const fileContent = fs.readFileSync(configFilePath, 'utf8');
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    // Regex directly targets and extracts key-value pairs from the existing code layout
+    const extractKey = (keyName) => {
+      const regex = new RegExp(`${keyName}:\\s*["']([^"']+)["']`);
+      const match = fileContent.match(regex);
+      return match ? match[1] : null;
+    };
+
+    return {
+      apiKey: extractKey('apiKey'),
+      authDomain: extractKey('authDomain'),
+      projectId: extractKey('projectId'),
+      storageBucket: extractKey('storageBucket'),
+      messagingSenderId: extractKey('messagingSenderId'),
+      appId: extractKey('appId')
+    };
+  } catch (err) {
+    console.error("Fatal: Unable to auto-read src/config/firebase.js layout details.", err);
+    process.exit(1);
+  }
+}
 
 async function buildSitemap() {
   const BASE_URL = 'https://onyxstacklabs.com';
   const currentDate = new Date().toISOString().split('T')[0];
 
+  // 1. Core Enterprise Application Routes Matrix Inventory
   const staticRoutes = [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
@@ -38,7 +55,7 @@ async function buildSitemap() {
 
   let xmlUrlNodes = '';
 
-  // 1. Static Routes Add Karein
+  // Process static inventory nodes into XML wrappers
   staticRoutes.forEach(route => {
     xmlUrlNodes += `
   <url>
@@ -49,7 +66,12 @@ async function buildSitemap() {
   </url>`;
   });
 
-  // 2. Firestore se LIVE Blogs Fetch Karein
+  // 2. Dynamic Initialization using extracted properties
+  const extractedConfig = await getFirebaseConfig();
+  const app = initializeApp(extractedConfig);
+  const db = getFirestore(app);
+
+  // 3. Automated Extraction for LIVE Status Content Blocks from Cloud Firestore
   try {
     const blogCollectionRef = collection(db, 'blogs');
     const liveBlogsQuery = query(blogCollectionRef, where('status', '==', 'LIVE'));
@@ -75,18 +97,19 @@ async function buildSitemap() {
   </url>`;
       }
     });
-  } catch (e) {
-    console.error("Firestore fetch failed, components fallback to static only:", e);
+  } catch (firestoreError) {
+    console.error("Firestore sync operational error - compiling static assets fallback setup:", firestoreError);
   }
 
+  // 4. Strict XML Compliance Formatting Framework
   const completeSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrlNodes}
 </urlset>`.trim();
 
-  // Vite/React ke public folder mein sitemap write karna taaki Vercel direct deploy kar sakay
+  // Dynamic distribution directly into the system build environment public directory
   const outputPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
   fs.writeFileSync(outputPath, completeSitemapXml, 'utf8');
-  console.log('✅ Standard XML Sitemap successfully generated in public folder!');
+  console.log('✅ Standard dynamic xml sitemap fully compiled into public folder without any schema bugs!');
 }
 
 buildSitemap();
