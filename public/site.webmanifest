@@ -1,8 +1,8 @@
 {
   "name": "OnyxStack Labs Admin",
-  "short_name": "OnyxStack",
+  "short_name": "OnyxAdmin",
   "description": "Enterprise Software, AI Automation & Cloud Development Agency",
-  "start_url": "/onyxstacklabs.com/onyx",
+  "start_url": "/onyx-control-tower",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
