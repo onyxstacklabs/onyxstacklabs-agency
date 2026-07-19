@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // Exact relative trajectory mapping targeting the real firebase module location
 import { db } from '../config/firebase'; 
-import { collection, query, orderBy, onSnapshot, doc, updateDoc, addDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot, doc, updateDoc, addDoc, deleteDoc, serverTimestamp, where } from 'firebase/firestore';
 
 export default function OnyxAdmin() {
   const [leads, setLeads] = useState([]);
@@ -17,6 +17,7 @@ export default function OnyxAdmin() {
   // Recruitment Pipeline Core State Matrix
   const [candidates, setCandidates] = useState([]);
   const [candidatesLoading, setCandidatesLoading] = useState(true);
+  const [activeCandidateTab, setActiveCandidateTab] = useState('pending'); // Upgraded: 'pending', 'shortlisted', 'archived'
   
   // Blog Filter/Sort/Search Pipeline State
   const [blogSearch, setBlogSearch] = useState('');
@@ -118,12 +119,19 @@ export default function OnyxAdmin() {
     return () => unsubscribe();
   }, [isAuthenticated]);
 
-  // Real-time listener for incoming recruitment submissions
+  // Upgraded: Real-time listener for incoming recruitment submissions with dynamic status filters
   useEffect(() => {
     if (!isAuthenticated) return;
+    setCandidatesLoading(true);
 
     const recruitmentRef = collection(db, 'recruitment_pipeline');
-    const q = query(recruitmentRef, orderBy('submittedAt', 'desc'));
+    
+    // Clean Pipeline Query targeting specific active tabs logic mapping
+    const q = query(
+      recruitmentRef, 
+      where('status', '==', activeCandidateTab),
+      orderBy('submittedAt', 'desc')
+    );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedCandidates = snapshot.docs.map(doc => ({
@@ -138,7 +146,7 @@ export default function OnyxAdmin() {
     });
 
     return () => unsubscribe();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, activeCandidateTab]);
 
   // Core Mutation Logic for updating Lead Status
   const updateLeadStatus = async (leadId, newStatus) => {
@@ -154,12 +162,32 @@ export default function OnyxAdmin() {
     }
   };
 
+  // Upgraded: Core Mutation Logic for candidate workflows
+  const updateCandidateStatus = async (candidateId, newStatus) => {
+    try {
+      const candidateDocRef = doc(db, 'recruitment_pipeline', candidateId);
+      await updateDoc(candidateDocRef, {
+        status: newStatus
+      });
+    } catch (error) {
+      console.error("Error mutating candidate pipeline state: ", error);
+      alert("Failed to update candidate workflow node.");
+    }
+  };
+
   // Helper to safely open communication channel with dynamic templates
   const triggerWhatsAppCommunication = (phone, companyName) => {
     const cleanPhone = phone.replace(/[^\d+]/g, ''); 
     const message = `Hello ${companyName},\n\nThis is OnyxStack Labs. We have successfully verified your parameters and initiated your active engineering funnel.\n\nLet us schedule a quick technical discovery call. Please let us know your availability.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${cleanPhone}?text=${encodedMessage}`, '_blank');
+  };
+
+  // Upgraded: Trigger pre-formatted email workflows 
+  const triggerEmailCommunication = (email, name, role) => {
+    const subject = encodeURIComponent(`[OnyxStack Labs] Application Update - ${role}`);
+    const body = encodeURIComponent(`Hello ${name},\n\nThank you for applying for the ${role} position at OnyxStack Labs.\n\nWe have reviewed your profile and would like to move forward to discuss your technical parameters.\n\nBest Regards,\nOnyxStack Labs Management`);
+    window.open(`mailto:${email}?subject=${subject}&body=${body}`, '_self');
   };
 
   // Blog Action Logic Handlers
@@ -402,7 +430,7 @@ export default function OnyxAdmin() {
           <div className="bg-[#111] border border-slate-800 rounded-lg px-4 py-2 text-xs font-mono text-slate-400">
             {currentTab === 'leads' && <>Total Nodes Cached: <span className="text-[#00f2fe] font-bold">{leads.length}</span></>}
             {currentTab === 'blog' && <>Core Collection Entries: <span className="text-[#00f2fe] font-bold">{blogs.length}</span></>}
-            {currentTab === 'recruitment' && <>Total Applications: <span className="text-[#00f2fe] font-bold">{candidates.length}</span></>}
+            {currentTab === 'recruitment' && <>Visible Applications: <span className="text-[#00f2fe] font-bold">{candidates.length}</span></>}
           </div>
         </header>
 
@@ -647,12 +675,10 @@ export default function OnyxAdmin() {
                           />
                         </div>
 
-                        {/* UPGRADED RICH TEXT WRITING MODULE WITH COMPILER ENGINE DIRECTIVES */}
+                        {/* Rich Text Writing Module */}
                         <div>
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                             <label className="block text-xs uppercase tracking-widest text-slate-400">Rich Text Content Core Payload Block</label>
-                            
-                            {/* DYNAMIC SEMANTIC PARSING HELPER TERMINAL */}
                             <div className="flex flex-wrap gap-1.5 bg-black/40 border border-slate-900 rounded-lg p-1.5 text-[10px] font-mono">
                               <span className="text-slate-500 px-1 font-bold">Parser Rules:</span>
                               <span className="text-cyan-400 bg-cyan-500/5 px-1.5 py-0.5 border border-cyan-500/10 rounded">### Heading</span>
@@ -967,22 +993,70 @@ export default function OnyxAdmin() {
 
           {/* TAB AREA 3: RECRUITMENT PIPELINE TRACKER MODULE */}
           {currentTab === 'recruitment' && (
-            <>
+            <div className="space-y-6">
+              
+              {/* Upgraded: Recruitment Functional Sub-Tabs Nav Panel */}
+              <div className="flex gap-2 border-b border-slate-900 pb-3">
+                {['pending', 'shortlisted', 'archived'].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveCandidateTab(tab)}
+                    className={`px-4 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 border ${
+                      activeCandidateTab === tab
+                        ? tab === 'pending' ? 'bg-amber-500/10 text-amber-400 border-amber-500/30' :
+                          tab === 'shortlisted' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' :
+                          'bg-red-500/10 text-red-400 border-red-500/30'
+                        : 'bg-[#121212] border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
               {candidatesLoading ? (
                 <div className="text-center py-20 text-slate-500 font-mono text-sm animate-pulse">Syncing recruitment streams...</div>
               ) : candidates.length === 0 ? (
                 <div className="text-center py-20 border border-dashed border-slate-800 rounded-xl">
-                  <p className="text-slate-500 font-mono text-sm">No applications received inside recruitment_pipeline yet.</p>
+                  <p className="text-slate-500 font-mono text-sm">No applications matching "{activeCandidateTab}" state in system query.</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {candidates.map((candidate) => (
-                    <div key={candidate.id} className="bg-[#121212] border border-slate-800 rounded-xl p-6 transition-all duration-300 flex flex-col justify-between">
-                      
+                    <div 
+                      key={candidate.id} 
+                      className={`bg-[#121212] border rounded-xl p-6 transition-all duration-300 flex flex-col justify-between ${
+                        candidate.status === 'shortlisted' ? 'border-emerald-500/30 shadow-md shadow-emerald-500/5' :
+                        candidate.status === 'archived' ? 'border-red-900/40 opacity-50 hover:opacity-75' : 'border-slate-800'
+                      }`}
+                    >
                       <div>
                         <div className="flex justify-between items-start gap-4 mb-4">
                           <div>
-                            <h3 className="text-lg font-bold text-white tracking-wide">{candidate.name || 'Anonymous Applicant'}</h3>
+                            <div className="flex items-center gap-2">
+                              <h3 className="text-lg font-bold text-white tracking-wide">{candidate.name || 'Anonymous Applicant'}</h3>
+                              {/* Quick State Actions (Tick / Cross) inside Card Head */}
+                              <div className="flex gap-1 ml-2">
+                                <button
+                                  onClick={() => updateCandidateStatus(candidate.id, 'shortlisted')}
+                                  title="Shortlist Candidate"
+                                  className={`p-1 rounded transition-all ${candidate.status === 'shortlisted' ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-600 hover:text-emerald-400 hover:bg-[#1a1a1a]'}`}
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => updateCandidateStatus(candidate.id, 'archived')}
+                                  title="Archive Candidate"
+                                  className={`p-1 rounded transition-all ${candidate.status === 'archived' ? 'text-red-400 bg-red-500/10' : 'text-slate-600 hover:text-red-400 hover:bg-[#1a1a1a]'}`}
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
                             <p className="text-xs text-slate-400 font-mono mt-0.5">{candidate.email}</p>
                           </div>
                           <span className="text-[10px] uppercase font-mono font-bold tracking-widest px-2.5 py-1 rounded border bg-[#00f2fe]/10 text-[#00f2fe] border-[#00f2fe]/20">
@@ -1012,22 +1086,29 @@ export default function OnyxAdmin() {
                         </div>
                       </div>
 
-                      {candidate.phone && (
-                        <div className="flex justify-end border-t border-slate-900 pt-4 mt-2">
+                      {/* Communications Array Panel Loop (WhatsApp + Email Matrix) */}
+                      <div className="flex justify-end gap-2 border-t border-slate-900 pt-4 mt-2">
+                        <button
+                          onClick={() => triggerEmailCommunication(candidate.email, candidate.name, candidate.role || 'Developer')}
+                          className="px-3 py-1.5 bg-[#00f2fe]/10 hover:bg-[#00f2fe]/20 text-[#00f2fe] text-xs font-semibold rounded uppercase tracking-wider transition-all border border-[#00f2fe]/20"
+                        >
+                          Send Email
+                        </button>
+                        {candidate.phone && (
                           <button
                             onClick={() => triggerWhatsAppCommunication(candidate.phone, candidate.name)}
                             className="px-3 py-1.5 bg-white hover:bg-slate-200 text-black text-xs font-bold rounded uppercase tracking-wider transition-all flex items-center gap-1"
                           >
-                            <span>Contact Candidate</span>
+                            <span>Contact on WhatsApp</span>
                           </button>
-                        </div>
-                      )}
+                        )}
+                      </div>
 
                     </div>
                   ))}
                 </div>
               )}
-            </>
+            </div>
           )}
 
         </main>
