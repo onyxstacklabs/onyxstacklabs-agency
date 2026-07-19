@@ -3,41 +3,12 @@ import path from 'path';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 
-/**
- * OnyxStack Labs - Automated XML Sitemap Parser Pipeline
- * Automatically extracts credentials directly from your existing firebase.js config file.
- */
-async function getFirebaseConfig() {
-  try {
-    const configFilePath = path.resolve(process.cwd(), 'src', 'config', 'firebase.js');
-    const fileContent = fs.readFileSync(configFilePath, 'utf8');
-
-    // Regex directly targets and extracts key-value pairs from the existing code layout
-    const extractKey = (keyName) => {
-      const regex = new RegExp(`${keyName}:\\s*["']([^"']+)["']`);
-      const match = fileContent.match(regex);
-      return match ? match[1] : null;
-    };
-
-    return {
-      apiKey: extractKey('apiKey'),
-      authDomain: extractKey('authDomain'),
-      projectId: extractKey('projectId'),
-      storageBucket: extractKey('storageBucket'),
-      messagingSenderId: extractKey('messagingSenderId'),
-      appId: extractKey('appId')
-    };
-  } catch (err) {
-    console.error("Fatal: Unable to auto-read src/config/firebase.js layout details.", err);
-    process.exit(1);
-  }
-}
-
 async function buildSitemap() {
   const BASE_URL = 'https://onyxstacklabs.com';
+  // Standard format formatting: YYYY-MM-DD
   const currentDate = new Date().toISOString().split('T')[0];
 
-  // 1. Core Enterprise Application Routes Matrix Inventory
+  // 1. Static Core App Inventory Layout Node Matrix
   const staticRoutes = [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
@@ -55,24 +26,26 @@ async function buildSitemap() {
 
   let xmlUrlNodes = '';
 
-  // Process static inventory nodes into XML wrappers
+  // Process static inventory nodes into XML templates
   staticRoutes.forEach(route => {
-    xmlUrlNodes += `
-  <url>
-    <loc>${BASE_URL}${route.path}</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>${route.changefreq}</changefreq>
-    <priority>${route.priority}</priority>
-  </url>`;
+    xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}${route.path}</loc>\n    <lastmod>${currentDate}</lastmod>\n    <changefreq>${route.changefreq}</changefreq>\n    <priority>${route.priority}</priority>\n  </url>`;
   });
 
-  // 2. Dynamic Initialization using extracted properties
-  const extractedConfig = await getFirebaseConfig();
-  const app = initializeApp(extractedConfig);
-  const db = getFirestore(app);
+  // Hardcoded direct verification params parsed strictly from your working production setup
+  const explicitConfig = {
+    apiKey: "AIzaSyDwpE_nXBS-ptEvf9CsV3Bze5xr-W-oHmI",
+    authDomain: "onyxstack-labs.firebaseapp.com",
+    projectId: "onyxstack-labs",
+    storageBucket: "onyxstack-labs.firebasestorage.app",
+    messagingSenderId: "825221965531",
+    appId: "1:825221965531:web:ae6684052f998f8c9d8efe"
+  };
 
-  // 3. Automated Extraction for LIVE Status Content Blocks from Cloud Firestore
+  // Safe isolated dynamic initialization context layer 
   try {
+    const app = initializeApp(explicitConfig);
+    const db = getFirestore(app);
+    
     const blogCollectionRef = collection(db, 'blogs');
     const liveBlogsQuery = query(blogCollectionRef, where('status', '==', 'LIVE'));
     const querySnapshot = await getDocs(liveBlogsQuery);
@@ -88,28 +61,34 @@ async function buildSitemap() {
       }
 
       if (slug) {
-        xmlUrlNodes += `
-  <url>
-    <loc>${BASE_URL}/blog/${slug}</loc>
-    <lastmod>${lastModDate}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>`;
+        xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}/blog/${slug}</loc>\n    <lastmod>${lastModDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
       }
     });
   } catch (firestoreError) {
-    console.error("Firestore sync operational error - compiling static assets fallback setup:", firestoreError);
+    console.error("Firestore automated sync dropped. Continuing with static core nodes infrastructure fallback layout.", firestoreError);
   }
 
-  // 4. Strict XML Compliance Formatting Framework
-  const completeSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrlNodes}
-</urlset>`.trim();
+  // 2. Structural boundary layout processing enforcement parameter
+  const completeSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrlNodes}\n</urlset>`.trim();
 
-  // Dynamic distribution directly into the system build environment public directory
-  const outputPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
-  fs.writeFileSync(outputPath, completeSitemapXml, 'utf8');
-  console.log('✅ Standard dynamic xml sitemap fully compiled into public folder without any schema bugs!');
+  // 3. Dual distribution routing deployment fallback logic (Writes to both target vectors)
+  const targetDirectories = [
+    path.resolve(process.cwd(), 'public', 'sitemap.xml'),
+    path.resolve(process.cwd(), 'dist', 'sitemap.xml') // Safe check if Vercel reads output directly from built asset path
+  ];
+
+  targetDirectories.forEach(targetPath => {
+    try {
+      const dir = path.dirname(targetPath);
+      if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      fs.writeFileSync(targetPath, completeSitemapXml, 'utf8');
+      console.log(`✅ Standard dynamic xml successfully structural map built at: ${targetPath}`);
+    } catch (writeErr) {
+      console.warn(`Non-fatal system storage directory offset skip: ${targetPath}`);
+    }
+  });
 }
 
 buildSitemap();
