@@ -10,6 +10,9 @@ import Footer from '../components/Footer';
 export default function Careers({ currentPath, navigateToNode }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [selectedDept, setSelectedDept] = useState("All");
+  
+  // Custom Modal Pipeline State Matrix
+  const [activeApplicationModal, setActiveApplicationModal] = useState(null);
 
   // Synchronize layout viewport configuration on initial mount
   useEffect(() => {
@@ -151,7 +154,7 @@ export default function Careers({ currentPath, navigateToNode }) {
   ];
 
   const handleApplicationPlaceholder = (jobTitle) => {
-    alert(`Initializing OnyxStack Application Terminal Pipeline Node...\nTarget Position: ${jobTitle}\n\n[Recruitment API Tunnel Linked Successfully]`);
+    setActiveApplicationModal(jobTitle);
   };
 
   const scrollToOpportunities = () => {
@@ -384,6 +387,78 @@ export default function Careers({ currentPath, navigateToNode }) {
         </section>
 
       </div>
+
+      {/* CUSTOM PREMIUM RECRUITMENT MODAL DIALOG INTEGRATION */}
+      {activeApplicationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-x-hidden overflow-y-auto">
+          {/* Backdrop blur overlay layer */}
+          <div 
+            className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300"
+            onClick={() => setActiveApplicationModal(null)}
+          />
+          
+          {/* Modal surface architecture container */}
+          <div className="relative w-full max-w-md transform rounded-2xl border border-neutral-800 bg-neutral-950 p-6 shadow-2xl transition-all duration-300 z-10 animate-in fade-in zoom-in-95">
+            {/* Holographic accent lighting inside modal */}
+            <div className="absolute -top-12 -left-12 w-40 h-40 bg-[#06B6D4]/[0.05] blur-3xl pointer-events-none rounded-full" />
+            
+            {/* Header frame */}
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <span className="inline-flex items-center px-2 py-0.5 rounded bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-[10px] font-mono uppercase tracking-widest mb-1.5">
+                  System API Terminal Connected
+                </span>
+                <h3 className="text-lg font-bold text-white tracking-wide font-sans">
+                  Pipeline Initialization
+                </h3>
+              </div>
+              <button 
+                onClick={() => setActiveApplicationModal(null)}
+                className="text-neutral-500 hover:text-neutral-300 p-1 font-mono text-sm transition-colors focus:outline-none"
+              >
+                [ESC]
+              </button>
+            </div>
+
+            {/* Output screen layer */}
+            <div className="bg-[#050505] border border-neutral-900 rounded-xl p-4 font-mono text-xs space-y-3 mb-6 text-neutral-300">
+              <div className="flex items-start gap-2">
+                <span className="text-[#06B6D4] select-none">&gt;</span>
+                <p className="leading-relaxed">Initializing OnyxStack Application Terminal Pipeline Node...</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-[#06B6D4] select-none">&gt;</span>
+                <p className="leading-relaxed">
+                  Target Position: <span className="text-white font-bold">{activeApplicationModal}</span>
+                </p>
+              </div>
+              <div className="flex items-start gap-2 pt-2 border-t border-neutral-900/60 text-emerald-400">
+                <span className="select-none">✓</span>
+                <p className="font-bold">[Recruitment API Tunnel Linked Successfully]</p>
+              </div>
+            </div>
+
+            {/* Interactive actions vector */}
+            <div className="flex items-center justify-end gap-3">
+              <button
+                onClick={() => setActiveApplicationModal(null)}
+                className="px-5 py-2.5 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-900 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200"
+              >
+                Cancel Node
+              </button>
+              <button
+                onClick={() => {
+                  alert(`Direct intake workflow node for "${activeApplicationModal}" configuration placeholder triggered.`);
+                  setActiveApplicationModal(null);
+                }}
+                className="px-5 py-2.5 rounded-xl bg-white hover:bg-[#06B6D4] text-black text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shadow-[0_0_25px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.35)]"
+              >
+                Proceed to Intake
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* CORE GLOBAL FOOTER COUPLING */}
       <Footer siteConfig={siteConfig} />
