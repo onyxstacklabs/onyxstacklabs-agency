@@ -129,31 +129,31 @@ export default function Pricing({ currentPath, navigateToNode }) {
       <div className="relative z-10 execution-pricing-scope">
         
         {/* HERO SECTION */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-24 text-center">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-16 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-[10px] font-mono uppercase tracking-widest mb-6">
             Enterprise Engagement Models
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-8 leading-[1.1]">
+          <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1] px-2">
             Transparent Value. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-blue-500">
               Infinite Scale.
             </span>
           </h1>
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-base md:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed mb-6 px-2">
             We author high-performance software tailored to your operational requirements. Review our engagement frameworks and request a customized scoping blueprint.
           </p>
         </section>
 
         {/* PRICING CARDS */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {pricingTiers.map((tier, tIdx) => (
               <div 
                 key={tIdx} 
-                className={`group p-8 rounded-2xl border bg-neutral-950/50 flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-2 ${tier.accent}`}
+                className={`group p-6 md:p-8 rounded-2xl border bg-neutral-950/50 flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-2 ${tier.accent}`}
               >
                 {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#06B6D4] text-black text-[10px] font-mono font-bold uppercase tracking-widest shadow-lg shadow-[#06B6D4]/20">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#06B6D4] text-black text-[10px] font-mono font-bold uppercase tracking-widest shadow-lg shadow-[#06B6D4]/20 white-space-nowrap">
                     Recommended
                   </div>
                 )}
@@ -164,9 +164,9 @@ export default function Pricing({ currentPath, navigateToNode }) {
                   <p className="text-sm text-neutral-400 mb-8 leading-relaxed">{tier.desc}</p>
                   <div className="space-y-4 mb-8">
                     {tier.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-center gap-3 text-xs text-neutral-300">
-                        <svg className="w-4 h-4 text-[#06B6D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                        {feat}
+                      <div key={fIdx} className="flex items-start gap-3 text-xs text-neutral-300">
+                        <svg className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                        <span>{feat}</span>
                       </div>
                     ))}
                   </div>
@@ -182,26 +182,26 @@ export default function Pricing({ currentPath, navigateToNode }) {
           </div>
         </section>
 
-        {/* COMPARISON TABLE */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">Feature Matrix</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+        {/* COMPARISON TABLE - MOBILE OPTIMIZED FIXED */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-neutral-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 text-center">Feature Matrix</h2>
+          <div className="overflow-x-auto rounded-xl border border-neutral-900 bg-neutral-950/20 scrollbar-thin scrollbar-thumb-neutral-800">
+            <table className="w-full text-left border-collapse min-w-[650px]">
               <thead>
-                <tr className="text-neutral-500 text-[10px] font-mono uppercase border-b border-neutral-800">
-                  <th className="p-4">Feature</th>
+                <tr className="text-neutral-500 text-[10px] font-mono uppercase border-b border-neutral-800 bg-neutral-950/40">
+                  <th className="p-4 pl-6">Feature</th>
                   <th className="p-4">Starter</th>
                   <th className="p-4 text-[#06B6D4]">Core</th>
-                  <th className="p-4">Enterprise</th>
+                  <th className="p-4 pr-6">Enterprise</th>
                 </tr>
               </thead>
               <tbody className="text-sm text-neutral-300">
                 {featureTable.map((row, i) => (
                   <tr key={i} className="border-b border-neutral-900/50 hover:bg-neutral-900/20 transition-colors">
-                    <td className="p-4 font-bold">{row.feature}</td>
-                    <td className="p-4">{row.starter}</td>
-                    <td className="p-4 text-[#06B6D4] font-semibold">{row.core}</td>
-                    <td className="p-4">{row.enterprise}</td>
+                    <td className="p-4 pl-6 font-bold text-white whitespace-nowrap">{row.feature}</td>
+                    <td className="p-4 whitespace-nowrap">{row.starter}</td>
+                    <td className="p-4 text-[#06B6D4] font-semibold whitespace-nowrap">{row.core}</td>
+                    <td className="p-4 pr-6 whitespace-nowrap">{row.enterprise}</td>
                   </tr>
                 ))}
               </tbody>
@@ -210,8 +210,8 @@ export default function Pricing({ currentPath, navigateToNode }) {
         </section>
 
         {/* PROTOCOL SUITE */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-20 border-t border-neutral-900">
-          <h2 className="text-3xl font-bold text-white mb-12">Production Protocol Suite</h2>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-neutral-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">Production Protocol Suite</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {baselineInclusions.map((inc, iIdx) => (
               <div key={iIdx} className="p-6 rounded-xl border border-neutral-900 bg-neutral-950/50 hover:border-neutral-700 transition-colors">
@@ -224,20 +224,20 @@ export default function Pricing({ currentPath, navigateToNode }) {
         </section>
 
         {/* FAQ */}
-        <section className="max-w-4xl mx-auto px-6 py-20 border-t border-neutral-900">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">Frequently Asked Queries</h2>
+        <section className="max-w-4xl mx-auto px-6 py-16 border-t border-neutral-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 text-center">Frequently Asked Queries</h2>
           <div className="space-y-4">
             {faqCatalog.map((faq, idx) => (
-              <div key={idx} className="rounded-xl border border-neutral-900 bg-neutral-950/40">
+              <div key={idx} className="rounded-xl border border-neutral-900 bg-neutral-950/40 overflow-hidden">
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full text-left p-6 flex items-center justify-between font-bold text-neutral-200"
+                  className="w-full text-left p-5 md:p-6 flex items-center justify-between font-bold text-neutral-200 text-sm md:text-base gap-4"
                 >
-                  {faq.q}
-                  <span className="text-[#06B6D4]">{activeFaq === idx ? '−' : '+'}</span>
+                  <span>{faq.q}</span>
+                  <span className="text-[#06B6D4] shrink-0 font-mono text-xl">{activeFaq === idx ? '−' : '+'}</span>
                 </button>
                 {activeFaq === idx && (
-                  <div className="px-6 pb-6 text-sm text-neutral-400 leading-relaxed border-t border-neutral-900/50 pt-4">
+                  <div className="px-5 pb-5 md:px-6 md:pb-6 text-xs md:text-sm text-neutral-400 leading-relaxed border-t border-neutral-900/50 pt-4 bg-neutral-950/20">
                     {faq.a}
                   </div>
                 )}
@@ -247,14 +247,14 @@ export default function Pricing({ currentPath, navigateToNode }) {
         </section>
 
         {/* FINAL CTA */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 py-24">
-          <div className="p-12 rounded-3xl border border-neutral-900 bg-gradient-to-br from-neutral-900 to-neutral-950 text-center relative overflow-hidden">
+        <section className="max-w-7xl mx-auto px-4 md:px-12 py-16">
+          <div className="p-8 md:p-12 rounded-3xl border border-neutral-900 bg-gradient-to-br from-neutral-900 to-neutral-950 text-center relative overflow-hidden">
              <div className="relative z-10">
-               <h2 className="text-4xl font-bold text-white mb-6">Ready to Engineer Your Future?</h2>
-               <p className="text-neutral-400 mb-8 max-w-xl mx-auto">Connect directly with our lead solution engineers to map out your feature goals, data models, and deployment timelines.</p>
+               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Engineer Your Future?</h2>
+               <p className="text-sm md:text-base text-neutral-400 mb-8 max-w-xl mx-auto px-2">Connect directly with our lead solution engineers to map out your feature goals, data models, and deployment timelines.</p>
                <button
                   onClick={triggerConsultation}
-                  className="bg-white hover:bg-[#06B6D4] text-black px-10 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                  className="bg-white hover:bg-[#06B6D4] text-black px-8 py-4 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] w-full sm:w-auto"
                 >
                   Establish Connection
                 </button>
