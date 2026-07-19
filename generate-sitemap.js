@@ -8,11 +8,13 @@ async function buildSitemap() {
   // Standard format formatting: YYYY-MM-DD
   const currentDate = new Date().toISOString().split('T')[0];
 
-  // 1. Static Core App Inventory Layout Node Matrix
+  // 1. Core Enterprise App Inventory Layout Node Matrix (Updated with missing production pages)
   const staticRoutes = [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
     { path: '/services', changefreq: 'monthly', priority: '0.9' },
+    { path: '/projects', changefreq: 'monthly', priority: '0.8' },
+    { path: '/industries', changefreq: 'monthly', priority: '0.8' },
     { path: '/portfolio', changefreq: 'monthly', priority: '0.8' },
     { path: '/pricing', changefreq: 'monthly', priority: '0.8' },
     { path: '/careers', changefreq: 'weekly', priority: '0.7' },
