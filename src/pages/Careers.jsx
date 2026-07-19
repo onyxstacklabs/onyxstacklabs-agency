@@ -76,7 +76,7 @@ export default function Careers({ currentPath, navigateToNode }) {
 
     setModalStep(3); // Processing telemetry status
     
-    // Exact schema matching OnyxAdmin state maps perfectly
+    // Upgraded Payload: Status anchor attached to align perfectly with the Admin Sub-Tabs Routing Logic
     const applicationPayload = {
       role: activeApplicationModal,
       name: formData.name,
@@ -84,6 +84,7 @@ export default function Careers({ currentPath, navigateToNode }) {
       phone: formData.phone,
       portfolio: formData.portfolio,
       experience: formData.experience || "Not Specified",
+      status: "pending", // <--- Synchronizes with OnyxAdmin 'pending' query filter node
       submittedAt: serverTimestamp() // Explicit mapping hook for orderBy query
     };
 
