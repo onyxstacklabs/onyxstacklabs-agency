@@ -4,10 +4,12 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 
 async function buildSitemap() {
+  console.log('🚀 [OnyxStack Labs GSC Audit] Starting dynamic sitemap pipeline execution...');
+  
   const BASE_URL = 'https://onyxstacklabs.com';
   const currentDate = new Date().toISOString().split('T')[0];
 
-  // 1. Core Enterprise App Inventory Layout Node Matrix
+  // 1. Core Static Route Matrix
   const staticRoutes = [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
@@ -27,12 +29,11 @@ async function buildSitemap() {
 
   let xmlUrlNodes = '';
 
-  // Process static inventory nodes into XML templates
   staticRoutes.forEach(route => {
     xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}${route.path}</loc>\n    <lastmod>${currentDate}</lastmod>\n    <changefreq>${route.changefreq}</changefreq>\n    <priority>${route.priority}</priority>\n  </url>`;
   });
 
-  // Hardcoded direct verification params parsed strictly from your working production setup
+  // 2. Verified Production Firebase Configuration Data Matrix
   const explicitConfig = {
     apiKey: "AIzaSyDwpE_nXBS-ptEvf9CsV3Bze5xr-W-oHmI",
     authDomain: "onyxstack-labs.firebaseapp.com",
@@ -42,14 +43,22 @@ async function buildSitemap() {
     appId: "1:825221965531:web:ae6684052f998f8c9d8efe"
   };
 
-  // Safe isolated dynamic initialization context layer 
   try {
+    console.log('⚙️ [Firebase Audit] Initializing client application core context layer...');
     const app = initializeApp(explicitConfig);
+    console.log('✅ [Firebase Audit] Firebase Client Instance initialized successfully.');
+
+    console.log('🔌 [Firestore Audit] Connecting to Relational Document Storage...');
     const db = getFirestore(app);
+    console.log('✅ [Firestore Audit] Cloud Firestore instance wrapper references established.');
     
+    console.log('📁 [Firestore Audit] Query Target Validation - Collection target: "blogs" | Parameter status == "LIVE"');
     const blogCollectionRef = collection(db, 'blogs');
     const liveBlogsQuery = query(blogCollectionRef, where('status', '==', 'LIVE'));
+    
+    console.log('⏳ [Firestore Audit] Dispatching asynchronous remote connection network frame...');
     const querySnapshot = await getDocs(liveBlogsQuery);
+    console.log('✅ [Firestore Audit] Network payload packet received from remote instance storage server.');
 
     const liveBlogs = [];
     const seenSlugs = new Set();
@@ -72,30 +81,43 @@ async function buildSitemap() {
           }
         }
 
+        console.log(`🔗 [Sitemap Node Push] Mapping valid blog item found: /blog/${slug} (lastmod: ${lastModDate})`);
         liveBlogs.push({
           slug: slug,
           lastmod: lastModDate,
           sortTimestamp: sortTimestamp
         });
+      } else if (!slug) {
+        console.warn(`⚠️ [Data Validation Failure] Skipping document node (ID: ${doc.id}) - Reason: Property 'slug' is missing/undefined.`);
       }
     });
 
-    // Sort blog URLs by newest updatedAt first
-    liveBlogs.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+    console.log(`📊 [Pipeline Inventory Analysis] Total matching "LIVE" documents successfully loaded into RAM: ${liveBlogs.length}`);
 
-    // Append sorted dynamic blog entries to nodes matrix
-    liveBlogs.forEach(blog => {
-      xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}/blog/${blog.slug}</loc>\n    <lastmod>${blog.lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
-    });
+    if (liveBlogs.length === 0) {
+      console.warn('❌ [Pipeline Threat Analysis] CRITICAL: 0 blog entries processed. Reason: The remote "blogs" collection contains no matching data nodes OR runtime authentication environment rejected execution silent fail.');
+    } else {
+      // Sort blog URLs by newest updatedAt first
+      liveBlogs.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+
+      // Append sorted dynamic blog entries to nodes matrix
+      liveBlogs.forEach(blog => {
+        xmlUrlNodes += `\n  <url>\n    <loc>${BASE_URL}/blog/${blog.slug}</loc>\n    <lastmod>${blog.lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
+      });
+    }
 
   } catch (firestoreError) {
-    console.error("Firestore automated sync dropped. Continuing with static core nodes infrastructure fallback layout.", firestoreError);
+    console.error("🚨 [FATAL SYSTEM PIPELINE EXCEPTION ERROR]: Cloud Firestore transmission handshake failed entirely.");
+    console.error("Error Code Context Trace:", firestoreError.code);
+    console.error("Detailed Error Message Object:", firestoreError.message);
+    console.error("Full Runtime Stack Trace Below:");
+    console.error(firestoreError.stack);
   }
 
-  // 2. Structural boundary layout processing enforcement parameter - Explicitly Trimming Whitespace Before XML Dec
+  // 3. Strict XML Compliance Formatting Framework
   const completeSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrlNodes}\n</urlset>`.trim();
 
-  // 3. Dual distribution routing deployment fallback logic (Writes to both target vectors)
+  // 4. Output Target Vector Distribution Layer
   const targetDirectories = [
     path.resolve(process.cwd(), 'public', 'sitemap.xml'),
     path.resolve(process.cwd(), 'dist', 'sitemap.xml')
@@ -108,11 +130,12 @@ async function buildSitemap() {
         fs.mkdirSync(dir, { recursive: true });
       }
       fs.writeFileSync(targetPath, completeSitemapXml, 'utf8');
-      console.log(`✅ Standard dynamic xml successfully structural map built at: ${targetPath}`);
+      console.log(`✅ [File System Write Successful] Map buffer written directly into: ${targetPath}`);
     } catch (writeErr) {
-      console.warn(`Non-fatal system storage directory offset skip: ${targetPath}`);
+      console.warn(`[File System System Storage Skip]: Directory offset validation failed at ${targetPath}`);
     }
   });
+  console.log('🏁 [OnyxStack Labs GSC Audit] Pipeline generation process completed.');
 }
 
 buildSitemap();
