@@ -13,6 +13,7 @@ export default function Careers({ currentPath, navigateToNode }) {
   
   // Custom Modal Pipeline State Matrix
   const [activeApplicationModal, setActiveApplicationModal] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Synchronize layout viewport configuration on initial mount
   useEffect(() => {
@@ -21,6 +22,11 @@ export default function Careers({ currentPath, navigateToNode }) {
 
   const toggleFaq = (idx) => {
     setActiveFaq(activeFaq === idx ? null : idx);
+  };
+
+  const handleModalClose = () => {
+    setActiveApplicationModal(null);
+    setIsSubmitted(false);
   };
 
   // Section 2 Data: Corporate Cultural Vectors
@@ -394,7 +400,7 @@ export default function Careers({ currentPath, navigateToNode }) {
           {/* Backdrop blur overlay layer */}
           <div 
             className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300"
-            onClick={() => setActiveApplicationModal(null)}
+            onClick={handleModalClose}
           />
           
           {/* Modal surface architecture container */}
@@ -409,53 +415,76 @@ export default function Careers({ currentPath, navigateToNode }) {
                   System API Terminal Connected
                 </span>
                 <h3 className="text-lg font-bold text-white tracking-wide font-sans">
-                  Pipeline Initialization
+                  {isSubmitted ? "Pipeline Connection Complete" : "Pipeline Initialization"}
                 </h3>
               </div>
               <button 
-                onClick={() => setActiveApplicationModal(null)}
+                onClick={handleModalClose}
                 className="text-neutral-500 hover:text-neutral-300 p-1 font-mono text-sm transition-colors focus:outline-none"
               >
                 [ESC]
               </button>
             </div>
 
-            {/* Output screen layer */}
-            <div className="bg-[#050505] border border-neutral-900 rounded-xl p-4 font-mono text-xs space-y-3 mb-6 text-neutral-300">
-              <div className="flex items-start gap-2">
-                <span className="text-[#06B6D4] select-none">&gt;</span>
-                <p className="leading-relaxed">Initializing OnyxStack Application Terminal Pipeline Node...</p>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-[#06B6D4] select-none">&gt;</span>
-                <p className="leading-relaxed">
-                  Target Position: <span className="text-white font-bold">{activeApplicationModal}</span>
-                </p>
-              </div>
-              <div className="flex items-start gap-2 pt-2 border-t border-neutral-900/60 text-emerald-400">
-                <span className="select-none">✓</span>
-                <p className="font-bold">[Recruitment API Tunnel Linked Successfully]</p>
-              </div>
-            </div>
+            {/* Dynamic UI Terminal Screen Matrix (No alerts) */}
+            {!isSubmitted ? (
+              <>
+                <div className="bg-[#050505] border border-neutral-900 rounded-xl p-4 font-mono text-xs space-y-3 mb-6 text-neutral-300">
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#06B6D4] select-none">&gt;</span>
+                    <p className="leading-relaxed">Initializing OnyxStack Application Terminal Pipeline Node...</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#06B6D4] select-none">&gt;</span>
+                    <p className="leading-relaxed">
+                      Target Position: <span className="text-white font-bold">{activeApplicationModal}</span>
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2 pt-2 border-t border-neutral-900/60 text-cyan-400">
+                    <span className="select-none">✓</span>
+                    <p className="font-bold">[Recruitment API Tunnel Linked Successfully]</p>
+                  </div>
+                </div>
 
-            {/* Interactive actions vector */}
-            <div className="flex items-center justify-end gap-3">
-              <button
-                onClick={() => setActiveApplicationModal(null)}
-                className="px-5 py-2.5 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-900 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200"
-              >
-                Cancel Node
-              </button>
-              <button
-                onClick={() => {
-                  alert(`Direct intake workflow node for "${activeApplicationModal}" configuration placeholder triggered.`);
-                  setActiveApplicationModal(null);
-                }}
-                className="px-5 py-2.5 rounded-xl bg-white hover:bg-[#06B6D4] text-black text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shadow-[0_0_25px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.35)]"
-              >
-                Proceed to Intake
-              </button>
-            </div>
+                <div className="flex items-center justify-end gap-3">
+                  <button
+                    onClick={handleModalClose}
+                    className="px-5 py-2.5 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-900 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200"
+                  >
+                    Cancel Node
+                  </button>
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-white hover:bg-[#06B6D4] text-black text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shadow-[0_0_25px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.35)]"
+                  >
+                    Proceed to Intake
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="bg-[#050505] border border-neutral-900 rounded-xl p-5 font-mono text-xs space-y-4 mb-6 text-neutral-300 text-center">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto text-base">
+                    ✓
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1 font-sans text-sm">Intake Pipeline Activated</h4>
+                    <p className="text-[11px] text-neutral-400 leading-relaxed">
+                      Secure connection handshake for <span className="text-white font-semibold">"{activeApplicationModal}"</span> established successfully.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  <button
+                    onClick={handleModalClose}
+                    className="w-full py-2.5 rounded-xl border border-neutral-800 text-neutral-300 hover:text-white bg-neutral-900/50 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200"
+                  >
+                    Close Terminal Node
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
