@@ -65,6 +65,11 @@ export default function Hero() {
       className="relative min-h-screen bg-[#050505] overflow-hidden flex flex-col justify-center items-center z-10 pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 px-4 sm:px-6 lg:px-8"
       aria-label="OnyxStack Labs Showcase introduction"
     >
+      {/* PERFORMANCE FIX: Native React Head Injection for Browser Preloading */}
+      <React.Fragment>
+        <link rel="preload" fetchpriority="high" as="image" href={heroBanner} type="image/webp" />
+      </React.Fragment>
+
       {/* ADVANCED OPTIMIZED HARDWARE-ACCELERATED BACKGROUND MESH */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 will-change-transform transform-gpu">
         {/* Fine structural grid layer */}
