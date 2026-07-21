@@ -1,22 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 
 // LIVE DATA CORE IMPORTS
 import { transmitLeadToFirebase } from '../config/firebase';
 import { siteConfig } from '../config/siteConfig';
 
-// MODULAR DETACHED COMPONENT ARCHITECTURE LAYER
+// IMMEDIATE CRITICAL ABOVE-THE-FOLD IMPORTS
 import Hero from '../components/Hero';
 import Clients from '../components/Clients';
 import Stats from '../components/Stats';
-import BrandShowcase from '../components/BrandShowcase';
-import Services from '../components/Services';
-import FeaturedProjects from '../components/FeaturedProjects';
-import Portfolio from '../components/Portfolio';
-import WhyChooseUs from '../components/WhyChooseUs';
-import Process from '../components/Process';
-import TechStack from '../components/TechStack';
-import CTA from '../components/CTA';
-import ContactForm from '../components/ContactForm';
+
+// LAZY-LOADED BELOW-THE-FOLD COMPONENTS FOR LIGHTHOUSE OPTIMIZATION
+const BrandShowcase = lazy(() => import('../components/BrandShowcase'));
+const Services = lazy(() => import('../components/Services'));
+const FeaturedProjects = lazy(() => import('../components/FeaturedProjects'));
+const Portfolio = lazy(() => import('../components/Portfolio'));
+const WhyChooseUs = lazy(() => import('../components/WhyChooseUs'));
+const Process = lazy(() => import('../components/Process'));
+const TechStack = lazy(() => import('../components/TechStack'));
+const CTA = lazy(() => import('../components/CTA'));
+const ContactForm = lazy(() => import('../components/ContactForm'));
+
+// LIGHTWEIGHT ZERO-CLS SKELETON PLACEHOLDER
+const SectionFallback = () => (
+  <div 
+    className="w-full min-h-[300px] my-8 bg-[#080808]/40 rounded-2xl border border-white/[0.03] animate-pulse" 
+    aria-hidden="true"
+  />
+);
 
 export default function Home({ currentPath, navigateToNode }) {
   const [activeSection, setActiveSection] = useState('');
@@ -163,41 +173,60 @@ export default function Home({ currentPath, navigateToNode }) {
       <div className="absolute top-[1500px] right-0 w-[500px] h-[500px] bg-[#2563EB]/[0.03] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-[600px] left-0 w-[600px] h-[600px] bg-[#06B6D4]/[0.02] blur-[200px] pointer-events-none" />
 
-      {/* CORE FRAMEWORK ORDER MATRIX */}
+      {/* CORE FRAMEWORK ORDER MATRIX - ABOVE THE FOLD (IMMEDIATE) */}
       <Hero />
       
       <Clients />
       
       <Stats />
       
-      <BrandShowcase />
+      {/* BELOW THE FOLD SECTIONS (DYNAMICALLY LOADED VIA REACT.LAZY + SUSPENSE) */}
+      <Suspense fallback={<SectionFallback />}>
+        <BrandShowcase />
+      </Suspense>
       
-      <Services
-        currentPath={currentPath}
-        navigateToNode={navigateToNode}
-      />
+      <Suspense fallback={<SectionFallback />}>
+        <Services
+          currentPath={currentPath}
+          navigateToNode={navigateToNode}
+        />
+      </Suspense>
       
-      <FeaturedProjects />
+      <Suspense fallback={<SectionFallback />}>
+        <FeaturedProjects />
+      </Suspense>
       
-      <Portfolio projects={siteConfig.projects} />
+      <Suspense fallback={<SectionFallback />}>
+        <Portfolio projects={siteConfig.projects} />
+      </Suspense>
       
-      <WhyChooseUs valueProps={valueProps} />
+      <Suspense fallback={<SectionFallback />}>
+        <WhyChooseUs valueProps={valueProps} />
+      </Suspense>
       
-      <Process deliveryProcess={deliveryProcess} />
+      <Suspense fallback={<SectionFallback />}>
+        <Process deliveryProcess={deliveryProcess} />
+      </Suspense>
       
-      <TechStack techStackBadges={techStackBadges} />
+      <Suspense fallback={<SectionFallback />}>
+        <TechStack techStackBadges={techStackBadges} />
+      </Suspense>
       
-      <CTA navigateToNode={navigateToNode} />
+      <Suspense fallback={<SectionFallback />}>
+        <CTA navigateToNode={navigateToNode} />
+      </Suspense>
       
-      <ContactForm 
-        formData={formData}
-        setFormData={setFormData}
-        submissionState={submissionState}
-        setSubmissionState={setSubmissionState}
-        errors={errors}
-        handleLeadFormTransmission={handleLeadFormTransmission}
-        siteConfig={siteConfig}
-      />
+      <Suspense fallback={<SectionFallback />}>
+        <ContactForm 
+          formData={formData}
+          setFormData={setFormData}
+          submissionState={submissionState}
+          setSubmissionState={setSubmissionState}
+          errors={errors}
+          handleLeadFormTransmission={handleLeadFormTransmission}
+          siteConfig={siteConfig}
+        />
+      </Suspense>
 
     </div>
   );
