@@ -384,50 +384,83 @@ export default function Services({ currentPath, navigateToNode }) {
       {/* SYSTEM CONTROLLER CONTAINER */}
       <div className="relative z-10">
 
-        {/* SECTION 1: HERO CONTAINER — FULL-WIDTH PREMIUM BACKGROUND HERO */}
-        <section className="relative w-full min-h-[560px] sm:min-h-[640px] flex items-center overflow-hidden hero-fade">
+        {/* SECTION 1: HERO CONTAINER — REFINED HIGH-END ENTERPRISE HERO */}
+        <section className="relative w-full min-h-[620px] sm:min-h-[720px] flex items-center overflow-hidden hero-fade pt-20 pb-16">
           <div className="absolute inset-0 z-0">
             <img
               src={heroBanner}
               alt="OnyxStack Labs enterprise software development showcase"
               loading="eager"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center scale-105"
             />
-            <div className="absolute inset-0 bg-[#050505]/80" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-[#050505]/30" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.12),transparent_60%)]" />
+            {/* Multi-layered radial and directional overlays for optimal contrast */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-[#050505]/75" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/80" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(6,182,212,0.18),transparent_55%)]" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-32 sm:py-40 w-full">
-            <div className="max-w-4xl fade-up">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-6 backdrop-blur-sm">
-                Our Capabilities
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 sm:py-28 w-full">
+            <div className="max-w-3xl fade-up">
+              
+              {/* Status Badge */}
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/30 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-pulse" />
+                Enterprise Software Capabilities
               </div>
-              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
+
+              {/* Main Headline */}
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-8 leading-[1.08]">
                 Custom Software Development <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] via-cyan-200 to-blue-500">
                   Tailored for Business Growth
                 </span>
               </h1>
-              <p className="text-base sm:text-lg text-neutral-300 max-w-2xl leading-relaxed mb-10 font-sans">
-                OnyxStack Labs is a modern software development company that crafts secure web applications, smart AI solutions, and performant cloud tools. We match intentional, low-friction visual layout design with robust MERN stack architecture to convert product strategies into reliable business outcomes.
+
+              {/* Description */}
+              <p className="text-base sm:text-lg text-neutral-300 max-w-2xl leading-relaxed mb-10 font-sans font-normal">
+                OnyxStack Labs crafts secure web applications, smart AI integrations, and high-performance cloud platforms. We combine low-friction UI/UX design with robust architecture to translate your software requirements into scalable digital systems.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 mb-12">
                 <a
                   href="#contact-redirect"
-                  onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                  className="bg-neutral-100 hover:bg-[#06B6D4] text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    navigateToNode('/'); 
+                    setTimeout(() => { 
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); 
+                    }, 150); 
+                  }}
+                  className="bg-white hover:bg-[#06B6D4] text-black px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   Work With Us
                 </a>
                 <a
                   href="#services-catalog"
-                  onClick={(e) => { e.preventDefault(); document.getElementById('services-catalog')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="border border-neutral-700 hover:border-neutral-500 bg-neutral-900/30 backdrop-blur-sm text-neutral-200 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    document.getElementById('services-catalog')?.scrollIntoView({ behavior: 'smooth' }); 
+                  }}
+                  className="border border-neutral-700 hover:border-neutral-400 bg-neutral-900/50 backdrop-blur-md text-neutral-200 hover:text-white px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   View Services
                 </a>
               </div>
+
+              {/* Stack & Architecture Badges */}
+              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-neutral-400 font-mono uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#06B6D4]">✓</span> MERN Stack
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#06B6D4]">✓</span> Cloud Architecture
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#06B6D4]">✓</span> AI Workflows
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -630,7 +663,7 @@ export default function Services({ currentPath, navigateToNode }) {
                     aria-expanded={isOpen}
                   >
                     <span className="text-sm sm:text-base font-medium font-sans">{faq.q}</span>
-                    <span className={`flex-shrink-0 w-6 h-6 rounded-full border border-neutral-800 flex-shrink-0 flex items-center justify-center text-neutral-500 transition-all duration-300 ${isOpen ? 'rotate-45 border-[#06B6D4]/40 text-[#06B6D4]' : ''}`} aria-hidden="true">
+                    <span className={`flex-shrink-0 w-6 h-6 rounded-full border border-neutral-800 flex items-center justify-center text-neutral-500 transition-all duration-300 ${isOpen ? 'rotate-45 border-[#06B6D4]/40 text-[#06B6D4]' : ''}`} aria-hidden="true">
                       +
                     </span>
                   </button>
