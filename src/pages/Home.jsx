@@ -40,7 +40,7 @@ export default function Home({ currentPath, navigateToNode }) {
       }
     };
 
-    window.addEventListener('scroll', handleScrollSpy);
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScrollSpy);
     };
@@ -99,7 +99,6 @@ export default function Home({ currentPath, navigateToNode }) {
     
     const discordPayload = {
       username: "OnyxStack Control Tower",
-      avatar_url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150",
       embeds: [
         {
           title: "🛑 NEW TRANSMISSION DETECTED: INCOMING LEAD",
