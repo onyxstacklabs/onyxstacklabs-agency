@@ -1,68 +1,69 @@
 import React from "react";
 import heroBanner from "../assets/images/hero-banner.webp";
 
+// STATIC DATASETS MOVED TO MODULE SCOPE TO PREVENT REACT RE-ALLOCATION ON RERENDER
+const FEATURE_PILLS = [
+  {
+    label: "Custom Software",
+    icon: (
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    )
+  },
+  {
+    label: "AI Automation",
+    icon: (
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
+      </svg>
+    )
+  },
+  {
+    label: "Cloud Infrastructure",
+    icon: (
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.26A8 8 0 1 0 4 15.25" />
+        <path d="M8 19h9.5" />
+      </svg>
+    )
+  },
+  {
+    label: "Enterprise Security",
+    icon: (
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z" />
+        <polyline points="9 12 11 14 15 10" />
+      </svg>
+    )
+  }
+];
+
+const VALUE_STATS = [
+  { value: "100%", label: "Custom Architecture" },
+  { value: "AI READY", label: "Automation Sync" },
+  { value: "24/7", label: "Dedicated Support" },
+  { value: "PREMIUM", label: "Enterprise Quality" }
+];
+
+const JSON_LD_DATA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "OnyxStack Labs",
+  "url": "https://onyxstacklabs.com",
+  "logo": "https://onyxstacklabs.com/favicon.png",
+  "description": "OnyxStack Labs engineers elite web architectures, cloud-native infrastructure platforms, and context-aware artificial intelligence automation pipelines.",
+  "sameAs": [
+    "https://github.com/onyxstacklabs"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "category": "Enterprise Software & AI Automation Development"
+  }
+};
+
 export default function Hero() {
-  const featurePills = [
-    {
-      label: "Custom Software",
-      icon: (
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
-        </svg>
-      )
-    },
-    {
-      label: "AI Automation",
-      icon: (
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
-        </svg>
-      )
-    },
-    {
-      label: "Cloud Infrastructure",
-      icon: (
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.26A8 8 0 1 0 4 15.25" />
-          <path d="M8 19h9.5" />
-        </svg>
-      )
-    },
-    {
-      label: "Enterprise Security",
-      icon: (
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z" />
-          <polyline points="9 12 11 14 15 10" />
-        </svg>
-      )
-    }
-  ];
-
-  const valueStats = [
-    { value: "100%", label: "Custom Architecture" },
-    { value: "AI READY", label: "Automation Sync" },
-    { value: "24/7", label: "Dedicated Support" },
-    { value: "PREMIUM", label: "Enterprise Quality" }
-  ];
-
-  const jsonLdData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "OnyxStack Labs",
-    "url": "https://onyxstacklabs.com",
-    "logo": "https://onyxstacklabs.com/favicon.png",
-    "description": "OnyxStack Labs engineers elite web architectures, cloud-native infrastructure platforms, and context-aware artificial intelligence automation pipelines.",
-    "sameAs": [
-      "https://github.com/onyxstacklabs"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "category": "Enterprise Software & AI Automation Development"
-    }
-  };
-
   return (
     <section 
       className="relative min-h-screen bg-[#050505] overflow-hidden flex flex-col justify-center items-center z-10 pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 px-4 sm:px-6 lg:px-8"
@@ -71,7 +72,7 @@ export default function Hero() {
       {/* INJECT GEO & LLM SCHEMA */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD_DATA) }}
       />
 
       {/* LIGHTWEIGHT OPTIMIZED BACKGROUND MESH */}
@@ -123,7 +124,7 @@ export default function Hero() {
 
         {/* FEATURE PILLS */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-6 sm:mt-7 px-4 sm:px-0" role="list" aria-label="Core service areas">
-          {featurePills.map((pill, idx) => (
+          {FEATURE_PILLS.map((pill, idx) => (
             <span
               key={idx}
               role="listitem"
@@ -176,12 +177,12 @@ export default function Hero() {
       <div className="relative mt-20 sm:mt-24 lg:mt-28 w-full max-w-6xl mx-auto z-10 px-2 sm:px-4 lg:px-0">
         <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-500 overflow-hidden">
           
-          {/* NON-BLOCKING ASYNCHRONOUS HERO IMAGE */}
+          {/* HIGH-PRIORITY ABOVE-THE-FOLD HERO IMAGE */}
           <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04]">
             <img
               src={heroBanner}
               alt="OnyxStack Labs enterprise software platform"
-              loading="lazy"
+              fetchPriority="high"
               decoding="async"
               width="1280"
               height="720"
@@ -194,7 +195,7 @@ export default function Hero() {
       {/* STATS MODULE */}
       <div className="w-full max-w-5xl mx-auto mt-16 sm:mt-20 lg:mt-24 border-t border-white/[0.06] pt-12 z-10">
         <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 sm:gap-y-12 text-center lg:text-left">
-          {valueStats.map((stat, idx) => (
+          {VALUE_STATS.map((stat, idx) => (
             <div key={idx} className="flex flex-col items-center lg:items-start">
               <dd className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 {stat.value}
