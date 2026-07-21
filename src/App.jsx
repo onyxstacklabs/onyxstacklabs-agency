@@ -5,10 +5,10 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 // LAYOUT SYSTEM IMPORT 
 import MainLayout from './Layouts/MainLayout.jsx';
 
-// DIRECT HOME IMPORT (FOR 0-DELAY INSTANT INITIAL RENDER)
+// DIRECT HOME IMPORT (Is se 1-second ka Lazy Loading Splash Screen delay zero ho jayega)
 import Home from './pages/Home';
 
-// LAZY LOADED SECONDARY PAGES ONLY
+// LAZY LOADED SECONDARY PAGES (In ki waja se initial landing delay nahi aayega)
 const OnyxAdmin = lazy(() => import('./pages/OnyxAdmin'));
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
@@ -26,12 +26,8 @@ const TermsConditions = lazy(() => import('./pages/TermsConditions'));
 const ThankYou = lazy(() => import('./pages/ThankYou'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// FAST FALLBACK LOADER
-const PageLoader = () => (
-  <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-    <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
-  </div>
-);
+// ZERO-DELAY EMPTY FALLBACK (Koi splash logo ya screen delay nahi aayega)
+const InvisibleFallback = () => <div className="min-h-screen bg-[#050505]" />;
 
 export default function App() {
   const navigate = useNavigate();
@@ -47,7 +43,7 @@ export default function App() {
   };
 
   return (
-    <Suspense fallback={<PageLoader />}>
+    <Suspense fallback={<InvisibleFallback />}>
       <Routes>
         <Route 
           path="/onyx-control-tower" 
@@ -63,7 +59,7 @@ export default function App() {
             />
           }
         >
-          {/* HOME PAGE DIRECT RENDER */}
+          {/* HOME PAGE IS RENDERED INSTANTLY WITHOUT SUSPENSE DELAY */}
           <Route 
             index 
             element={<Home currentPath={currentPath} navigateToNode={navigateToNode} />} 
@@ -101,7 +97,6 @@ export default function App() {
             element={<Blog currentPath={currentPath} navigateToNode={navigateToNode} />} 
           />
 
-          {/* FALLBACK ROUTING LAYER */}
           <Route 
             path="/blog/:slug" 
             element={<BlogArticle currentPath={currentPath} navigateToNode={navigateToNode} />} 
