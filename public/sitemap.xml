@@ -3,13 +3,13 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 
 /**
  * OnyxStack Labs - Dynamic Enterprise XML Sitemap Generator Pipeline
- * Automates tracking for multi-million dollar business ecosystems across changing dynamic nodes.
+ * Optimized for Traditional SEO & Generative AI Search Engine Crawlers (GEO / LLMO)
  */
 export async function generateSitemap() {
   const BASE_URL = 'https://onyxstacklabs.com';
   const currentDate = new Date().toISOString().split('T')[0];
 
-  // 1. Immutable Premium Enterprise Core Core Static Routes Definition Matrix
+  // 1. Immutable Premium Enterprise Static Routes Definition Matrix
   const staticRoutes = [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
@@ -22,7 +22,7 @@ export async function generateSitemap() {
     { path: '/terms-conditions', changefreq: 'yearly', priority: '0.3' },
     { path: '/cookie-policy', changefreq: 'yearly', priority: '0.3' },
     { path: '/thankyou', changefreq: 'monthly', priority: '0.5' },
-    { path: '/blog', changefreq: 'daily', priority: '0.8' }
+    { path: '/blog', changefreq: 'daily', priority: '0.9' }
   ];
 
   let xmlUrlNodes = '';
@@ -51,10 +51,17 @@ export async function generateSitemap() {
       
       // Secondary fallback parameter verification layer: timestamp parsing strategy
       let lastModDate = currentDate;
-      if (blogData.updatedAt) {
-        // Adapt format parameter structurally to YYYY-MM-DD template validation requirements
-        const dateObj = blogData.updatedAt.toDate ? blogData.updatedAt.toDate() : new Date(blogData.updatedAt);
-        lastModDate = dateObj.toISOString().split('T')[0];
+      const rawDate = blogData.updatedAt || blogData.createdAt;
+      
+      if (rawDate) {
+        try {
+          const dateObj = rawDate.toDate ? rawDate.toDate() : new Date(rawDate);
+          if (!isNaN(dateObj.getTime())) {
+            lastModDate = dateObj.toISOString().split('T')[0];
+          }
+        } catch (e) {
+          lastModDate = currentDate;
+        }
       }
 
       if (slug) {
@@ -63,7 +70,7 @@ export async function generateSitemap() {
     <loc>${BASE_URL}/blog/${slug}</loc>
     <lastmod>${lastModDate}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>`;
       }
     });
@@ -72,9 +79,11 @@ export async function generateSitemap() {
     // Silent failover implementation matrix: allow standard payload export even if content cluster fails
   }
 
-  // 3. Assemble complete standards-compliant dynamic XML structural map string
+  // 3. Assemble complete standards-compliant dynamic XML structural map string (Extended for AI/GEO schema validation)
   const completeSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrlNodes}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">${xmlUrlNodes}
 </urlset>`;
 
   return completeSitemapXml;
