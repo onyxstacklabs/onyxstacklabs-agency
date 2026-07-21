@@ -5,9 +5,11 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 // LAYOUT SYSTEM IMPORT 
 import MainLayout from './Layouts/MainLayout.jsx';
 
-// LAZY LOADED COMPONENTS (Performance & Speed Boost)
+// DIRECT HOME IMPORT (FOR 0-DELAY INSTANT INITIAL RENDER)
+import Home from './pages/Home';
+
+// LAZY LOADED SECONDARY PAGES ONLY
 const OnyxAdmin = lazy(() => import('./pages/OnyxAdmin'));
-const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
@@ -61,6 +63,7 @@ export default function App() {
             />
           }
         >
+          {/* HOME PAGE DIRECT RENDER */}
           <Route 
             index 
             element={<Home currentPath={currentPath} navigateToNode={navigateToNode} />} 
