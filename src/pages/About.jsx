@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
-// ASSETS IMPORTS
+// ASSETS IMPORTS — EXACT PATHS PRESERVED
 import heroImage from '../assets/images/about/about-hero-enterprise-workspace.webp';
 import companyStoryImage from '../assets/images/about/about-company-story.webp';
 import missionVisionImage from '../assets/images/about/about-mission-vision.webp';
@@ -63,7 +63,7 @@ export default function About({ currentPath, navigateToNode }) {
     <div className="min-h-screen bg-[#050505] text-[#F3F4F6] font-sans antialiased selection:bg-[#06B6D4] selection:text-black scroll-smooth relative overflow-hidden">
 
       {/* BACKGROUND AMBIENT INFRASTRUCTURE NODE */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1000px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.12),transparent_60%)] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1000px] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.14),transparent_60%)] pointer-events-none z-0" />
       <div className="absolute top-[1200px] left-0 w-[500px] h-[500px] bg-[#06B6D4]/[0.02] blur-[150px] pointer-events-none" />
       <div className="absolute top-[2200px] right-0 w-[600px] h-[600px] bg-[#2563EB]/[0.03] blur-[180px] pointer-events-none" />
       <div className="absolute bottom-[1000px] left-0 w-[700px] h-[700px] bg-[#06B6D4]/[0.02] blur-[220px] pointer-events-none" />
@@ -74,14 +74,14 @@ export default function About({ currentPath, navigateToNode }) {
       {/* MAIN TARGET MATRIX CONTROLLER */}
       <div className="relative z-10 distribution-container-layer">
 
-        {/* SECTION 1: HERO CONTAINER */}
+        {/* SECTION 1: HERO CONTAINER — REFINED ENTERPRISE HERO */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24 sm:pt-48 sm:pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
 
             {/* LEFT CONTENT CONTAINER */}
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              <div className="inline-flex self-start items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 text-[#06B6D4] text-[11px] font-mono uppercase tracking-widest mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
+              <div className="inline-flex self-start items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/30 text-[#06B6D4] text-[11px] font-mono uppercase tracking-widest mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-pulse" />
                 Our Agency Profile
               </div>
 
@@ -92,29 +92,42 @@ export default function About({ currentPath, navigateToNode }) {
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl mb-10 font-sans">
+              <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-2xl mb-10 font-sans">
                 OnyxStack Labs is an agile software development company specializing in custom software, high-performance web development, smart AI solutions, and cloud applications. We build digital products that combine intentional design with robust production engineering to help businesses automate operations and scale with confidence.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4 mb-12">
                 <a
                   href="#contact-initiate"
                   onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                  className="relative overflow-hidden bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5"
+                  className="relative overflow-hidden bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   Get In Touch
                 </a>
                 <a
                   href="#narrative"
                   onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="border border-neutral-800 bg-neutral-900/40 text-neutral-300 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5"
+                  className="border border-neutral-800 bg-neutral-900/40 text-neutral-300 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   Our Story
                 </a>
               </div>
+
+              {/* Stack & Capability Highlights */}
+              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-neutral-400 font-mono uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#06B6D4]">✓</span> Production-Grade Code
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#06B6D4]">✓</span> Scalable Architecture
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#06B6D4]">✓</span> End-To-End Support
+                </div>
+              </div>
             </div>
 
-            {/* HERO IMAGE CONTAINER — Design system reference: all other images match this treatment */}
+            {/* HERO IMAGE CONTAINER */}
             <div className="lg:col-span-5 w-full flex justify-center items-center">
               <div className="relative group w-full max-w-[560px] lg:max-w-none">
                 <div className="absolute -inset-2 rounded-2xl bg-gradient-to-tr from-[#06B6D4] to-blue-600 opacity-20 blur-xl group-hover:opacity-40 transition-all duration-700" />
@@ -409,7 +422,7 @@ export default function About({ currentPath, navigateToNode }) {
               <a
                 href="#contact-terminal"
                 onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="inline-block bg-white text-black px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-1 whitespace-nowrap"
+                className="inline-block bg-white text-black px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 Talk to our Team
               </a>
