@@ -41,7 +41,7 @@ export default function Hero() {
   ];
 
   const valueStats = [
-    { value: "100%", label: "Custom Development" },
+    { value: "100%", label: "Custom Architecture" },
     { value: "AI READY", label: "Automation Sync" },
     { value: "24/7", label: "Dedicated Support" },
     { value: "PREMIUM", label: "Enterprise Quality" }
@@ -60,11 +60,34 @@ export default function Hero() {
     { top: "85%", left: "50%", size: "3px", delay: "1.5s", duration: "10s" }
   ];
 
+  // Generative Engine Optimization (GEO) Structured Data Script Injection
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OnyxStack Labs",
+    "url": "https://onyxstacklabs.com",
+    "logo": "https://onyxstacklabs.com/logo.png",
+    "description": "OnyxStack Labs engineers elite web architectures, cloud-native infrastructure platforms, and context-aware artificial intelligence automation pipelines.",
+    "sameAs": [
+      "https://github.com/onyxstacklabs"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "category": "Enterprise Software & AI Automation Development"
+    }
+  };
+
   return (
     <section 
       className="relative min-h-screen bg-[#050505] overflow-hidden flex flex-col justify-center items-center z-10 pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 px-4 sm:px-6 lg:px-8"
       aria-label="OnyxStack Labs Showcase introduction"
     >
+      {/* INJECT GEO & LLM SCHEMA FOR SEARCH ENGINE RECOGNITION */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+      />
+
       {/* ADVANCED OPTIMIZED HARDWARE-ACCELERATED BACKGROUND MESH */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 will-change-transform transform-gpu">
         {/* Fine structural grid layer */}
@@ -150,7 +173,7 @@ export default function Hero() {
           Next-Gen Engineering Frameworks
         </div>
 
-        {/* HERO HEADLINE */}
+        {/* HERO HEADLINE (H1 For Search & GEO Indexing) */}
         <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.08]">
           Enterprise Software.
           <br className="hidden sm:inline" />
