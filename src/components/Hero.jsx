@@ -65,11 +65,6 @@ export default function Hero() {
       className="relative min-h-screen bg-[#050505] overflow-hidden flex flex-col justify-center items-center z-10 pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 px-4 sm:px-6 lg:px-8"
       aria-label="OnyxStack Labs Showcase introduction"
     >
-      {/* PERFORMANCE FIX: Native React Head Injection for Browser Preloading */}
-      <React.Fragment>
-        <link rel="preload" fetchpriority="high" as="image" href={heroBanner} type="image/webp" />
-      </React.Fragment>
-
       {/* ADVANCED OPTIMIZED HARDWARE-ACCELERATED BACKGROUND MESH */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 will-change-transform transform-gpu">
         {/* Fine structural grid layer */}
@@ -108,7 +103,7 @@ export default function Hero() {
             background: "radial-gradient(circle, rgba(147,197,253,0.06) 0%, transparent 70%)"
           }}
         />
-        {/* Directional lighting: blue from right, cyan from below, white highlight above */}
+        {/* Directional lighting */}
         <div
           className="absolute top-0 right-0 w-[500px] h-[700px] opacity-30 blur-[130px]"
           style={{ background: "radial-gradient(circle at 100% 0%, rgba(37,99,213,0.14) 0%, transparent 70%)" }}
@@ -142,17 +137,11 @@ export default function Hero() {
             }}
           />
         ))}
-        <div 
-          className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
-          }}
-        />
       </div>
 
       {/* CORE BRANDING COMPOSITION HEADER */}
       <header className="relative w-full max-w-5xl mx-auto text-center z-10 flex flex-col items-center">
-        {/* ULTRA-PREMIUM CONTEXT BADGE */}
+        {/* CONTEXT BADGE */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-md shadow-[0_1px_2px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] text-[10px] sm:text-[11px] font-medium tracking-[0.2em] text-neutral-300 uppercase transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/[0.04]">
           <span className="relative flex h-2 w-2">
             <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -161,18 +150,18 @@ export default function Hero() {
           Next-Gen Engineering Frameworks
         </div>
 
-        {/* HIGH-HIERARCHY HERO HEADLINE - NOW STRUCTURALLY MAPS AS VALID VISIBLE H1 */}
+        {/* HERO HEADLINE */}
         <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.08]">
           Enterprise Software.
           <br className="hidden sm:inline" />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-cyan-200 to-blue-500 select-none will-change-auto">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-cyan-200 to-blue-500 select-none">
             AI Automation.
           </span>
           <br />
           Scalable Digital Products.
         </h1>
 
-        {/* HIGH-READABILITY INTRODUCTORY PARAGRAPH */}
+        {/* INTRODUCTORY PARAGRAPH */}
         <p className="mt-6 sm:mt-8 max-w-3xl mx-auto text-neutral-400 text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-8 font-light tracking-wide px-2 sm:px-0">
           OnyxStack Labs engineers elite web architectures, cloud-native infrastructure platforms, and context-aware artificial intelligence automation pipelines crafted to scale multi-million dollar business ecosystems.
         </p>
@@ -191,7 +180,7 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* PREMIUM KEYBOARD ACCESSIBLE ACTION BUTTON INTERFACES */}
+        {/* ACTION BUTTON INTERFACES */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
           <a
             href="#contact"
@@ -217,7 +206,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* PREMIUM TRUST INDICATOR */}
+        {/* TRUST INDICATOR */}
         <div className="flex items-center gap-3 mt-8 sm:mt-9 text-[11px] sm:text-xs text-neutral-500 tracking-wide">
           <div className="flex items-center -space-x-2" aria-hidden="true">
             <span className="w-6 h-6 rounded-full border border-[#050505] bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
@@ -237,7 +226,6 @@ export default function Hero() {
 
       {/* BANNER VISUAL CENTERPIECE CONTAINER */}
       <div className="relative mt-20 sm:mt-24 lg:mt-28 w-full max-w-6xl mx-auto z-10 px-2 sm:px-4 lg:px-0">
-        {/* CONNECTION LINES: BADGE / CONTENT -> BANNER */}
         <svg
           className="absolute -top-16 sm:-top-20 left-1/2 -translate-x-1/2 w-[2px] h-16 sm:h-20 pointer-events-none hidden sm:block motion-reduce:hidden"
           aria-hidden="true"
@@ -265,27 +253,25 @@ export default function Hero() {
           }}
         />
 
-        {/* LAYER 2: GLASS BORDER / LAYER 3: DARK FRAME */}
+        {/* LAYER 2 & 3: GLASS FRAME */}
         <div className="relative z-10 rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090909]/60 backdrop-blur-sm p-1.5 sm:p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] transition-all duration-700 hover:border-white/[0.16] hover:shadow-[0_40px_110px_rgba(37,99,213,0.2)] hover:-translate-y-1 motion-reduce:hover:translate-y-0 group overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.015] via-transparent to-white/[0.04] pointer-events-none" />
 
-          {/* LAYER 4: INNER BEVEL */}
+          {/* LAYER 4: OPTIMIZED HERO IMAGE CONTAINER */}
           <div className="relative rounded-[10px] sm:rounded-[20px] overflow-hidden bg-[#050505] border border-white/[0.04] ring-1 ring-inset ring-white/[0.04]">
             <img
               src={heroBanner}
               alt="OnyxStack Labs enterprise software platform showing dashboard, automation, and infrastructure overview"
               loading="eager"
               decoding="async"
-              fetchpriority="high"
+              fetchPriority="high"
               width="1920"
               height="1080"
               className="w-full h-auto object-cover opacity-95 transition-transform duration-700 group-hover:scale-[1.015] filter contrast-[1.02]"
             />
 
-            {/* LAYER 5: TOP HIGHLIGHT REFLECTION */}
+            {/* LAYER 5: REFLECTION & VIGNETTE */}
             <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none" />
-
-            {/* Side vignette for depth */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{ boxShadow: "inset 0 0 90px 20px rgba(0,0,0,0.35)" }}
@@ -293,7 +279,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* LAYER 6: BOTTOM CYAN GROUND REFLECTION */}
+        {/* LAYER 6: BOTTOM REFLECTION */}
         <div
           className="absolute left-1/2 -translate-x-1/2 -bottom-10 sm:-bottom-14 w-[85%] h-16 sm:h-20 rounded-full opacity-40 blur-[50px] pointer-events-none"
           style={{ background: "radial-gradient(ellipse, rgba(6,182,212,0.35) 0%, transparent 75%)" }}
