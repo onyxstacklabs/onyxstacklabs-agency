@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
 
-// ASSETS IMPORTS — EXACT PATHS PRESERVED
+// ASSETS IMPORTS
 import heroImage from '../assets/images/about/about-hero-enterprise-workspace.webp';
 import companyStoryImage from '../assets/images/about/about-company-story.webp';
 import missionVisionImage from '../assets/images/about/about-mission-vision.webp';
@@ -15,6 +15,49 @@ export default function About({ currentPath, navigateToNode }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // 1. DYNAMIC PAGE TITLE & META DESCRIPTION (SEO / GEO Optimization)
+    document.title = "About Us | OnyxStack Labs - Enterprise Software & AI Engineering";
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.name = 'description';
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.content = "Learn about OnyxStack Labs, a premier software engineering agency specializing in custom React development, MERN stack solutions, and enterprise AI integrations.";
+
+    // 2. SCHEMA.ORG JSON-LD STRUCTURED DATA (AI Crawlers & Search Engines)
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "OnyxStack Labs",
+      "description": "Agile software development agency specializing in custom web applications, MERN stack solutions, and AI development.",
+      "url": window.location.href,
+      "logo": window.location.origin + "/logo.png",
+      "knowsAbout": [
+        "Software Engineering",
+        "React Development",
+        "MERN Stack Solutions",
+        "Artificial Intelligence Integration",
+        "Cloud Applications",
+        "Tailwind CSS",
+        "Web Systems Architecture"
+      ],
+      "areaServed": "Global"
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'onyxstack-about-geo-schema';
+    script.innerHTML = JSON.stringify(schemaData);
+    document.head.appendChild(script);
+
+    // CLEANUP ON UNMOUNT
+    return () => {
+      const existingScript = document.getElementById('onyxstack-about-geo-schema');
+      if (existingScript) existingScript.remove();
+    };
   }, []);
 
   const coreValues = [
@@ -35,7 +78,6 @@ export default function About({ currentPath, navigateToNode }) {
     { title: "Long-Term Partnerships", desc: "We support your platform long after launch with dedicated systems optimization, proactive monitoring, and iterative feature development." }
   ];
 
-  // Stack glow colors normalized to the locked brand palette (cyan / blue only)
   const stackItems = [
     { name: "React", category: "Frontend Engine", glow: "group-hover:border-cyan-500/40 group-hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]" },
     { name: "Vite", category: "Build Systems", glow: "group-hover:border-blue-500/40 group-hover:shadow-[0_0_25px_rgba(37,99,235,0.15)]" },
@@ -74,8 +116,8 @@ export default function About({ currentPath, navigateToNode }) {
       {/* MAIN TARGET MATRIX CONTROLLER */}
       <div className="relative z-10 distribution-container-layer">
 
-        {/* SECTION 1: HERO CONTAINER — REFINED ENTERPRISE HERO */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24 sm:pt-48 sm:pb-32">
+        {/* SECTION 1: HERO CONTAINER */}
+        <header className="max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24 sm:pt-48 sm:pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
 
             {/* LEFT CONTENT CONTAINER */}
@@ -100,14 +142,14 @@ export default function About({ currentPath, navigateToNode }) {
                 <a
                   href="#contact-initiate"
                   onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                  className="relative overflow-hidden bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="relative overflow-hidden bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4]"
                 >
                   Get In Touch
                 </a>
                 <a
                   href="#narrative"
                   onClick={(e) => { e.preventDefault(); document.getElementById('company-narrative')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="border border-neutral-800 bg-neutral-900/40 text-neutral-300 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="border border-neutral-800 bg-neutral-900/40 text-neutral-300 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:text-white hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4]"
                 >
                   Our Story
                 </a>
@@ -136,7 +178,7 @@ export default function About({ currentPath, navigateToNode }) {
                   <div className="w-full overflow-hidden rounded-xl bg-neutral-900/50 flex items-center justify-center">
                     <img
                       src={heroImage}
-                      alt="OnyxStack Labs Enterprise Workspace"
+                      alt="OnyxStack Labs enterprise software engineering workspace and team setup"
                       className="w-full h-auto max-h-[480px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.025] group-hover:-translate-y-1"
                       loading="eager"
                       decoding="async"
@@ -148,7 +190,7 @@ export default function About({ currentPath, navigateToNode }) {
             </div>
 
           </div>
-        </section>
+        </header>
 
         {/* SECTION 2: COMPANY STORY */}
         <section id="company-narrative" className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/60 scroll-mt-24">
@@ -163,7 +205,7 @@ export default function About({ currentPath, navigateToNode }) {
                   <div className="w-full overflow-hidden rounded-xl bg-neutral-900/30 flex items-center justify-center">
                     <img
                       src={companyStoryImage}
-                      alt="The OnyxStack Labs Story"
+                      alt="The OnyxStack Labs story and agency foundation"
                       className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.025] group-hover:-translate-y-1"
                       loading="lazy"
                       decoding="async"
@@ -238,7 +280,7 @@ export default function About({ currentPath, navigateToNode }) {
                   <div className="w-full h-full overflow-hidden rounded-xl bg-neutral-900/30 flex items-center justify-center">
                     <img
                       src={missionVisionImage}
-                      alt="Our Mission and Vision Support Visual"
+                      alt="OnyxStack Labs mission and vision roadmap"
                       className="w-full h-auto max-h-[380px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.025] group-hover:-translate-y-1"
                       loading="lazy"
                       decoding="async"
@@ -287,7 +329,7 @@ export default function About({ currentPath, navigateToNode }) {
                   <div className="w-full h-full overflow-hidden rounded-xl bg-neutral-900/30 flex items-center justify-center">
                     <img
                       src={coreValuesImage}
-                      alt="OnyxStack Labs Core Values"
+                      alt="OnyxStack Labs core engineering values"
                       className="w-full h-auto max-h-[460px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.025] group-hover:-translate-y-1"
                       loading="lazy"
                       decoding="async"
@@ -354,7 +396,7 @@ export default function About({ currentPath, navigateToNode }) {
                   <div className="w-full h-full overflow-hidden rounded-xl bg-neutral-900/30 flex items-center justify-center">
                     <img
                       src={technologyStackImage}
-                      alt="OnyxStack Labs Engineering Workspace"
+                      alt="OnyxStack Labs modern technology stack ecosystem"
                       className="w-full h-auto max-h-[460px] object-contain mx-auto transform transition-transform duration-1000 ease-out group-hover:scale-[1.025] group-hover:-translate-y-1"
                       loading="lazy"
                       decoding="async"
@@ -397,7 +439,7 @@ export default function About({ currentPath, navigateToNode }) {
             <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
               <img
                 src={finalCtaImage}
-                alt="Engineering Background"
+                alt="OnyxStack Labs engineering contact section background"
                 className="w-full h-full object-cover opacity-20 mix-blend-luminosity transform scale-100 group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
                 loading="lazy"
                 decoding="async"
@@ -422,7 +464,7 @@ export default function About({ currentPath, navigateToNode }) {
               <a
                 href="#contact-terminal"
                 onClick={(e) => { e.preventDefault(); navigateToNode('/'); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 150); }}
-                className="inline-block bg-white text-black px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                className="inline-block bg-white text-black px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#06B6D4] hover:text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4]"
               >
                 Talk to our Team
               </a>
