@@ -1,9 +1,31 @@
+# Universal Crawler Guidelines
 User-agent: *
 Allow: /
-
 Disallow: /api/
 Disallow: /admin/
 Disallow: /*.json$
 Disallow: /cgi-bin/
 
+# Explicitly Allow Major Generative AI & Search Engine Bots (GEO / LLMO)
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: AnthropicAI
+Allow: /
+
+# XML Sitemap Index
 Sitemap: https://onyxstacklabs.com/sitemap.xml
