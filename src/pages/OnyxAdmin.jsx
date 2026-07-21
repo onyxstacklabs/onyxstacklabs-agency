@@ -17,7 +17,7 @@ export default function OnyxAdmin() {
   // Recruitment Pipeline Core State Matrix
   const [candidates, setCandidates] = useState([]);
   const [candidatesLoading, setCandidatesLoading] = useState(true);
-  const [activeCandidateTab, setActiveCandidateTab] = useState('pending'); // Upgraded: 'pending', 'shortlisted', 'archived'
+  const [activeCandidateTab, setActiveCandidateTab] = useState('pending'); // 'pending', 'shortlisted', 'archived'
   
   // Blog Filter/Sort/Search Pipeline State
   const [blogSearch, setBlogSearch] = useState('');
@@ -60,7 +60,7 @@ export default function OnyxAdmin() {
   }, [blogForm.title, isEditing]);
 
   useEffect(() => {
-    const words = blogForm.content.trim().split(/\s+/).length;
+    const words = blogForm.content.trim() ? blogForm.content.trim().split(/\s+/).length : 0;
     const minutes = Math.max(1, Math.ceil(words / 225));
     setBlogForm(prev => ({ ...prev, readTime: `${minutes} min read` }));
   }, [blogForm.content]);
@@ -68,7 +68,7 @@ export default function OnyxAdmin() {
   // Simple Secure Entry Gate for OnyxStack Labs Admin Control
   const handleAdminAuth = (e) => {
     e.preventDefault();
-    if (passkey === 'OnyxAdmin2026!') {
+    if (passkey.trim() === 'OnyxAdmin2026!') {
       setIsAuthenticated(true);
     } else {
       alert('Access Denied: Invalid Security Node Token.');
@@ -80,7 +80,6 @@ export default function OnyxAdmin() {
     if (!isAuthenticated) return;
 
     const leadsRef = collection(db, 'agency_leads');
-    // Client-side execution friendly structuring to prevent index requirements
     const q = query(leadsRef);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -89,7 +88,6 @@ export default function OnyxAdmin() {
         ...doc.data()
       }));
 
-      // High-performance client-side chronological sort mapping
       fetchedLeads.sort((a, b) => {
         const timeA = a.timestamp?.seconds || 0;
         const timeB = b.timestamp?.seconds || 0;
@@ -119,7 +117,6 @@ export default function OnyxAdmin() {
         ...doc.data()
       }));
 
-      // Handled filtering & ordering inside JavaScript memory model safely
       fetchedBlogs.sort((a, b) => {
         const timeA = a.createdAt?.seconds || 0;
         const timeB = b.createdAt?.seconds || 0;
@@ -136,14 +133,12 @@ export default function OnyxAdmin() {
     return () => unsubscribe();
   }, [isAuthenticated]);
 
-  // UPGRADED & INDEX-FREE: Real-time listener for incoming recruitment submissions with dynamic status filters
+  // Real-time listener for incoming recruitment submissions
   useEffect(() => {
     if (!isAuthenticated) return;
     setCandidatesLoading(true);
 
     const recruitmentRef = collection(db, 'recruitment_pipeline');
-    
-    // Clean Pipeline Query targeting specific active tabs logic mapping without composite indexing demands
     const q = query(
       recruitmentRef, 
       where('status', '==', activeCandidateTab)
@@ -155,7 +150,6 @@ export default function OnyxAdmin() {
         ...doc.data()
       }));
 
-      // Client-side sort pipeline to secure fast-rendering and zero Firestore failures
       fetchedCandidates.sort((a, b) => {
         const timeA = a.submittedAt?.seconds || 0;
         const timeB = b.submittedAt?.seconds || 0;
@@ -176,30 +170,25 @@ export default function OnyxAdmin() {
   const updateLeadStatus = async (leadId, newStatus) => {
     try {
       const leadDocRef = doc(db, 'agency_leads', leadId);
-      await updateDoc(leadDocRef, {
-        status: newStatus
-      });
-      alert(`Lead state successfully mutated to: ${newStatus}`);
+      await updateDoc(leadDocRef, { status: newStatus });
     } catch (error) {
       console.error("Error updating lead status: ", error);
       alert("Failed to update status node.");
     }
   };
 
-  // Upgraded: Core Mutation Logic for candidate workflows
+  // Core Mutation Logic for candidate workflows
   const updateCandidateStatus = async (candidateId, newStatus) => {
     try {
       const candidateDocRef = doc(db, 'recruitment_pipeline', candidateId);
-      await updateDoc(candidateDocRef, {
-        status: newStatus
-      });
+      await updateDoc(candidateDocRef, { status: newStatus });
     } catch (error) {
       console.error("Error mutating candidate pipeline state: ", error);
       alert("Failed to update candidate workflow node.");
     }
   };
 
-  // Helper to safely open communication channel with dynamic templates
+  // WhatsApp communication helper
   const triggerWhatsAppCommunication = (phone, companyName) => {
     const cleanPhone = phone.replace(/[^\d+]/g, ''); 
     const message = `Hello ${companyName},\n\nThis is OnyxStack Labs. We have successfully verified your parameters and initiated your active engineering funnel.\n\nLet us schedule a quick technical discovery call. Please let us know your availability.`;
@@ -207,7 +196,7 @@ export default function OnyxAdmin() {
     window.open(`https://wa.me/${cleanPhone}?text=${encodedMessage}`, '_blank');
   };
 
-  // Upgraded: Trigger pre-formatted email workflows 
+  // Email communication helper
   const triggerEmailCommunication = (email, name, role) => {
     const subject = encodeURIComponent(`[OnyxStack Labs] Application Update - ${role}`);
     const body = encodeURIComponent(`Hello ${name},\n\nThank you for applying for the ${role} position at OnyxStack Labs.\n\nWe have reviewed your profile and would like to move forward to discuss your technical parameters.\n\nBest Regards,\nOnyxStack Labs Management`);
@@ -244,12 +233,18 @@ export default function OnyxAdmin() {
     });
   };
 
-  const handleSaveBlog = async (e) => {
-    e.preventDefault();
+  // Clean Direct Save Function (No DOM Hacks)
+  const handleSaveBlog = async (e, forcePublished = null) => {
+    if (e) e.preventDefault();
     try {
-      const processedTags = blogForm.tags.split(',').map(t => t.trim()).filter(t => t.length > 0);
+      const isPublishedState = forcePublished !== null ? forcePublished : blogForm.published;
+      const processedTags = typeof blogForm.tags === 'string' 
+        ? blogForm.tags.split(',').map(t => t.trim()).filter(Boolean) 
+        : blogForm.tags;
+
       const blogPayload = {
         ...blogForm,
+        published: isPublishedState,
         tags: processedTags,
         updatedAt: serverTimestamp()
       };
@@ -308,13 +303,13 @@ export default function OnyxAdmin() {
     }
   };
 
-  // Metrics Dashboard Calculation
+  // Metrics Calculations
   const totalBlogsCount = blogs.length;
   const publishedBlogsCount = blogs.filter(b => b.published).length;
   const draftBlogsCount = blogs.filter(b => !b.published).length;
   const featuredBlogsCount = blogs.filter(b => b.featured).length;
 
-  // Pipeline Filter Processing Functionality
+  // Pipeline Filter Processing
   const filteredBlogs = blogs.filter(blog => {
     const matchesSearch = blog.title?.toLowerCase().includes(blogSearch.toLowerCase()) || 
                           blog.summary?.toLowerCase().includes(blogSearch.toLowerCase());
@@ -326,7 +321,7 @@ export default function OnyxAdmin() {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  // Sorting Pipeline Node
+  // Sorting
   const sortedBlogs = [...filteredBlogs].sort((a, b) => {
     if (blogSortOrder === 'newest') return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
     if (blogSortOrder === 'oldest') return (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0);
@@ -334,7 +329,7 @@ export default function OnyxAdmin() {
     return 0;
   });
 
-  // Pagination Compute Node
+  // Pagination
   const indexOfLastBlog = blogPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentPaginatedBlogs = sortedBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
@@ -374,7 +369,7 @@ export default function OnyxAdmin() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-slate-100 font-sans flex flex-col md:flex-row">
       
-      {/* SIDEBAR NAVIGATION MATRIX CONTROLLER */}
+      {/* SIDEBAR NAVIGATION */}
       <aside className="w-full md:w-64 bg-[#0d0d0d] border-b md:border-b-0 md:border-r border-slate-900 p-6 flex flex-col justify-between shrink-0">
         <div>
           <div className="flex items-center gap-2 mb-8">
@@ -433,7 +428,7 @@ export default function OnyxAdmin() {
         </div>
       </aside>
 
-      {/* MAIN SYSTEM WORKSPACE CONTENT COMPONENT */}
+      {/* MAIN WORKSPACE */}
       <div className="flex-1 p-4 sm:p-8 overflow-y-auto">
         <header className="max-w-7xl mx-auto mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-900 pb-6">
           <div>
@@ -460,7 +455,7 @@ export default function OnyxAdmin() {
 
         <main className="max-w-7xl mx-auto">
           
-          {/* TAB AREA 1: ORIGINAL LEAD MANAGEMENT CHANNEL MATRIX */}
+          {/* TAB 1: LEAD MANAGEMENT */}
           {currentTab === 'leads' && (
             <>
               {loading ? (
@@ -554,11 +549,11 @@ export default function OnyxAdmin() {
             </>
           )}
 
-          {/* TAB AREA 2: ENTERPRISE CMS COMPONENT SYSTEM */}
+          {/* TAB 2: BLOG MANAGEMENT */}
           {currentTab === 'blog' && (
             <div className="space-y-10">
               
-              {/* MODULE 1: ANALYTICAL METRICS CONTROL CONSOLE PANEL */}
+              {/* ANALYTICS PANEL */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-[#121212] border border-slate-900 rounded-xl p-5 shadow-sm">
                   <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Total Blogs</div>
@@ -578,7 +573,7 @@ export default function OnyxAdmin() {
                 </div>
               </div>
 
-              {/* MODULE 2: DOCUMENT GENERATION AND COMPILATION PIPELINE WRITER */}
+              {/* BLOG EDITOR */}
               <div className="bg-[#121212] border border-slate-900 rounded-2xl p-6 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-6 border-b border-slate-900 pb-4">
                   <div className="flex items-center gap-2">
@@ -599,7 +594,6 @@ export default function OnyxAdmin() {
                 </div>
 
                 {previewMode ? (
-                  /* REUSABLE EMBEDDED CONTENT PREVIEW MATRIX EYE SCREEN */
                   <div className="space-y-6 bg-[#0a0a0a] border border-slate-800 rounded-xl p-6 max-w-4xl mx-auto">
                     <div className="flex justify-between items-center border-b border-slate-900 pb-4">
                       <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Virtual DOM Preview Node</span>
@@ -612,8 +606,17 @@ export default function OnyxAdmin() {
                       </button>
                     </div>
 
-                    {blogForm.coverImage && (
-                      <img src={blogForm.coverImage} alt="Cover Preview" className="w-full h-64 object-cover rounded-xl border border-slate-800" />
+                    {blogForm.coverImage ? (
+                      <img 
+                        src={blogForm.coverImage} 
+                        alt="Cover Preview" 
+                        className="w-full h-64 object-cover rounded-xl border border-slate-800"
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                    ) : (
+                      <div className="w-full h-32 bg-[#1a1a1a] rounded-xl border border-dashed border-slate-800 flex items-center justify-center text-xs font-mono text-slate-600">
+                        No Cover Image Attached
+                      </div>
                     )}
 
                     <div className="space-y-2">
@@ -640,7 +643,7 @@ export default function OnyxAdmin() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSaveBlog} className="space-y-6">
+                  <form onSubmit={(e) => handleSaveBlog(e)} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       
                       {/* Left Core Parameter Stack */}
@@ -699,7 +702,6 @@ export default function OnyxAdmin() {
                           />
                         </div>
 
-                        {/* Rich Text Writing Module */}
                         <div>
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                             <label className="block text-xs uppercase tracking-widest text-slate-400">Rich Text Content Core Payload Block</label>
@@ -840,16 +842,12 @@ export default function OnyxAdmin() {
                       <div className="flex gap-2">
                         <button
                           type="button"
-                          onClick={() => {
-                            setBlogForm(prev => ({ ...prev, published: false }));
-                            setTimeout(() => { document.getElementById('cms-commit-anchor')?.click(); }, 50);
-                          }}
+                          onClick={() => handleSaveBlog(null, false)}
                           className="px-4 py-2 bg-slate-800 text-slate-200 hover:bg-slate-700 rounded-lg text-xs font-mono tracking-wider transition-all"
                         >
                           Draft State Caching
                         </button>
                         <button
-                          id="cms-commit-anchor"
                           type="submit"
                           className="px-5 py-2 bg-gradient-to-r from-[#00f2fe] to-[#0575e6] text-black font-bold uppercase text-xs tracking-widest rounded-lg transition-all shadow-md shadow-[#00f2fe]/10"
                         >
@@ -861,7 +859,7 @@ export default function OnyxAdmin() {
                 )}
               </div>
 
-              {/* MODULE 3: EXTENSIBLE CONTENT CATALOG MATRIX TABLE LIST */}
+              {/* BLOG TABLE REGISTRY */}
               <div className="bg-[#121212] border border-slate-900 rounded-2xl p-6">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6 border-b border-slate-900 pb-4">
                   <div className="flex items-center gap-2">
@@ -869,7 +867,6 @@ export default function OnyxAdmin() {
                     <h3 className="text-base font-bold uppercase tracking-wider text-slate-200">System Document Registry</h3>
                   </div>
 
-                  {/* Operational Sorting/Filtering Tools Terminal Dashboard */}
                   <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
                     <input
                       type="text"
@@ -985,7 +982,6 @@ export default function OnyxAdmin() {
                       </div>
                     ))}
 
-                    {/* Pagination Router Controller Node */}
                     <div className="flex items-center justify-between pt-4 font-mono text-xs text-slate-500">
                       <div>
                         Page {blogPage} of {totalPages} ({sortedBlogs.length} target records matched)
@@ -1015,11 +1011,10 @@ export default function OnyxAdmin() {
             </div>
           )}
 
-          {/* TAB AREA 3: RECRUITMENT PIPELINE TRACKER MODULE */}
+          {/* TAB 3: RECRUITMENT PIPELINE */}
           {currentTab === 'recruitment' && (
             <div className="space-y-6">
               
-              {/* Upgraded: Recruitment Functional Sub-Tabs Nav Panel */}
               <div className="flex gap-2 border-b border-slate-900 pb-3">
                 {['pending', 'shortlisted', 'archived'].map((tab) => (
                   <button
@@ -1059,7 +1054,6 @@ export default function OnyxAdmin() {
                           <div>
                             <div className="flex items-center gap-2">
                               <h3 className="text-lg font-bold text-white tracking-wide">{candidate.name || 'Anonymous Applicant'}</h3>
-                              {/* Quick State Actions (Tick / Cross) inside Card Head */}
                               <div className="flex gap-1 ml-2">
                                 <button
                                   onClick={() => updateCandidateStatus(candidate.id, 'shortlisted')}
@@ -1110,7 +1104,6 @@ export default function OnyxAdmin() {
                         </div>
                       </div>
 
-                      {/* Communications Array Panel Loop (WhatsApp + Email Matrix) */}
                       <div className="flex justify-end gap-2 border-t border-slate-900 pt-4 mt-2">
                         <button
                           onClick={() => triggerEmailCommunication(candidate.email, candidate.name, candidate.role || 'Developer')}
