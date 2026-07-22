@@ -316,7 +316,7 @@ export default function Clients() {
         {/* SECTION HEADER */}
         <div className="flex flex-col items-center text-center space-y-6 mb-20 max-w-3xl mx-auto">
           {/* Premium Glass Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#06B6D4] backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:border-[#06B6D4]/30 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all duration-300">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#06B6D4] backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:border-[#06B6D4]/30 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-colors duration-300">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06B6D4] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#06B6D4]"></span>
@@ -353,11 +353,11 @@ export default function Clients() {
                 key={index}
                 role="listitem"
                 tabIndex={0}
-                className="group relative flex flex-col p-8 rounded-2xl bg-[#090909] border border-white/[0.08] transition-all duration-300 ease-out outline-none hover:-translate-y-1.5 hover:border-[#06B6D4]/35 hover:shadow-[0_12px_40px_-12px_rgba(6,182,212,0.12)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:border-[#06B6D4]/50 motion-reduce:hover:translate-y-0"
+                className="group relative flex flex-col p-8 rounded-2xl bg-[#090909] border border-white/[0.08] transition-[transform,border-color,box-shadow] duration-300 ease-out outline-none hover:-translate-y-1.5 hover:border-[#06B6D4]/35 hover:shadow-[0_12px_40px_-12px_rgba(6,182,212,0.12)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:border-[#06B6D4]/50 motion-reduce:hover:translate-y-0"
               >
                 {/* Micro Top Accent Bar */}
                 <div
-                  className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#06B6D4]/50 transition-all duration-500"
+                  className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#06B6D4]/50 transition-colors duration-500"
                   aria-hidden="true"
                 />
 
@@ -368,14 +368,14 @@ export default function Clients() {
                 />
 
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.08] text-[#06B6D4] mb-6 transition-all duration-300 group-hover:bg-[#06B6D4]/10 group-hover:border-[#06B6D4]/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.08] text-[#06B6D4] mb-6 transition-[background-color,border-color,box-shadow] duration-300 group-hover:bg-[#06B6D4]/10 group-hover:border-[#06B6D4]/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]">
                     <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
                   </div>
 
                   <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-1.5">
                     {card.title}
                     <IconArrowUpRight
-                      className="w-4 h-4 text-neutral-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                      className="w-4 h-4 text-neutral-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform] duration-300"
                       aria-hidden="true"
                     />
                   </h3>
@@ -398,7 +398,7 @@ export default function Clients() {
               <div 
                 key={index} 
                 ref={stat.ref} 
-                className="group relative flex flex-col justify-between p-6 rounded-2xl bg-[#090909] border border-white/[0.06] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#06B6D4]/35 hover:shadow-[0_12px_40px_-12px_rgba(6,182,212,0.12)]"
+                className="group relative flex flex-col justify-between p-6 rounded-2xl bg-[#090909] border border-white/[0.06] transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1.5 hover:border-[#06B6D4]/35 hover:shadow-[0_12px_40px_-12px_rgba(6,182,212,0.12)]"
               >
                 {/* Subtle Inner Gradient Finish */}
                 <div 
@@ -417,7 +417,7 @@ export default function Clients() {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4]">
                       {stat.label}
                     </span>
-                    <div className="text-neutral-500 transition-all duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">
+                    <div className="text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">
                       <IconComponent className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
                     </div>
                   </div>
@@ -453,7 +453,7 @@ export default function Clients() {
                   key={index}
                   role="listitem"
                   tabIndex={0}
-                  className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-semibold text-neutral-400 bg-[#090909] border border-white/[0.06] backdrop-blur-md transition-all duration-300 outline-none hover:text-white hover:border-[#06B6D4]/35 hover:scale-[1.04] hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] cursor-default"
+                  className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-semibold text-neutral-400 bg-[#090909] border border-white/[0.06] backdrop-blur-md transition-[color,border-color,box-shadow,transform] duration-300 outline-none hover:text-white hover:border-[#06B6D4]/35 hover:scale-[1.04] hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] focus-visible:ring-2 focus-visible:ring-[#06B6D4] cursor-default"
                 >
                   <TechIcon className="w-4 h-4 text-neutral-500 transition-colors duration-300 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_5px_rgba(6,182,212,0.5)]" />
                   <span className="tracking-wide">{tech.name}</span>
