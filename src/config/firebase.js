@@ -1,6 +1,8 @@
 // src/config/firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 // OnyxStack Labs Web Production Environment Matrix
 const firebaseConfig = {
@@ -12,11 +14,14 @@ const firebaseConfig = {
   appId: "1:825221965531:web:ae6684052f998f8c9d8efe"
 };
 
-// Initialize Cloud Core Instance
+// Initialize Firebase App
 const app = initializeApp(firebaseConfig);
 
-// Initialize Relational Document Layer
+// Firestore Database
 export const db = getFirestore(app);
+
+// Firebase Authentication
+export const auth = getAuth(app);
 
 /**
  * Universal Lead Pipeline Push Function
@@ -25,17 +30,27 @@ export const db = getFirestore(app);
 export const transmitLeadToFirebase = async (data) => {
   try {
     const leadRef = collection(db, "agency_leads");
+
     const payload = {
       ...data,
       status: "pending_verification",
       timestamp: serverTimestamp()
     };
-    
+
     const docRef = await addDoc(leadRef, payload);
+
     console.log("Firebase Node Sync Successful. Transmitted ID:", docRef.id);
-    return { success: true, nodeRef: docRef.id };
+
+    return {
+      success: true,
+      nodeRef: docRef.id
+    };
   } catch (error) {
     console.error("Firebase Critical Database Error:", error);
-    return { success: false, error: error.message };
+
+    return {
+      success: false,
+      error: error.message
+    };
   }
 };
