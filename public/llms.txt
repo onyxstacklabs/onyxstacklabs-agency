@@ -17,6 +17,12 @@ OnyxStack Labs engineers high-end custom software, web and Android applications,
 - [Careers](https://onyxstacklabs.com/careers): Open engineering roles at OnyxStack Labs.
 - [Contact](https://onyxstacklabs.com/contact): How to get in touch with OnyxStack Labs to start a project.
 
+## Legal
+
+- [Privacy Policy](https://onyxstacklabs.com/privacy-policy): Our data privacy practices.
+- [Terms & Conditions](https://onyxstacklabs.com/terms-conditions): Terms of service for using OnyxStack Labs services.
+- [Cookies Policy](https://onyxstacklabs.com/cookies-policy): Our use of cookies on this website.
+
 ## Contact
 
 - Email: onyxstacklabs@gmail.com
