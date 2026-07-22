@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 // Exact relative trajectory mapping targeting the real firebase module location
-import { db } from '../config/firebase'; 
+import { db, auth } from '../config/firebase'; 
 import { collection, query, onSnapshot, doc, updateDoc, addDoc, deleteDoc, serverTimestamp, where } from 'firebase/firestore';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 export default function OnyxAdmin() {
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [passkey, setPasskey] = useState('');
+
+  // Firebase Authentication Session State Matrix
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [authSubmitting, setAuthSubmitting] = useState(false);
+
+  // Derived authentication flag — kept so all existing gated effects below
+  // (leads / blogs / recruitment listeners) continue to work unchanged.
+  const isAuthenticated = !!user;
 
   // Enterprise Blog CMS State Matrix
   const [currentTab, setCurrentTab] = useState('leads'); // 'leads', 'blog', or 'recruitment'
@@ -65,13 +76,38 @@ export default function OnyxAdmin() {
     setBlogForm(prev => ({ ...prev, readTime: `${minutes} min read` }));
   }, [blogForm.content]);
 
-  // Simple Secure Entry Gate for OnyxStack Labs Admin Control
-  const handleAdminAuth = (e) => {
+  // Firebase Authentication Session Listener — persists login across refreshes
+  // (Firebase Auth defaults to local persistence, so no extra storage logic is needed)
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Secure Firebase Authentication Login Handler
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (passkey.trim() === 'OnyxAdmin2026!') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Access Denied: Invalid Security Node Token.');
+    setAuthError('');
+    setAuthSubmitting(true);
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail.trim(), loginPassword);
+      setLoginPassword('');
+    } catch (error) {
+      console.error("Firebase authentication error: ", error);
+      setAuthError('Access Denied: Invalid credentials or account not authorized.');
+    } finally {
+      setAuthSubmitting(false);
+    }
+  };
+
+  // Secure Logout Handler — clears session and returns user to Login Screen
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out: ", error);
     }
   };
 
@@ -335,6 +371,18 @@ export default function OnyxAdmin() {
   const currentPaginatedBlogs = sortedBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
   const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage) || 1;
 
+  // Initial auth-state check in progress — prevents a flash of the login screen
+  // before Firebase has confirmed whether a session already exists.
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#0d0d0d] flex flex-col justify-center items-center px-4 font-sans text-white">
+        <div className="text-xs font-mono text-slate-500 uppercase tracking-widest animate-pulse">
+          Verifying secure session...
+        </div>
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#0d0d0d] flex flex-col justify-center items-center px-4 font-sans text-white">
@@ -343,22 +391,44 @@ export default function OnyxAdmin() {
             <div className="w-3 h-3 rounded-full bg-[#00f2fe] animate-pulse"></div>
             <h2 className="text-xl font-bold tracking-wider uppercase text-slate-200">OnyxStack Control Tower</h2>
           </div>
-          <form onSubmit={handleAdminAuth} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs uppercase tracking-widest text-slate-400 mb-2">Security Passkey</label>
+              <label className="block text-xs uppercase tracking-widest text-slate-400 mb-2">Admin Email</label>
+              <input
+                type="email"
+                required
+                autoComplete="username"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                placeholder="admin@onyxstacklabs.com"
+                className="w-full bg-[#1a1a1a] border border-slate-800 focus:border-[#00f2fe] rounded-lg px-4 py-3 text-white placeholder-slate-600 outline-none transition-all duration-300"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-slate-400 mb-2">Password</label>
               <input
                 type="password"
-                value={passkey}
-                onChange={(e) => setPasskey(e.target.value)}
+                required
+                autoComplete="current-password"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
                 placeholder="Enter system access token..."
                 className="w-full bg-[#1a1a1a] border border-slate-800 focus:border-[#00f2fe] rounded-lg px-4 py-3 text-white placeholder-slate-600 outline-none transition-all duration-300"
               />
             </div>
+
+            {authError && (
+              <div className="text-xs font-mono text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                {authError}
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-[#00f2fe] to-[#0575e6] hover:opacity-90 text-black font-semibold uppercase tracking-wider py-3 rounded-lg transition-all duration-300 shadow-lg shadow-[#00f2fe]/10"
+              disabled={authSubmitting}
+              className="w-full bg-gradient-to-r from-[#00f2fe] to-[#0575e6] hover:opacity-90 disabled:opacity-50 text-black font-semibold uppercase tracking-wider py-3 rounded-lg transition-all duration-300 shadow-lg shadow-[#00f2fe]/10"
             >
-              Initialize Console
+              {authSubmitting ? 'Verifying...' : 'Initialize Console'}
             </button>
           </form>
         </div>
@@ -422,9 +492,21 @@ export default function OnyxAdmin() {
           </nav>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-slate-900 text-[10px] font-mono text-slate-500">
-          Operational Anchor v2.2.0<br/>
-          Secure Environment Protected
+        <div className="mt-8 pt-4 border-t border-slate-900 space-y-4">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs uppercase tracking-widest font-mono rounded-lg border border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-200"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Logout
+          </button>
+          <div className="text-[10px] font-mono text-slate-500 text-center">
+            {user?.email && <span className="block truncate mb-1 text-slate-400">{user.email}</span>}
+            Operational Anchor v2.2.0<br/>
+            Secure Environment Protected
+          </div>
         </div>
       </aside>
 
