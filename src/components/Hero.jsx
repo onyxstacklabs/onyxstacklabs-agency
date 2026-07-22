@@ -184,8 +184,8 @@ export default function Hero() {
               alt="OnyxStack Labs enterprise software platform"
               fetchPriority="high"
               decoding="async"
-              width="1280"
-              height="720"
+              width="1200"
+              height="800"
               className="w-full h-auto object-cover opacity-95 filter contrast-[1.02]"
             />
           </div>
