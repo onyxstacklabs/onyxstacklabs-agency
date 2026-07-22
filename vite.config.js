@@ -32,14 +32,31 @@ export default defineConfig({
     sourcemap: false, 
     terserOptions: {
       compress: {
-        drop_console: true,
+        drop_console: true, // Drops console messages to reduce core JavaScript payload size
         drop_debugger: true
       }
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom']
+        // Splits vendor code by usage pattern instead of one large shared chunk,
+        // so routes only download the libraries they actually need and browsers
+        // can cache stable vendor code independently from app code.
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-router-dom') || id.includes('/react/') || id.includes('/react-dom/')) {
+              return 'react-vendor';
+            }
+            if (id.includes('framer-motion')) {
+              return 'motion-vendor';
+            }
+            if (id.includes('firebase')) {
+              return 'firebase-vendor';
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons-vendor';
+            }
+            return 'vendor';
+          }
         }
       }
     }
