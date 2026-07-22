@@ -1,0 +1,23 @@
+# OnyxStack Labs
+
+> OnyxStack Labs is an enterprise software, AI automation, and cloud development agency. We build custom software, web and Android applications, ERP systems, AI-driven automation, and scalable cloud infrastructure for startups and enterprises.
+
+OnyxStack Labs engineers high-end custom software, web and Android applications, ERP systems, AI automation, and cloud infrastructure for growing businesses and enterprises. Our core services include custom software development, web application development, Android app development, AI solutions and automation, ERP systems development, business process automation, Firebase infrastructure development, and React fullstack development.
+
+## Pages
+
+- [Home](https://onyxstacklabs.com/): Overview of OnyxStack Labs and our engineering capabilities.
+- [About](https://onyxstacklabs.com/about): Information about OnyxStack Labs as a company.
+- [Services](https://onyxstacklabs.com/services): Our software development, AI automation, and cloud infrastructure service offerings.
+- [Portfolio](https://onyxstacklabs.com/portfolio): Case studies and live production projects delivered by OnyxStack Labs.
+- [Industries](https://onyxstacklabs.com/industries): Industry verticals and domain-specific engineering solutions we serve.
+- [Projects](https://onyxstacklabs.com/projects): Enterprise initiatives and systems we have built.
+- [Pricing](https://onyxstacklabs.com/pricing): Pricing tiers for our services.
+- [Blog](https://onyxstacklabs.com/blog): Technical insights and engineering articles from OnyxStack Labs.
+- [Careers](https://onyxstacklabs.com/careers): Open engineering roles at OnyxStack Labs.
+- [Contact](https://onyxstacklabs.com/contact): How to get in touch with OnyxStack Labs to start a project.
+
+## Contact
+
+- Email: onyxstacklabs@gmail.com
+- Website: https://onyxstacklabs.com/
