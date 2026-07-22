@@ -9,12 +9,13 @@ function asyncCssPlugin() {
     name: 'async-css-plugin',
     transformIndexHtml(html) {
       return html.replace(
-        /<link rel="stylesheet" crossorigin(?:\s+([^>]*))?\s+href="([^"]+\.css)">/g,
-        (match, extraAttrs, href) => {
-          const attrs = extraAttrs ? ` ${extraAttrs}` : '';
+        /<link rel="stylesheet"([^>]*?)\s+href="([^"]+\.css)"([^>]*)>/g,
+        (match, before, href, after) => {
+          const extra = `${before || ''}${after || ''}`.trim();
+          const attrs = extra ? ` ${extra}` : '';
           return (
-            `<link rel="preload" as="style" crossorigin${attrs} href="${href}" onload="this.onload=null;this.rel='stylesheet'">` +
-            `<noscript><link rel="stylesheet" crossorigin href="${href}"></noscript>`
+            `<link rel="preload" as="style"${attrs} href="${href}" onload="this.onload=null;this.rel='stylesheet'">` +
+            `<noscript><link rel="stylesheet"${attrs} href="${href}"></noscript>`
           );
         }
       );
@@ -31,13 +32,12 @@ export default defineConfig({
     sourcemap: false, 
     terserOptions: {
       compress: {
-        drop_console: true, // Drops console messages to reduce core JavaScript payload size
+        drop_console: true,
         drop_debugger: true
       }
     },
     rollupOptions: {
       output: {
-        // Balances cache persistence with minimal initial payload delivery
         manualChunks: {
           vendor: ['react', 'react-dom']
         }
