@@ -342,7 +342,7 @@ export default function Portfolio() {
                   {project.description}
                 </p>
 
-                {/* Dashboard Image */}
+                {/* Dashboard Image — only the very first card's primary dashboard image gets eager/high-priority loading */}
                 <ProjectImage
                   src={project.dashboardImage}
                   alt={`${project.name} dashboard interface preview`}
@@ -350,12 +350,11 @@ export default function Portfolio() {
                   priority={isFirstCard}
                 />
 
-                {/* Supporting Image */}
+                {/* Supporting Image — always lazy-loaded regardless of card position, since this section is below-the-fold on Home */}
                 <ProjectImage
                   src={project.supportingImage}
                   alt={`${project.name} supporting interface preview`}
                   onOpen={openLightbox}
-                  priority={isFirstCard}
                 />
 
                 {/* Action Button */}
