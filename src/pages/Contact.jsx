@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 // LIVE DATA CORE IMPORTS
 import { siteConfig } from '../config/siteConfig';
+import { transmitLeadToFirebase } from '../config/firebase';
 
 export default function Contact({ currentPath, navigateToNode }) {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -68,7 +69,42 @@ export default function Contact({ currentPath, navigateToNode }) {
     }));
   };
 
-  // Existing Submit Form Pipeline Logic (Preserved UI-Layer Adaptations Only)
+  // Discord notification helper — same pattern as Home.jsx's lead form,
+  // duplicated locally rather than imported so Home.jsx stays untouched.
+  const triggerDiscordNotification = async (payload) => {
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1524387978846142494/O6FRnbl8XQmgBuMlB4P3HubPI9oUJ-Thcv4SoAEiQ9lCiDBCAeB9MxdVybF1QHkNEWqa";
+
+    const discordPayload = {
+      username: "OnyxStack Control Tower",
+      embeds: [
+        {
+          title: "🛑 NEW TRANSMISSION DETECTED: CONTACT PAGE LEAD",
+          color: 62206,
+          fields: [
+            { name: "🏢 Name", value: `**${payload.companyName}**`, inline: true },
+            { name: "📧 Email", value: payload.email, inline: true },
+            { name: "🔖 Subject", value: payload.budget || 'Not specified', inline: true },
+            { name: "🔬 Message", value: payload.details }
+          ],
+          footer: { text: "OnyxStack Labs • Infrastructure Automation Engine" },
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+
+    try {
+      await fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(discordPayload)
+      });
+    } catch (error) {
+      console.error("Discord transmission dropped:", error);
+    }
+  };
+
+  // Real Firebase-backed Submit Pipeline — replaces the previous simulated timeout.
+  // Maps this form's fields onto the same agency_leads schema Admin Tower already reads.
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -76,12 +112,24 @@ export default function Contact({ currentPath, navigateToNode }) {
     setSubmitSuccess(false);
 
     try {
-      // PRESERVED BEHAVIOR: Interface node mimicking active Firebase + Discord runtime loops
-      // In actual deployment, this mirrors the exact asynchronous telemetry hook without modifications.
-      await new Promise(resolve => setTimeout(resolve, 1400));
+      const leadPayload = {
+        companyName: formData.name,
+        email: formData.email,
+        phone: '',
+        budget: formData.subject,
+        details: formData.message,
+        source: 'contact_page'
+      };
 
-      setSubmitSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      const response = await transmitLeadToFirebase(leadPayload);
+
+      if (response.success) {
+        await triggerDiscordNotification(leadPayload);
+        setSubmitSuccess(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitError('Something went wrong sending your message. Please try again, or email us directly.');
+      }
     } catch (err) {
       setSubmitError('Something went wrong sending your message. Please try again, or email us directly.');
     } finally {
