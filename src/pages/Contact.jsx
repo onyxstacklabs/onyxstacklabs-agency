@@ -69,42 +69,9 @@ export default function Contact({ currentPath, navigateToNode }) {
     }));
   };
 
-  // Discord notification helper — same pattern as Home.jsx's lead form,
-  // duplicated locally rather than imported so Home.jsx stays untouched.
-  const triggerDiscordNotification = async (payload) => {
-    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1524387978846142494/O6FRnbl8XQmgBuMlB4P3HubPI9oUJ-Thcv4SoAEiQ9lCiDBCAeB9MxdVybF1QHkNEWqa";
-
-    const discordPayload = {
-      username: "OnyxStack Control Tower",
-      embeds: [
-        {
-          title: "🛑 NEW TRANSMISSION DETECTED: CONTACT PAGE LEAD",
-          color: 62206,
-          fields: [
-            { name: "🏢 Name", value: `**${payload.companyName}**`, inline: true },
-            { name: "📧 Email", value: payload.email, inline: true },
-            { name: "🔖 Subject", value: payload.budget || 'Not specified', inline: true },
-            { name: "🔬 Message", value: payload.details }
-          ],
-          footer: { text: "OnyxStack Labs • Infrastructure Automation Engine" },
-          timestamp: new Date().toISOString()
-        }
-      ]
-    };
-
-    try {
-      await fetch(DISCORD_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(discordPayload)
-      });
-    } catch (error) {
-      console.error("Discord transmission dropped:", error);
-    }
-  };
-
-  // Real Firebase-backed Submit Pipeline — replaces the previous simulated timeout.
-  // Maps this form's fields onto the same agency_leads schema Admin Tower already reads.
+  // Real Firebase-backed Submit Pipeline. On success, the existing inline
+  // confirmation banner shows briefly, then redirects to /thank-you —
+  // giving the user visible confirmation before the page transition.
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -124,15 +91,21 @@ export default function Contact({ currentPath, navigateToNode }) {
       const response = await transmitLeadToFirebase(leadPayload);
 
       if (response.success) {
-        await triggerDiscordNotification(leadPayload);
         setSubmitSuccess(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
+        setIsSubmitting(false);
+
+        // Hybrid flow: let the user see the success banner briefly,
+        // then move them to the dedicated Thank You page.
+        setTimeout(() => {
+          navigateToNode('/thank-you');
+        }, 1800);
       } else {
         setSubmitError('Something went wrong sending your message. Please try again, or email us directly.');
+        setIsSubmitting(false);
       }
     } catch (err) {
       setSubmitError('Something went wrong sending your message. Please try again, or email us directly.');
-    } finally {
       setIsSubmitting(false);
     }
   };
