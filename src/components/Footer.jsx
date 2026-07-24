@@ -92,6 +92,27 @@ const SOCIAL_NODES = [
   }
 ];
 
+// Third-party recognition / featured-on badges
+const FEATURED_BADGES = [
+  {
+    name: 'Product Hunt',
+    href: 'https://www.producthunt.com/products/onyxstack-labs/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-onyxstack-labs',
+    src: 'https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1271338&theme=light',
+    alt: 'OnyxStack Labs - Building Smarter Solutions with AI & Custom Software | Product Hunt',
+    width: 250,
+    height: 54
+  },
+  {
+    name: 'LaunchBuff',
+    href: 'https://launchbuff.com',
+    src: 'https://launchbuff.com/badge-featured-dark.svg',
+    alt: 'Featured on LaunchBuff',
+    width: 256,
+    height: 80,
+    title: 'Featured on LaunchBuff'
+  }
+];
+
 function Footer({ siteConfig }) {
   const navigate = useNavigate();
 
@@ -273,6 +294,34 @@ function Footer({ siteConfig }) {
               </div>
             </div>
           </section>
+        </div>
+
+        {/* FEATURED ON / THIRD-PARTY RECOGNITION STRIP */}
+        <div className="border-t border-[#161B26] pt-10 pb-2 flex flex-col items-center gap-4">
+          <h3 className="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-mono font-bold">
+            Featured On
+          </h3>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            {FEATURED_BADGES.map((badge) => (
+              <a
+                key={badge.name}
+                href={badge.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={badge.title || badge.name}
+                className="opacity-90 hover:opacity-100 transition-opacity duration-300 ease-out"
+              >
+                <img
+                  src={badge.src}
+                  alt={badge.alt}
+                  width={badge.width}
+                  height={badge.height}
+                  style={{ width: `${badge.width}px`, height: `${badge.height}px` }}
+                  loading="lazy"
+                />
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* BOTTOM UTILITY MATRIX ENGINE WITH BEAUTIFUL SOCIAL ICONS */}
