@@ -96,6 +96,13 @@ export default function Careers({ currentPath, navigateToNode }) {
       await dispatchDiscordNotification(applicationPayload);
       
       setModalStep(4); // Success routing complete
+
+      // Hybrid flow: show the existing "Transmission Relayed" success screen
+      // briefly, then close the modal and move the user to the Thank You page.
+      setTimeout(() => {
+        handleModalClose();
+        navigateToNode('/thank-you');
+      }, 1800);
     } catch (error) {
       console.error("Critical database pipeline rupture:", error);
       setModalStep(2); // Fallback to form loop on exception
