@@ -96,8 +96,8 @@ const SOCIAL_NODES = [
 const FEATURED_BADGES = [
   {
     name: 'Product Hunt',
-    href: 'https://www.producthunt.com/products/onyxstack-labs/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-onyxstack-labs',
-    src: 'https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1271338&theme=light',
+    href: 'https://www.producthunt.com/products/onyxstack-labs?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-onyxstack-labs',
+    src: 'https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1198402&theme=light',
     alt: 'OnyxStack Labs - Building Smarter Solutions with AI & Custom Software | Product Hunt',
     width: 250,
     height: 54
