@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from '@sparticuz/chromium';
 import fs from 'fs';
 import path from 'path';
 
@@ -49,9 +50,13 @@ async function run() {
   try {
     await waitForServer(BASE_URL);
 
+    const executablePath = await chromium.executablePath();
+
     const browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath,
+      headless: chromium.headless
     });
     const page = await browser.newPage();
 
