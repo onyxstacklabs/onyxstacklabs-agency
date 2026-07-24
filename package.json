@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node prerender.js && node generate-sitemap.js",
+    "build": "vite build && node generate-sitemap.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -18,14 +18,11 @@
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
-    "@sparticuz/chromium": "^123.0.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "puppeteer-core": "^22.13.1",
-    "serve": "^14.2.1",
     "tailwindcss": "^3.4.4",
     "terser": "^5.31.1",
     "vite": "^5.3.1"
