@@ -26,6 +26,10 @@ const TermsConditions = lazy(() => import('./pages/TermsConditions'));
 const ThankYou = lazy(() => import('./pages/ThankYou'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+// TOOLS HUB (Interactive free tools section)
+const ToolsHub = lazy(() => import('./pages/ToolsHub'));
+const ROICalculator = lazy(() => import('./pages/tools/ROICalculator'));
+
 // ZERO-DELAY EMPTY FALLBACK (Koi splash logo ya screen delay nahi aayega)
 const InvisibleFallback = () => <div className="min-h-screen bg-[#050505]" />;
 
@@ -106,6 +110,17 @@ export default function App() {
             path="/careers" 
             element={<Careers currentPath={currentPath} navigateToNode={navigateToNode} />} 
           />
+
+          {/* TOOLS HUB ROUTES */}
+          <Route 
+            path="/tools" 
+            element={<ToolsHub currentPath={currentPath} navigateToNode={navigateToNode} />} 
+          />
+          <Route 
+            path="/tools/roi-calculator" 
+            element={<ROICalculator currentPath={currentPath} navigateToNode={navigateToNode} />} 
+          />
+
           <Route 
             path="/cookies-policy" 
             element={<CookiesPolicy currentPath={currentPath} navigateToNode={navigateToNode} />} 
