@@ -5,6 +5,7 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /*.json$
 Disallow: /cgi-bin/
+Disallow: /*?*
 
 # Explicitly Allow Major Generative AI & Search Engine Bots (GEO / LLMO)
 User-agent: GPTBot
